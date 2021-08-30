@@ -1,4 +1,4 @@
-name: build
+name: publish
 
 on:
   push:    
@@ -12,10 +12,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: docker-practice/actions-setup-docker@master
-    - name: book building process
+    - name: build
       run: |
         mkdir -p /tmp/result
         docker run -v $(pwd):/input/:ro -v /tmp/result/:/output/ thomasweise/docker-bookbuilderpy book.md
-        cd /tmp/result
-        chmod 777 *.*
+
+    - name: deploy
+      uses: JamesIves/github-pages-deploy-action@4.1.4
+      with:
+        branch: gh-pages
+        folder: /tmp/result
+        single-commit: true
 
