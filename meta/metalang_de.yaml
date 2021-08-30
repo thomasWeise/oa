@@ -1,0 +1,28 @@
+title: Optimierungsverfahren
+keywords: [Optimierung, Optimierungsverfahren, Metaheuristiken, Heuristiken, Operations Research, OR, Lokale Suche, Globale Suche, Evolutionäre Algorithmen, EA, Genetische Algorithmen, GA]
+
+figureTitle: Abbildung
+tableTitle: Tabelle
+listingTitle: Kode
+
+figPrefix:
+  - "Abbildung"
+  - "Abbildungen"
+eqnPrefix:
+  - "Gleichung"
+  - "Gleichungen"
+tblPrefix:
+  - "Tabelle"
+  - "Tabellen"
+lstPrefix:
+  - "Kode"
+  - "Kodes"
+secPrefix:
+  - "Abschnitt"
+  - "Abschnitten"
+
+reference-section-title: Referenzen
+toc-title: Inhalt
+
+defTitle: Definition
+

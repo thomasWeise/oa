@@ -1,0 +1,30 @@
+title: 优化算法
+keywords: [优化算法, 元启发式, 启发式, 运筹学, OR, 局部搜索算法, 全局搜索算法, 进化计算, 进化算法, EA, 遗传算法, GA, 爬山算法, 模拟退火]
+
+CJKmainfont: Noto Sans CJK SC
+
+figureTitle: 图
+tableTitle: 表
+listingTitle: 源代码
+
+figPrefix:
+  - "图"
+  - "图"
+eqnPrefix:
+  - "方程式"
+  - "方程式"
+tblPrefix:
+  - "表"
+  - "表"
+lstPrefix:
+  - "源代码"
+  - "源代码"
+secPrefix:
+  - "章"
+  - "章"
+
+reference-section-title: 参考文献
+toc-title: 目录
+
+defTitle: 定义
+

@@ -1,0 +1,64 @@
+---
+# book metadata
+author: [Thomas Weise]
+date: "\meta{date}"
+
+langs:
+  - id: en
+    name: English
+  - id: de
+    name: Deutsch
+  - id: zh
+    name: 中文
+    
+\rel.input{metalang.yaml}
+
+repos:
+  - id: mp
+    url: https://github.com/thomasWeise/moptipy.git
+
+# bibliography metadata
+bibliography: bibliography.bib
+csl: association-for-computing-machinery.csl
+link-citations: true
+
+# HTML template metadata
+template.html: GitHub.html5
+
+# LaTeX template metadata
+template.latex: eisvogel.tex
+titlepage: true
+titlepage-color: "9F2925"
+titlepage-text-color: "FFFFFF"
+titlepage-rule-color: "E67015"
+toc-own-page: true
+linkcolor: blue!50!black
+citecolor: blue!50!black
+urlcolor: blue!50!black
+toccolor: black
+
+# line 1..3: hold floating objects in the same section and sub-section
+# line 4..6: prevent ugly broken footnotes
+header-includes:
+- |
+  ```{=latex}
+  \usepackage[section,above,below]{placeins}
+  \let\Oldsubsection\subsection
+  \renewcommand{\subsection}{\FloatBarrier\Oldsubsection}
+  \addtolength{\topskip}{0pt plus 10pt}
+  \interfootnotelinepenalty=10000
+  \raggedbottom
+  ```
+
+# pandoc-crossref setup
+cref: true
+chapters: true
+linkReferences: true
+listings: false
+codeBlockCaptions: true
+
+# the website
+website_outer: meta/website.html
+website_body: README.md
+
+...

@@ -1,0 +1,15 @@
+# idea gui
+.idea/
+.idea_modules/
+
+# rstudio gui
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+docker-bookbuilderpy.Rproj
+*.Rproj
+
+# eclipse
+/.settings
+

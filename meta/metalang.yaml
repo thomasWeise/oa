@@ -1,0 +1,27 @@
+title: Optimization Algorithms
+keywords: [Optimization, Metaheuristics, Heuristics, Operations Research, OR, Local Search, Global Search, Evolutionary Computation, Evolutionary Algorithms, EA, Genetic Algorithm, GA, Hill Climbing, Simulated Annealing]
+
+figureTitle: Figure
+tableTitle: Table
+listingTitle: Listing
+
+figPrefix:
+  - "Figure"
+  - "Figures"
+eqnPrefix:
+  - "Equation"
+  - "Equations"
+tblPrefix:
+  - "Table"
+  - "Tables"
+lstPrefix:
+  - "Listing"
+  - "Listings"
+secPrefix:
+  - "Section"
+  - "Sections"
+
+reference-section-title: References
+
+defTitle: Definition
+
