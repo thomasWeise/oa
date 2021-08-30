@@ -52,6 +52,9 @@ Wenn Du das Buch zitieren möchtest, dann kannst Du die folgende Information ver
 Die Versionsinformation des Buchs ist wie folgt:
 
 | &nbsp;
+| Buch Repository: [\meta{repo.name}](\meta{repo.url})
+| Buch Commit: \meta{repo.commit}
+| Buch Datum: \meta{repo.date}
 | Kode Repository: [\repo{mp}{repo.name}](\repo{mp}{repo.url})
 | Kode Commit: \repo{mp}{repo.commit}
 | Kode Datum: \repo{mp}{repo.date}

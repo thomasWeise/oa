@@ -49,6 +49,9 @@ If you want to cite the book, you can use the following information:
 The version information for this book is:
 
 | &nbsp;
+| book repository: [\meta{repo.name}](\meta{repo.url})
+| book commit: \meta{repo.commit}
+| book date: \meta{repo.date}
 | code repository: [\repo{mp}{repo.name}](\repo{mp}{repo.url})
 | code commit: \repo{mp}{repo.commit}
 | code date: \repo{mp}{repo.date}

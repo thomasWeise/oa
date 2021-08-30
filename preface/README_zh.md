@@ -30,6 +30,9 @@
 这本书的版本信息如下：
 
 | &nbsp;
+| 书库：[\meta{repo.name}](\meta{repo.url})
+| 书库提交：\meta{repo.commit}
+| 书库日期：\meta{repo.date}
 | 源代码库：[\repo{mp}{repo.name}](\repo{mp}{repo.url})
 | 源代码库提交：\repo{mp}{repo.commit}
 | 源代码库日期：\repo{mp}{repo.date}
