@@ -15,7 +15,7 @@ jobs:
     - name: book building process
       run: |
         mkdir -p /tmp/result
-        docker run -v .:/input/:ro -v /tmp/result/:/output/ -t -i thomasweise/docker-bookbuilderpy book.md
+        docker run -v .:/input/:ro -v /tmp/result/:/output/ thomasweise/docker-bookbuilderpy book.md
         cd /tmp/result
         chmod 777 *.*
 
