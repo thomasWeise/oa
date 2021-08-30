@@ -1,0 +1,21 @@
+name: build
+
+on:
+  push:    
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: docker-practice/actions-setup-docker@master
+    - name: book building process
+      run: |
+        mkdir -p /tmp/result
+        docker run -v .:/input/:ro -v /tmp/result/:/output/ -t -i thomasweise/docker-bookbuilderpy book.md
+        cd /tmp/result
+        chmod 777 *.*
+
