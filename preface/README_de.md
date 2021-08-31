@@ -1,4 +1,4 @@
-﻿# Vorwort {-}
+# Vorwort {-}
 
 Nachdem ich während meiner Doktorandenzeit das Buch *Global Optimization Algorithms &ndash; Theory and Applications*&nbsp;[@WGOEB] geschrieben habe, möchte ich nun eine eher praktisch ausgerichtete Übersicht über Optimierungsverfahren und Metaheuristiken schreiben.
 Aktuell ist diese neue [Buch](http://thomasweise.github.io/oa/index.html) in einer frühen Entwicklungsphase.

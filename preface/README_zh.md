@@ -1,4 +1,4 @@
-﻿# 序言 {-}
+# 序言 {-}
 
 很久以前我在攻读博士期间写过*Global Optimization Algorithms &ndash; Theory and Applications*&nbsp;[@WGOEB]，现在我想写一个更直接的优化和元启发式指南。
 目前，[这本书](http://thomasweise.github.io/oa/index.html)处于开发和工作的早期阶段，所以可以期待很多变化。
