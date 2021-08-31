@@ -1,4 +1,4 @@
-﻿# Optimization Algorithms
+# Optimization Algorithms
 
 ## 1. Introduction
 
