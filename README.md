@@ -17,6 +17,7 @@ The English one will most likely be the most up-to-date version.
 For each language, the book is available in several different formats:
 
 <div id="files">
+
 - English
   + [book_en.pdf](https://thomasweise.github.io/oa/en/book_en.pdf) for reading on PC,
   + [book_en.html](https://thomasweise.github.io/oa/en/book_en.html) for viewing in the browser,
@@ -38,6 +39,7 @@ For each language, the book is available in several different formats:
   + [book_zh.azw3](https://thomasweise.github.io/oa/zh/book_zh.azw3)在kindle阅读器上阅读,
   + 所有东西一起作为[tar.xz Archiv](https://thomasweise.github.io/oa/zh/book_zh.tar.xz)归档,
   + 所有东西一起作为[zip Archiv](https://thomasweise.github.io/oa/zh/book_zh.zip)归档.  
+
 </div>
 
 Every algorithm that we discuss is implemented in [Python](http://python.org) and all accompanying sources codes are provided in the repository [moptipy](http://github.com/thomasWeise/moptipy).
