@@ -1,8 +1,8 @@
-# Optimization Algorithms
+﻿# Optimization Algorithms
 
 ## 1. Introduction
 
-With the book *"Optimization Algorithms"* we try to develop an accessible and easy-to-read introduction to optimization, optimization algorithms, and, in particular, metaheuristics.
+With the book *"[Optimization Algorithms](https://thomasweise.github.io/oa)"* we try to develop an accessible and easy-to-read introduction to optimization, optimization algorithms, and, in particular, metaheuristics.
 We will do this by first building a general framework structure for optimization problems.
 We then approach the algorithms that have been developed to solve such problems from bottom-up, starting with simple approaches and step-by-step moving to more advanced methods.
 
@@ -11,15 +11,36 @@ Your feedback would help us to improve the book.
 
 ## 2. Resources
 
-### 2.1. The Book
+We are trying to develop this book in three languages at once.
+Of course, this will go wrong and it won't be possible to keep them synchronized.
+The English one will most likely be the most up-to-date version.
+For each language, the book is available in several different formats:
 
 <div id="files">
-The book *"Optimization Algorithms"* will be available in the several formats.
+- English
+  + [book_en.pdf](https://thomasweise.github.io/oa/en/book_en.pdf) for reading on PC,
+  + [book_en.html](https://thomasweise.github.io/oa/en/book_en.html) for viewing in the browser,
+  + [book_en.epub](https://thomasweise.github.io/oa/en/book_en.epub) for reading on a tablet or phone,
+  + [book_en.azw3](https://thomasweise.github.io/oa/en/book_en.azw3) for reading on a Kindle device,
+  + all of the above as [tar.xz archive](https://thomasweise.github.io/oa/en/book_en.tar.xz),
+  + all of the above as [zip archive](https://thomasweise.github.io/oa/en/book_en.zip).
+- Deutsch
+  + [book_de.pdf](https://thomasweise.github.io/oa/de/book_de.pdf) zum Lesen am PC,
+  + [book_de.html](https://thomasweise.github.io/oa/de/book_de.html) zum Lesen im Webbrowser,
+  + [book_de.epub](https://thomasweise.github.io/oa/de/book_de.epub) zum Lesen auf dem Tablet oder Mobiltelefon,
+  + [book_de.azw3](https://thomasweise.github.io/oa/de/book_de.azw3) zum Lesen auf dem Kindle,
+  + alles oben als [tar.xz Archiv](https://thomasweise.github.io/oa/de/book_de.tar.xz),
+  + alles oben als [zip Archiv](https://thomasweise.github.io/oa/de/book_de.zip).
+- 中文
+  + [book_zh.pdf](https://thomasweise.github.io/oa/zh/book_zh.pdf)在电脑上阅读,
+  + [book_zh.html](https://thomasweise.github.io/oa/zh/book_zh.html)在浏览器中阅读它,
+  + [book_zh.epub](https://thomasweise.github.io/oa/zh/book_zh.epub)在平板电脑或手机上阅读,
+  + [book_zh.azw3](https://thomasweise.github.io/oa/zh/book_zh.azw3)在kindle阅读器上阅读,
+  + 所有东西一起作为[tar.xz Archiv](https://thomasweise.github.io/oa/zh/book_zh.tar.xz)归档,
+  + 所有东西一起作为[zip Archiv](https://thomasweise.github.io/oa/zh/book_zh.zip)归档.  
 </div>
 
-### 2.2. The Algorithm Implementations
-
-Every algorithm that we discuss is implemented in Python and all accompanying sources codes are provided in the GitHub repository [moptipy](moptipy).
+Every algorithm that we discuss is implemented in [Python](http://python.org) and all accompanying sources codes are provided in the repository [moptipy](http://github.com/thomasWeise/moptipy).
 
 ## 3. License
 
