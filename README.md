@@ -37,8 +37,8 @@ For each language, the book is available in several different formats:
   + [book_zh.html](https://thomasweise.github.io/oa/zh/book_zh.html)在浏览器中阅读它,
   + [book_zh.epub](https://thomasweise.github.io/oa/zh/book_zh.epub)在平板电脑或手机上阅读,
   + [book_zh.azw3](https://thomasweise.github.io/oa/zh/book_zh.azw3)在kindle阅读器上阅读,
-  + 所有东西一起作为[tar.xz Archiv](https://thomasweise.github.io/oa/zh/book_zh.tar.xz)归档,
-  + 所有东西一起作为[zip Archiv](https://thomasweise.github.io/oa/zh/book_zh.zip)归档.  
+  + 所有东西一起作为[tar.xz归档](https://thomasweise.github.io/oa/zh/book_zh.tar.xz),
+  + 所有东西一起作为[zip归档](https://thomasweise.github.io/oa/zh/book_zh.zip).  
 
 </div>
 
