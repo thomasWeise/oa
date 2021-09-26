@@ -12,4 +12,4 @@ docker-bookbuilderpy.Rproj
 
 # eclipse
 /.settings
-
+.project
