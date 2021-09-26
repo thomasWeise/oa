@@ -40,3 +40,4 @@ header-includes:
   \usepackage[nameinlink]{cleveref}
   \crefname{chapter}{Chapter}{Chapters}
   \crefname{section}{Section}{Sections}
+  ```
