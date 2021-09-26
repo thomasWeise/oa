@@ -4,7 +4,7 @@ Today, algorithms influence a bigger and bigger part in our daily life and the e
 They support us by suggesting good decisions in a variety of fields, ranging from engineering, timetabling and scheduling, product design, over travel and logistic planning to even product or movie recommendations.
 They will be the most important element of the transition of our industry to smarter manufacturing and intelligent production, where they can automate a variety of tasks, as illustrated in [@fig:intelligent_manufacturing].
 
-\rel.figure{intelligent_manufacturing}{TExamples for applications of optimization, computational intelligence, machine learning techniques in five fields of smart manufacturing: the production itself, the delivery of the products, the management of the production, the products and services, and the sales level.}{intelligent_manufacturing.svgz}{width=99%}
+\rel.figure{intelligent_manufacturing}{TExamples for applications of optimization, computational intelligence, machine learning techniques in five fields of smart manufacturing: the production itself, the delivery of the products, the management of the production, the products and services, and the sales level.}{intelligent_manufacturing.svg}{width=99%}
 
 Optimization and Operations Research provide us with algorithms that propose good solutions to such a wide range of questions.
 Usually, it is applied in scenarios where we can choose from many possible options.
