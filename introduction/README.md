@@ -3,7 +3,7 @@
 Today, algorithms influence a bigger and bigger part of both of our daily private and work life.
 They suggest interesting movies for us to watch or products to purchase.
 They help us find efficient routes when driving by car or match us to the next available and sufficiently nearby taxi.
-They control advertisement campaigns.
+They control advertisement campaigns and suggest product pricing policies&nbsp;[@MAM2021TROAIRWAFRAMG].
 They support us by suggesting good decisions in a variety of fields, ranging from engineering, timetabling and scheduling, product design, to logistic planning.
 They will be the most important element of the transition of our industry to smarter manufacturing and intelligent production, where they can automate a variety of tasks, as illustrated in [@fig:intelligent_manufacturing].
 

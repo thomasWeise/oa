@@ -3,7 +3,7 @@
 Algorithmen beeinflussen heute einen immer größer werdenden Teil unseres Arbeits- und Privatlebens.
 Sie schlagen uns interessante Filme zum anschauen oder Produkte zum kaufen vor.
 Sie helfen uns bei der Routenplanung beim Fahren oder wählen das nächste freie Taxi für uns aus.
-Sie steuern Werbekampagnen.
+Sie steuern Werbekampagnen und schlagen Preisstrategien für Produkte vor&nbsp;[@MAM2021TROAIRWAFRAMG].
 Sie unterstützen uns mit guten Entscheidungen in einer Vielfalt von Feldern, von Maschinenbau über Zeitplanung hin zur Produktentwicklung oder Logistikplanung.
 Algorithmen werden die wichtigste Zutat beim Übergang unserer Industrie zu "Smart Manufacturing" und intelligenter Produktion sein, wo sie eine Vielzahl von Aufgaben automatisieren können, wir in [@fig:intelligent_manufacturing] dargestellt.
 
