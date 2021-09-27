@@ -34,3 +34,5 @@ How can they help us to save resources?
 In this book, we will try to answer all of these questions.
 We will explore quite a lot of different optimization algorithms.
 We will look at their actual implementations and we will apply them to example problems to see what their strengths and weaknesses are.
+
+\rel.input{examples/README.md}

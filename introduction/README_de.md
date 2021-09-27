@@ -33,3 +33,5 @@ Wie können sie zu einer Ressourceneinsparung führen?
 In diesem Buch wollen wir versuchen, diese Fragen zu beantworten.
 Wir werden viele verschiedene Optimierungsverfahren untersuchen.
 Wir werden uns ihre Implementierungen anschauen und sie auf Beispielprobleme anwenden um ihre Stärken und Schwächen zu erforschen.
+
+\rel.input{examples/README.md}
