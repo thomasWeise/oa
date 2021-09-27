@@ -2,6 +2,8 @@
 
 Let us first look at some typical use cases of optimization.
 
+\rel.input{quadratic_assignment/README.md}
+
 ### Summary
 
 The examples we have discussed so far are, actually, related to each other.

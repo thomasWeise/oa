@@ -2,6 +2,8 @@
 
 Wir wollen nun zuerst ein paar typische Beispielszenarien für Optimierung betrachten.
 
+\rel.input{quadratic_assignment/README.md}
+
 ### Zusammenfassung
 
 Die Beispiele, die wir bis jetzt besprochen haben, haben alle etwas gemeinsam.

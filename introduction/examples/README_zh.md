@@ -2,6 +2,8 @@
 
 让我们首先看看一些典型的优化用例。
 
+\rel.input{quadratic_assignment/README.md}
+
 ### Summary
 
 到目前为止，我们讨论的例子是相互关联的。
