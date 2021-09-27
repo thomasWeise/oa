@@ -23,9 +23,9 @@ secPrefix:
   - "章"
   - "章"
   
-figureTemplate: 图$$t$$
-tableTemplate: 表$$t$$
-listingTemplate: 源代码$$t$$
+figureTemplate: 图$$i$$。$$t$$
+tableTemplate: 表$$i$$。$$t$$
+listingTemplate: 源代码$$i$$。$$t$$
 figPrefixTemplate: 图$$i$$
 eqnPrefixTemplate: 方程式$$i$$
 tblPrefixTemplate: 表$$i$$
