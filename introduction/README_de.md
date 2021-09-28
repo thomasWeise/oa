@@ -7,7 +7,7 @@ Sie steuern Werbekampagnen und schlagen Preisstrategien für Produkte vor&nbsp;[
 Sie unterstützen uns mit guten Entscheidungen in einer Vielfalt von Feldern, von Maschinenbau über Zeitplanung hin zur Produktentwicklung oder Logistikplanung.
 Algorithmen werden die wichtigste Zutat beim Übergang unserer Industrie zu "Smart Manufacturing" und intelligenter Produktion sein, wo sie eine Vielzahl von Aufgaben automatisieren können, wir in [@fig:intelligent_manufacturing] dargestellt.
 
-\rel.figure{intelligent_manufacturing}{Beispiele für Anwendungen von Optimierungsverfahren, Computational Intelligence, und machinellem Lernen in fünf Feldern das "smart manufacturing": die Produktion selbst, das Liefern von Produkten, die Verwaltung der Produktion, den Produkten und Diensten, sowie die Verkaufsebene. }{intelligent_manufacturing.svg}{width=99%}
+\rel.figure{intelligent_manufacturing}{Beispiele für Anwendungen von Optimierungsverfahren, Computational Intelligence, und machinellem Lernen in fünf Feldern das "smart manufacturing": die Produktion selbst, das Liefern von Produkten, die Verwaltung der Produktion, den Produkten und Diensten, sowie die Verkaufsebene. }{intelligent_manufacturing.svgz}{width=99%}
 
 Optimierungsverfahren und Operations Research liefern uns die Algorithmen mit denen wir gute Lösungen für eine sehr große Spannbreite von Fragen finden können.
 Diese Lösungen erreichen ein vorgegebenes Ziel und minimieren dabei (mindestens) eine Ressourcenanforderung, z.B. Kosten, Energieverbrauch, Platz- oder Zeitbedarf, und so weiter.

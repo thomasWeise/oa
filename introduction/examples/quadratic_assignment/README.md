@@ -7,7 +7,7 @@ Of course we know which products we will produce in this factory.
 We also know which facilities we need to construct, i.e., the workshops, storage depots, and maybe an administrative building.
 What we need to decide is where to place them on our land, as illustrated in [@fig:qap_example].
 
-\rel.figure{qap_example}{Illustrative sketch of a quadratic assignment scenario, where different buildings of a factory need to be laid out on a plot of land.}{qap_example.svg}{width=72%}
+\rel.figure{qap_example}{Illustrative sketch of a quadratic assignment scenario, where different buildings of a factory need to be laid out on a plot of land.}{qap_example.svgz}{width=72%}
 
 Let us assume we have $n$&nbsp;locations on our plot of land that we can use for our $n$&nbsp;facilities.
 In some locations, there might be already buildings, in others, we may need to construct them anew.

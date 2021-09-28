@@ -21,10 +21,26 @@
 @string { econ = "{Econometrica}" }
 @string { jacm = "{Journal of the {ACM} ({JACM})}" }
 @string { sr = "{SIAM Review}" }
+@string { zor = "{Zeitschrift f{\"u}r Operations Research ({ZOR}) -- Methods and Models of Operations Research}"}
 
+%% series
+@string { esacwisidmao = "{Estimation, Simulation, and Control {--} Wiley-Interscience Series in Discrete Mathematics and Optimization}" }
+@string { lncs = "{Lecture Notes in Computer Science ({LNCS})}" }
+@string { psam = "{Princeton Series in Applied Mathematics}" }
 
 %% contents
 
+@book{ABCC2006TTSPACS,
+ author = {David Lee Applegate and Robert E. Bixby and Va{\v{s}}ek Chv{\'a}tal and William John Cook},
+ title = {The Traveling Salesman Problem: {A} Computational Study},
+ publisher = {Princeton University Press},
+ address = {Princeton, NJ, USA},
+ edition = {2},
+ series = psam,
+ volume = {17},
+ year = {2007},
+ isbn = {0-691-12993-2}
+}
 
 @incollection{BCPP1998TQAP,
  title = {The Quadratic Assignment Problem},
@@ -64,6 +80,30 @@
  doi = {10.1016/j.compchemeng.2012.06.037}
 }
 
+@article{GJR1991OCOPADMACS,
+ author = {Martin Gr{\"{o}}tschel and Michael J{\"{u}}nger and Gerhard Reinelt},
+ title = {Optimal Control of Plotting and Drilling Machines: {A} Case Study},
+ journal = zor,
+ volume = {35},
+ number = {1},
+ pages = {61--84},
+ year = {1991},
+ doi = {10.1007/BF01415960},
+ month = jan
+}
+
+@book{GP2002TTSPAIV,
+ title = {The Traveling Salesman Problem and its Variations},
+ editor = {Gregory Z. Gutin and Abraham P. Punnen},
+ publisher = {Kluwer Academic Publishers},
+ address = {Norwell, MA, USA},
+ series = coop,
+ volume = {12},
+ year = {2002},
+ doi = {10.1007/b101971},
+ isbn = {0-306-48213-4}
+}
+
 @inproceedings{HPO2016DPFI4S,
  author = {Mario Hermann and Tobias Pentek and Boris Otto},
  title = {Design Principles for Industrie~4.0 Scenarios},
@@ -75,6 +115,17 @@
  publisher = {{IEEE} Computer Society Press},
  address = {Los Alamitos, CA, USA},
  editor = {Tung X. Bui and Ralph H. {Sprague Jr.}}
+}
+
+@book{LLKS1985TTSPAGTOCO,
+ author = {Eugene Leighton Lawler and Jan Karel Lenstra and Alexander Hendrik George {Rinnooy Kan} and David B. Shmoys},
+ title = {The Traveling Salesman Problem: A Guided Tour of Combinatorial Optimization},
+ publisher = {Wiley Interscience},
+ address = {Chichester, West Sussex, UK},
+ series = esacwisidmao,
+ year = {1985},
+ month = sep,
+ isbn = {0-471-90413-9}
 }
 
 @book{MAM2021TROAIRWAFRAMG,
@@ -117,4 +168,34 @@
  year = {2009},
  address = {Germany},
  url = {http://www.it-weise.de/projects/book.pdf}
+}
+
+@incollection{WPG2009SRWVRPWEA,
+ author = {Thomas Weise and Alexander Podlich and Christian Gorldt},
+ title = {Solving Real-World Vehicle Routing Problems with Evolutionary Algorithms},
+ booktitle = {Natural Intelligence for Scheduling, Planning and Packing Problems},
+ editor = {Raymond Chiong and Sandeep Dhakal},
+ publisher = {Springer-Verlag},
+ address = {Berlin/Heidelberg, Germany},
+ series = sici,
+ volume = {250},
+ chapter = {2},
+ pages = {29--53},
+ year = {2009},
+ month = oct,
+ doi = {10.1007/978-3-642-04039-9_2}
+}
+
+@inproceedings{WPRGG2009EFTP,
+ author = {Thomas Weise and Alexander Podlich and Kai Reinhard and Christian Gorldt and Kurt Geihs},
+ title = {Evolutionary Freight Transportation Planning},
+ booktitle = {Applications of Evolutionary Computing {--} Proceedings of {EvoWorkshops 2009}: {EvoCOMNET, EvoENVIRONMENT, EvoFIN, EvoGAMES, EvoHOT, EvoIASP, EvoINTERACTION, EvoMUSART, EvoNUM, EvoSTOC, EvoTRANSLOG}, } # apr # {~15--17, 2009, {T{\"{u}}bingen}, {Germany}},
+ editor = {Mario Giacobini and Penousal Machado and Anthony Brabazon and Jon {McCormack} and Stefano Cagnoni and Michael {O'Neill} and Gianni A. {Di Caro} and Ferrante Neri and Anik{\'{o}} Ek{\'{a}}rt and Mike Preu{\ss} and Anna Isabel {Esparcia-Alc{\'{a}}zar} and Franz Rothlauf and Muddassar Farooq and Ernesto Tarantino and Andreas Fink and Shengxiang Yang},
+ publisher = {Springer-Verlag GmbH},
+ address = {Berlin, Germany},
+ series = lncs,
+ volume = {5484/2009},
+ pages = {768--777},
+ year = {2009},
+ doi = {10.1007/978-3-642-01129-0_87}
 }

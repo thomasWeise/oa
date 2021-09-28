@@ -7,7 +7,7 @@ Natürlich wissen wir, welche Produkte wir in der Fabrik herstellen wollen.
 Wir wissen auch, welche Abteilungen wir aufbauen müssen, also zum Beispiel welche Werkhallen und Lagerhallen wir brauchen, vielleicht dazu noch ein Verwaltungsgebäude und so weiter.
 Jetzt müssen wir entscheiden, wo wir diese Abteilungen auf unserem Grundstück bauen wollen, wie in [@fig:qap_example] skizziert.
 
-\rel.figure{qap_example}{Skizze des Szenarios als Quadratisches Zuordnungsproblem, wo verschiedene Gebäude einer Fabrik auf einem Grundstück platziert werden müssen.}{qap_example.svg}{width=72%}
+\rel.figure{qap_example}{Skizze des Szenarios als Quadratisches Zuordnungsproblem, wo verschiedene Gebäude einer Fabrik auf einem Grundstück platziert werden müssen.}{qap_example.svgz}{width=72%}
 
 Nehmen wir an, dass wir $n$&nbsp;verschiedene mögliche Bauplätze auf unserem Grundstück haben.
 Wir müssen nun die (ebenfalls) $n$&nbsp;Abteilungen der geplanten Fabrik diesen Bauplätzen zuweisen.

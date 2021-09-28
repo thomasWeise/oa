@@ -8,7 +8,7 @@
 它们将成为我国工业向智能制造和智能生产转型的最重要因素。
 在智能制造和智能生产中，它们可以自动化各种任务，如[@fig:intelligent_manufacturing]所示。
 
-\rel.figure{intelligent_manufacturing}{优化、计算智能、机器学习技术在智能制造五个领域的应用实例:生产、产品交付、生产管理、产品和服务、销售水平。}{intelligent_manufacturing.svg}{width=99%}
+\rel.figure{intelligent_manufacturing}{优化、计算智能、机器学习技术在智能制造五个领域的应用实例:生产、产品交付、生产管理、产品和服务、销售水平。}{intelligent_manufacturing.svgz}{width=99%}
 
 优化和运筹学为我们提供的算法，可以找到很好的解决范围非常广泛的问题。
 这些算法发现的解决方案在最小化(至少)一个资源需求(如成本、能源消耗、空间、时间需求等)的同时实现预定义的目标。
