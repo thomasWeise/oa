@@ -17,38 +17,44 @@
 @string { winter = "{Winter}" }
 
 %% journals
+@string { adm = "{Annals of Discrete Mathematics}" }
 @string { cace = "{Computers {\&} Chemical Engineering}" }
 @string { econ = "{Econometrica}" }
+@string { ejor = "{European Journal of Operational Research ({EJOR})}" }
 @string { jacm = "{Journal of the {ACM} ({JACM})}" }
+@string { jors = "{The Journal of the Operational Research Society ({JORS})}" }
+@string { nrlq = "{Naval Research Logistics Quarterly}" }
 @string { sr = "{SIAM Review}" }
 @string { zor = "{Zeitschrift f{\"u}r Operations Research ({ZOR}) -- Methods and Models of Operations Research}"}
 
 %% series
+@string { ctms = "{Contributions to Management Science}" }
 @string { esacwisidmao = "{Estimation, Simulation, and Control {--} Wiley-Interscience Series in Discrete Mathematics and Optimization}" }
 @string { lncs = "{Lecture Notes in Computer Science ({LNCS})}" }
 @string { psam = "{Princeton Series in Applied Mathematics}" }
+@string { wsidmao = "{Wiley Series in Discrete Mathematics and Optimization}" }
 
 %% contents
 
 @book{ABCC2006TTSPACS,
  author = {David Lee Applegate and Robert E. Bixby and Va{\v{s}}ek Chv{\'a}tal and William John Cook},
  title = {The Traveling Salesman Problem: {A} Computational Study},
+ year = {2007},
  publisher = {Princeton University Press},
- address = {Princeton, NJ, USA},
+ address = {Princeton, {NJ}, {USA}},
  edition = {2},
  series = psam,
  volume = {17},
- year = {2007},
  isbn = {0-691-12993-2}
 }
 
 @incollection{BCPP1998TQAP,
- title = {The Quadratic Assignment Problem},
  author = {Rainer E. Burkard and Eranda {\c{C}}ela and Panos M. Pardalos and Leonidas S. Pitsoulis},
+ title = {The Quadratic Assignment Problem},
  booktitle = {Handbook of Combinatorial Optimization},
  editor = {Panos M. Pardalos and Ding{-}Zhu Du and Ronald Lewis Graham},
- pages = {1713--1809},
  year = {1998},
+ pages = {1713--1809},
  volume = {1-3},
  edition = {1},
  publisher = {Springer},
@@ -58,48 +64,104 @@
  url = {http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.52.3116&rep=rep1&type=pdf}
 }
 
+@article{BDP1996TJSSPCANST,
+ author = {Jacek B{\l}a{\.z}ewicz and Wolfgang Domschke and Erwin Pesch},
+ title = {The Job Shop Scheduling Problem: {C}onventional and New Solution Techniques},
+ journal = ejor,
+ year = {1996},
+ volume = {93},
+ issue = {1},
+ month = aug,
+ pages = {1--33},
+ doi = {10.1016/0377-2217(95)00362-2},
+ url = {http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.159.1650&type=pdf}
+}
+
 @article{BK1957APATLOEA,
- title = {Assignment Problems and the Location of Economic Activities},
  author = {Martin Beckmann and Tjalling Charles Koopmans},
+ title = {Assignment Problems and the Location of Economic Activities},
  journal = econ,
- month = jan,
  year = {1957},
+ month = jan,
  volume = {25},
  number = {1},
  pages = {53--76}
+}
+
+@book{CGLL1995STAIA,
+ editor = {Philippe Chr{\'e}tienne and Edward G. Coffman and Jan Karel Lenstra and Zhen Liu},
+ title = {Scheduling Theory and Its Applications},
+ year = {1995},
+ isbn = {978-0-471-94059-3},
+ month = sep,
+ publisher = {John Wiley and Sons Ltd.},
+ address = {Chichester, {NY}, {USA}},
 }
 
 @article{DEPBS2012SMMIADDP,
  author = {Jim Davis and Thomas F. Edgar and James Porter and John Bernaden and Michael Sarli},
  title = {Smart Manufacturing, Manufacturing Intelligence and Demand-Dynamic Performance},
  journal = cace,
+ year = {2012},
  volume = {47},
  pages = {145--156},
- year = {2012},
  month = dec,
  doi = {10.1016/j.compchemeng.2012.06.037}
+}
+
+@book{DF1992CAPIPADATAB,
+ author = {Harald Dyckhoff and Ute Finke},
+ title = {Cutting and Packing in Production and Distribution: A Typology and Bibliography},
+ year = {1992},
+ series = ctms,
+ publisher = {Physica-Verlag},
+ address = {Heidelberg, Germany},
+ doi = {10.1007/978-3-642-58165-6},
+ isbn = {978-3-642-63487-1}
+}
+
+@article{DIM2016BPACSPMMAEA,
+ author = {Maxence Delorme and Manuel Iori and Silvano Martello},
+ title = {Bin Packing and Cutting Stock Problems: Mathematical Models and Exact Algorithms},
+ journal = ejor,
+ year = {2016},
+ volume = {255},
+ issue = {1},
+ month = nov,
+ pages = {1--20},
+ doi = {10.1016/j.ejor.2016.04.030}
 }
 
 @article{GJR1991OCOPADMACS,
  author = {Martin Gr{\"{o}}tschel and Michael J{\"{u}}nger and Gerhard Reinelt},
  title = {Optimal Control of Plotting and Drilling Machines: {A} Case Study},
  journal = zor,
+ year = {1991},
  volume = {35},
  number = {1},
  pages = {61--84},
- year = {1991},
  doi = {10.1007/BF01415960},
  month = jan
 }
 
+@article{GLLRK1979OAAIDSASAS,
+ author = {Ronald Lewis Graham and Eugene Leighton Lawler and Jan Karel Lenstra and Alexander Hendrik George {Rinnooy Kan}},
+ title = {Optimization and Approximation in Deterministic Sequencing and Scheduling: A Survey},
+ journal = adm,
+ year = {1979},
+ volume = {5},
+ pages = {287--326},
+ doi = {10.1016/S0167-5060(08)70356-X}
+}
+
 @book{GP2002TTSPAIV,
- title = {The Traveling Salesman Problem and its Variations},
  editor = {Gregory Z. Gutin and Abraham P. Punnen},
+ title = {The Traveling Salesman Problem and its Variations},
+ year = {2002},
  publisher = {Kluwer Academic Publishers},
- address = {Norwell, MA, USA},
+ address = {Norwell, {MA}, {USA}},
  series = coop,
  volume = {12},
- year = {2002},
  doi = {10.1007/b101971},
  isbn = {0-306-48213-4}
 }
@@ -108,24 +170,75 @@
  author = {Mario Hermann and Tobias Pentek and Boris Otto},
  title = {Design Principles for Industrie~4.0 Scenarios},
  booktitle = {Proceedings of the 49th Hawaii International Conference on System Sciences ({HICSS}), } # jan # {~5--8, 2016, {Koloa}, {HI}, {USA}},
+ year = {2016},
  isbn = {978-0-7695-5670-3},
  doi = {10.1109/HICSS.2016.488},
  pages = {3928--3937},
- year = {2016},
  publisher = {{IEEE} Computer Society Press},
- address = {Los Alamitos, CA, USA},
+ address = {Los Alamitos, {CA}, {USA}},
  editor = {Tung X. Bui and Ralph H. {Sprague Jr.}}
+}
+
+@article{J1954OTATSPSWSTI,
+ author = {Selmer Martin Johnson},
+ title = {Optimal Two- and Three-Stage Production Schedules with Setup Times Included},
+ journal = nrlq,
+ year = {1954},
+ volume = {I},
+ pages = {61--68},
+ doi = {10.1002/nav.3800010110},
+ url = {http://www.rspq.org/pubs/j2.pdf}
+}
+
+@incollection{L1982RRITTOMS,
+ author = {Eugene Leighton Lawler},
+ title = {Recent Results in the Theory of Machine Scheduling},
+ editor = {Achim Bachem and Bernhard Korte and Martin Gr{\"o}tschel},
+ booktitle = {Math Programming: The State of the Art},
+ year = {1982},
+ address = {Bonn, Germany/New York, {NY}, {USA}},
+ publisher = {Springer-Verlag},
+ pages = {202--234},
+ doi = {10.1007/978-3-642-68874-4_9},
+ isbn = {978-3-642-68876-8},
+ chapter = {8}
 }
 
 @book{LLKS1985TTSPAGTOCO,
  author = {Eugene Leighton Lawler and Jan Karel Lenstra and Alexander Hendrik George {Rinnooy Kan} and David B. Shmoys},
  title = {The Traveling Salesman Problem: A Guided Tour of Combinatorial Optimization},
- publisher = {Wiley Interscience},
- address = {Chichester, West Sussex, UK},
- series = esacwisidmao,
  year = {1985},
+ publisher = {Wiley Interscience},
+ address = {Chichester, West Sussex, {UK}},
+ series = esacwisidmao,
  month = sep,
  isbn = {0-471-90413-9}
+}
+
+@incollection{LLRKS1993SASAAC,
+ author = {Eugene Leighton Lawler and Jan Karel Lenstra and Alexander Hendrik George {Rinnooy Kan} and David B. Shmoys},
+ title = {Sequencing and Scheduling: Algorithms and Complexity},
+ editor = {Stephen C. Graves and Alexander Hendrik George {Rinnooy Kan} and Paul H. Zipkin},
+ booktitle = {Handbook of Operations Research and Management Science},
+ year = {1993},
+ volume = {{IV}:~Production Planning and Inventory},
+ publisher = {North-Holland Scientific Publishers Ltd.},
+ address = {Amsterdam, The Netherlands},
+ chapter = {9},
+ pages = {445--522},
+ doi = {10.1016/S0927-0507(05)80189-6}
+}
+
+@article{LMM2002TDPPAS,
+ author = {Andrea Lodi and Silvano Martello and Michele Monaci},
+ title = {Two-Dimensional Packing Problems: A Survey},
+ journal = ejor,
+ year = {2002},
+ volume = {141},
+ issue = {2},
+ month = sep,
+ pages = {241--252},
+ doi = {10.1016/S0377-2217(02)00123-6}
 }
 
 @book{MAM2021TROAIRWAFRAMG,
@@ -137,35 +250,93 @@
  isbn = {9781925736625},
 }
 
+@book{MT1990KPAACI,
+ author = {Silvano Martello and Paolo Toth},
+ title = {Knapsack Problems: Algorithms and Computer Implementations},
+ year = {1990}, 
+ series = wsidmao, 
+ isbn = {978-0471924203},
+ publisher = {John Wiley and Sons Ltd.},
+ address = {Chichester, {NY}, {USA}},
+ url = {http://www.or.deis.unibo.it/knapsack.html},
+}
+
+@book{P2016STAAS,
+ author = {Michael L. Pinedo},
+ title = {Scheduling: Theory, Algorithms, and Systems},
+ year = {2016},
+ publisher = {Springer International Publishing},
+ address = {Cham, Switzerland},
+ isbn = {978-3-319-26578-0},
+ edition = {5},
+ doi = {10.1007/978-3-319-26580-3}
+}
+
+@article{PS2009FYOSASOM,
+ author = {Chris N. Potts and Vitaly A. Strusevich},
+ title = {Fifty Years of Scheduling: A Survey of Milestones},
+ journal = jors,
+ year = {2009},
+ volume = {60},
+ number = {{sup1}: Special Issue: Milestones in {OR}},
+ pages = {S41--S68},
+ doi = {10.1057/jors.2009.2},
+ url = {http://eprints.soton.ac.uk/145495/1/Scheduling50YearsE-Print.pdf}
+}
+
 @article{S1961TBWPAPA,
  title = {The Backboard Wiring Problem: A Placement Algorithm},
  author = {Leon Steinberg},
  journal = sr,
+ year = {1961},
  volume = {3},
  number = {1},
  pages = {37--50},
  doi = {10.1137/1003003},
  month = jan,
- year = {1961},
+}
+
+@book{S2018ITCAPOPMASM,
+ author = {Guntram Scheithauer},
+ title = {Introduction to Cutting and Packing Optimization: Problems, Modeling Approaches, Solution Methods},
+ year = {2018},
+ series = isor,
+ volume = {263},
+ publisher = {Springer International Publishing},
+ address = {Cham, Switzerland},
+ doi = {10.1007/978-3-319-64403-5},
+ isbn = {978-3-319-64402-8}
 }
 
 @article{SGA1976PCAP,
  author = {Sartaj Sahni and Teofilo Francisco {Gonzalez Arce}},
  title = {{P}-Complete Approximation Problems},
  journal = jacm,
+ year = {1976},
  volume = {23},
  number = {3},
  pages = {555--565},
- year = {1976},
  doi = {10.1145/321958.321975},
  url = {http://sites.cs.ucsb.edu/~teo/cs230.s18/nph.pdf}
+}
+
+@article{T199BFBSP,
+ author = {{\'E}ric D. Taillard},
+ title = {Benchmarks for Basic Scheduling Problems},
+ journal = ejor,
+ year = {1993},
+ volume = {64},
+ number = {2},
+ month = jan,
+ pages = {278--285},
+ doi = {10.1016/0377-2217(93)90182-M}
 }
 
 @book{WGOEB,
  author = {Thomas Weise},
  title = {Global Optimization Algorithms {--} Theory and Application},
- publisher = {it-weise.de (self-published)},
  year = {2009},
+ publisher = {it-weise.de (self-published)},
  address = {Germany},
  url = {http://www.it-weise.de/projects/book.pdf}
 }
@@ -173,15 +344,15 @@
 @incollection{WPG2009SRWVRPWEA,
  author = {Thomas Weise and Alexander Podlich and Christian Gorldt},
  title = {Solving Real-World Vehicle Routing Problems with Evolutionary Algorithms},
- booktitle = {Natural Intelligence for Scheduling, Planning and Packing Problems},
  editor = {Raymond Chiong and Sandeep Dhakal},
+ booktitle = {Natural Intelligence for Scheduling, Planning and Packing Problems},
+ year = {2009},
  publisher = {Springer-Verlag},
  address = {Berlin/Heidelberg, Germany},
  series = sici,
  volume = {250},
  chapter = {2},
  pages = {29--53},
- year = {2009},
  month = oct,
  doi = {10.1007/978-3-642-04039-9_2}
 }
@@ -190,12 +361,12 @@
  author = {Thomas Weise and Alexander Podlich and Kai Reinhard and Christian Gorldt and Kurt Geihs},
  title = {Evolutionary Freight Transportation Planning},
  booktitle = {Applications of Evolutionary Computing {--} Proceedings of {EvoWorkshops 2009}: {EvoCOMNET, EvoENVIRONMENT, EvoFIN, EvoGAMES, EvoHOT, EvoIASP, EvoINTERACTION, EvoMUSART, EvoNUM, EvoSTOC, EvoTRANSLOG}, } # apr # {~15--17, 2009, {T{\"{u}}bingen}, {Germany}},
+ year = {2009},
  editor = {Mario Giacobini and Penousal Machado and Anthony Brabazon and Jon {McCormack} and Stefano Cagnoni and Michael {O'Neill} and Gianni A. {Di Caro} and Ferrante Neri and Anik{\'{o}} Ek{\'{a}}rt and Mike Preu{\ss} and Anna Isabel {Esparcia-Alc{\'{a}}zar} and Franz Rothlauf and Muddassar Farooq and Ernesto Tarantino and Andreas Fink and Shengxiang Yang},
- publisher = {Springer-Verlag GmbH},
+ publisher = {Springer-Verlag {GmbH}},
  address = {Berlin, Germany},
  series = lncs,
  volume = {5484/2009},
  pages = {768--777},
- year = {2009},
  doi = {10.1007/978-3-642-01129-0_87}
 }
