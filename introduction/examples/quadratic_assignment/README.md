@@ -15,7 +15,7 @@ For each facility and location pair, a different construction cost may arise.
 A location with an existing shed might be a good solution to put a warehouse.
 However, if we want to put the administration building there, we would first need to demolish the shed. 
 
-There also are costs arising from the relative distances between the facilities that we wish to place.
+For every possible plan, costs also arise from the relative distances between the facilities that we wish to place.
 Maybe there is a lot of material flow between two of the workshops.
 Finished products and raw material may need to be transported between a workshop and the storage depot.
 Between the administration building and the workshops, on the other hand, there will usually be no material flow.
@@ -23,7 +23,7 @@ Of course, the distance between two facilities will depend on the locations we p
 For each pair of facilities that we place on the map, flow costs will arise as a function of the amount of material to be transported between them and the distance of their locations.
 
 The total cost of an assignment of facilities to locations is therefore a weighted sum of the resulting base costs and flow costs.
-Our goal would be to find the assignment with the smallest possible total cost.
+Our goal would be to find the assignment (i.e., the plan) with the smallest possible total cost.
 
 This scenario is called *quadratic assignment problem* (QAP)&nbsp;[@BCPP1998TQAP].
 It has been subject to research since the 1950s&nbsp;[@BK1957APATLOEA].
