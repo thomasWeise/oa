@@ -21,9 +21,13 @@
 @string { cace = "{Computers {\&} Chemical Engineering}" }
 @string { econ = "{Econometrica}" }
 @string { ejor = "{European Journal of Operational Research ({EJOR})}" }
+@string { ijoc = "{{INFORMS} Journal on Computing}" }
 @string { jacm = "{Journal of the {ACM} ({JACM})}" }
+@string { jetai = "{Journal of Experimental {\&} Theoretical Artificial Intelligence ({JETAI})}" }
 @string { jors = "{The Journal of the Operational Research Society ({JORS})}" }
+@string { mpc = "{Mathematical Programming Computation ({MPC}): A Publication of the Mathematical Optimization Society}" }
 @string { nrlq = "{Naval Research Logistics Quarterly}" }
+@string { sa = "{Scientific American}" }
 @string { sr = "{SIAM Review}" }
 @string { zor = "{Zeitschrift f{\"u}r Operations Research ({ZOR}) -- Methods and Models of Operations Research}"}
 
@@ -32,9 +36,23 @@
 @string { esacwisidmao = "{Estimation, Simulation, and Control {--} Wiley-Interscience Series in Discrete Mathematics and Optimization}" }
 @string { lncs = "{Lecture Notes in Computer Science ({LNCS})}" }
 @string { psam = "{Princeton Series in Applied Mathematics}" }
+@string { tirss = "{The {IBM} Research Symposia Series}" }
 @string { wsidmao = "{Wiley Series in Discrete Mathematics and Optimization}" }
 
 %% contents
+
+@article{A2008TLOQC,
+ author = {Scott Aaronson},
+ title = {The Limits of Quantum Computers},
+ journal = sa,
+ year = {2008},
+ url = {http://www.cs.virginia.edu/~robins/The_Limits_of_Quantum_Computers.pdf},
+ pages = {62--69},
+ month = mar,
+ doi = {10.1038/scientificamerican0308-62},
+ volume = {298},
+ number = {3}
+}
 
 @book{ABCC2006TTSPACS,
  author = {David Lee Applegate and Robert E. Bixby and Va{\v{s}}ek Chv{\'a}tal and William John Cook},
@@ -88,6 +106,26 @@
  pages = {53--76}
 }
 
+@inproceedings{C1971TCOTPP,
+ author = {Stephen Arthur Cook},
+ title = {The Complexity of Theorem-Proving Procedures},
+ booktitle = {Proceedings of the Third Annual {ACM} Symposium on Theory of Computing {(STOC'71)}, } # may # {~3--5, 1971, {Shaker Heights, {OH}, {USA}}},
+ year = {1971},
+ pages = {151--158},
+ publisher = {{ACM}},
+ address = {New York, {NY}, {USA}},
+ doi = {10.1145/800157.805047}
+}
+
+@techreport{CEG2005CWDPIFT,
+ author = {William John Cook and Daniel G. Espinoza and Marcos Goycoolea},
+ title = {Computing with Domino-Parity Inequalities for the {TSP}},
+ year = {2005},
+ institution = {Georgia Institute of Technology, Industrial and Systems Engineering},
+ address = {Atlanta, {GA}, {USA}},
+ url = {http://www.dii.uchile.cl/~daespino/PApers/DP_paper.pdf}
+}
+
 @book{CGLL1995STAIA,
  editor = {Philippe Chr{\'e}tienne and Edward G. Coffman and Jan Karel Lenstra and Zhen Liu},
  title = {Scheduling Theory and Its Applications},
@@ -96,6 +134,20 @@
  month = sep,
  publisher = {John Wiley and Sons Ltd.},
  address = {Chichester, {NY}, {USA}},
+}
+
+@incollection{CPW1998AROMSCAAA,
+ author = {Bo Chen and Chris N. Potts and Gerhard J. Woeginger},
+ title = {A Review of Machine Scheduling: {C}omplexity, Algorithms and Approximability},
+ editor = {Ding{-}Zhu Du and Panos M. Pardalos},
+ booktitle = {Handbook of Combinatorial Optimization},
+ year = {1998},
+ pages = {1493--1641},
+ doi = {10.1007/978-1-4613-0303-9_25},
+ isbn = {978-1-4613-7987-4},
+ publisher = {Springer-Verlag {US}},
+ address = {Boston, {MA}, {USA}},
+ note = {also pages~21--169 in volume 3/3 by Kluwer Academic Publishers}
 }
 
 @article{DEPBS2012SMMIADDP,
@@ -132,6 +184,15 @@
  doi = {10.1016/j.ejor.2016.04.030}
 }
 
+@book{GJ1979CAIAGTTTONC,
+ author = {Michael R. Garey and David Stifler Johnson},
+ title = {Computers and Intractability: {A} Guide to the Theory of {NP}-Completeness},
+ year = {1979},
+ publisher = {W. H. Freeman and Company},
+ address = {New York, {NY}, {USA}},
+ isbn = {0-7167-1045-5}
+}
+
 @article{GJR1991OCOPADMACS,
  author = {Martin Gr{\"{o}}tschel and Michael J{\"{u}}nger and Gerhard Reinelt},
  title = {Optimal Control of Plotting and Drilling Machines: {A} Case Study},
@@ -166,6 +227,18 @@
  isbn = {0-306-48213-4}
 }
 
+@article{H2009GKOSFTLKTH,
+ author = {Keld Helsgaun},
+ title = {General k-opt Submoves for the {Lin-Kernighan} {TSP} Heuristic},
+ journal = mpc,
+ year = {2009},
+ number = {2-3},
+ volume = {1},
+ pages = {119--163},
+ month = oct,
+ doi = {10.1007/s12532-009-0004-6}
+}
+
 @inproceedings{HPO2016DPFI4S,
  author = {Mario Hermann and Tobias Pentek and Boris Otto},
  title = {Design Principles for Industrie~4.0 Scenarios},
@@ -188,6 +261,20 @@
  pages = {61--68},
  doi = {10.1002/nav.3800010110},
  url = {http://www.rspq.org/pubs/j2.pdf}
+}
+
+@incollection{K1972RACP,
+ author = {Richard M. Karp},
+ title = {Reducibility Among Combinatorial Problems},
+ editor = {Raymond E. Miller and James W. Thatcher},
+ booktitle = {Complexity of Computer Computations},
+ year = {1972},
+ series = tirss,
+ publisher = {Springer},
+ address = {Boston, {MA}, {USA}},
+ isbn = {978-1-4684-2003-6},
+ doi = {10.1007/978-1-4684-2001-2_9},
+ pages = {85--103}
 }
 
 @incollection{L1982RRITTOMS,
@@ -261,6 +348,18 @@
  url = {http://www.or.deis.unibo.it/knapsack.html},
 }
 
+@article{NK2013APGAUEACFTTSP,
+ author = {Yuichi Nagata and Shigenobu Kobayashi},
+ title = {A Powerful Genetic Algorithm using Edge Assembly Crossover for the Traveling Salesman Problem},
+ journal = ijoc,
+ year = {2013},
+ volume = {25},
+ issue = {2},
+ pages = {346--363},
+ month = spring,
+ doi = {10.1287/ijoc.1120.0506}
+}
+
 @book{P2016STAAS,
  author = {Michael L. Pinedo},
  title = {Scheduling: Theory, Algorithms, and Systems},
@@ -332,6 +431,28 @@
  doi = {10.1016/0377-2217(93)90182-M}
 }
 
+@misc{W2003ROCFTB,
+ author = {William John Cook},
+ title = {Results of Concorde for {TSPLib} Benchmark},
+ year = {2003},
+ publisher = {Georgia Institute of Technology, H. Milton Stewart School of Industrial and Systems Engineering},
+ address = {Atlanta, {GA}, {USA}},
+ url = {http://www.tsp.gatech.edu/concorde/benchmarks/bench99.html}
+}
+
+@inproceedings{W2016BNMDPCADIM,
+ author = {L. Darrell Whitley},
+ title = {Blind No More: Deterministic Partition Crossover and Deterministic Improving Moves},
+ booktitle = {Companion Material Proceedings of the Genetic and Evolutionary Computation Conference ({GECCO'16}), } # jul # {~20--24, 2016, {Denver}, {CO}, {USA}},
+ year = {2016},
+ pages = {515--532},
+ doi = {10.1145/2908961.2926987},
+ editor = {Tobias Friedrich and Frank Neumann and Andrew M. Sutton},
+ publisher = {ACM},
+ address = {New York, {NY}, {USA}},
+ isbn = {978-1-4503-4323-7}
+}
+
 @book{WGOEB,
  author = {Thomas Weise},
  title = {Global Optimization Algorithms {--} Theory and Application},
@@ -369,4 +490,15 @@
  volume = {5484/2009},
  pages = {768--777},
  doi = {10.1007/978-3-642-01129-0_87}
+}
+
+@article{WWLC2019IIIOADTM,
+ title = {Implementation Issues in Optimization Algorithms: Do They Matter?},
+ author = {Thomas Weise and Yuezhong Wu and Weichen Liu and Raymond Chiong},
+ journal = jetai,
+ volume = {31},
+ number = {4}, 
+ pages = {533--554},
+ year = {2019},
+ doi = {10.1080/0952813X.2019.1574908}
 }
