@@ -15,7 +15,7 @@ jobs:
     - name: build
       run: |
         mkdir -p /tmp/result
-        docker run -v $(pwd):/input/:ro -v /tmp/result/:/output/ thomasweise/docker-bookbuilderpy book.md
+        docker run -v $(pwd):/input/:ro -v /tmp/result/:/output/ thomasweise/docker-bookbuilderpy optimization_algorithms.md
 
     - name: deploy
       uses: JamesIves/github-pages-deploy-action@4.1.4

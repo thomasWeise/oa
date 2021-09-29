@@ -19,26 +19,26 @@ For each language, the book is available in several different formats:
 <div id="files">
 
 - English
-  + [book_en.pdf](https://thomasweise.github.io/oa/en/book_en.pdf) for reading on PC,
-  + [book_en.html](https://thomasweise.github.io/oa/en/book_en.html) for viewing in the browser,
-  + [book_en.epub](https://thomasweise.github.io/oa/en/book_en.epub) for reading on a tablet or phone,
-  + [book_en.azw3](https://thomasweise.github.io/oa/en/book_en.azw3) for reading on a Kindle device,
-  + all of the above as [tar.xz archive](https://thomasweise.github.io/oa/en/book_en.tar.xz),
-  + all of the above as [zip archive](https://thomasweise.github.io/oa/en/book_en.zip).
+  + [optimization_algorithms_en.pdf](https://thomasweise.github.io/oa/en/optimization_algorithms_en.pdf) for reading on the PC,
+  + [optimization_algorithms_en.html](https://thomasweise.github.io/oa/en/optimization_algorithms_en.html) for viewing in the browser,
+  + [optimization_algorithms_en.epub](https://thomasweise.github.io/oa/en/optimization_algorithms_en.epub) for reading on a tablet or phone,
+  + [optimization_algorithms_en.azw3](https://thomasweise.github.io/oa/en/optimization_algorithms_en.azw3) for reading on a Kindle device,
+  + all of the above as [tar.xz archive](https://thomasweise.github.io/oa/en/optimization_algorithms_en.tar.xz),
+  + all of the above as [zip archive](https://thomasweise.github.io/oa/en/optimization_algorithms_en.zip).
 - Deutsch
-  + [book_de.pdf](https://thomasweise.github.io/oa/de/book_de.pdf) zum Lesen am PC,
-  + [book_de.html](https://thomasweise.github.io/oa/de/book_de.html) zum Lesen im Webbrowser,
-  + [book_de.epub](https://thomasweise.github.io/oa/de/book_de.epub) zum Lesen auf dem Tablet oder Mobiltelefon,
-  + [book_de.azw3](https://thomasweise.github.io/oa/de/book_de.azw3) zum Lesen auf dem Kindle,
-  + alles oben als [tar.xz Archiv](https://thomasweise.github.io/oa/de/book_de.tar.xz),
-  + alles oben als [zip Archiv](https://thomasweise.github.io/oa/de/book_de.zip).
+  + [optimization_algorithms_de.pdf](https://thomasweise.github.io/oa/de/optimization_algorithms_de.pdf) zum Lesen am PC,
+  + [optimization_algorithms_de.html](https://thomasweise.github.io/oa/de/optimization_algorithms_de.html) zum Lesen im Webbrowser,
+  + [optimization_algorithms_de.epub](https://thomasweise.github.io/oa/de/optimization_algorithms_de.epub) zum Lesen auf dem Tablet oder Mobiltelefon,
+  + [optimization_algorithms_de.azw3](https://thomasweise.github.io/oa/de/optimization_algorithms_de.azw3) zum Lesen auf dem Kindle,
+  + alles oben als [tar.xz Archiv](https://thomasweise.github.io/oa/de/optimization_algorithms_de.tar.xz),
+  + alles oben als [zip Archiv](https://thomasweise.github.io/oa/de/optimization_algorithms_de.zip).
 - 中文
-  + [book_zh.pdf](https://thomasweise.github.io/oa/zh/book_zh.pdf)在电脑上阅读,
-  + [book_zh.html](https://thomasweise.github.io/oa/zh/book_zh.html)在浏览器中阅读它,
-  + [book_zh.epub](https://thomasweise.github.io/oa/zh/book_zh.epub)在平板电脑或手机上阅读,
-  + [book_zh.azw3](https://thomasweise.github.io/oa/zh/book_zh.azw3)在kindle阅读器上阅读,
-  + 所有东西一起作为[tar.xz归档](https://thomasweise.github.io/oa/zh/book_zh.tar.xz),
-  + 所有东西一起作为[zip归档](https://thomasweise.github.io/oa/zh/book_zh.zip).  
+  + [optimization_algorithms_zh.pdf](https://thomasweise.github.io/oa/zh/optimization_algorithms_zh.pdf)在电脑上阅读,
+  + [optimization_algorithms_zh.html](https://thomasweise.github.io/oa/zh/optimization_algorithms_zh.html)在浏览器中阅读它,
+  + [optimization_algorithms_zh.epub](https://thomasweise.github.io/oa/zh/optimization_algorithms_zh.epub)在平板电脑或手机上阅读,
+  + [optimization_algorithms_zh.azw3](https://thomasweise.github.io/oa/zh/optimization_algorithms_zh.azw3)在kindle阅读器上阅读,
+  + 所有东西一起作为[tar.xz归档](https://thomasweise.github.io/oa/zh/optimization_algorithms_zh.tar.xz),
+  + 所有东西一起作为[zip归档](https://thomasweise.github.io/oa/zh/optimization_algorithms_zh.zip).  
 
 </div>
 
