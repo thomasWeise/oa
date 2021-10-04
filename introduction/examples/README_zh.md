@@ -4,7 +4,7 @@
 
 \rel.input{quadratic_assignment/README.md}
 
-### Summary
+### 总结
 
 到目前为止，我们讨论的例子是相互关联的。
 所有的例子都适用于运筹学和智能制造的广泛领域&nbsp;[@DEPBS2012SMMIADDP; @HPO2016DPFI4S]。
