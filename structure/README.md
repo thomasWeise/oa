@@ -1,4 +1,4 @@
-# The Structure of Optimization {#sec:structure}
+# The Structure of Optimization Problems {#sec:structure}
 
 \rel.input{introduction/README.md}
 \rel.input{instance/README.md}

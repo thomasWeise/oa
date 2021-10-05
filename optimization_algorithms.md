@@ -3,3 +3,4 @@
 
 \rel.input{preface/README.md}
 \rel.input{introduction/README.md}
+\rel.input{structure/README.md}
