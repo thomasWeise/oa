@@ -25,8 +25,11 @@
 @string { jacm = "{Journal of the {ACM} ({JACM})}" }
 @string { jetai = "{Journal of Experimental {\&} Theoretical Artificial Intelligence ({JETAI})}" }
 @string { jors = "{The Journal of the Operational Research Society ({JORS})}" }
+@string { jos = "{Journal of Scheduling}" }
+@string { mans = "{Management Science}" }
 @string { mpc = "{Mathematical Programming Computation ({MPC}): A Publication of the Mathematical Optimization Society}" }
 @string { nrlq = "{Naval Research Logistics Quarterly}" }
+@string { ojoc = "{{ORSA} Journal on Computing}" }
 @string { sa = "{Scientific American}" }
 @string { sr = "{SIAM Review}" }
 @string { zor = "{Zeitschrift f{\"u}r Operations Research ({ZOR}) -- Methods and Models of Operations Research}"}
@@ -64,6 +67,41 @@
  series = psam,
  volume = {17},
  isbn = {0-691-12993-2}
+}
+
+@article{ABZ1988TSBPFJSS,
+ title = {The Shifting Bottleneck Procedure for Job Shop Scheduling},
+ author = {Joseph Adams and Egon Balas and Daniel Zawack},
+ year = {1988},
+ journal = mans,
+ volume = {34},
+ number = {3},
+ pages = {391--401},
+ doi = {10.1287/mnsc.34.3.391}
+}
+
+@article{AC1991ACSOTJSSP,
+ title = {A Computational Study of the Job-Shop Scheduling Problem},
+ author = {David Lee Applegate and William John Cook},
+ journal = ojoc,
+ volume = {3},
+ number = {2},
+ pages = {149--156},
+ month = may,
+ year = {1991},
+ doi = {10.1287/ijoc.3.2.149},
+ note = {the JSSP instances used were generated in Bonn in 1986}
+}
+
+@article{B1990OLDTPBEM,
+ author = {John Edward Beasley},
+ title = {{OR-Library}: Distributing Test Problems by Electronic Mail},
+ journal = jors,
+ volume = {41},
+ pages = {1069--1072},
+ year = {1990},
+ month = nov,
+ doi = {10.1057/jors.1990.166}
 }
 
 @incollection{BCPP1998TQAP,
@@ -184,6 +222,30 @@
  doi = {10.1016/j.ejor.2016.04.030}
 }
 
+@article{DMU1998BFSSP,
+ title = {Benchmarks for Shop Scheduling Problems},
+ author = {Ebru Demirkol and Sanjay V. Mehta and Reha Uzsoy},
+ journal = ejor,
+ volume = {109},
+ number = {1},
+ month = aug,
+ year = {1998},
+ pages = {137--141},
+ doi = {10.1016/S0377-2217(97)00019-2}
+}
+
+@incollection{FT1963PLCOLJSSR,
+ author = {Henry Fisher and Gerald L. Thompson},
+ title = {Probabilistic Learning Combinations of Local Job-Shop Scheduling Rules},
+ booktitle = {Industrial Scheduling},
+ editor = {John F. Muth and Gerald L. Thompson},
+ publisher = {Prentice-Hall},
+ address = {Englewood Cliffs, {NJ}, {USA}},
+ year = {1963},
+ chapter = {3.2},
+ pages = {225--251}
+}
+
 @book{GJ1979CAIAGTTTONC,
  author = {Michael R. Garey and David Stifler Johnson},
  title = {Computers and Intractability: {A} Guide to the Theory of {NP}-Completeness},
@@ -289,6 +351,15 @@
  doi = {10.1007/978-3-642-68874-4_9},
  isbn = {978-3-642-68876-8},
  chapter = {8}
+}
+
+@phdthesis{L1998RCPSAEIOHSTS,
+ author = {Stephen R. Lawrence},
+ year = {1984},
+ title = {Resource Constrained Project Scheduling: An Experimental Investigation of Heuristic Scheduling Techniques (Supplement)},
+ school = {Graduate School of Industrial Administration ({GSIA}), Carnegie-Mellon University},
+ institution = {Graduate School of Industrial Administration ({GSIA}), Carnegie-Mellon University},
+ address = {Pittsburgh, {PA}, {USA}}
 }
 
 @book{LLKS1985TTSPAGTOCO,
@@ -407,6 +478,15 @@
  isbn = {978-3-319-64402-8}
 }
 
+@misc{S2019JSSPH,
+ title = {Job Shop Scheduling (Personal Homepage)},
+ author = {Oleg V. Shylo},
+ address = {Knoxville, {TN}, {USA}},
+ url = {http://optimizizer.com/jobshop.php},
+ month = aug,
+ year = {2019}
+}
+
 @article{SGA1976PCAP,
  author = {Sartaj Sahni and Teofilo Francisco {Gonzalez Arce}},
  title = {{P}-Complete Approximation Problems},
@@ -419,6 +499,17 @@
  url = {http://sites.cs.ucsb.edu/~teo/cs230.s18/nph.pdf}
 }
 
+@article{SWV1992NSSFSPWATJSS,
+ title = {New Search Spaces for Sequencing Problems with Application to Job Shop Scheduling},
+ author = {Robert H. Storer and S. David Wu and Renzo Vaccari},
+ doi = {10.1287/mnsc.38.10.1495},
+ year = {1992},
+ journal = mans,
+ volume = {38},
+ pages = {1495--1509},
+ number = {10}
+}
+
 @article{T199BFBSP,
  author = {{\'E}ric D. Taillard},
  title = {Benchmarks for Basic Scheduling Problems},
@@ -429,6 +520,25 @@
  month = jan,
  pages = {278--285},
  doi = {10.1016/0377-2217(93)90182-M}
+}
+
+@misc{vH2015JSIAS,
+ author = {Jelke Jeroen {van Hoorn}},
+ title = {Job Shop Instances and Solutions},
+ url = {http://jobshop.jjvh.nl},
+ year = {2015}
+}
+
+@article{vH2018TCSOBOBIOTJSSP,
+ author = {Jelke Jeroen {van Hoorn}},
+ title = {The Current State of Bounds on Benchmark Instances of the Job-Shop Scheduling Problem},
+ journal = jos,
+ month = feb,
+ year = {2018},
+ volume = {21},
+ issue = {1},
+ pages = {127--128},
+ doi = {10.1007/s10951-017-0547-8}
 }
 
 @misc{W2003ROCFTB,
@@ -452,6 +562,17 @@
  address = {New York, {NY}, {USA}},
  isbn = {978-1-4503-4323-7}
 }
+
+@misc{W2019JRDAIOTJSSP,
+ title = {{jsspInstancesAndResults}: Results, Data, and Instances of the Job Shop Scheduling Problem},
+ author = {Thomas Weise},
+ publisher = {Institute of Applied Optimization, Hefei University},
+ address = {Hefei, Anhui, China},
+ year = {2019},
+ url = {http://github.com/thomasWeise/jsspInstancesAndResults},
+ note = {A {GitHub} repository with the common benchmark instances for the {Job} {Shop} {Scheduling} {Problem} as well as results from the literature, both in form of {CSV} files as well as R program code to access them.}
+}
+
 
 @book{WGOEB,
  author = {Thomas Weise},
@@ -501,4 +622,15 @@
  pages = {533--554},
  year = {2019},
  doi = {10.1080/0952813X.2019.1574908}
+}
+
+@inproceedings{YN1992AGAATLSJSI,
+ author = {Takeshi Yamada and Ryohei Nakano},
+ title = {A Genetic Algorithm Applicable to Large-Scale Job-Shop Instances},
+ booktitle = {Proceedings of Parallel Problem Solving from Nature 2 ({PPSN~II}), } # sep # {~28--30, 1992, {Brussels}, {Belgium}},
+ editor = {Reinhard M{\"{a}}nner and Bernard Manderick},
+ address = {Amsterdam, The Netherlands},
+ publisher = {Elsevier},
+ pages = {281--290},
+ year = {1992}
 }

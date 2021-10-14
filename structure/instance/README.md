@@ -48,3 +48,19 @@ In other words, the JSSP instance structure described here already encompasses a
 This means that if we can build an algorithm which can solve this general type of JSSP well, it can also automatically solve the above-mentioned special cases.
 
 #### Sources for JSSP Instances
+
+In order to practically play around with optimization algorithms, we need some concrete instances of the JSSP.
+Luckily, the optimization community provides "benchmark instances" for many different optimization problems.
+Such common, well-known instances are important, because they allow researchers to compare their algorithms.
+
+The eight classical and most commonly used sets of benchmark instances are published in&nbsp;[@FT1963PLCOLJSSR; @ABZ1988TSBPFJSS; @AC1991ACSOTJSSP; @SWV1992NSSFSPWATJSS; @YN1992AGAATLSJSI; @L1998RCPSAEIOHSTS; @DMU1998BFSSP; @T199BFBSP].
+Their data can be found (sometimes partially) in several repositories in the internet, such as
+
+- the [*OR&#8209;Library*](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/jobshopinfo.html) managed by Beasley&nbsp;[@B1990OLDTPBEM],
+- the comprehensive [set of JSSP instances](http://jobshop.jjvh.nl/) provided by van&nbsp;Hoorn&nbsp;[@vH2015JSIAS; @vH2018TCSOBOBIOTJSSP], where also state-of-the-art results are listed,
+- [Oleg Shylo's Page](http://optimizizer.com/jobshop.php)&nbsp;[@S2019JSSPH], which, too, contains up-to-date experimental results,
+- [Éric Taillard's Page](http://mistic.heig-vd.ch/taillard/problemes.dir/ordonnancement.dir/ordonnancement.html), or, finally,
+- my own repository [jsspInstancesAndResults](http://github.com/thomasWeise/jsspInstancesAndResults)&nbsp;[@W2019JRDAIOTJSSP], where I collect all the above problem instances and many results from existing works.
+
+We will try to solve JSSP instances obtained from these collections.
+They will serve as illustrative example of how to approach optimization problem.
