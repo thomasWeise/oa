@@ -117,7 +117,7 @@ Each instance has a `name`, a number&nbsp;$\jsspJobs$ of jobs stored in the vari
 The array `matrix` has one row for each job, containing the machine-runtime tuples for each operation.
 (Let us ignore the optional parameter `makespan_lower_bound` for now.)
 
-\git.code{mp}{jssp_instance}{Excerpt from a Python class for representing the data of a JSSP instance.}{instance.py}{}{book-code}{hints}
+\git.code{mp}{jssp_instance}{Excerpt from a Python class for representing the data of a JSSP instance.}{instance.py}{}{book}{hints}
 
 We add a static method `from_resource(name)` that can load any of the aforementioned benchmark JSSP instances directly based on its name.
 This way, we can conveniently access all the necessary data of a job shop scheduling task.

@@ -4,7 +4,7 @@ The main topic of this book will be metaheuristic optimization (although I will 
 So why do we need metaheuristic algorithms?
 Why should you read this book?
 
-### Good Solutions within Acceptable Time {#sec:approximationOfTheOptimum}
+### Good Solutions within Acceptable Runtime {#sec:approximationOfTheOptimum}
 
 The first and foremost reason is that they can provide us good solutions within reasonable time.
 It is easy to understand that there are some problems which are harder to solve than others.
@@ -54,7 +54,7 @@ Different from exact algorithms, they do not guarantee to find the optimal solut
 Still, they often allow us to get very good solutions for computationally hard problems in short time.
 They may often still discover them (just not always, not guaranteed).
 
-### Good Solutions within Acceptable Time
+### Good Solutions within Acceptable Development Time
 
 Saying that we need a good algorithm to solve a given problem is very easy.
 Developing a good algorithm to solve a given problem is not, as any graduate student in the field can probably confirm.
