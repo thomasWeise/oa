@@ -63,4 +63,62 @@ Their data can be found (sometimes partially) in several repositories in the int
 - my own repository [jsspInstancesAndResults](http://github.com/thomasWeise/jsspInstancesAndResults)&nbsp;[@W2019JRDAIOTJSSP], where I collect all the above problem instances and many results from existing works.
 
 We will try to solve JSSP instances obtained from these collections.
-They will serve as illustrative example of how to approach optimization problem.
+The goal of this book is that you can play around with the algorithms and replicate our experiments.
+Therefore, we cannot use all 242&nbsp;instances from the above sets, because then the experiments would take too long.
+We have to pick a small representative subset of instances.
+They will serve as illustrative example of how to approach optimization problems.
+In order to keep the example and analysis simple, we will focus on only eight instances, namely
+
+1. instance `abz9` by Adams et&nbsp;al.&nbsp;[@ABZ1988TSBPFJSS] with 20&nbsp;jobs and 15&nbsp;machines,
+2. instance `dmu48` by Demirkol et&nbsp;al.&nbsp;[@DMU1998BFSSP] with 20&nbsp;jobs and 20&nbsp;machines,
+3. instance `ft06` by Fisher and Thompson&nbsp;[@FT1963PLCOLJSSR] with 6&nbsp;jobs and 6&nbsp; machines (which is the smallest of the well-known benchmark instances),
+4. instance `la10` by Lawrence&nbsp;[@L1998RCPSAEIOHSTS] with 15&nbsp;jobs and 5&nbsp;machines,
+5. instance `swv17` by Storer et&nbsp;al.&nbsp;[@SWV1992NSSFSPWATJSS] with 50&nbsp;jobs and 10&nbsp;machines,
+6. instance `ta19` by Taillard&nbsp;[@T199BFBSP] with 20&nbsp;jobs and 15&nbsp;machines,
+7. instance `ta73` by Taillard&nbsp;[@T199BFBSP] with 100&nbsp;jobs and 20&nbsp;machines (which is one of the largest of the well-known benchmark instances), and
+8. instance `yn3` by Yamada and Nakano&nbsp;[@YN1992AGAATLSJSI] with 20&nbsp;jobs and 20&nbsp;machines.
+
+These instances are contained in text files available at <http://people.brunel.ac.uk/~mastjjb/jeb/orlib/files/jobshop1.txt>, <http://raw.githubusercontent.com/thomasWeise/jsspInstancesAndResults/master/data-raw/instance-data/instance_data.txt>, and in <http://jobshop.jjvh.nl/>.
+They are also part of the `moptipy` Python package with the sources for our experiments.
+
+Of course, if we really want to solve a new type of problem, we will usually use many benchmark problem instances to get a good understand about the performance of our algorithm(s).
+Only for the sake of clarity of presentation, we will here limit ourselves to these above eight problems.
+When selecting them, we tried to make sure to pick representative instances with different features from different sets in order to still obtain representative results.
+
+
+#### File Format and `demo` Instance {#sec:jsspDemoInstance}
+
+For the sake of simplicity, we created one additional, smaller JSSP instance to describe the format of these files, as illustrated in [@fig:jssp_demo_instance].
+This instance will also allow us to describe components of optimization processes in an easy way.
+
+\rel.figure{jssp_demo_instance}{The meaning of the text representing our `demo` instance of the JSSP, as an example of the format used in the OR&#8209;Library.}{demo_instance.svgz}{width=90%}
+
+In the simple text format used in OR&#8209;Library, several problem instances can be contained in one file.
+Each problem instance&nbsp;$\instance$ is starts and ends with a line of several `+` characters.
+The next line is a short description or title of the instance.
+In the third line, the number&nbsp;$\jsspJobs$ of jobs is specified, followed by the number&nbsp;$\jsspMachines$ of machines.
+The actual IDs or indexes of machines and jobs are 0-based, similar to array indexes in Python.
+The JSSP instance definition is completed by&nbsp;$\jsspJobs$ lines of text, each of which specifying the operations of one job&nbsp;$\jsspJobIndex\in0\dots(\jsspJobs-1)$.
+Each operation&nbsp;$\jsspMachineIndex$ is specified as a pair of two numbers, the ID&nbsp;$\jsspOperationMachine{\jsspJobIndex}{\jsspMachineIndex}$ of the machine that is to be used (violet), from the interval&nbsp;$0\dots(\jsspMachines-1)$, followed by the number of time units&nbsp;$\jsspOperationTime{\jsspJobIndex}{\jsspMachineIndex}$ the job will take on that machine.
+The order of the operations defines exactly the order in which the job needs to be passed through the machines.
+Of course, each machine can only process at most one job at a time.
+
+In our demo instance illustrated in [@fig:jssp_demo_instance], this means that we have&nbsp;$\jsspJobs=4$ jobs and&nbsp;$\jsspMachines=5$ machines.
+Job&nbsp;0 first needs to be processed by machine&nbsp;0 for 10&nbsp;time units, it then goes to machine&nbsp;1 for 20&nbsp;time units, then to machine&nbsp;2 for 20&nbsp;time units, then to machine&nbsp;3 for 40&nbsp;time units, and finally to machine&nbsp;4 for 10&nbsp;time units.
+This job will thus take at least&nbsp;100 time units to be completed, if it can be scheduled without any delay or waiting period, i.e., if all of its operations can directly be processed by their corresponding machines.
+Job&nbsp;3 first needs to be processed by machine&nbsp;4 for 50&nbsp;time units, then by machine&nbsp;3 for 30&nbsp;time units, then by machine&nbsp;2 for 15&nbsp;time units, then by machine&nbsp;0 for&nbsp;20 time units, and finally by machine&nbsp;1 for 15&nbsp;time units.
+It would not be allowed to first send Job&nbsp;3 to any machine different from machine&nbsp;4 and after being processed by machine&nbsp;4, it must be processed by machine&nbsp;3 &ndash; although it may be possible that it has to wait for some time, if machine&nbsp;3 would already be busy processing another job.
+In the ideal case, job&nbsp;3 could be completed after 130&nbsp;time units.
+
+#### A Python Class for JSSP Instances
+
+This structure of a JSSP instance can be represented by the simple Python class given in [@lst:jssp_instance].
+Each instance has a `name`, a number&nbsp;$\jsspJobs$ of jobs stored in the variable `jobs`, and a number&nbsp;$\jsspMachines$ machines stored in the variable `machines`.
+The array `matrix` has one row for each job, containing the machine-runtime tuples for each operation.
+(Let us ignore the optional parameter `makespan_lower_bound` for now.)
+
+\git.code{mp}{jssp_instance}{Excerpt from a Python class for representing the data of a JSSP instance.}{instance.py}{}{book-code}{hints}
+
+We add a static method `from_resource(name)` that can load any of the aforementioned benchmark JSSP instances directly based on its name.
+This way, we can conveniently access all the necessary data of a job shop scheduling task.
+The actual code of the above as well as sanity checks in the `__init__` constructor have here been omitted as they are unimportant for the understanding of the scenario.
