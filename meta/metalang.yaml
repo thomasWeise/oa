@@ -31,13 +31,13 @@ defTitle: Definition
 header-includes:
 - |
   ```{=latex}
-  \usepackage[section,above,below]{placeins}
-  \let\Oldsubsection\subsection
-  \renewcommand{\subsection}{\FloatBarrier\Oldsubsection}
-  \addtolength{\topskip}{0pt plus 10pt}
-  \interfootnotelinepenalty=10000
-  \raggedbottom
-  \usepackage[nameinlink]{cleveref}
-  \crefname{chapter}{Chapter}{Chapters}
-  \crefname{section}{Section}{Sections}
+  \usepackage[section,above,below]{placeins}%               1
+  \let\Oldsubsection\subsection%                            2
+  \renewcommand{\subsection}{\FloatBarrier\Oldsubsection}%  2
+  \addtolength{\topskip}{0pt plus 10pt}%                    4
+  \interfootnotelinepenalty=10000%                          5
+  \raggedbottom%                                            6
+  \usepackage[nameinlink]{cleveref}%                        7
+  \crefname{chapter}{Chapter}{Chapters}%                    8
+  \crefname{section}{Section}{Sections}%                    9
   ```
