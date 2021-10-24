@@ -112,12 +112,13 @@ In the ideal case, job&nbsp;3 could be completed after 130&nbsp;time units.
 
 #### A Python Class for JSSP Instances
 
-This structure of a JSSP instance can be represented by the simple Python class given in [@lst:jssp_instance].
+This structure of a JSSP instance can be represented by the simple Python class.
+In [@lst:jssp_instance], we give an excerpt of this class, i.e., a snippt of the original code where some methods and data verification has been omitted.
 Each instance has a `name`, a number&nbsp;$\jsspJobs$ of jobs stored in the variable `jobs`, and a number&nbsp;$\jsspMachines$ machines stored in the variable `machines`.
 The `matrix` is a two-dimensional ([numpy](https://numpy.org/)) array with one row for each job, containing the machine-runtime tuples for each operation.
 (Let us ignore the optional parameter `makespan_lower_bound` for now.)
 
-\git.code{mp}{jssp_instance}{Excerpt from a Python class for representing the data of a JSSP instance.}{moptipy/examples/jssp/instance.py}{}{book}{hints}
+\git.code{mp}{jssp_instance}{Excerpt from a Python class for representing the data of a JSSP instance.}{moptipy/examples/jssp/instance.py}{}{book}{}
 
 We add a static method `from_resource(name)` that can load any of the aforementioned benchmark JSSP instances directly based on its name.
 This way, we can conveniently access all the necessary data of a job shop scheduling task.
