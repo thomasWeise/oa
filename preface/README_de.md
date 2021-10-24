@@ -16,6 +16,11 @@ Wir versuchen, Algorithmen Schritt für Schritt zu verbessern und arbeiten uns v
 Wir verwenden konkrete Beispiele und Algorithmusimplementierungen in [Python](https://python.org).
 Diese werden frei im Repository *[thomasWeise/mopitpy](https://github.com/thomasWeise/moptipy)* unter der GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 Lizenz zur Verfügung gestellt.
 Jedes Quellkode-Listing im Buch ist mit einem *(src)*-Link in der Überschrift versehen, mit dem man zur vollen Version des Kodes im Repository kommt.
+Diese Quellkode-Listings sind normalerweise verkürtzte Ausschnitte des tatsächlichen Kodes.
+Wir werden viele Details weglassen, die für das Verständnis der Algorithmen nicht notwendig sind, wie zum Beispiel Type Hints, Parameterüberprüfungen, oder auch ganze Methoden.
+Diese sind dann natürlich in der vollständigen Version des Kodes im [GitHub-Repository](\repo{mp}{repo.url}) enthalten.
+Der verlinkte Kode kann also durchaus anders aussehen, als der im Buch abgebildete, verkürzte Kode.
+Um die Quellkodebeispiele vollständig zu verstehen, empfehlen wir der Leserin, sich mit Python, [numpy](https://numpy.org/), und [matplotlib](https://matplotlib.org/) vertraut zu machen.
 
 Der Text des Buches selbst wird aktiv geschrieben und liegt komplett im Repository *[thomasWeise/oa](https://github.com/thomasWeise/oa)*.
 Dort kannst Du auch *[Meldungen](https://github.com/thomasWeise/oa/issues)* einstellen, wie zum Beispiel Änderungsanfragen, Vorschläge, gefundene (Schreib-)Fehler, oder Du kannst Bescheid sagen, wenn etwas unklar ist.

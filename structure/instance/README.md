@@ -114,7 +114,7 @@ In the ideal case, job&nbsp;3 could be completed after 130&nbsp;time units.
 
 This structure of a JSSP instance can be represented by the simple Python class given in [@lst:jssp_instance].
 Each instance has a `name`, a number&nbsp;$\jsspJobs$ of jobs stored in the variable `jobs`, and a number&nbsp;$\jsspMachines$ machines stored in the variable `machines`.
-The array `matrix` has one row for each job, containing the machine-runtime tuples for each operation.
+The `matrix` is a two-dimensional ([numpy](https://numpy.org/)) array with one row for each job, containing the machine-runtime tuples for each operation.
 (Let us ignore the optional parameter `makespan_lower_bound` for now.)
 
 \git.code{mp}{jssp_instance}{Excerpt from a Python class for representing the data of a JSSP instance.}{moptipy/examples/jssp/instance.py}{}{book}{hints}

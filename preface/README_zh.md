@@ -18,6 +18,12 @@
 我们使用Python编程语言编写的具体示例和优化算法实现。
 这些可以在存储库*[thomasWeise/mopitpy](https://github.com/thomasWeise/moptipy)*中以GNU通用公共许可证版本3,2007年6月29日语言免费获得。
 每个源代码清单的标题中都有一个*(src)*超链接，链接到存储库中该文件的完整版本。
+书中的源代码清单通常是实际源代码的删节摘要。
+这意味着我们将省略源代码清单中许多对理解算法没有必要的细节。
+例如，我们将省略Python类型提示、参数值的完整性检查，甚至完整的方法。
+这些详细信息将出现在[GitHub存储库](\repo{mp}{repo.url})中可用的完整代码版本中。
+因此，GitHub存储库中的完整代码版本看起来可能与书中插图的删节代码不同。
+为了完全理解代码示例，我们建议读者熟悉Python、[numpy](https://numpy.org/)和[matplotlib](https://matplotlib.org/)。
 
 本书以“署名-非商业性使用-相同方式共享4.0国际” (CC&nbsp;BY-NC-SA&nbsp;4.0) 许可证发布，请参阅<https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh>以获取摘要。
 我试图用多种语言并行编写这本书，但我可能无法使它们保持同步。

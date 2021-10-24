@@ -14,6 +14,11 @@ We try to improve the algorithms step-by-step, moving from very simple approache
 We use concrete examples and algorithm implementations written in [Python](https://python.org).
 These are freely available in the repository *[thomasWeise/mopitpy](https://github.com/thomasWeise/moptipy)* under the GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007.
 Each source code listing is accompanied by a *(src)* link in the caption linking to the full version of the file in the repository.
+The listings will usually be abridged excerpts.
+This means that we will omit a lot of details unnecessary for understanding the algorithms in play, such as type hints, sanity checks, or even complete methods.
+These will then be present in the full code version of the code available in the [GitHub repository](\repo{mp}{repo.url}).
+This full code version therefore can look different from the illustrated abridged code in the book.
+In order to fully understand the code examples, we recommend the reader to familiarize themselves with Python, [numpy](https://numpy.org/), and [matplotlib](https://matplotlib.org/). 
 
 The text of the book itself is actively written and available in the repository *[thomasWeise/oa](https://github.com/thomasWeise/oa)*.
 There, you can also submit *[issues](https://github.com/thomasWeise/oa/issues)*, such as change requests, suggestions, errors, typos, or you can inform me that something is unclear, so that I can improve the book. 
