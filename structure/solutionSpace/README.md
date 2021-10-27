@@ -52,8 +52,6 @@ An instance of our `Gantt` class holds a reference to the JSSP instance (see [ls
 Furthermore, it holds a three dimensional array `times`, which has one row for each of the $\jsspJobs$&nbsp;jobs.
 Each job-row has one column for each of the $\jsspMachines$&nbsp;operations of the job (there is one operation for each of the $\jsspMachines$&nbsp;machines).
 Each of these columns, in turn, stores the start and the end time of the operation of that job on this machine.
-Actually, we do not necessarily need to store the end times as well, because we know how long each operation takes based on the instance data so only having the start times stored would be sufficient &hellip; but it will make our life a bit easier here and save us some look-ups, so we will settle for this format.
-This way, we can store all the data needed to represent and/or plot a Gantt chart in one object.
 
 \git.code{mp}{jssp_gantt}{Excerpt from a Python class for representing the data of a candidate solution to a JSSP.}{moptipy/examples/jssp/gantt.py}{}{book}{}
 
@@ -69,3 +67,81 @@ This is signified by its third component array having values `[0, 30]`.
 It will arrive at machine&nbsp;0 much later, after having passed through all other machines.
 Its values for the operation on this machine, which come first in its component array, are `[150, 160]`.
 The complete array contents are illustrated in [@lst:jssp_example_solution_times].
+
+This way to represent Gantt charts as data structures is easy to read, understand, and visualize.
+Actually, we could also chose a more compact representation:
+We do not necessarily need to store the end times of the operations as well.
+We know how long each job&nbsp;$\jsspJobIndex$ needs on any machine&nbsp;$\jsspMachineIndex$ takes based on the instance data&nbsp;$\jsspOperationTime{\jsspJobIndex}{\jsspMachineIndex'}$.
+Thus, having only the start times stored would be sufficient.
+Another form of representing a solution would therefore be to just map each operation to a starting time, leading to $\jsspMachines*\jsspJobs$ integer values per candidate solution&nbsp;[@vH2016DPFRASOSOD].
+However, also storing the end times of the operations will make our life a bit easier here.
+It allows the human operator to directly see what is going on.
+She can directly tell each machine or worker what to do and when to do it, without needing to look up any additional information from the problem instance data.
+
+#### Size of the Solution Space {#sec:solutionSpace:size}
+
+We choose the set of all Gantt charts for $\jsspMachines$&nbsp;machines and $\jsspJobs$&nbsp;jobs as our solution space&nbsp;$\solutionSpace$.
+Now it is not directly clear how many such Gantt charts exist, i.e., how big&nbsp;$\solutionSpace$ is.
+If we allow arbitrary useless waiting times between operations, then we could create arbitrarily many different valid Gantt charts for any problem instance.
+Let us therefore assume that no time is wasted by waiting unnecessarily.
+
+There are&nbsp;$\jsspJobs!=\prod_{\jsspJobIndex=1}^{\jsspJobs} \jsspJobIndex$ possible ways to arrange $\jsspJobs$&nbsp;jobs on one machine.
+Here, $\jsspJobs!$, called the factorial of&nbsp;$\jsspJobs$, is the number of different permutations (or orderings) of&nbsp;$\jsspJobs$ objects.
+If we have three jobs $a$, $b$, and&nbsp;$c$, then there are $3!=1*2*3=6$ possible permutations, namely $(a,b,c)$, $(a,c,b)$, $(b,a,c)$, $(b, c, a)$, $(c, a, b)$, and $(c, b, a)$.
+Each permutation would equal one possible sequence in which we can process the jobs on *one* machine.
+If we have three jobs and one machine, then six is the number of possible different Gantt charts that do not waste time.
+
+If we would have&nbsp;$\jsspJobs=3$ jobs and&nbsp;$\jsspMachines=2$ machines, we then would have $(3!)^2=36$ possible Gantt charts, as for each of the&nbsp;6 possible sequence of jobs on the first machines, there would be&nbsp;6 possible arrangements on the second machine.
+For&nbsp;$\jsspMachines=2$ machines, it is then $(\jsspJobs!)^3$, and so on.
+In the general case, we obtain [@eq:jssp_solution_space_size_upper] for the size&nbsp;$\left|\solutionSpace\right|$ of the solution space&nbsp;$\solutionSpace$.
+
+$$ \left|\solutionSpace\right| = (\jsspJobs!)^{\jsspMachines} $$ {#eq:jssp_solution_space_size_upper}
+
+However, the fact that we can generate $(\jsspJobs!)^{\jsspMachines}$ possible Gantt charts without useless delay for a JSSP with&nbsp;$\jsspJobs$ jobs and&nbsp;$\jsspMachines$ machines does not mean that all of them are actual *feasible* solutions.
+
+#### The Feasibility of the Solutions {#sec:solutionSpace:feasibility}
+
+\definition{def}{constraint}{A *constraint* is a rule imposed on the solution space&nbsp;$\solutionSpace$ which can either be fulfilled or violated by a candidate solution&nbsp;$\solspel\in\solutionSpace$.}
+
+\definition{def}{feasibility}{A candidate solution&nbsp;$\solspel\in\solutionSpace$ is *feasible* if and only if it fulfills all constraints.}
+
+\definition{def}{infeasibility}{A candidate solution&nbsp;$\solspel\in\solutionSpace$ is *infeasible* if it is *not feasible*, i.e., if it violates at least one constraint.}
+
+In order to be a feasible solution for a JSSP instance, a Gantt chart must indeed fulfill a couple of *constraints*:
+
+1. all operations of all jobs must be assigned to their respective machines and properly be completed,
+2. only the jobs and machines specified by the problem instance must occur in the chart,
+3. a operation must be assigned a time window on its corresponding machine which is exactly as long as the operation needs on that machine,
+4. the operations cannot intersect or overlap, each machine can only carry out one job at a time,
+5. once a machine begins to process an operation, it cannot stop until the operation is complete, i.e., no preemption is possible, and
+6. the precedence constraints of the operations must be honored.
+
+While the first five  *constraints* are rather trivial, the latter one proofs problematic.
+Imagine a JSSP with&nbsp;$\jsspJobs=2$ jobs and&nbsp;$\jsspMachines=2$ machines.
+There are&nbsp;$(2!)^2=(1*2)^2=4$ possible Gantt charts.
+Assume that the first job needs to first be processed by machine&nbsp;0 and then by machine&nbsp;1, while the second job first needs to go to machine&nbsp;1 and then to machine&nbsp;0.
+A Gantt chart which assigns the first job to be the first on machine&nbsp;1 and the second job first to be the first on machine&nbsp;$0$ cannot be executed in practice, i.e., is *infeasible*, as such an assignment does not honor the precedence constraints of the jobs.
+Instead, it contains a deadlock.
+
+\rel.figure{jssp_feasible_gantt}{Two different JSSP instances with&nbsp;$\jsspMachines=2$ machines and&nbsp;$\jsspJobs=2$ jobs, one of which has only three feasible candidate solutions while the other has four.}{jssp_feasible_gantt.svgz}{width=90%}
+
+The third schedule in the first column of [@fig:jssp_feasible_gantt] illustrates exactly this case.
+Machine&nbsp;0 should begin by doing job&nbsp;1.
+Job&nbsp;1 can only start on machine&nbsp;0 after it has been finished on machine&nbsp;1.
+At machine&nbsp;1, we should begin with job&nbsp;0.
+Before job&nbsp;0 can be put on machine&nbsp;1, it must go through machine&nbsp;0.
+So job&nbsp;1 cannot go to machine&nbsp;0 until it has passed through machine&nbsp;1, but in order to be executed on machine&nbsp;1, job&nbsp;0 needs to be finished there first.
+Job&nbsp;0 cannot begin on machine&nbsp;1 until it has been passed through machine&nbsp;0, but it cannot be executed there, because job&nbsp;1 needs to be finished there first.
+A cyclic blockage has appeared: no job can be executed on any machine if we follow this schedule.
+This is called a deadlock.
+No jobs overlap in the schedule.
+All operations are assigned to proper machines and receive the right processing times.
+Still, the schedule is infeasible, because it cannot be executed or written down without breaking the precedence constraint.
+
+Hence, there are only three out of four possible Gantt charts that work for this problem instance.
+For a problem instance where the jobs need to pass through all machines in the same sequence, however, all possible Gantt charts will work, as also illustrated in the second column of [@fig:jssp_feasible_gantt].
+The number of actually feasible Gantt charts in&nbsp;$\solutionSpace$ thus can be different for different problem instances.
+
+This is very annoying.
+The potential existence of infeasible solutions means that we cannot just pick a good element from&nbsp;$\solutionSpace$ (according to whatever *good* means), we also must be sure that it is actually *feasible*.
+An optimization algorithm which might sometimes return infeasible solutions will not be acceptable. 
