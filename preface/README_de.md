@@ -38,7 +38,7 @@ English wird wahrscheinlich die Sprache mit der aktuellsten Version werden.
 | [Hefei University](http://www.hfuu.edu.cn/english/),
 | Hefei, Anhui, China.
 | Web: <http://iao.hfuu.edu.cn/5>
-| Email: <tweise@hfuu.edu.cn>, tweise@ustc.edu.cn
+| Email: <tweise@hfuu.edu.cn>, <tweise@ustc.edu.cn>
 | &nbsp;
 
 

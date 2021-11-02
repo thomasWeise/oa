@@ -85,7 +85,8 @@ They are also part of the `moptipy` Python package with the sources for our expe
 
 Of course, if we really want to solve a new type of problem, we will usually use many benchmark problem instances to get a good understand about the performance of our algorithm(s).
 Only for the sake of clarity of presentation, we will here limit ourselves to these above eight problems.
-When selecting them, we tried to make sure to pick representative instances with different features from different sets in order to still obtain representative results.
+We have chosen them as hopefully diverse representatives of all of the common JSSP benchmarks.
+They stem from instance sets contributed by different researchers and have different numbers of jobs and machines.
 
 
 #### File Format and `demo` Instance {#sec:jsspDemoInstance}
