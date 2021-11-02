@@ -14,6 +14,7 @@ A problem instance is related to an optimization problem in the same way an obje
 The `class` defines which member variables exists and what their valid ranges are.
 An instance of the class is a piece of memory which holds concrete values for each member variable.
 
+
 ### Example: Job Shop Scheduling {#sec:jsspInstance}
 
 #### JSSP Instance Structure
@@ -47,6 +48,7 @@ Notice that for this reason we wrote "$\jsspOperationTime{\jsspJobIndex}{\jsspMa
 In other words, the JSSP instance structure described here already encompasses a wide variety of real-world production situations.
 This means that if we can build an algorithm which can solve this general type of JSSP well, it can also automatically solve the above-mentioned special cases.
 
+
 #### Sources for JSSP Instances
 
 In order to practically play around with optimization algorithms, we need some concrete instances of the JSSP.
@@ -69,14 +71,14 @@ We have to pick a small representative subset of instances.
 They will serve as illustrative example of how to approach optimization problems.
 In order to keep the example and analysis simple, we will focus on only eight instances, namely
 
-1. instance `abz9` by Adams et&nbsp;al.&nbsp;[@ABZ1988TSBPFJSS] with 20&nbsp;jobs and 15&nbsp;machines,
-2. instance `dmu48` by Demirkol et&nbsp;al.&nbsp;[@DMU1998BFSSP] with 20&nbsp;jobs and 20&nbsp;machines,
+1. instance `abz8` by Adams et&nbsp;al.&nbsp;[@ABZ1988TSBPFJSS] with 20&nbsp;jobs and 15&nbsp;machines,
+2. instance `dmu40` by Demirkol et&nbsp;al.&nbsp;[@DMU1998BFSSP] with 50&nbsp;jobs and 20&nbsp;machines,
 3. instance `ft06` by Fisher and Thompson&nbsp;[@FT1963PLCOLJSSR] with 6&nbsp;jobs and 6&nbsp; machines (which is the smallest of the well-known benchmark instances),
-4. instance `la10` by Lawrence&nbsp;[@L1998RCPSAEIOHSTS] with 15&nbsp;jobs and 5&nbsp;machines,
-5. instance `swv17` by Storer et&nbsp;al.&nbsp;[@SWV1992NSSFSPWATJSS] with 50&nbsp;jobs and 10&nbsp;machines,
-6. instance `ta19` by Taillard&nbsp;[@T199BFBSP] with 20&nbsp;jobs and 15&nbsp;machines,
-7. instance `ta73` by Taillard&nbsp;[@T199BFBSP] with 100&nbsp;jobs and 20&nbsp;machines (which is one of the largest of the well-known benchmark instances), and
-8. instance `yn3` by Yamada and Nakano&nbsp;[@YN1992AGAATLSJSI] with 20&nbsp;jobs and 20&nbsp;machines.
+4. instance `la09` by Lawrence&nbsp;[@L1998RCPSAEIOHSTS] with 15&nbsp;jobs and 5&nbsp;machines,
+5. instance `swv18` by Storer et&nbsp;al.&nbsp;[@SWV1992NSSFSPWATJSS] with 50&nbsp;jobs and 10&nbsp;machines,
+6. instance `ta54` by Taillard&nbsp;[@T199BFBSP] with 50&nbsp;jobs and 15&nbsp;machines,
+7. instance `ta79` by Taillard&nbsp;[@T199BFBSP] with 100&nbsp;jobs and 20&nbsp;machines (which is one of the largest of the well-known benchmark instances), and
+8. instance `yn2` by Yamada and Nakano&nbsp;[@YN1992AGAATLSJSI] with 20&nbsp;jobs and 20&nbsp;machines.
 
 These instances are contained in text files available at <http://people.brunel.ac.uk/~mastjjb/jeb/orlib/files/jobshop1.txt>, <http://raw.githubusercontent.com/thomasWeise/jsspInstancesAndResults/master/data-raw/instance-data/instance_data.txt>, and in <http://jobshop.jjvh.nl/>.
 They are also part of the `moptipy` Python package with the sources for our experiments.
@@ -109,6 +111,7 @@ This job will thus take at least&nbsp;100 time units to be completed, if it can 
 Job&nbsp;3 first needs to be processed by machine&nbsp;4 for 50&nbsp;time units, then by machine&nbsp;3 for 30&nbsp;time units, then by machine&nbsp;2 for 15&nbsp;time units, then by machine&nbsp;0 for&nbsp;20 time units, and finally by machine&nbsp;1 for 15&nbsp;time units.
 It would not be allowed to first send Job&nbsp;3 to any machine different from machine&nbsp;4 and after being processed by machine&nbsp;4, it must be processed by machine&nbsp;3 &ndash; although it may be possible that it has to wait for some time, if machine&nbsp;3 would already be busy processing another job.
 In the ideal case, job&nbsp;3 could be completed after 130&nbsp;time units.
+
 
 #### A Python Class for JSSP Instances
 
