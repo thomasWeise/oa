@@ -55,7 +55,7 @@ Furthermore, it holds a three dimensional array `times`, which has one row for e
 Each job-row has one column for each of the $\jsspMachines$&nbsp;operations of the job (there is one operation for each of the $\jsspMachines$&nbsp;machines).
 Each of these columns, in turn, stores the start and the end time of the operation of that job on this machine.
 
-\git.code{mp}{jssp_gantt}{Excerpt from a Python class for representing the data of a candidate solution to a JSSP.}{moptipy/examples/jssp/gantt.py}{}{book}{}
+\git.code{mp}{jssp_gantt}{Excerpt from a Python class for representing the data of a candidate solution to a JSSP.}{moptipy/examples/jssp/gantt.py}{}{book}{doc}
 
 The `times` for the `Gantt` instance corresponding to [@fig:gantt_demo_without_makespan] would look as follows:
 For job&nbsp;0 and operation&nbsp;0, it would hold `[0, 10]` since this operation indeed takes place during the first 10&nbsp; time units of the schedule.
@@ -155,7 +155,7 @@ An optimization algorithm which might sometimes return infeasible solutions will
 
 |name|$\jsspJobs$|$\jsspMachines$|$\min(\#\text{feasible})$|$\left|\solutionSpace\right|$|
 |:--|--:|--:|--:|--:|
-||2|2|3|4|
+|[@fig:jssp_feasible_gantt]|2|2|3|4|
 ||2|3|4|8|
 ||2|4|5|16|
 ||2|5|6|32|
@@ -166,19 +166,19 @@ An optimization algorithm which might sometimes return infeasible solutions will
 ||4|2|244|576|
 ||4|3|1'630|13'824|
 ||4|4|7'451|331'776|
-|demo|4|5||7'962'624|
+|`demo`|4|5||7'962'624|
 ||5|2|4'548|14'400|
 ||5|3|91'461|1'728'000|
 ||5|4||207'360'000|
 ||5|5||24'883'200'000|
-|ft06|6|6||$\approx$&nbsp;1.393*10^17^|
-|la09|15|5||$\approx$&nbsp;3.824*10^60^|
-|abz8|20|15||$\approx$&nbsp;6.193*10^275^|
-|yn2|20|20||$\approx$&nbsp;5.278*10^367^|
-|swv18|50|10||$\approx$&nbsp;6.772*10^644^|
-|ta54|50|15||$\approx$&nbsp;1.762*10^967^|
-|dmu40|50|20||$\approx$&nbsp;4.587*10^1'289^|
-|ta79|100|20||$\approx$&nbsp;2.512*10^3'159^|
+|`ft06`|6|6||$\approx$&nbsp;1.393*10^17^|
+|`la09`|15|5||$\approx$&nbsp;3.824*10^60^|
+|`abz8`|20|15||$\approx$&nbsp;6.193*10^275^|
+|`yn2`|20|20||$\approx$&nbsp;5.278*10^367^|
+|`swv18`|50|10||$\approx$&nbsp;6.772*10^644^|
+|`ta54`|50|15||$\approx$&nbsp;1.762*10^967^|
+|`dmu40`|50|20||$\approx$&nbsp;4.587*10^1'289^|
+|`ta79`|100|20||$\approx$&nbsp;2.512*10^3'159^|
 
 : The size&nbsp;$\left|\solutionSpace\right|$ of the solution space&nbsp;$\solutionSpace$ (without schedules that stall uselessly) for selected values of the number&nbsp;$\jsspJobs$ of jobs and the number&nbsp;$\jsspMachines$ of machines of an JSSP instance&nbsp;$\instance$ (later compare also with [@fig:function_growth]). {#tbl:jsspSolutionSpaceTable}
 
