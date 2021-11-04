@@ -31,4 +31,4 @@ From the perspective of a Python programmer, the general concept of objective fu
 The `evaluate` function of this class accepts one instance&nbsp;`x` of the solution space and returns a numerical value.
 We can implement this function in any way we want, meaning that we can accommodate all types of solution spaces and optimization goals.
 
-\git.code{mp}{Objective}{A generic interface for objective functions.}{moptipy/api/objective.py}{}{book}{doc}
+\git.code{mp}{Objective}{A generic interface for objective functions.}{moptipy/api/objective.py}{}{book}{doc,hints}

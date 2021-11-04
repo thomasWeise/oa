@@ -55,7 +55,7 @@ Furthermore, it holds a three dimensional array `times`, which has one row for e
 Each job-row has one column for each of the $\jsspMachines$&nbsp;operations of the job (there is one operation for each of the $\jsspMachines$&nbsp;machines).
 Each of these columns, in turn, stores the start and the end time of the operation of that job on this machine.
 
-\git.code{mp}{jssp_gantt}{Excerpt from a Python class for representing the data of a candidate solution to a JSSP.}{moptipy/examples/jssp/gantt.py}{}{book}{doc}
+\git.code{mp}{jssp_gantt}{Excerpt from a Python class for representing the data of a candidate solution to a JSSP.}{moptipy/examples/jssp/gantt.py}{}{book}{doc,hints}
 
 The `times` for the `Gantt` instance corresponding to [@fig:gantt_demo_without_makespan] would look as follows:
 For job&nbsp;0 and operation&nbsp;0, it would hold `[0, 10]` since this operation indeed takes place during the first 10&nbsp; time units of the schedule.
