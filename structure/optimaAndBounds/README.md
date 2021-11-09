@@ -102,3 +102,41 @@ We know no solution can be better than this, but we do not know whether a soluti
 
 However, if our algorithms produce solutions with a quality close to&nbsp;$\lowerBound(\objf)$, we know that we are doing well.
 Also, if we would actually find a solution with that makespan, then we would know that we have perfectly solved the problem.
+
+
+|name|$\jsspJobs$|$\jsspMachines$|$\lowerBound(\objf)$|$\lowerBound(\objf)^{\star}$|source for&nbsp;$\lowerBound(\objf)^{\star}$|
+|:--|--:|--:|--:|--:|:--|
+|`demo`|5|4|180|180|[@eq:jsspLowerBound]|
+|**`abz8`**|15|20|566|648|[@VLS2015FDSFCBS]|
+|`dmu40`|20|50|5577|5577|[@DMU1996BFSSP]|
+|`ft06`|6|6|52|55|[@FTM1971AIEAFTMSP]|
+|`la09`|5|15|951|951|[@ABZ1988TSBPFJSS]|
+|`swv18`|10|50|2852|2852|[@SWV1992NSSFSPWATJSS]|
+|`ta54`|15|50|2813|2839|[@T199BFBSP]|
+|`ta79`|20|100|5358|5358|[@T199BFBSP]|
+|**`yn2`**|20|20|732|870|[@BB2001SOBIFTJSPBPHTA]|
+
+: The lower bounds&nbsp;$\lowerBound{\objf}$ for the makespan of the optimal solutions for our example problems. For some instances, research literature (last column) provides better (i.e., higher) lower bounds&nbsp;$\lowerBound(\objf)^{\star}$ than our algorithm in [@lst:jssp_makespan_lb]. {#tbl:jsspLowerBoundsTable}
+
+
+The lower bounds for the makespans of our example problems are illustrated in [@tbl:jsspLowerBoundsTable].
+Only for the two instances `abz8` and `yn2`, no solutions have been found yet that have a makespan equal to the best available lower bound.
+This means that these two problems have not yet been solved to optimality.
+
+\rel.figure{gantt_demo_opt_with_makespan}{The globally optimal solution of the demo instance [@fig:jssp_demo_instance], whose makespan happens to be the same as the lower bound.}{gantt_demo_opt_with_makespan.svgz}{width=80%}
+
+[@fig:gantt_demo_opt_with_makespan] illustrates the globally optimal solution for our small `demo` JSSP instance defined in [@fig:jssp_demo_instance] (we will get to how to find such a solution later).
+Here we were lucky: The objective value of this solution happens to be the same as the lower bound for the makespan.
+Upon closer inspection, the limiting machine is the one at index&nbsp;3.
+
+We will find this by again looking at [@fig:jssp_demo_instance].
+Regardless with which job we would start here, it would need to initially wait at least&nbsp;$\jsspMachineStartIdle{3}=30$ time units.
+The reason is that no first operation of any job starts at machine&nbsp;3.
+Job&nbsp;0 would get to machine&nbsp;3 the earliest after 50&nbsp;time units, job&nbsp;1 after&nbsp;30, job&nbsp;2 after&nbsp;62, and job&nbsp;3 after again 50&nbsp;time units.
+Also, no job in the `demo` instance finishes at machine&nbsp;3.
+Job&nbsp;0, for instance, needs to be processed by machine&nbsp;4 for 10&nbsp;time units after it has passed through machine&nbsp;3.
+Job&nbsp;1 requires 80&nbsp;more time units after finishing at machine&nbsp;3, job&nbsp;2 also 10&nbsp;time units, and job&nbsp;3 again&nbsp;50 time units.
+In other words, machine&nbsp;3 needs to wait at least 30&nbsp;time units before it can commence its work and will remain idle for at least 10&nbsp;time units after processing the last sub job.
+In between, it will need to work for exactly&nbsp;140 time units, the total sum of the running time of all operations assigned to it.
+This means that no schedule can complete faster than $30+140+10=180$ time units.
+Thus, [@fig:gantt_demo_opt_with_makespan] illustrates the optimal solution for the `demo` instance.

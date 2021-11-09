@@ -38,6 +38,7 @@
 @string { ctms = "{Contributions to Management Science}" }
 @string { esacwisidmao = "{Estimation, Simulation, and Control {--} Wiley-Interscience Series in Discrete Mathematics and Optimization}" }
 @string { lncs = "{Lecture Notes in Computer Science ({LNCS})}" }
+@string { lntcs = "{Theoretical Computer Science and General Issues book sub series ({LNTCS})}" }
 @string { orcsis = "{Operations Research/Computer Science Interfaces Series}" }
 @string { psam = "{Princeton Series in Applied Mathematics}" }
 @string { tirss = "{The {IBM} Research Symposia Series}" }
@@ -103,6 +104,17 @@
  year = {1990},
  month = nov,
  doi = {10.1057/jors.1990.166}
+}
+
+@article{BB2001SOBIFTJSPBPHTA,
+ author = {Wolfgang Brinkk{\"o}tter and Peter Brucker},
+ title = {Solving Open Benchmark Instances for the Job-Shop Problem by Parallel Head-Tail Adjustments},
+ journal = jos,
+ volume = {4},
+ number = {1},
+ pages = {53--64},
+ year = {2001},
+ doi = {10.1002/1099-1425(200101/02)4:1<53::AID-JOS59>3.0.CO;2-Y}
 }
 
 @incollection{BB2008NO,
@@ -234,6 +246,16 @@
  doi = {10.1016/j.ejor.2016.04.030}
 }
 
+@techreport{DMU1996BFSSP,
+ title = {Benchmarking for Shop Scheduling Problems},
+ author = {Ebru Demirkol and Sanjay V. Mehta and Reha Uzsoy}, 
+ type = {Research Memorandum},
+ number = {96-4},
+ institution = {School of Industrial Engineering, Purdue University},
+ address = {{West Lafayette}, {IN}, {USA}},
+ year = {1996}
+}
+
 @article{DMU1998BFSSP,
  title = {Benchmarks for Shop Scheduling Problems},
  author = {Ebru Demirkol and Sanjay V. Mehta and Reha Uzsoy},
@@ -256,6 +278,19 @@
  year = {1963},
  chapter = {3.2},
  pages = {225--251}
+}
+
+@article{FTM1971AIEAFTMSP,
+ author = {Michael Florian and P. Trepant and Graham McMahon},
+ title = {An Implicit Enumeration Algorithm for the Machine Sequencing Problem},
+ journal = mans,
+ volume = {17},
+ number = {12},
+ pages = {B-782--B-792},
+ year= {1971},
+ month = aug,
+ doi = {10.1287/mnsc.17.12.B782},
+ note = {jstor: 2629469}
 }
 
 @book{GJ1979CAIAGTTTONC,
@@ -576,6 +611,21 @@
  doi = {10.1007/s10951-017-0547-8}
 }
 
+@inproceedings{VLS2015FDSFCBS,
+ title = {Failure-Directed Search for Constraint-Based Scheduling},
+ author = {Petr Vil{\'i}m and Philippe Laborie and Paul Shaw},
+ booktitle = {International Conference Integration of {AI} and {OR} Techniques in Constraint Programming: Proceedings of 12th International Conference on {AI} and {OR} Techniques in Constriant Programming for Combinatorial Optimization Problems {(CPAIOR'2015)}, } # may # {~18-22, 2015, {Barcelona}, {Spain}},
+ series = lncs # { and } # lntcs,
+ volume = 9075,
+ pages = {437--453},
+ year = {2015},
+ editor = {Laurent Michel},
+ publisher = {Springer},
+ address = {{Cham}, {Switzerland}},
+ doi = {10.1007/978-3-319-18008-3_30},
+ isbn = {978-3-319-18007-6}
+}
+
 @article{W2003GCACA,
  title = {Gantt Charts: {A} Centenary Appreciation},
  author = {James M. Wilson},
@@ -620,7 +670,6 @@
  url = {http://github.com/thomasWeise/jsspInstancesAndResults},
  note = {A {GitHub} repository with the common benchmark instances for the {Job} {Shop} {Scheduling} {Problem} as well as results from the literature, both in form of {CSV} files as well as R program code to access them.}
 }
-
 
 @book{WGOEB,
  author = {Thomas Weise},
