@@ -71,8 +71,16 @@ A Gantt chart with the shortest possible makespan is then a global optimum.
 There may be multiple globally optimal solutions, which then would all have the same makespan.
 
 When facing a JSSP instance&nbsp;$\instance$, we do not know whether a given Gantt chart is the globally optimal solution or not, because we do not know the shortest possible makespan.
-There is no direct way in which we can compute it.
+There is no direct way in which we can compute it (if we could, we would have solved the problem already).
 But we can, at least, compute some *lower bound*&nbsp;$\lowerBound(\objf)$ for the best possible makespan.
+
+A trivial lower bound for the makespan is always 0&nbsp;time units.
+No schedule can complete faster than that.
+Of course, this would also be a useless lower bound, because it does not tell us anything.
+A lower bound is the better, the higher it is.
+The highest possible lower bound for the quality of an optimal solution would be exactly that quality itself.
+As said, we are not able to build such a bound for the JSSP.
+But we can do other things.
 
 For instance, we know that a job&nbsp;$\jsspJobIndex$ needs at least as long to complete as the sum&nbsp;$\sum_{\jsspMachineIndex=0}^{\jsspMachines-1} \jsspOperationTime{\jsspJobIndex}{\jsspMachineIndex}$ over the processing times of all of its operations.
 It is clear that no schedule can complete faster then the longest job.
@@ -116,12 +124,14 @@ Also, if we would actually find a solution with that makespan, then we would kno
 |`ta79`|20|100|5358|5358|[@T199BFBSP]|
 |**`yn2`**|20|20|732|870|[@BB2001SOBIFTJSPBPHTA]|
 
-: The lower bounds&nbsp;$\lowerBound{\objf}$ for the makespan of the optimal solutions for our example problems. For some instances, research literature (last column) provides better (i.e., higher) lower bounds&nbsp;$\lowerBound(\objf)^{\star}$ than our algorithm in [@lst:jssp_makespan_lb]. {#tbl:jsspLowerBoundsTable}
+: The lower bounds&nbsp;$\lowerBound{\objf}$ for the makespan of the optimal solutions for our example problems. For some instances, research literature ([@W2019JRDAIOTJSSP], last column) provides better (i.e., higher) lower bounds&nbsp;$\lowerBound(\objf)^{\star}$ than our algorithm in [@lst:jssp_makespan_lb]. {#tbl:jsspLowerBoundsTable}
 
 
 The lower bounds for the makespans of our example problems are illustrated in [@tbl:jsspLowerBoundsTable].
 Only for the two instances `abz8` and `yn2`, no solutions have been found yet that have a makespan equal to the best available lower bound.
 This means that these two problems have not yet been solved to optimality.
+In the table, we also provide better, i.e., higher lower bounds&nbsp;$\lowerBound(\objf)^{\star}$ that are available for some instances.
+We took these from our meta-study&nbsp;[@W2019JRDAIOTJSSP], which aggregates many results from different papers and existing studies.
 
 \rel.figure{gantt_demo_opt_with_makespan}{The globally optimal solution of the demo instance [@fig:jssp_demo_instance], whose makespan happens to be the same as the lower bound.}{gantt_demo_opt_with_makespan.svgz}{width=80%}
 
