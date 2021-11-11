@@ -189,3 +189,51 @@ It is also suitable to simple scenarios, such as the Flow Shop Problem, where al
 
 Many such different problem flavors can now be reduced to investigating the same space&nbsp;$\searchSpace$ using the same optimization algorithms, just with different encodings&nbsp;$\encoding$ and/or objective functions&nbsp;$\objf$.
 Additionally, it becomes  easy to indirectly create and modify candidate solutions by sampling points from the search space and moving to similar points, as we will see in the following chapters.
+
+
+#### Size of the Search Space
+
+It is relatively easy to compute the size&nbsp;$\left|\searchSpace\right|$ of our proposed search space&nbsp;$\searchSpace$&nbsp;[@SIS1997NESFSJSPBGA].
+We do not need to make any assumptions regarding "no useless waiting time", as in [@sec:solutionSpace:size], since this is not possible by default.
+Each element&nbsp;$\sespel\in\searchSpace$ is a permutation of a multiset where each of the&nbsp;$\jsspJobs$ elements occurs exactly&nbsp;$\jsspMachines$ times.
+This means that the size of the search space can be computed as given in [@eq:jssp_search_space_size].
+
+$$ \left|\searchSpace\right| = \frac{\left(\jsspMachines*\jsspJobs\right)!}{ \left(\jsspMachines!\right)^{\jsspJobs} } $$ {#eq:jssp_search_space_size}
+
+|name|$\jsspJobs$|$\jsspMachines$|$\left|\solutionSpace\right|$|$\left|\searchSpace\right|$|
+|:--|--:|--:|--:|--:|
+||3|2|36|90|
+||3|3|216|1'680|
+||3|4|1'296|34'650|
+||3|5|7'776|756'756|
+||4|2|576|2'520|
+||4|3|13'824|369'600|
+||4|4|331'776|63'063'000|
+|`demo`|4|5|7'962'624|11'732'745'024|
+||5|2|14'400|113'400|
+||5|3|1'728'000|168'168'000|
+||5|4|207'360'000|305'540'235'000|
+||5|5|24'883'200'000|$\approx$&nbsp;6.234*10^14^|
+|`ft06`|6|6|$\approx$&nbsp;1.393*10^17^|$\approx$&nbsp;2.670*10^24^|
+|`la09`|15|5|$\approx$&nbsp;3.824*10^60^|$\approx$&nbsp;1.610*10^78^|
+|`abz8`|20|15|$\approx$&nbsp;6.193*10^275^|$\approx$&nbsp;1.432*10^372^|
+|`yn2`|20|20|$\approx$&nbsp;5.278*10^367^|$\approx$&nbsp;1.213*10^501^|
+|`swv18`|50|10|$\approx$&nbsp;6.772*10^644^|$\approx$&nbsp;1.254*10^806^|
+|`ta54`|50|15|$\approx$&nbsp;1.762*10^967^|$\approx$&nbsp;3.862*10^1'226^|
+|`dmu40`|50|20|$\approx$&nbsp;4.587*10^1'289^|$\approx$&nbsp;1.988*10^1'648^|
+|`ta79`|100|20|$\approx$&nbsp;2.512*10^3'159^|$\approx$&nbsp;8.094*10^3'896^|
+
+: The sizes&nbsp;$\left|\searchSpace\right|$ and&nbsp;$\left|\solutionSpace\right|$ of the search and solution spaces for selected values of the number&nbsp;$\jsspJobs$ of jobs and the number&nbsp;$\jsspMachines$ of machines of an JSSP instance&nbsp;$\instance$. (compare with [@fig:function_growth] and with the size&nbsp;$\left|\solutionSpace\right|$ of the solution space) {#tbl:jsspSearchSpaceTable}
+
+We give some example values for this search space size&nbsp;$\left|\searchSpace\right|$ in [@tbl:jsspSearchSpaceTable].
+From the table, we can immediately see that the number of points in the search space, too, grows very quickly with both the number of jobs&nbsp;$\jsspJobs$ and the number of machines&nbsp;$\jsspMachines$ of an JSSP instance&nbsp;$\instance$.
+
+For our `demo` JSSP instance with&nbsp;$\jsspJobs=4$ jobs and&nbsp;$\jsspMachines=5$ machines, we already have about 12&nbsp;billion different points in the search space for 7&nbsp;million possible non-wasteful candidate solutions.
+
+We now find the drawback of our encoding:
+There is some redundancy in our mapping.
+$\encoding$&nbsp; is not injective.
+For example, we could arbitrarily swap the first three numbers in the example string in [@fig:jssp_mapping_demo] and would obtain the same Gantt chart, because jobs&nbsp;0, 2, and&nbsp;3 start at different machines.
+
+As said before, we should avoid redundancy in the search space.
+However, here we will stick with our proposed mapping because it is very simple, it solves the problem of feasibility of candidate solutions, and it allows us to relatively easily introduce and discuss many different approaches, algorithms, and sub-algorithm
