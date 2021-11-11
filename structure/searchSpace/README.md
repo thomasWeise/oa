@@ -145,11 +145,47 @@ It can start after the second operation of job&nbsp;2 which is already assigned 
 Directly afterwards, job&nbsp;1 needs to be assigned again and its second operation will go to machine&nbsp;0.
 It can start at time index&nbsp;$50+20=70$, namely after its first operation is completed.
 
-We will continue this process.
+We continue this iterative process.
 The last row of [@fig:jssp_encoding] illustrates the second-to-last decoding step.
 It places the second-to-last operation of job&nbsp;0 onto machine&nbsp;3.
 The previous (i.e., third) operation of the job was on machine&nbsp;2 and completed there after 180&nbsp;time units.
 Machine&nbsp;3 is idle at that time, so operation&nbsp;4 of job&nbsp;1 will occupy it from time index&nbsp;180 to&nbsp;220.
 This only leaves the last operation of job&nbsp;1 to be assigned, which will take&nbsp;10 time units on machine&nbsp;4.
 It can start there directly at time index&nbsp;220 and will finish on time index&nbsp;230 (illustrated in dark gray in the figure).
+
 The Gantt chart then is complete.
+Whenever we assign a operation&nbsp;$\jsspJobIndex>0$ of any given job to a machine, then we already had assigned all operations at smaller indices first.
+No deadlock can occur and&nbsp;$\solspel$ must therefore be feasible.
+
+\git.code{mp}{jssp_encoding}{An excerpt of the implementation of the operation-based encoding for the JSSP.}{moptipy/examples/jssp/ob_encoding.py}{}{book}{comments,hints}
+
+In [@lst:jssp_encoding], we illustrate how such an encoding can be implemented.
+It basically is a function translating an [numpy integer array](https://numpy.org/doc/stable/user/basics.types.html) to a `Gantt` chart.
+We put the algorithm into a function `decode`, so that we can mark it for compilation with [numba](https://numba.pydata.org/) to improve the performance.
+
+
+#### Advantages of this very simple Encoding
+
+This is a very nice and natural way to represent Gantt charts with a much simpler data structure.
+As a result, it has been discovered by several researchers independently, the earliest being Gen et&nbsp;al.&nbsp;[@GTK1994SJSSPBGA], Bierwirth&nbsp;[@B1995AGPATJSSWGA; @BMK1996OPRFSP], and Shi et&nbsp;al.&nbsp;[@SIS1997NESFSJSPBGA], all in the 1990s.
+
+But what do we gain by using this search space and encoding?
+First, well, we now have a very simple data structure&nbsp;$\searchSpace$ to represent our candidate solutions.
+Second, we also have very simple rules for validating a point&nbsp;$\sespel$ in the search space:
+If it contains the numbers&nbsp;$0\dots (\jsspJobs-1)$ each exactly&nbsp;$\jsspMachines$ times, it represents a feasible candidate solution.
+
+Third, the candidate solution corresponding to a valid point from the search space will always be *feasible*&nbsp;[@B1995AGPATJSSWGA].
+The mapping&nbsp;$\encoding$ will ensure that the order of the operations per job is always observed.
+We do not need to worry about the issue of deadlocks mentioned in [@sec:solutionSpace:feasibility].
+We know from [@tbl:jsspSolutionSpaceTable], that the vast majority of the possible Gantt charts for a given problem might actually be infeasible &ndash; and now we do no longer need to worry about that. 
+Our mapping also makes sure of the more trivial constraints, such as that each machine will process at most one job at a time and that all operations are eventually processed.
+
+Finally, we also could modify our representation mapping&nbsp;$\encoding$ to adapt to more complicated and constraint versions of the JSSP if need be:
+For example, imagine that it would take a job- and machine-dependent time requirement for carrying a job from one machine to another, then we could facilitate this by changing&nbsp;$\encoding$ so that it adds this time to the starting time of the job.
+If there was a job-dependent setup time for each machine&nbsp;[@ANCK2008ASOSPWSTOC], which could be different if job&nbsp;1 follows job&nbsp;0 instead of job&nbsp;2, then this could be facilitated easily as well.
+If our operations would be assigned to "machine types" instead of "machines" and there could be more than one machine per machine type, then the representation mapping could assign the operations to the next machine of their type which becomes idle.
+Our representation also trivially covers the situation where each job may have more than&nbsp;$\jsspMachines$ operations, i.e., where a job may need to cycle back and pass one machine twice.
+It is also suitable to simple scenarios, such as the Flow Shop Problem, where all jobs pass through the machines in the same, pre-determined order&nbsp;[@T199BFBSP; @GJS1976TCOFAJS; @W2013GAFSSPAS].
+
+Many such different problem flavors can now be reduced to investigating the same space&nbsp;$\searchSpace$ using the same optimization algorithms, just with different encodings&nbsp;$\encoding$ and/or objective functions&nbsp;$\objf$.
+Additionally, it becomes  easy to indirectly create and modify candidate solutions by sampling points from the search space and moving to similar points, as we will see in the following chapters.

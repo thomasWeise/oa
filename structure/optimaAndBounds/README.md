@@ -27,7 +27,7 @@ If we solve a vehicle routing problem to serve several customers, then we may ei
 Thus, optimization means searching for such superlatives, as illustrated in [@fig:optimization_superlatives].
 Vice versa, whenever we are looking for the cheapest, fastest, strongest, best, biggest or smallest "thing", then we have an optimization problem at our hands.
 
-\rel.figure{optimization_superlatives}{Optimization is the search for superlatives&nbsp;[@BB2008NO].}{optimization_superlatives.svgz}{width=60%}
+\rel.figure{optimization_superlatives}{Optimization is the search for superlatives&nbsp;[@BB2008NO].}{optimization_superlatives.svgz}{width=72%}
 
 For the JSSP, there exists a simple and fast algorithm that can find the optimal schedules for problem instances with exactly&nbsp;$\jsspMachines=2$ machines *and* if all&nbsp;$\jsspJobs$ jobs need to be processed by the two machines in exactly the same order&nbsp;[@J1954OTATSPSWSTI].
 If our application always falls into a certain special case of the problem, we may be lucky to find an efficient way to always solve it to optimality.
