@@ -96,3 +96,60 @@ We therefore do not need to encode it.
 This means that we just include each job's id&nbsp;$\jsspMachines=5$ times in the string.
 This was the original idea: The encoding represents the order in which we assign the $\jsspJobs$&nbsp;jobs, and each job must be picked $\jsspMachines$&nbsp;times.
 Our search space is thus somehow similar to the set&nbsp;$\mathSpace{P}(\jsspJobs*\jsspMachines)$ of permutations of&nbsp;$\jsspJobs*\jsspMachines$ objects mentioned earlier, but instead of permutations, we have *permutations with repetitions*.
+
+\rel.figure{jssp_encoding}{Illustration of the first five and the second-to-last steps of the encoding of an example point in the search space to a candidate solution.}{jssp_encoding.svgz}{width=97.5%}
+
+A point&nbsp;$\sespel\in\searchSpace$ in the search space&nbsp;$\searchSpace$ for the `demo` JSSP instance would thus be an integer string of length&nbsp;20.
+As example, we choose $\sespel=(0, 2, 3, 2, 2, 3, 1, 1, 0, 3, 1, 3, 2, 1, 3, 2, 0, 1, 0, 0)$.
+Let us now exercise the encoding&nbsp;$\encoding(\sespel)$.
+In [@fig:jssp_encoding], we sketch several of its steps.
+For each step, we show the instance data&nbsp;$\instance$ on the left, the point&nbsp;$\sespel$ in the search space in the middle, and the current state of the Gantt chart&nbsp;$\solspel$ on the right hand side.
+
+The decoding of the string&nbsp;$\sespel$ starts with an empty Gantt chart.
+This string is interpreted from left to right, as illustrated in the figure.
+The first value is&nbsp;0, which means that, in the first step, job&nbsp;0 is assigned to a machine.
+From the instance data, we know that job&nbsp;0 first must be executed for 10&nbsp;time units on machine&nbsp;0.
+The job is thus inserted on machine&nbsp;0 in the chart.
+Since machine&nbsp;0 is initially idle, it can be placed at time index&nbsp;0.
+We also know that this operation can definitely be executed, i.e., won't cause a deadlock, because it is the first operation of the job.
+Once we have placed it in the chart, we cross it out to mark it as done.
+This is done in the first line in our figure.
+
+The next value in the string is&nbsp;2, meaning that we now need to insert an operation from job&nbsp;2.
+No operation from this job was processed yet, so we pick its first operation.
+From the instance data, we see that it should go to machine&nbsp;2 for 30&nbsp;time units.
+In our current Gantt chart, no job has yet been assigned to machine&nbsp;2, so we can place it there at time index&nbsp;0.
+This is done in the second line of the figure.
+
+We then encounter the value&nbsp;3 in the string for the first time.
+Job&nbsp;3 first goes to machine&nbsp;4 for 50&nbsp;time units.
+Machine&nbsp;4 is still unused, so we can place it there directly and mark it as done, as shown in line&nbsp;3 of our figure.
+
+Next we encounter job&nbsp;2 again, i.e., for the second time.
+We have already marked its first operation as done, as we now need to allocate its second operation.
+It should go to machine&nbsp;1 for 20&nbsp;time units.
+While machine&nbsp;1 has no job assigned to it yet, we cannot place the operation at time index&nbsp;0.
+We first need to wait for the first operation of job&nbsp;2 to complete, which happens at time index&nbsp;30.
+Hence, we can start the operation at that time.
+
+In the fifth row of [@fig:jssp_encoding], we again find job&nbsp;2.
+We need to assign its third operation, which goes to machine&nbsp;4 and will need 12&nbsp;time units there.
+It can only start after the second operation of the job is completed, which happens after $30+20=50$&nbsp;time units.
+Also, machine&nbsp;4 is used by job&nbsp;3, whose first operation will be completed there also after 50&nbsp;time units.
+Therefore, the third operation of job&nbsp;2 can begin there at time index&nbsp;50.
+
+We then again encounter job&nbsp;3 in&nbsp;$\sespel$, which means we need to assign its second operation.
+This operation goes to machine&nbsp;3 and can start at time index&nbsp;50, after the first operation of the job has been completed.
+Then we will encounter job&nbsp;1 for the first time and allocate its first operation to machine&nbsp;1 for 20&nbsp;time units.
+It can start after the second operation of job&nbsp;2 which is already assigned to that machine completes, i.e., at time index&nbsp;50.^[The reader will notice: Actually, we could let it start at time index&nbsp;0, which would not interfere with the operation of job&nbsp;2. However, this would make the mapping more complicated and we will stick to the easier approach here.]
+Directly afterwards, job&nbsp;1 needs to be assigned again and its second operation will go to machine&nbsp;0.
+It can start at time index&nbsp;$50+20=70$, namely after its first operation is completed.
+
+We will continue this process.
+The last row of [@fig:jssp_encoding] illustrates the second-to-last decoding step.
+It places the second-to-last operation of job&nbsp;0 onto machine&nbsp;3.
+The previous (i.e., third) operation of the job was on machine&nbsp;2 and completed there after 180&nbsp;time units.
+Machine&nbsp;3 is idle at that time, so operation&nbsp;4 of job&nbsp;1 will occupy it from time index&nbsp;180 to&nbsp;220.
+This only leaves the last operation of job&nbsp;1 to be assigned, which will take&nbsp;10 time units on machine&nbsp;4.
+It can start there directly at time index&nbsp;220 and will finish on time index&nbsp;230 (illustrated in dark gray in the figure).
+The Gantt chart then is complete.
