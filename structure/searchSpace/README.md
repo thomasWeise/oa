@@ -15,7 +15,9 @@ It would be nice to have a compact, clear, and easy-to-understand representation
 
 \definition{def}{searchSpacePoint}{The elements&nbsp;$\sespel\in\searchSpace$ of the search space $\searchSpace$ are called *points* in the search space.}
 
-\definition{def}{representationMapping}{The *encoding*&nbsp;$\encoding:\searchSpace\mapsto\solutionSpace$ is a left-total relation which maps each point&nbsp;$\sespel\in\searchSpace$ of the search space&nbsp;$\searchSpace$ to one candidate solutions&nbsp;$\solspel\in\solutionSpace$ in the solution space&nbsp;$\solutionSpace$.}
+\definition{def}{encoding}{The *encoding*&nbsp;$\encoding:\searchSpace\mapsto\solutionSpace$ is a left-total relation which maps each point&nbsp;$\sespel\in\searchSpace$ of the search space&nbsp;$\searchSpace$ to one candidate solutions&nbsp;$\solspel\in\solutionSpace$ in the solution space&nbsp;$\solutionSpace$.}
+
+\definition{def}{representation}{The search space and encoding together are called the *representation*.}
 
 The solution space&nbsp;$\solutionSpace$ is what the user cares about.
 The optimization algorithm *only* works on the search space&nbsp;$\searchSpace$.
@@ -53,6 +55,13 @@ The mapping&nbsp;$\encoding$ also does not necessarily need to be surjective, i.
 However, such solutions then can never be discovered.
 If the optimal solution would be among those unreachable ones, then, well, it could not be found by the optimization process.
 Being surjective is therefore a good feature for&nbsp;$\encoding$.
+
+
+### A Programmer's Perspective
+
+In [lst:Space], we already have defined a simple API to provide common operations for (solution) spaces.
+We can reuse this very same API for search spaces too.
+Additionally, we need a function that can convert from points in the search space to candidate solutions. 
 
 \git.code{mp}{Encoding}{An abstract base class for encodings.}{moptipy/api/encoding.py}{}{book}{doc,hints}
 
@@ -163,8 +172,15 @@ In [@lst:jssp_encoding], we illustrate how such an encoding can be implemented.
 It basically is a function translating an [numpy integer array](https://numpy.org/doc/stable/user/basics.types.html) to a `Gantt` chart.
 We put the algorithm into a function `decode`, so that we can mark it for compilation with [numba](https://numba.pydata.org/) to improve the performance.
 
+\git.code{mp}{PermutationsWithRepetitions}{Excerpt of the implementation of the `Space` API [lst:Space] for permutations with repetitions.}{moptipy/spaces/permutationswr.py}{}{book}{doc,hints}
 
-#### Advantages of this very simple Encoding
+In [@lst:PermutationsWithRepetitions], we just provide a very small excerpt of an implementation of the `Space` API for permutations with repetitions stored in [numpy arrays](https://numpy.org/doc/stable/reference/generated/numpy.array.html).
+Its `create` method will always create a new array which consists of $\jsspMachines$&nbsp;repetitions of the permutation&nbsp;$0..\jsspJobs$.
+We omit the conversion to and from strings, as it can be implemented similarly as in [@lst:jssp_gantt_space].
+Validation can simply check whether each job ID occurs exactly $\jsspMachines$&nbsp;times and is thus also not printed.
+
+
+#### Advantages of this very simple Representation
 
 This is a very nice and natural way to represent Gantt charts with a much simpler data structure.
 As a result, it has been discovered by several researchers independently, the earliest being Gen et&nbsp;al.&nbsp;[@GTK1994SJSSPBGA], Bierwirth&nbsp;[@B1995AGPATJSSWGA; @BMK1996OPRFSP], and Shi et&nbsp;al.&nbsp;[@SIS1997NESFSJSPBGA], all in the 1990s.

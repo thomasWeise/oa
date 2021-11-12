@@ -14,8 +14,26 @@ This candidate solution is the choice that the optimization process proposes to 
 It therefore holds all the data that the human operator needs to take action, in a form that the human operator can understand, interpret, and execute.
 During the optimization process, many such candidate solutions may be created and compared to find and return the best of them.
 
-From the programmer's perspective, the solution space is again a data structure, e.g., a `class` in Python.
+
+### A Programmer's Perspective
+
+From the programmer's perspective, the solution space is a data structure, e.g., a `class` in Python.
 An instance of this data structure is the candidate solution.
+On an abstract level, this data structure could be anything.
+It could be a list, a [numpy array](https://numpy.org/doc/stable/reference/generated/numpy.array.html), a tree data structure, a graph, a construction plan for a train, anything.
+
+Earlier, I said that we will do a lot of hands-on learning in this optimization book.
+We will look at things not *only* from the perspective of an algorithm scientist, but also from the perspective of a *programmer*.
+If a programmer is supposed to build algorithms that can deal with arbitrary data structures, she will first think about what kind of operations she will definitely need to perform with them.
+In [lst:Space], we give an excerpt example of such a "space API."
+
+\git.code{mp}{Space}{An excerpt of an abstract base class for implementing space handlers.}{moptipy/api/space.py}{}{book}{doc}
+
+We will want to store the solutions we create in a file.
+Ideally in a text file, because then a human can read it.
+So we need to be able to convert candidate solutions to strings.
+And then we want to read them again.
+Also any reasonable optimization algorithm that we will develop later should be able to create, copy, and check the data structures.  
 
 
 ### Example: Job Shop Scheduling
@@ -55,7 +73,7 @@ Furthermore, it holds a three dimensional array `times`, which has one row for e
 Each job-row has one column for each of the $\jsspMachines$&nbsp;operations of the job (there is one operation for each of the $\jsspMachines$&nbsp;machines).
 Each of these columns, in turn, stores the start and the end time of the operation of that job on this machine.
 
-\git.code{mp}{jssp_gantt}{Excerpt from a Python class for representing the data of a candidate solution to a JSSP.}{moptipy/examples/jssp/gantt.py}{}{book}{doc,hints}
+\git.code{mp}{jssp_gantt}{Excerpt from a Python class for representing a Gantt chart, i.e., the data of a candidate solution to a JSSP.}{moptipy/examples/jssp/gantt.py}{}{book}{doc,hints}
 
 The `times` for the `Gantt` instance corresponding to [@fig:gantt_demo_without_makespan] would look as follows:
 For job&nbsp;0 and operation&nbsp;0, it would hold `[0, 10]` since this operation indeed takes place during the first 10&nbsp; time units of the schedule.
@@ -79,6 +97,8 @@ Another form of representing a solution would therefore be to just map each oper
 However, also storing the end times of the operations will make our life a bit easier here.
 It allows the human operator to directly see what is going on.
 She can directly tell each machine or worker what to do and when to do it, without needing to look up any additional information from the problem instance data.
+
+\git.code{mp}{jssp_gantt_space}{Excerpt of the implementation of the `Space` API [lst:Space] for Gantt charts.}{moptipy/examples/jssp/gantt_space.py}{}{book}{doc,hints,comments}
 
 
 #### Size of the Solution Space {#sec:solutionSpace:size}

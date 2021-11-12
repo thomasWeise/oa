@@ -8,3 +8,4 @@
 \rel.input{searchSpace/README.md}
 \rel.input{searchOperators/README.md}
 \rel.input{termination/README.md}
+\rel.input{solvingOptimizationProblems/README.md}

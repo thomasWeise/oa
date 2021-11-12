@@ -27,6 +27,9 @@ Maximization problems, i.e., where the candidate solution with the higher object
 Maximization and minimization problems can be converted to each other by simply negating the objective function.
 In other words, if&nbsp;$\objf$ is the objective function of a minimization problem, we can solve the maximization problem with&nbsp;$-\objf$ and get the same result, and vice versa.
 
+
+### A Programmer's Perspective
+
 From the perspective of a Python programmer, the general concept of objective functions can be represented by the class given in [@lst:Objective].
 The `evaluate` function of this class accepts one instance&nbsp;`x` of the solution space and returns a numerical value.
 We can implement this function in any way we want, meaning that we can accommodate all types of solution spaces and optimization goals.
