@@ -1,4 +1,4 @@
-## Examples
+## Examples {#sec:intro:examples}
 
 Let us first look at some typical use cases of optimization.
 

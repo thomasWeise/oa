@@ -1,4 +1,4 @@
-## Beispiele
+## Beispiele {#sec:intro:examples}
 
 Wir wollen nun zuerst ein paar typische Beispielszenarien für Optimierung betrachten.
 
