@@ -102,10 +102,45 @@ Ideally, we do not want to be bothered with too much bookkeeping or the creation
 It should be possible to implement the most general type of black-box methods as well as problem-specific optimization methods and to run them in a uniform environment. 
 
 I therefore try to define a simple API for black-box optimization that combines all of our considerations far.
-The goal is to make the implementation of metaheuristics as simple as possible.
-We do this by clearly dividing between the optimization algorithms for solving a problem on one side and the structural components of the problem on the other side.
+The goal is to make two things very easy:
+
+1. the implementation of metaheuristics and
+2. the experimentation with metaheuristics.
+
+We do this by clearly dividing three things:
+
+1. the structural components of the problem that we discussed in [@sec:structure],
+2. the optimization algorithms that use them (which we will introduce in this chapter), and
+3. the execution of experiments, the logging of results, and evaluation of the results.
+
 The algorithms that we will implement will be general black-box methods.
 At the same time, we will develop the components that we need to plug into them to solve JSSPs as educational example.
+In this book, we will not really care much about the third point &ndash; but in our [\repo{mp}{repo.name}](\repo{mp}{repo.url}) package, you can find all the implementations and code.
+Here, we will only very shortly outline them.
 
-We therefore first need to consider what an optimization process needs as input.
-Obviously, in the most common case, these are all the items we have discussed in the previous section, ranging from the termination criterion over the search operators (which we will discuss later) and the representation mapping to the objective function.
+\git.code{mp}{Process}{An excerpt of the abstract base class for the Process API.}{moptipy/api/process.py}{}{book}{doc,hints}
+
+\git.code{mp}{Algorithm}{An excerpt of the abstract base class for the API for implementing optimization algorithms.}{moptipy/api/algorithm.py}{}{book}{doc,hints}
+
+The core component for executing experiments is the class `Process`, a part of which is illustrated in [@lst:Process].
+Instances of this class are passed to the optimization algorithm implementations that inherit from class `Algorithm` given in [@lst:Algorithm].
+It inherits from `Space` (see [@lst:Space]) and provides all of its method to directly access the search space&nbsp;$\searchSpace$.
+And algorithm can therefore use an instance of `Process` to create and copy points in the search space.
+`Process` also inherits from `Objective` (see [@lst:Objective]).
+It represents a wrapper&nbsp;$\objf':\searchSpace\mapsto\realNumbers$ that embodies both the encoding and the original objective function, i.e., $\objf'(\sespel)=\objf(\encoding(\sespel))\;\forall\sespel\in\searchSpace$.
+This means that an optimization algorithm indeed only needs to care about the search space and has basically no contact with the solution space&nbsp;$\solutionSpace$.
+
+Since `Process` forwards calls of `evaluate` (again, see [@lst:Objective]), it has one other advantage:
+It will see all the solutions that the algorithm evaluates *and* all of their objective values.
+Hence, it can easily remember the best-so-far solution and even log improvements to log files if we want.
+The optimization algorithm can thus query the `Process` for a copy of the best-so-far solution.
+Once the algorithm has completed, the user can ask the `Process` for a copy of the final result, too.
+
+`Process` can also count the number of evaluated solutions, check if any goal quality was reached, and observe the runtime that has been consumed.
+It therefore also provides a function `should_terminate` representing the termination criterion discussed in [@sec:terminationCriterion].
+Finally, a `Process` also provides a source for randomness&nbsp;$\random$ (see [@sec:randomizedAlgos]) that the algorithm can use for all of its non-deterministic decisions.
+
+As said, I will not go into detail much how this functionality is implemented.
+You can read this in the documentation of our library, if you want.
+The important point is:
+With the structural components discussed in [@sec:structure] and the blueprint of the most trivial abstract class for implementing an optimization algorithm given in [@lst:Algorithm], we can now finally move forward and begin implementing actual algorithms.
