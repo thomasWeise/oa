@@ -24,6 +24,7 @@
 这些详细信息将出现在[GitHub存储库](\repo{mp}{repo.url})中可用的完整代码版本中。
 因此，GitHub存储库中的完整代码版本看起来可能与书中插图的删节代码不同。
 为了完全理解代码示例，我们建议读者熟悉Python、[numpy](https://numpy.org/)和[matplotlib](https://matplotlib.org/)。
+当然，如果你只是为了学习算法而阅读这本书，你可以忽略程序源代码示例。
 
 本书以“署名-非商业性使用-相同方式共享4.0国际” (CC&nbsp;BY-NC-SA&nbsp;4.0) 许可证发布，请参阅<https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh>以获取摘要。
 我试图用多种语言并行编写这本书，但我可能无法使它们保持同步。

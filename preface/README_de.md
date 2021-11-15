@@ -21,6 +21,7 @@ Wir werden viele Details weglassen, die für das Verständnis der Algorithmen ni
 Diese sind dann natürlich in der vollständigen Version des Kodes im [GitHub-Repository](\repo{mp}{repo.url}) enthalten.
 Der verlinkte Kode kann also durchaus anders aussehen, als der im Buch abgebildete, verkürzte Kode.
 Um die Quellkodebeispiele vollständig zu verstehen, empfehlen wir der Leserin, sich mit Python, [numpy](https://numpy.org/), und [matplotlib](https://matplotlib.org/) vertraut zu machen.
+Natürlich ist es auch völlig OK, die Quellkodebeispiele einfach komplett zu ignorieren.
 
 Der Text des Buches selbst wird aktiv geschrieben und liegt komplett im Repository *[thomasWeise/oa](https://github.com/thomasWeise/oa)*.
 Dort kannst Du auch *[Meldungen](https://github.com/thomasWeise/oa/issues)* einstellen, wie zum Beispiel Änderungsanfragen, Vorschläge, gefundene (Schreib-)Fehler, oder Du kannst Bescheid sagen, wenn etwas unklar ist.

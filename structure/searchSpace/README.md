@@ -172,7 +172,7 @@ In [@lst:jssp_encoding], we illustrate how such an encoding can be implemented.
 It basically is a function translating an [numpy integer array](https://numpy.org/doc/stable/user/basics.types.html) to a `Gantt` chart.
 We put the algorithm into a function `decode`, so that we can mark it for compilation with [numba](https://numba.pydata.org/) to improve the performance.
 
-\git.code{mp}{PermutationsWithRepetitions}{Excerpt of the implementation of the `Space` API [lst:Space] for permutations with repetitions.}{moptipy/spaces/permutationswr.py}{}{book}{doc,hints,comments}
+\git.code{mp}{PermutationsWithRepetitions}{Excerpt of the implementation of the `Space` API [@lst:Space] for permutations with repetitions.}{moptipy/spaces/permutationswr.py}{}{book}{doc,hints,comments}
 
 In [@lst:PermutationsWithRepetitions], we just provide a very small excerpt of an implementation of the `Space` API for permutations with repetitions stored in [numpy arrays](https://numpy.org/doc/stable/reference/generated/numpy.array.html).
 Its `create` method will always create a new array which consists of $\jsspMachines$&nbsp;repetitions of the permutation&nbsp;$0..\jsspJobs$.

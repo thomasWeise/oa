@@ -23,3 +23,4 @@ We will introduce several such general algorithms in this book.
 We explore them by again using the Job Shop Scheduling Problem (JSSP) from [@sec:jsspExample] as example.
 
 \rel.input{common/README.md}
+\rel.input{randomSampling/README.md}
