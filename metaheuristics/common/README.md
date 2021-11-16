@@ -45,7 +45,7 @@ Then your algorithm always picks the worse one of the two choices.
 If you hard-code to always to "B," you have essentially the same situation.
 If you let your algorithm to choose randomly whether to do "A" or "B," you can at least avoid the situation that it *always* picks the worst option.
 
-That our search operator APIs in [@lst:Op0;@lst:op1;@lst:Op2] all accept a pseudorandom number generator&nbsp;$\random$ as parameter is one manifestation of this issue.
+That our search operator APIs in [@lst:op0;@lst:op1;@lst:op2] all accept a pseudorandom number generator&nbsp;$\random$ as parameter is one manifestation of this issue.
 Random number generators are objects which provide functions that can return numbers from certain ranges, say from $[0,1)$ or an integer interval.
 Whenever we call such a function, it may return any value from the allowed range, but we do not know which one it will be.
 The returned value should be independent from those returned before, i.e., from known the past random numbers, we should *not* be able to guess the next one.

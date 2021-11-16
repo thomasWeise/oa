@@ -16,7 +16,7 @@ Then the best we can do is just create the solutions randomly.
 
 ### Ingredient: Nullary Search Operation for the JSSP
 
-For this purpose, we need to implement the nullary search operation from [@lst:Op0].
+For this purpose, we need to implement the nullary search operation from [@lst:op0].
 We create a new search operator which needs no input (except the random number generator&nbsp;$\random$) and returns a point in the search space.
 Recall that our representation ([@sec:jsspSearchSpace]) requires that each index&nbsp;$\jsspJobIndex\in 0\dots(\jsspJobs-1)$ of the&nbsp;$\jsspJobs$ must occur exactly&nbsp;$\jsspMachines$ times in the integer array of length&nbsp;$\jsspMachines*\jsspJobs$, where&nbsp;$\jsspMachines$ is the number of machines in the JSSP instance.
 We already learned how to create one such sequence, namely the constant one returned by out `Space` implementation given in [@lst:PermutationsWithRepetitions].

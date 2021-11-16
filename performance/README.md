@@ -18,3 +18,5 @@ Instead, we often start by first developing one idea and then try to improve it.
 Of course, we need to compare each new approach with the ones we already have.
 Alternatively, especially if we work in a research scenario, maybe we have a new idea which then needs to be compared to a set of existing state-of-the-art algorithms.
 Let us now discuss how such comparisons can be conducted in a rigorous, reliable, and reproducible way.
+
+\rel.input{codingAndReproducibility/README.md}

@@ -249,7 +249,7 @@ For our `demo` JSSP instance with&nbsp;$\jsspJobs=4$ jobs and&nbsp;$\jsspMachine
 We now find the drawback of our encoding:
 There is some redundancy in our mapping.
 $\encoding$&nbsp; is not injective.
-For example, we could arbitrarily swap the first three numbers in the example string in [@fig:jssp_mapping_demo] and would obtain the same Gantt chart, because jobs&nbsp;0, 2, and&nbsp;3 start at different machines.
+For example, we could arbitrarily swap the first three numbers in the example string in [@fig:jssp_encoding] and would obtain the same Gantt chart, because jobs&nbsp;0, 2, and&nbsp;3 start at different machines.
 
 As said before, we should avoid redundancy in the search space.
 However, here we will stick with our proposed mapping because it is very simple, it solves the problem of feasibility of candidate solutions, and it allows us to relatively easily introduce and discuss many different approaches, algorithms, and sub-algorithm
