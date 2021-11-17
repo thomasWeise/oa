@@ -19,6 +19,7 @@
 %% journals
 @string { adm = "{Annals of Discrete Mathematics}" }
 @string { aim = "{{AI} Magazine}" }
+@string { asoc = "{Applied Soft Computing Journal ({ASOC})}" }
 @string { bio = "{Biometrics}" }
 @string { cace = "{Computers {\&} Chemical Engineering}" }
 @string { caie = "{Computers {\&} Industrial Engineering}" }
@@ -29,6 +30,7 @@
 @string { jacm = "{Journal of the {ACM} ({JACM})}" }
 @string { jetai = "{Journal of Experimental {\&} Theoretical Artificial Intelligence ({JETAI})}" }
 @string { jlfnvaac = "{Journal of Low Frequency Noise, Vibration and Active Control}" }
+@string { joar = "{Journal of Automated Reasoning}" }
 @string { jors = "{The Journal of the Operational Research Society ({JORS})}" }
 @string { jos = "{Journal of Scheduling}" }
 @string { jotrssscas = "{Journal of the Royal Statistical Society. Series {C} (Applied Statistics)}" }
@@ -43,11 +45,13 @@
 @string { ors = "{{O}perations-{R}esearch-{S}pektrum ({OR} Spectrum)}" }
 @string { rtriqr = "{Railway Technical Research Institute, Quarterly Reports (QR)}" }
 @string { sa = "{Scientific American}" }
-@string { sr = "{SIAM Review}" }
+@string { sr = "{{SIAM} Review}" }
+@string { tm = "{Technometrics}" }
 @string { zor = "{Zeitschrift f{\"u}r Operations Research ({ZOR}) -- Methods and Models of Operations Research}"}
 
 %% series
 @string { ctms = "{Contributions to Management Science}" }
+@string { dbom = "{Dover Books on Mathematics}" }
 @string { esacwisidmao = "{Estimation, Simulation, and Control {--} Wiley-Interscience Series in Discrete Mathematics and Optimization}" }
 @string { isor = "{International Series in Operations Research \& Management Science ({ISOR})}"}
 @string { lncs = "{Lecture Notes in Computer Science ({LNCS})}" }
@@ -56,6 +60,7 @@
 @string { orcsis = "{Operations Research/Computer Science Interfaces Series}" }
 @string { psam = "{Princeton Series in Applied Mathematics}" }
 @string { tirss = "{The {IBM} Research Symposia Series}" }
+@string { ut = "{Universitext}" }
 @string { wsidmao = "{Wiley Series in Discrete Mathematics and Optimization}" }
 
 %% contents
@@ -298,6 +303,14 @@
  doi = {10.1016/0360-8352(96)00047-2}
 }
 
+@misc{CPD2017TAMPARAOEA,
+ title = {Towards a More Practice-Aware Runtime Analysis of Evolutionary Algorithms},
+ author = {Eduardo {Carvalho Pinto} and Carola Doerr},
+ year = {2017},
+ note = {\mbox{arXiv:1812.00493v1} \mbox{[cs.NE]} \mbox{3~Dec~2018}},
+ url = {http://arxiv.org/pdf/1812.00493.pdf},
+}
+
 @incollection{CPW1998AROMSCAAA,
  author = {Bo Chen and Chris N. Potts and Gerhard J. Woeginger},
  title = {A Review of Machine Scheduling: {C}omplexity, Algorithms and Approximability},
@@ -390,6 +403,17 @@
  doi = {10.1016/S0377-2217(97)00019-2}
 }
 
+@book{DN2020TOECRDIDO,
+ title = {Theory of Evolutionary Computation -- Recent Developments in Discrete Optimization},
+ editor = {Benjamin Doerr and Frank Neumann},
+ year = {2020},
+ series = ncs,
+ doi = {10.1007/978-3-030-29414-4},
+ publisher = {Springer Nature Switzerland {AG}},
+ address = {{Cham}, {Switzerland}},
+ isbn = {978-3-030-29413-7},
+}
+
 @article{F1965CAOMDEVIOC,
  title = {Cluster Analysis of Multivariate Data: Efficiency vs Interpretability of Classifications},
  author = {Edward W. Forgy},
@@ -398,6 +422,14 @@
  number = {3},
  pages = {768--780},
  year = {1965}, 
+}
+
+@misc{FHRA2015CDR1,
+ author = {Steffen Finck and Nikolaus Hansen and Raymond Ros and Anne Auger},
+ title = {{COCO} Documentation, Release~15.03},
+ year = {2015},
+ month = nov # {~17, },
+ url = {http://coco.lri.fr/COCOdoc/COCO.pdf}
 }
 
 @incollection{FT1963PLCOLJSSR,
@@ -432,6 +464,17 @@
  edition = {3},
  publisher = {Oliver \& Boyd},
  address = {{London}, {UK}}
+}
+
+@article{G1969PFDOOIS,
+ title = {Procedures for Detecting Outlying Observations in Samples},
+ author = {Frank E. Grubbs},
+ journal = tm,
+ volume = {11},
+ year = {1969},
+ issue = {1},
+ pages = {1--21},
+ doi = {10.1080/00401706.1969.10490657}
 }
 
 @book{GBC2016DL,
@@ -570,6 +613,18 @@
  doi = {10.1007/s12532-009-0004-6}
 }
 
+@techreport{HAFR2010RPBBOB2ES,
+ author = {Nikolaus Hansen and Anne Auger and Steffen Finck and Raymond Ros},
+ title = {Real-Parameter Black-Box Optimization Benchmarking 2010: Experimental Setup},
+ institution = {Institut National de Recherche en Informatique et en Automatique ({INRIA})},
+ type = {Rapports de Recherche},
+ number = {RR-7215},
+ year = {2010},
+ url = {http://hal.inria.fr/inria-00462481},
+ note = {inria-00462481},
+ month = mar # {~9, }
+}
+
 @inproceedings{HPO2016DPFI4S,
  author = {Mario Hermann and Tobias Pentek and Boris Otto},
  title = {Design Principles for Industrie~4.0 Scenarios},
@@ -579,8 +634,21 @@
  doi = {10.1109/HICSS.2016.488},
  pages = {3928--3937},
  publisher = {{IEEE} Computer Society Press},
- address = {{Los} {Alamitos}, {CA}, {USA}},
+ address = {{Los Alamitos}, {CA}, {USA}},
  editor = {Tung X. Bui and Ralph H. {Sprague Jr.}}
+}
+
+@article{HS2000LSAFSAEE,
+ author = {Holger H. Hoos and Thomas St{\"{u}}tzle},
+ title = {Local Search Algorithms for {SAT}: An Empirical Evaluation},
+ journal = joar,
+ volume = {24},
+ number = {4},
+ pages = {421--481},
+ year = {2000},
+ doi = {10.1023/A:1006350622830},
+ month = may,
+ url = {http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.29.978&type=pdf}
 }
 
 @article{HW1979AA1AKMCA,
@@ -592,6 +660,19 @@
  year = {1979},
  pages = {100--108},
  doi = {10.2307/2346830}
+}
+
+@inproceedings{HWHC2013HILSFM,
+ title = {Hyperplane Initialized Local Search for {MAXSAT}},
+ author = {Doug Hains and L. Darrell Whitley and Adele E. Howe and Wenxiang Chen},
+ editor = {Christian Blum and Enrique Alba},
+ booktitle = {Proceedings of the Genetic and Evolutionary Computation Conference ({GECCO'13}) } # jul # {~6--10, 2013, {Amsterdam}, {The Netherlands}},
+ pages = {805--812},
+ publisher = {{ACM}},
+ address = {{New York}, {NY}, {USA}},
+ year = {2013},
+ doi = {10.1145/2463372.2463468},
+ url = {http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.386.2047}
 }
 
 @article{IMNFM1997ENSFRTSB,
@@ -627,6 +708,21 @@
  year = {2002},
  pages = {215--250},
  url = {https://web.cs.dal.ca/~eem/gradResources/A-theoreticians-guide-to-experimental-analysis-of-algorithms-2001.pdf}
+}
+
+@incollection{JMG2004EAOHFTS,
+ author = {David Stifler Johnson and Lyle A. McGeoch},
+ title = {Experimental Analysis of Heuristics for the {STSP}},
+ booktitle = {The Traveling Salesman Problem and its Variations},
+ chapter = {9},
+ pages = {369--443},
+ editor = {Gregory Z. Gutin and Abraham P. Punnen},
+ publisher = {Kluwer Academic Publishers},
+ year = {2002},
+ series = {Combinatorial Optimization},
+ volume = {12},
+ doi = {10.1007/0-306-48213-4_9},
+ url = {http://archive.dimacs.rutgers.edu/Challenges/TSP/papers/stspchap.pdf}
 }
 
 @article{JMSO2005ASFJSSPWCPT,
@@ -676,6 +772,18 @@
  address = {New York, {NY}, {USA}},
  doi = {10.1007/978-1-4615-4629-0},
  isbn = {978-0-7923-8637-7}
+}
+
+@book{K2014PTACC,
+ title = {Probability Theory: A Comprehensive Course},
+ author = {Achim Klenke},
+ series = ut,
+ edition = {2},
+ year = {2014},
+ isbn = {144715360X},
+ publisher = {{Springer-Verlag}},
+ address = {{London}, {UK}},
+ doi = {10.1007/978-1-4471-5361-0}
 }
 
 @article{KIF2011OOTNSFRMPWRFTE,
@@ -766,6 +874,16 @@
  doi = {10.1016/S0377-2217(02)00123-6}
 }
 
+@book{M1992ITE,
+ title = {Introduction to Econometrics},
+ author = {Gangadharrao Soundalyarao Maddala},
+ edition = {Second},
+ year = {1992},
+ isbn = {978-0-02-374545-4},
+ publisher = {{MacMillan}},
+ address = {{New York}, {NY}, {USA}}
+}
+
 @book{MAM2021TROAIRWAFRAMG,
  author = {Zbigniew Michalewicz and Leonardo Arantes and Matthew Michalewicz},
  title = {The Rise of Artificial Intelligence: Real-world Applications for Revenue and Margin Growth},
@@ -812,12 +930,34 @@
 }
 
 @book{O2017PTWPSREAS,
- title = {Python Testing with pytest: Simple, Rapid, Effective, and Scalable},
  author = {Brian Okken},
+ title = {Python Testing with pytest: Simple, Rapid, Effective, and Scalable},
  publisher = {Pragmatic Bookshelf},
  address = {{NC}, {USA}},
  year = {2017},
  isbn = {978-1680502404},
+}
+
+@inproceedings{P1996ACPAANMFGA,
+ author = {Alan P{\'{e}}trowski},
+ title = {A Clearing Procedure as a Niching Method for Genetic Algorithms},
+ pages = {798--803},
+ year = {1996},
+ doi = {10.1109/ICEC.1996.542703},
+ booktitle = {Proceedings of {IEEE} International Conference on Evolutionary Computation ({CEC'96}), } # may # {~20--22, 1996, {Nagoya}, {Japan}},
+ editor = {Keisoku Jid{\={o}} and Seigyo Gakkai},
+ publisher = {{IEEE} Computer Society Press},
+ address = {{Los Alamitos}, {CA}, {USA}},
+ isbn = {0-7803-2902-3},
+ url = {http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.33.8027&rep=rep1&type=pdf}
+}
+
+@techreport{P1997AEHCTFS,
+ author = {Alan P{\'{e}}trowski},
+ title = {An Efficient Hierarchical Clustering Technique for Speciation},
+ institution = {Institut National des T{\'{e}}l{\'{e}}communications},
+ address = {{Evry Cedex}, {France}},
+ year = {1997},
 }
 
 @book{P2016STAAS,
@@ -851,6 +991,26 @@
  pages = {S41--S68},
  doi = {10.1057/jors.2009.2},
  url = {http://eprints.soton.ac.uk/145495/1/Scheduling50YearsE-Print.pdf}
+}
+
+@book{R1977PTACC,
+ title = {Probability Theory: A Concise Course},
+ series = dbom,
+ edition = {new},
+ author = {Y.A. Rozanov},
+ publisher = {Dover Publications},
+ isbn = {0486635449},
+ year = {1977},
+ address = {{Mineola}, {NY}, {USA}}
+}
+
+@article{R2011WDEGMFA,
+ author = {Uwe E. Reinhardt},
+ title = {What Does `Economic Growth' Mean for Americans?},
+ month = sep # {~2, },
+ year = {2011},
+ journal = {{The New York Times}, {Economix}, {Today's Economist}},
+ url = {http://economix.blogs.nytimes.com/2011/09/02/what-does-economic-growth-mean-for-americans}
 }
 
 @article{S1961TBWPAPA,
@@ -893,6 +1053,16 @@
  publisher = {{O'Reilly} {Media}},
  address = {{Sebastopol}, {CA}, {USA}},
  isbn = {978-1098106478}
+}
+
+@book{SC1988NSFTBS,
+ author = {Sidney Siegel and N. John {Castellan Jr.}},
+ title = {Nonparametric Statistics for The Behavioral Sciences},
+ publisher = {{McGraw-Hill}},
+ address = {{New York}, {NY}, {USA}},
+ series = {Humanities/Social Sciences/Languages},
+ year = {1988},
+ isbn = {0-07-057357-3}
 }
 
 @article{SGA1976PCAP,
@@ -940,6 +1110,37 @@
  month = jan,
  pages = {278--285},
  doi = {10.1016/0377-2217(93)90182-M}
+}
+
+@book{T2017LOPTAMS,
+ title = {Lectures on Probability Theory and Mathematical Statistics},
+ author = {Marco Taboga},
+ edition = {3},
+ month = dec,
+ year = {2017},
+ publisher = {CreateSpace Independent Publishing Platform (On-Demand Publishing, {LLC})},
+ address = {{Scotts Valley}, {CA}, {USA}},
+ isbn = {1981369198},
+ url = {http://www.statlect.com/}
+}
+
+@book{T2018SFAB,
+ title = {Statistics for Absolute Beginners},
+ author = {Oliver Theobald},
+ month = apr,
+ year = {2018},
+ edition = {Paperback},
+ isbn = {1980797749},
+ publisher = {Independently published}
+}
+
+@techreport{TLSYW2010BFFTC2SSACOLSGO,
+ author = {Ke Tang and Xiaodong Li and Ponnuthurai Nagaratnam Suganthan and Zhenyu Yang and Thomas Weise},
+ title = {Benchmark Functions for the {CEC'2010} Special Session and Competition on Large-Scale Global Optimization},
+ institution = {University of Science and Technology of China ({USTC}), School of Computer Science and Technology, Nature Inspired Computation and Applications Laboratory ({NICAL})},
+ address = {{Hefei}, {Anhui}, {China}},
+ year = {2010},
+ month = jan # {~8, }
 }
 
 @misc{vH2015JSIAS,
@@ -1042,7 +1243,7 @@
  booktitle = {Proceedings of the 16th {IEEE} Conference on Cognitive Informatics \& Cognitive Computing ({ICCI*CC'17}), } # jul # {~26--28, 2017, {University} of {Oxford}, {Oxford}, {UK}},
  pages = {490--497},
  year = {2017},
- address = {{Los} {Alamitos}, {CA}, {USA}},
+ address = {{Los Alamitos}, {CA}, {USA}},
  publisher = {{IEEE} Computer Society Press},
  isbn = {978-1-5386-0770-1},
  doi = {10.1109/ICCI-CC.2017.8109794}
@@ -1107,6 +1308,17 @@
  doi = {10.1007/978-3-642-04039-9_2}
 }
 
+@inproceedings{WNT2010AAOAB,
+ author = {Thomas Weise and Li Niu and Ke Tang},
+ title = {{AOAB} {--} Automated Optimization Algorithm Benchmarking},
+ booktitle = {Proceedings of the 12th Annual Conference Companion on Genetic and Evolutionary Computation ({GECCO'10}), } # jul # {~7--11,2010, {Portland}, {OR}, {USA}},
+ publisher = {{ACM} Press},
+ address = {{New York}, {NY}, {USA}},
+ pages = {1479--1486},
+ year = {2010},
+ doi = {10.1145/1830761.1830763}
+}
+
 @inproceedings{WPRGG2009EFTP,
  author = {Thomas Weise and Alexander Podlich and Kai Reinhard and Christian Gorldt and Kurt Geihs},
  title = {Evolutionary Freight Transportation Planning},
@@ -1130,6 +1342,17 @@
  pages = {533--554},
  year = {2019},
  doi = {10.1080/0952813X.2019.1574908}
+}
+
+@article{WWQLT2018ADCOAAPIBAWATCFEDASAIF,
+ author = {Thomas Weise and Xiaofeng Wang and Qi Qi and Bin Li and Ke Tang},
+ title = {Automatically discovering clusters of algorithm and problem instance behaviors as well as their causes from experimental data, algorithm setups, and instance features},
+ journal = asoc,
+ month = dec,
+ year = {2018},
+ volume = {73},
+ pages = {366--382},
+ doi = {10.1016/j.asoc.2018.08.030}
 }
 
 @inproceedings{YN1992AGAATLSJSI,

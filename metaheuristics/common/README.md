@@ -48,7 +48,7 @@ If you let your algorithm to choose randomly whether to do "A" or "B," you can a
 That our search operator APIs in [@lst:op0;@lst:op1;@lst:op2] all accept a pseudorandom number generator&nbsp;$\random$ as parameter is one manifestation of this issue.
 Random number generators are objects which provide functions that can return numbers from certain ranges, say from $[0,1)$ or an integer interval.
 Whenever we call such a function, it may return any value from the allowed range, but we do not know which one it will be.
-The returned value should be independent from those returned before, i.e., from known the past random numbers, we should *not* be able to guess the next one.
+The returned value should be independent of those returned before, i.e., from known the past random numbers, we should *not* be able to guess the next one.
 By using such random number generators, we can let an algorithm make random choices, randomly pick elements from a set, or change a variable's value in some unpredictable way.  
 
 
