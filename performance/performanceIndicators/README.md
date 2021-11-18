@@ -37,7 +37,7 @@ Our results obtained with vertical cuts will, however not necessarily carry over
 The "vertical cuts" approach is applied in quite a few competitions and research publications, including, for instance, [@TLSYW2010BFFTC2SSACOLSGO].
 
 
-### Horizontal Cuts: Runtime Needed until Reaching a Solution of a Given Quality
+### Horizontal Cuts: Runtime Needed until Reaching a Solution of a Given Quality {#sec:performanceIndicators:horizontalCut}
 
 The idea horizontal cuts corresponds to defining fixed goal qualities and measuring the runtime needed to get there.
 For a given problem instance, we would define the target solution quality at which we would consider the problem as solved.

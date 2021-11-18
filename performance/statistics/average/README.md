@@ -2,7 +2,15 @@
 
 Assume that we have obtained a sample&nbsp;$A=(\arrayIndex{a}{0},\arrayIndex{a}{1}, \dots, \arrayIndex{a}{n-1})$ of $n$&nbsp;observations from an experiment, e.g., we have measured the quality of the best discovered solutions of 11&nbsp;independent runs of an optimization algorithm.
 We usually want to get reduce this set of numbers to a single value which can give us an impression of what the "average outcome" (or result quality) is.
-Three of the most common options for doing so, for estimating the "center" of a distribution, are the *arithmetic mean*, the *median*, and the *geometric mean*.
+
+We could just report the best solution encountered over all runs, but this would not be a good idea&nbsp;[@BD2007HTAARTPOASAOAPMOBROANOR].
+First, it would not really tell us about the performance of our algorithm, but about our algorithm *with restarts*.
+Second, the best result over many runs could also be a fluke, e.g., just one lucky hit that will not occur again.
+Third, the best encountered solution is just one value from&nbsp;$n$ runs which is not influenced by the results of the other $n-1$&nbsp;runs.
+It is not a bad idea to report the best solution encountered in the runs, especially if it is better or equally good than the best known solutions (BKS) for a given problem&nbsp;[@IJG2016MPOOAIEC].
+However, reporting *only* the best result is overly optimistic and we need some other indicator for the average performance that we can expect.
+ 
+Three of the most common options for this purpose, for estimating a central value of a distribution, are the *arithmetic mean*, the *median*, and the *geometric mean*.
 
 
 #### Arithmetic Mean and Median
@@ -13,7 +21,7 @@ It is computed as the sum of all&nbsp;$n$ elements&nbsp;$\arrayIndex{a}{i}$ in t
 $$ \mean(A) = \frac{1}{n} \sum_{i=0}^{n-1} \arrayIndex{a}{i} $$
  
 \definition{def}{median}{The median $\median(A)$ is the value separating the bigger half from the smaller half of a data sample or distribution.
-It is the value right in the middle of a *sorted* data sample $A=(\arrayIndex{a}{0},\arrayIndex{a}{1}, \dots, \arrayIndex{a}{n-1})$ where $\arrayIndex{a}{i-1}\leq \arrayIndex{a}{i} \; \forall i \in 1\dots (n-1)$.}
+It is the value right in the middle of a *sorted* data sample $A=(\arrayIndex{a}{0},\arrayIndex{a}{1}, \dots, \arrayIndex{a}{n-1})$ where $\arrayIndex{a}{i-1}\leq \arrayIndex{a}{i}$&nbsp;$\forall i \in 1\dots (n-1)$.}
 
 $$ \median(A) = \left\{\begin{array}{ll}
 \arrayIndex{a}{\frac{n-1}{2}} & \text{if }n\text{ is odd}\\
@@ -78,7 +86,7 @@ The median would show us that, for normal people, the income did not really grow
 #### Why outliers are important in experiments with optimization algorithms
 
 But there are also scenarios where outliers contain important information, e.g., represent some unusual side-effect in a clinical trial of a new medicine.
-**Actually, in our domain &ndash; optimization &ndash; outliers will very often give us very important information**!
+**Actually, in our domain &ndash; optimization &ndash; outliers will very often give us very important information.**
 
 When we measure the performance of an algorithm implementation, there are few possible sources of "measurement errors" apart from unusual scheduling delays and even these cannot occur if we measure runtime in FEs.
 If there are unusually behaving runs, then the most likely source is a bug in the algorithm implementation!
@@ -109,7 +117,7 @@ Thinking that we will most often get results similar to the arithmetic mean migh
 Both the arithmetic mean and median carry useful information.
 The median tells us about values we are likely to encounter if we perform an experiment once.
 It is robust against outliers and unusual behaviors.
-The arithmetic mean tells us about the average performance if we perform the experiment many times.
+The arithmetic mean tells us about the average performance if we perform the experiment many times&nbsp;[@IJG2016MPOOAIEC].
 If we try to solve 1000&nbsp;problem instances, the overall time we will need will probably be similar to 1000&nbsp;times the arithmetic mean time we observed in our previous experiments.
 It also incorporates information about odd, rarely occurring situations while the median may "ignore" phenomena even if they occur in one third of the samples.
 If the outcome in such situations is bad, then it is good to have this information.
@@ -129,3 +137,123 @@ I think there is no reason for us to limit ourselves to only one measure of the 
 I suggest to report both, the median and the mean, to be on the safe side &ndash; as we did in our JSSP experiments.
 Indeed, the maybe best idea would be to consider both the mean and median value and then take the worst of the two.
 This should always provide a conservative and robust outlook on algorithm performance. 
+
+
+#### The Geometric Mean and Normalized Data
+
+So far, we have discussed the arithmetic mean and the median.
+
+\definition{def}{geometricMean}{The sample *geometric mean*&nbsp;$\geomean(A)$ is the $n$^th^ root of the product of the $n$ **positive** values $\arrayIndex{a}{i}$ (with $i\in 0\ldots(n-1)$) in&nbsp;$A$.}
+
+The geometric mean is always smaller than the arithmetic mean&nbsp;[@C1981CDADLERPIPAA].
+It can be computed as follows:
+
+$$ \geomean(A) = \sqrt[n]{\prod_{i=0}^{n-1} \arrayIndex{a}{i}} $$ {#eq:geomean1}
+$$ \geomean(A) = \exp{\left(\frac{1}{n} \sum_{i=0}^{n-1} \log{\arrayIndex{a}{i}} \right)} $$ {#eq:geomean2}
+
+[@eq:geomean1] and [@eq:geomean2] are equivalent.
+Both of them require that $\arrayIndex{a}{i}>0$&nbsp;$\forall i\in 0\ldots(n-1)$.
+If the values $\arrayIndex{a}{i}$ are either all big, all small, or many, then we may get floating point precision problems when computing the product in [@eq:geomean1].
+[@eq:geomean2] avoids this by summing up over logarithms.
+
+But what do we need the geometric mean for?
+Let us approach this question by looking at a simple example experiment.
+Imagine that we solve the JSSP instances&nbsp;$\instance_1$ to&nbsp;$\instance_3$ with the different algorithms&nbsp;$\algorithmStyle{A}_1$ to&nbsp;$\algorithmStyle{A}_3$.
+We stop the algorithms once they reach a given goal quality&nbsp;$\goalF$.
+We measure the runtimes they need to reach the goal, i.e., aim for the horizontal cut scheme introduced in [@sec:performanceIndicators:horizontalCut].
+We get the results presented in [@tbl:geometric_mean_example_1]:
+Here, the arithmetic mean and, the median, and the geometric mean values of these runtimes are the same.
+We can conclude that the three algorithms offer the same performance in average over these benchmark instances.
+
+| | $\algorithmStyle{A}_1$ |$\algorithmStyle{A}_2$ | $\algorithmStyle{A}_3$ |
+|--:|--:|--:|--:|
+$\instance_1$ | 10.00&nbsp;s | 20.00&nbsp;s | 40.00&nbsp;s |
+$\instance_2$ | 20.00&nbsp;s | 40.00&nbsp;s | 10.00&nbsp;s |
+$\instance_3$ | 40.00&nbsp;s | 10.00&nbsp;s | 20.00&nbsp;s |
+$\mean$:      | 23.33&nbsp;s | 23.33&nbsp;s | 23.33&nbsp;s |
+$\median$:    | 20.00&nbsp;s | 20.00&nbsp;s | 20.00&nbsp;s |
+$\geomean$:   | 20.00&nbsp;s | 20.00&nbsp;s | 20.00&nbsp;s |
+
+: The runtimes measured for algorithms $\algorithmStyle{A}_1$ to $\algorithmStyle{A}_2$ on problem instances $\instance_1$ to $\instance_3$. All algorithms have the same arithmetic mean, median, and geometric mean runtime requirements. {#tbl:geometric_mean_example_1}
+
+Often, the measured numbers "look messier" and the relationships of the numbers are not so obvious.
+Often, we use more instances and algorithms. 
+It becomes harder to see whether and which algorithms perform different, better, worse, or equal.
+Thus, we may often want to normalize them by picking one algorithm as "standard" and dividing them by its measurements.
+Let's say $\algorithmStyle{A}_1$ was a well-known heuristic.
+We want to use it as baseline for comparison and normalize our data by it.
+
+| | **$\algorithmStyle{A}_1$** |$\algorithmStyle{A}_2$ | $\algorithmStyle{A}_3$ |
+|--:|--:|--:|--:|
+$\instance_1$ | 1.00 | 2.00 | 4.00 |
+$\instance_2$ | 1.00 | 2.00 | 0.50 |
+$\instance_3$ | 1.00 | 0.25 | 0.50 |
+$\mean$:      | 1.00 | 1.42 | 1.67 |
+$\median$:    | 1.00 | 2.00 | 0.50 |
+$\geomean$:   | 1.00 | 1.00 | 1.00 |
+
+: The data from [@tbl:geometric_mean_example_1], but normalized based on&nbsp;$\algorithmStyle{A}_1$: The runtimes for each instance are divided by the values measured for runtimes measured for algorithm&nbsp;$\algorithmStyle{A}_1$. Now $\algorithmStyle{A}_1$ has the best and $\algorithmStyle{A}_3$ has the worst arithmetic mean, $\algorithmStyle{A}_3$ has the best and $\algorithmStyle{A}_2$ the worst median. {#tbl:geometric_mean_example_2}
+
+OK, so we get the [@tbl:geometric_mean_example_2] with normalized values, which allow us to make sense of the data at first glance.
+If we now compute the arithmetic mean, then algorithm&nbsp;$\algorithmStyle{A}_1$ seems best and algorithm&nbsp;$\algorithmStyle{A}_3$ looks worst.
+According to the median, however, $\algorithmStyle{A}_3$ would be best and $\algorithmStyle{A}_2$ appears to be the worst.
+Only the geometric mean still indicates that the algorithms perform the same&hellip;
+
+
+| | $\algorithmStyle{A}_1$ | **$\algorithmStyle{A}_2$** | $\algorithmStyle{A}_3$ |
+|--:|--:|--:|--:|
+$\instance_1$ | 0.50 | 1.00 | 2.00 |
+$\instance_2$ | 0.50 | 1.00 | 0.25 |
+$\instance_3$ | 4.00 | 1.00 | 2.00 |
+$\mean$:      | 1.67 | 1.00 | 1.42 |
+$\median$:    | 0.50 | 1.00 | 2.00 |
+$\geomean$:   | 1.00 | 1.00 | 1.00 |
+
+: The data from [@tbl:geometric_mean_example_1], but normalized based on&nbsp;$\algorithmStyle{A}_2$: The runtimes for each instance are divided by the values measured for runtimes measured for algorithm&nbsp;$\algorithmStyle{A}_2$. Now $\algorithmStyle{A}_2$ has the best and $\algorithmStyle{A}_1$ has the worst arithmetic mean, $\algorithmStyle{A}_1$ has the best and $\algorithmStyle{A}_3$ the worst median. {#tbl:geometric_mean_example_3}
+
+If we normalize based on algorithm&nbsp;$\algorithmStyle{A}_2$ instead, we get [@tbl:geometric_mean_example_3].
+Now, judging by the arithmetic mean, then $\algorithmStyle{A}_2$ seems to be best and $\algorithmStyle{A}_1$ looks worst.
+However, according to the median, $\algorithmStyle{A}_1$ would be best and $\algorithmStyle{A}_2$ appears to be the worst.
+Again only the geometric mean still indicates that the algorithms perform the same.
+
+We can conclude:
+Almost arbitrary conclusions can be reached based on the arithmetic mean and the median if the data is normalized.
+This means that if the data is normalized, these two averages are not useful. 
+The geometric mean is the only meaningful average if we have normalized data&nbsp;[@FW1986HNTLWSTCWTSBR].
+
+We very often have normalized data.
+For example, at least half of the papers on the Job Shop Scheduling Problem normalize the result qualities they obtain on benchmark instances with a Best Known Solutions (BKS) or the highest lower bound at the time when they were written.
+And many of them then compute the arithmetic mean&hellip;
+
+Then again, using the geometric mean also has some severe downsides&nbsp;[@V2020TGM]:
+The geometric mean is very sensitive to the underlying probability distribution and its skewness.
+Its estimator ([@eq:geomean1; @eq:geomean2]) exhibits considerable bias under small samples.
+
+
+#### Summary
+
+We want to represent the central trend of a performance indicator.
+There is no simple answer on which measure of the average we should use.
+
+A simple fact is this:
+Most publications report arithmetic mean results, many report median results, almost none report geometric means.
+
+The median is more robust against outliers compared to the arithmetic mean.
+However, in application scenarios of optimization algorithms (or soft computing in general), there are very few acceptable reasons for outliers.
+We therefore want to know *both* the arithmetic mean and the median:
+If the arithmetic mean is much worse than the median, then maybe we have a bug in our code that only sometimes has an impact or our algorithm has a bad worst-case behavior (which is also good to know).
+If the median is much worse than the mean, then the mean is too optimistic, i.e., most of the time we should expect worse results.
+If there are outliers, the value of the arithmetic mean itself may be very different from any actually observed value, while the median is (almost always) similar to some actual measurements.
+
+Often, our data is implicitly or explicitly normalized, e.g.,
+
+- if we divide result qualities by results of well-known heuristics or best-known solutions or
+- if we normalize the runtime using another algorithm as standard.
+
+Then, the arithmetic mean and median can be very misleading and the geometric mean needs be computed.
+However, the estimated geometric mean may be biased if we only have few runs.
+
+I think:
+On raw data, we should compute all three measures of average, and pay special attention to the one looking the worst. 
+On normalized data, we should compute the geometric mean, but also consider the arithmetic mean and median if and only if they make our algorithm look worse.
+Especially if we compare with existing methods, it is better to take the pessimistic stance.
