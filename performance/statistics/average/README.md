@@ -145,7 +145,7 @@ So far, we have discussed the arithmetic mean and the median.
 
 \definition{def}{geometricMean}{The sample *geometric mean*&nbsp;$\geomean(A)$ is the $n$^th^ root of the product of the $n$ **positive** values $\arrayIndex{a}{i}$ (with $i\in 0\ldots(n-1)$) in&nbsp;$A$.}
 
-The geometric mean is always smaller than the arithmetic mean&nbsp;[@C1981CDADLERPIPAA].
+The geometric mean is always smaller than (or equal to) the arithmetic mean&nbsp;[@C1981CDADLERPIPAA].
 It can be computed as follows:
 
 $$ \geomean(A) = \sqrt[n]{\prod_{i=0}^{n-1} \arrayIndex{a}{i}} $$ {#eq:geomean1}
