@@ -23,3 +23,4 @@ Let us now discuss how such comparisons can be conducted in a rigorous, reliable
 \rel.input{time/README.md}
 \rel.input{performanceIndicators/README.md}
 \rel.input{statistics/README.md}
+\rel.input{tests/README.md}
