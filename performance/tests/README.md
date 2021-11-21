@@ -129,7 +129,7 @@ Any of these 210 possible divisions of&nbsp;$O$ would have had the same probabil
 If we enumerate all possible divisions with the small program [@lst:enum_b_combinations], we find that there are exactly&nbsp;27 of them which lead to a set&nbsp;$B'$ with $\mean(B')\leq 4$.
 This, of course, means that in exactly these 27&nbsp;divisions, $\mean(A')\geq 6.5$, because $A'$ contains the numbers which are not in&nbsp;$B'$.
 
-\rel.code{enum_b_combinations}{An excerpt of a simple program enumerating all different four-element subsets of $O$ and counting how many have a mean at last as small as&nbsp;4.0. There are 27 such combinations.}{enum_b_combinations.py}{}{}{hints,comments}
+\rel.code{enum_b_combinations}{A simple program enumerating all different four-element subsets of&nbsp;$O$ and counting how many have a mean at least as small as&nbsp;4.0. There are 27 such combinations.}{enum_b_combinations.py}{}{}{hints,comments}
 
 If $H_0$&nbsp;holds, there would have been a probability of $p=\frac{27}{210}=\frac{9}{70}\approx 0.1286$ that we would see arithmetic mean performances *as extreme* as we did.
 If we would reject&nbsp;$H_0$ and instead claim that&nbsp;$H_1$ is true, i.e., algorithm&nbsp;$\algorithmStyle{B}$ is better than&nbsp;$\algorithmStyle{A}$, then we have a 13%&nbsp;chance of being wrong.
