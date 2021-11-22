@@ -8,3 +8,4 @@
 \rel.input{metaheuristics/README.md}
 
 \rel.input{performance/README.md}
+\rel.input{difficulties/README.md}

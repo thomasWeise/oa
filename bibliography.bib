@@ -17,6 +17,7 @@
 @string { winter = "{Winter}" }
 
 %% journals
+@string { acs = "{{ACM} Computing Surveys}" }
 @string { adm = "{Annals of Discrete Mathematics}" }
 @string { aim = "{{AI} Magazine}" }
 @string { aoms = "{The Annals of Mathematical Statistics ({AOMS})}" }
@@ -30,10 +31,13 @@
 @string { cistam = "{Communications in Statistics -- Theory and Methods}"}
 @string { econ = "{Econometrica}" }
 @string { ejor = "{European Journal of Operational Research ({EJOR})}" }
+@string { itevc = "{{IEEE} Transactions on Evolutionary Computation ({TEVC})}" }
 @string { ijmlc = "{International Journal of Machine Learning and Computing ({IJMLC})}" }
 @string { ijoc = "{{INFORMS} Journal on Computing}" }
+@string { is = "{Information Sciences}" }
 @string { jacm = "{Journal of the {ACM} ({JACM})}" }
 @string { jasa = "{Journal of the American Statistical Association ({J AM STAT ASSOC})}" }
+@string { jcst = "{Journal of Computer Science and Technology ({JCST})}" }
 @string { jetai = "{Journal of Experimental {\&} Theoretical Artificial Intelligence ({JETAI})}" }
 @string { jlfnvaac = "{Journal of Low Frequency Noise, Vibration and Active Control}" }
 @string { joar = "{Journal of Automated Reasoning}" }
@@ -68,6 +72,7 @@
 @string { ncs = "{Natural Computing Series ({NCS})}" }
 @string { orcsis = "{Operations Research/Computer Science Interfaces Series}" }
 @string { psam = "{Princeton Series in Applied Mathematics}" }
+@string { sici = "{Studies in Computational Intelligence ({SCI})}"}
 @string { sl = "{Springer-Lehrbuch}" }
 @string { tirss = "{The {IBM} Research Symposia Series}" }
 @string { ut = "{Universitext}" }
@@ -168,6 +173,28 @@
  issue = {339},
  volume = {67},
  pages = {687--690}
+}
+
+@phdthesis{B1980GAFFO,
+ author = {Anne F. Brindle},
+ title = {Genetic Algorithms for Function Optimization},
+ school = {University of Alberta},
+ address = {{Edmonton}, {Alberta}, {Canada}},
+ year = {1980},
+ note = {Technical Report {TR81-2}},
+ isbn = {0-315-01039-8}
+}
+
+@inproceedings{B1985ASMFGA,
+ author = {James E. Baker},
+ title = {Adaptive Selection Methods for Genetic Algorithms},
+ pages = {101--111},
+ year = {1985},
+ booktitle = {Proceedings of the 1st International Conference on Genetic Algorithms and their Applications ({ICGA'85}), } # jun # {~24--26, 1985, {Pittsburgh, PA, USA}},
+ editor = {John J. Grefenstette},
+ publisher = {Lawrence Erlbaum Associates},
+ address = {{Hillsdale}, {NJ}, {USA}},
+ isbn = {0-8058-0426-9}
 }
 
 @article{B1990OLDTPBEM,
@@ -321,6 +348,19 @@
  url = {http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.51.8377&type=pdf}
 }
 
+@techreport{BT1995ACOSSUIGA,
+ author = {Tobias Blickle and Lothar Thiele},
+ title = {A Comparison of Selection Schemes used in Genetic Algorithms},
+ edition = {2},
+ institution = {Eidgen{\"{o}}ssische Technische Hochschule {(ETH)} Z{\"{u}}rich, Department of Electrical Engineering, Computer Engineering and Networks Laboratory {(TIK)}},
+ address = {{Z{\"{u}}rich}, {Switzerland}},
+ type = {{TIK}-Report},
+ number = {11},
+ year = {1995},
+ month = dec,
+ url = {ftp://ftp.tik.ee.ethz.ch/pub/publications/TIK-Report11.ps}
+}
+
 @book{C1981CDADLERPIPAA,
  title = {Cours d'Analyse de l'{\'E}cole Royale Polytechnique; {I.}re Partie: Analyse Alg{\'e}brique},
  author = {{Baron} Augustin Louis Cauchy},
@@ -369,6 +409,19 @@
  year = {1996},
  pages = {983--997},
  doi = {10.1016/0360-8352(96)00047-2}
+}
+
+@article{CLM2013EAEIEAAS,
+ author = {Matej {\v{C}}repin{\v{s}}ek and Shih{-}Hsi Liu and Marjan Mernik},
+ title = {Exploration and Exploitation in Evolutionary Algorithms: {A} Survey},
+ journal = acs,
+ volume = {45},
+ number = {3},
+ pages = {35:1--35:33},
+ year = {2013},
+ doi = {10.1145/2480741.2480752},
+ month = jul,
+ url = {http://www.researchgate.net/publication/243055445}
 }
 
 @misc{CPD2017TAMPARAOEA,
@@ -461,6 +514,28 @@
  doi = {10.1016/j.ejor.2016.04.030}
 }
 
+@phdthesis{DJ1975GA,
+ author = {Kenneth Alan {De Jong}},
+ title = {An Analysis of the Behavior of a Class of Genetic Adaptive Systems},
+ school = {University of Michigan},
+ address = {{Ann Arbor}, {MI}, {USA}},
+ year = {1975},
+ month = aug,
+ url = {http://cs.gmu.edu/~eclab/kdj_thesis.html}
+}
+
+@inproceedings{dlMT1993AAOSPWPAPTPABS,
+ author = {Michael {de la Maza} and Bruce Tidor},
+ title = {An Analysis of Selection Procedures with Particular Attention Paid to Proportional and Bolzmann Selection},
+ pages = {124--131},
+ booktitle = {{Proceedings of the 5th International Conference on Genetic Algorithms ({ICGA'93})}, } # jul # {~17--21, 1993, {Urbana-Champaign, IL, USA}},
+ editor = {Stephanie Forrest},
+ publisher = {Morgan Kaufmann Publishers Inc.},
+ address = {{San Francisco}, {CA}, {USA}},
+ year = {1993},
+ isbn = {1-55860-299-2}
+}
+
 @techreport{DMU1996BFSSP,
  author = {Ebru Demirkol and Sanjay V. Mehta and Reha Uzsoy},
  title = {Benchmarking for Shop Scheduling Problems}, 
@@ -492,6 +567,21 @@
  publisher = {Springer Nature Switzerland {AG}},
  address = {{Cham}, {Switzerland}},
  isbn = {978-3-030-29413-7},
+}
+
+@inproceedings{DY1996ENMHINFSAISC,
+ author = {Paul J. Darwen and Xin Yao},
+ title = {Every Niching Method has its Niche: Fitness Sharing and Implicit Sharing Compared},
+ booktitle = {Proceedings The 4th International Conference on Parallel Problem Solving from Nature {PPSN~IV}, International Conference on Evolutionary Computation, } # sep # {~22--26, 1996, {Berlin, Germany}},
+ pages = {398--407},
+ year = {1996},
+ doi = {10.1007/3-540-61723-X_1004},
+ editor = {Hans{-}Michael Voigt and Werner Ebeling and Ingo Rechenberg and Hans{-}Paul Schwefel},
+ series = lncs,
+ volume = {1141},
+ publisher = {Springer},
+ address = {{Berlin}/{Heidelberg}, {Germany}},
+ isbn = {3-540-61723-X}
 }
 
 @book{E1995RT,
@@ -535,6 +625,17 @@
  volume = {29},
  year = {1986},
  doi = {10.1145/5666.5673}
+}
+
+@techreport{FHRA2009RPBBOB2POTNF,
+ title = {Real-Parameter Black-Box Optimization Benchmarking 2010: Presentation of the Noiseless Functions},
+ author = {Steffen Finck and Nikolaus Hansen and Raymond Ros and Anne Auger},
+ number = {2009/20},
+ year = {2009},
+ type = {Research Center {PPE}},
+ note = {re-compiled February 18, 2019},
+ institution = {Institut National de Recherche en Informatique et en Automatique ({INRIA})},
+ url = {http://coco.gforge.inria.fr/downloads/download16.00/bbobdocfunctions.pdf}
 }
 
 @misc{FHRA2015CDR1,
@@ -608,6 +709,19 @@
  year = {2016},
  address = {{Cambridge}, {MA}, USA},
  url = {http://www.deeplearningbook.org}
+}
+
+@inproceedings{GD1990ACAOSSUIGA,
+ author = {David Edward Goldberg and Kalyanmoy Deb},
+ title = {A Comparative Analysis of Selection Schemes used in Genetic Algorithms},
+ pages = {69--93},
+ year = {1990},
+ url = {http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.101.9494},
+ booktitle = {Proceedings of the First Workshop on Foundations of Genetic Algorithms ({FOGA'90}), } # jul # {~15--18, 1990, {Bloomington, IN, USA}},
+ editor = {Bruce M. Spatz and Gregory J. E. Rawlins},
+ publisher = {Morgan Kaufmann Publishers Inc.},
+ address = {{San Francisco}, {CA}, {USA}},
+ isbn = {1-55860-170-8}
 }
 
 @article{GGA2018ORATRROSADSIAP,
@@ -725,6 +839,15 @@
  url = {http://read.pudn.com/downloads151/doc/658565/00400072.pdf}
 }
 
+@book{H1975GA,
+ author = {John Henry Holland},
+ title = {Adaptation in Natural and Artificial Systems: An Introductory Analysis with Applications to Biology, Control, and Artificial Intelligence},
+ publisher = {University of Michigan Press},
+ address = {{Ann Arbor}, {MI}, {USA}},
+ year = {1975},
+ isbn = {0-472-08460-7}
+}
+
 @article{H2009GKOSFTLKTH,
  author = {Keld Helsgaun},
  title = {General k-opt Submoves for the {Lin-Kernighan} {TSP} Heuristic},
@@ -747,6 +870,18 @@
  url = {http://hal.inria.fr/inria-00462481},
  note = {inria-00462481},
  month = mar # {~9, }
+}
+
+@inproceedings{HG1995GADATMOTFL,
+ author = {Jeffrey Horn and David Edward Goldberg},
+ title = {Genetic Algorithm Difficulty and the Modality of the Fitness Landscape},
+ pages = {243--269},
+ year = {1995},
+ booktitle = {Proceedings of the Third Workshop on Foundations of Genetic Algorithms ({FOGA~3}), } # jul # {~31} # {--} # aug # {~2, 1994, {Estes Park}, {CO}, {USA}},
+ editor = {L. Darrell Whitley and Michael D. Vose},
+ publisher = {Morgan Kaufmann Publishers Inc.},
+ address = {{San Francisco}, {CA}, {USA}},
+ isbn = {1-55860-356-5}
 }
 
 @inproceedings{HPO2016DPFI4S,
@@ -1164,6 +1299,15 @@
  address = {{Mineola}, {NY}, {USA}}
 }
 
+@phdthesis{R1999ETROLOASPIGS,
+ author = {Soraya Rana},
+ title = {Examining the Role of Local Optima and Schema Processing in Genetic Search},
+ school = {Colorado State University, Department of Computer Science, {GENITOR} Research Group in Genetic Algorithms and Evolutionary Computation},
+ address = {{Fort Collins}, {CO}, {USA}},
+ year = {1999},
+ month = jul
+}
+
 @article{R2011WDEGMFA,
  author = {Uwe E. Reinhardt},
  title = {What Does `Economic Growth' Mean for Americans?},
@@ -1182,7 +1326,31 @@
  number = {1},
  pages = {37--50},
  doi = {10.1137/1003003},
- month = jan,
+ month = jan
+}
+
+@inproceedings{S1971GOTFFMST,
+ author = {J. Shekel},
+ title = {Test Functions for Multimodal Search Techniques},
+ booktitle = {Fifth Annual Princeton Conference on Information Science and Systems},
+ pages = {354--359},
+ year = {1971},
+ publisher = {Princeton University Press},
+ address = {{Princeton}, {NJ}, {USA}},
+ month = mar
+}
+
+@incollection{S2012NIEA,
+ author = {Ofer M. Shir},
+ editor = {Grzegorz Rozenberg and Thomas B{\"{a}}ck and Joost N. Kok},
+ title = {Niching in Evolutionary Algorithms},
+ booktitle = {Handbook of Natural Computing},
+ pages = {1035--1069},
+ publisher = {Springer},
+ address = {{Berlin}/{Heidelberg}, {Germany}},
+ year = {2012},
+ doi = {10.1007/978-3-540-92910-9_32},
+ isbn = {978-3-540-92909-3}
 }
 
 @book{S2018ITCAPOPMASM,
@@ -1247,6 +1415,28 @@
  year = {1997},
  isbn = {0-7803-3590-2},
  doi = {10.1109/CDC.1996.577484}
+}
+
+@article{SK1998FSANMR,
+ author = {Bruno Sareni and Laurent Kr{\"{a}}henb{\"{u}}hl},
+ title = {Fitness Sharing and Niching Methods Revisited},
+ journal = itevc,
+ volume = {2},
+ number = {3},
+ pages = {97--106},
+ year = {1998},
+ doi = {10.1109/4235.735432}
+}
+
+@article{ST2016DOCAPCASOMFPDIEO,
+ author = {Giovanni Squillero and Alberto Paolo Tonda},
+ title = {Divergence of Character and Premature Convergence: {A} Survey of Methodologies for Promoting Diversity in Evolutionary Optimization},
+ journal = is,
+ volume = {329},
+ pages = {782--799},
+ year = {2016},
+ doi = {10.1016/j.ins.2015.09.056},
+ month = feb
 }
 
 @article{SWV1992NSSFSPWATJSS,
@@ -1373,6 +1563,19 @@
  url = {http://sci2s.ugr.es/keel/pdf/algorithm/articulo/wilcoxon1945.pdf}
 }
 
+@inproceedings{W1989EA,
+ author = {L. Darrell Whitley},
+ title = {The {GENITOR} Algorithm and Selection Pressure: Why Rank-Based Allocation of Reproductive Trials is Best},
+ pages = {116--121},
+ year = {1989},
+ url = {http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.18.8195},
+ booktitle = {Proceedings of the 3rd International Conference on Genetic Algorithms ({ICGA'89}), } # jun # {~4--7, 1989, {Fairfax, VA, USA}},
+ editor = {J. David Schaffer},
+ publisher = {Morgan Kaufmann Publishers Inc.},
+ address = {{San Francisco}, {CA}, {USA}},
+ isbn = {1-55860-066-3}
+}
+
 @article{W2003GCACA,
  author = {James M. Wilson},
  title = {Gantt Charts: {A} Centenary Appreciation},
@@ -1442,6 +1645,18 @@
  year = {2019},
  url = {http://github.com/thomasWeise/jsspInstancesAndResults},
  note = {A {GitHub} repository with the common benchmark instances for the {Job} {Shop} {Scheduling} {Problem} as well as results from the literature, both in form of {CSV} files as well as R program code to access them.}
+}
+
+@article{WCT2012EOPABT,
+ author = {Thomas Weise and Raymond Chiong and Ke Tang},
+ title = {Evolutionary Optimization: Pitfalls and Booby Traps},
+ journal = jcst,
+ volume = {27},
+ issue = {5},
+ pages = {907--936},
+ month = sep,
+ year = {2012},
+ doi = {10.1007/s11390-012-1274-4}
 }
 
 @article{WCTLTCMY2014BOAAOSFFTTSP,
@@ -1550,6 +1765,23 @@
  volume = {73},
  pages = {366--382},
  doi = {10.1016/j.asoc.2018.08.030}
+}
+
+@incollection{WZCN2009WIOD,
+ author = {Thomas Weise and Michael Zapf and Raymond Chiong and Antonio Jes{\'u}s Nebro Urbaneja},
+ title = {Why is optimization difficult?},
+ editor = {Raymond Chiong},
+ booktitle = {Nature-Inspired Algorithms for Optimisation},
+ volume = {193/2009},
+ series = sici,
+ chapter = {1},
+ pages = {1--50},
+ isbn = {978-3-642-00266-3},
+ address = {Berlin/Heidelberg},
+ publisher = {Springer-Verlag},
+ month = apr,
+ year = {2009},
+ doi = {10.1007/978-3-642-00267-0_1}
 }
 
 @inproceedings{YN1992AGAATLSJSI,
