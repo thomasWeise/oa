@@ -35,7 +35,7 @@ The general version of the JSSP, however, is $\NPprefix$&#8209;hard&nbsp;[@LLRKS
 Then, developing a good (meta-)heuristic algorithm, which cannot provide guaranteed optimality but will give close-to-optimal solutions in practice, is a good choice.
 
 
-### Bounds of the Objective Function
+### Bounds of the Objective Function {#sec:objectiveFunctionBound}
 
 If we apply an approximation algorithm, then we do not have the guarantee that the solution we get is optimal.
 Usually, we do not even know if the best solution we currently have is optimal or not.

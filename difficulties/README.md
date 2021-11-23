@@ -8,4 +8,5 @@ Actually, sometimes there are *instances* of the same problem that are harder th
 It is natural to ask what makes an optimization problem hard for a given algorithm.
 It is natural to ask *Why is optimization difficult?*&nbsp;[@WZCN2009WIOD; @WCT2012EOPABT]
 
+\rel.input{scalability/README.md}
 \rel.input{prematureConvergence/README.md}

@@ -28,7 +28,8 @@
 @string { cacm = "{Communications of the {ACM}}" }
 @string { caie = "{Computers {\&} Industrial Engineering}" }
 @string { cim = "{{IEEE} Computational Intelligence Magazine ({CIM})}" }
-@string { cistam = "{Communications in Statistics -- Theory and Methods}"}
+@string { cistam = "{Communications in Statistics -- Theory and Methods}" }
+@string { cjm = "{Canadian Journal of Mathematics}" }
 @string { econ = "{Econometrica}" }
 @string { ejor = "{European Journal of Operational Research ({EJOR})}" }
 @string { itevc = "{{IEEE} Transactions on Evolutionary Computation ({TEVC})}" }
@@ -59,6 +60,8 @@
 @string { rtriqr = "{Railway Technical Research Institute, Quarterly Reports (QR)}" }
 @string { sa = "{Scientific American}" }
 @string { sr = "{{SIAM} Review}" }
+@string { tcs = "{Theoretical Computer Science}" }
+@string { tocs = "{Theory of Computing Systems}" }
 @string { tm = "{Technometrics}" }
 @string { zor = "{Zeitschrift f{\"u}r Operations Research ({ZOR}) -- Methods and Models of Operations Research}"}
 
@@ -66,14 +69,18 @@
 @string { ctms = "{Contributions to Management Science}" }
 @string { dbom = "{Dover Books on Mathematics}" }
 @string { esacwisidmao = "{Estimation, Simulation, and Control {--} Wiley-Interscience Series in Discrete Mathematics and Optimization}" }
+@string { hssl = "{Humanities/Social Sciences/Languages}" }
 @string { isor = "{International Series in Operations Research \& Management Science ({ISOR})}"}
 @string { lncs = "{Lecture Notes in Computer Science ({LNCS})}" }
 @string { lntcs = "{Theoretical Computer Science and General Issues book sub series ({LNTCS})}" }
 @string { ncs = "{Natural Computing Series ({NCS})}" }
 @string { orcsis = "{Operations Research/Computer Science Interfaces Series}" }
+@string { pll = "{Princeton Legacy Library}" }
 @string { psam = "{Princeton Series in Applied Mathematics}" }
+@string { serco = "{Combinatorial Optimization}" }
 @string { sici = "{Studies in Computational Intelligence ({SCI})}"}
 @string { sl = "{Springer-Lehrbuch}" }
+@string { taocp = "{The Art of Computer Programming}" }
 @string { tirss = "{The {IBM} Research Symposia Series}" }
 @string { ut = "{Universitext}" }
 @string { wsidmao = "{Wiley Series in Discrete Mathematics and Optimization}" }
@@ -161,6 +168,27 @@
  year = {2008},
  pages = {985--1032},
  doi = {10.1016/j.ejor.2006.06.060}
+}
+
+@book{B1957DP,
+ author = {Richard Ernest Bellman},
+ title = {Dynamic Programming},
+ publisher = {Princeton University Press},
+ address = {{Princeton}, {NJ}, {USA}},
+ series = dbom,
+ year = {1957},
+ isbn = {0486428095}
+}
+
+@book{B1961ACPAGT,
+ author = {Richard Ernest Bellman},
+ title = {Adaptive Control Processes: {A} Guided Tour},
+ publisher = {Princeton University Press},
+ address = {{Princeton}, {NJ}, {USA}},
+ series = pll,
+ volum = {Book~2045},
+ year = {1961},
+ isbn = {0691079013}
 }
 
 @article{B1972CCSURS,
@@ -389,6 +417,18 @@
  url = {http://www.dii.uchile.cl/~daespino/PApers/DP_paper.pdf}
 }
 
+@incollection{CFKLMPPS2015LBBOTETH,
+ author = {Marek Cygan and Fedor V. Fomin and {\L}ukasz Kowalik and Daniel Lokshtanov and D{\'a}niel Marx and Marcin Pilipczuk and Micha{\l} Pilipczuk and Saket Saurabh},
+ title = {Lower Bounds Based on the Exponential-Time Hypothesis},
+ booktitle = {Parameterized Algorithms},
+ publisher = {Springer International Publishing Switzerland},
+ address = {{Cham}, {Switzerland}},
+ pages = {467--521},
+ isbn = {978-3-319-21274-6},
+ doi = {10.1007/978-3-319-21275-3_14},
+ url = {https://www.ii.uib.no/~daniello/papers/surveyETH.pdf}
+}
+
 @book{CGLL1995STAIA,
  editor = {Philippe Chr{\'e}tienne and Edward G. Coffman and Jan Karel Lenstra and Zhen Liu},
  title = {Scheduling Theory and Its Applications},
@@ -536,6 +576,16 @@
  isbn = {1-55860-299-2}
 }
 
+@misc{dM2003CCOATP,
+ author = {Carl {de Marcken}}, 
+ title = {Computational Complexity of Air Travel Planning},
+ year = {2003},
+ month = autumn,
+ publisher = {{ITA} Software},
+ address = {{Cambridge}, {MA}, {USA}},
+ url = {http://www.demarcken.org/carl/papers/ITA-software-travel-complexity/ITA-software-travel-complexity.html},
+}
+
 @techreport{DMU1996BFSSP,
  author = {Ebru Demirkol and Sanjay V. Mehta and Reha Uzsoy},
  title = {Benchmarking for Shop Scheduling Problems}, 
@@ -584,6 +634,16 @@
  isbn = {3-540-61723-X}
 }
 
+@article{E1965PTAF,
+ title = {Paths, Trees, and Flowers},
+ author = {Jack Edmonds},
+ journal = cjm,
+ volume = {17},
+ year = {1965},
+ pages = {449--467},
+ doi = {10.4153/CJM-1965-045-4},
+}
+
 @book{E1995RT,
  author = {Eugene S. Edgington},
  title = {Randomization Tests},
@@ -614,6 +674,30 @@
  number = {3},
  pages = {768--780},
  year = {1965}, 
+}
+
+@article{F2007SSIPWOCAOM,
+ author = {Gianni Franceschini},
+ title = {Sorting Stably, in Place, with $O(n \log{n})$~Comparisons and $O(n)$~Moves},
+ journal = tocs,
+ volume = {40},
+ issue = {4},
+ pages = {327--353},
+ year = {2007},
+ month = jun,
+ doi = {10.1007/s00224-006-1311-1}
+}
+
+@article{F2009TSOTPVNP,
+ author = {Lance Fortnow},
+ title = {The Status of the {P} Versus {NP} Problem},
+ journal = cacm,
+ month = sep,
+ year = {2009},
+ volume = {52},
+ number = {9},
+ pages = {78--86},
+ doi = {10.1145/1562164.1562186}
 }
 
 @article{FW1986HNTLWSTCWTSBR,
@@ -999,7 +1083,7 @@
  editor = {Gregory Z. Gutin and Abraham P. Punnen},
  publisher = {Kluwer Academic Publishers},
  year = {2002},
- series = {Combinatorial Optimization},
+ series = serco,
  volume = {12},
  doi = {10.1007/0-306-48213-4_9},
  url = {http://archive.dimacs.rutgers.edu/Challenges/TSP/papers/stspchap.pdf}
@@ -1022,7 +1106,7 @@
  author = {Donald Ervin Knuth},
  year = {1969},
  title = {Seminumerical Algorithms},
- series = {The Art of Computer Programming},
+ series = taocp,
  volume = {2},
  address = {{Reading}, {MA}, {USA}},
  publisher = {Addison-Wesley}
@@ -1388,7 +1472,7 @@
  title = {Nonparametric Statistics for The Behavioral Sciences},
  publisher = {{McGraw-Hill}},
  address = {{New York}, {NY}, {USA}},
- series = {Humanities/Social Sciences/Languages},
+ series = hssl,
  year = {1988},
  isbn = {0-07-057357-3}
 }
@@ -1645,6 +1729,17 @@
  year = {2019},
  url = {http://github.com/thomasWeise/jsspInstancesAndResults},
  note = {A {GitHub} repository with the common benchmark instances for the {Job} {Shop} {Scheduling} {Problem} as well as results from the literature, both in form of {CSV} files as well as R program code to access them.}
+}
+
+@misc{W2021NHP,
+ author = {Eric W. Weisstein},
+ title = {NP-Hard Problem},
+ note = {From {MathWorld} -- A {Wolfram} Web Resource},
+ publisher = {Wolfram Research, Inc.},
+ address = {{Champaign}, {IL}, {USA}},
+ year = {2021},
+ month = nov # {~22, },
+ url = {https://mathworld.wolfram.com/NP-HardProblem.html},
 }
 
 @article{WCT2012EOPABT,
