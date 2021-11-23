@@ -8,8 +8,12 @@ The more items we want to sort, the longer it is going to take.
 The same holds for optimization problems like the JSSP:
 The more machines and jobs we have, the longer we will need to get a good solution.
 
+There are two ways in which this hits us:
+First, there are theoretical limitations on how long it will take or how much memory we will need if we want to solve the problem *exactly* or guarantee to reach a certain solution quality.
+Second, algorithms will slow down, i.e., need more time per iteration, on large problems also simply because there are more variables to consider.
 
-### $\NPprefix$-Hardness and Runtime
+
+### The Problem: $\NPprefix$-Hardness and Runtime
 
 Most of the problems that we try to solve with metaheuristic algorithms are (at least) $\NPprefix$-hard.
 Sometimes we know this, as in the case of the JSSP, satisfiability tasks, or the Traveling Salesperson Problem (TSP).
@@ -74,6 +78,9 @@ But we will not be able to *guarantee* to *always* find such a solution.
 Moreover, exact algorithms often can discover their final optimal solution relatively early on.
 But they may need a long time to rule out that there cannot be any other, better solution.
 
+One more issue is that the complexity problem does not only hold for seeking the *optimal* solution.
+For some problems, even guaranteeing to find a solution not worse than the optimum by a certain *factor* incurs this problem&nbsp;[@MS2011HOAFAJSSP] (see [@sec:jssp:termination]).
+
 
 #### Exponential Runtime
 
@@ -116,14 +123,26 @@ So sometimes, maybe even often, we may be lucky and have a quick runtime when us
 In general, the runtime needed to solve the problems to optimality will grow exponentially. 
   
 
+### Countermeasures
+
+The main problem statement was:
+"Any algorithm that can *guarantee* to always find the globally optimal solution of such an ($\NPprefix$-hard) problem will require *exponential* runtime in the *worst case*."
+Basically, we can mitigate the runtime problem by dropping any part of the sentence.
+
+1. Metaheuristics circumvent some of the problems above by simply not guaranteeing to find the optimal result.
+   They usually do not guarantee to reach any solution quality threshold at all.
+2. We can maybe accept that the runtime is exponential in the worst case as long as we can get solutions sufficiently fast in the average case.
+   For the TSP, for instance, the Concorde tool is incredibly fast on many relatively large problems.
+   If we really encounter a worst-case instance where the runtime is infeasible, then we may just stop the algorithm and give up on that one.
+   Getting optimal solutions 99% of the time may be good enough.
+3. We can also break the statement by using exact algorithms as heuristics:
+   As mentioned earlier, exact algorithms often find the optimal solution early, but spend much time in searching the rest of the search space to make sure that there is not any better solution lurking elsewhere.
+   We may terminate exact algorithms earlier if necessary and take their current best result.
+   We lose the guaranteed optimality, but the result we get could still be optimal.
+   This goes especially well in combination with the second point above.
+
+
 ### The Problem: Lack of Scalability
-
-We already know that the time to find globally optimal solutions for hard problems will always scale badly (get exponentially longer) with the problem size.
-We also know that for some problems, even guaranteeing to find a solution not worse than the optimal by a certain *factor* has this problem&nbsp;[@MS2011HOAFAJSSP] (see [@sec:jssp:termination]).
-
-Metaheuristics circumvent some of the problems above by simply not guaranteeing to find the optimal result.
-They usually do not guarantee to reach any solution quality threshold at all.
-However, even then, their performance is impacted by the problem instance size.
 
 *Any* algorithm will need more time if the number of decision variables grows for any (non-trivial) problem.
 In other words, the *"curse of dimensionality"*&nbsp;[@B1957DP; @B1961ACPAGT] will also strike metaheuristics that give no guarantee about the result quality.
