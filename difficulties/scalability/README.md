@@ -67,15 +67,19 @@ Some air travel planning problems fall into this category&nbsp;[@dM2003CCOATP].
 
 The next ingredient in the high runtime requirement for solving $\NPprefix$-hard problems is the *guaranteed optimality*.
 
-\definition{def}{exactAlgorithm}{An *exact algorithm* will always find the globally optimal solution *and* provides a proof that there cannot be any better solution when reaching its proper termination point if applied to a problem instance.}
+\definition{def}{exactAlgorithm}{An *exact algorithm* will always find the globally optimal solution *and* provides a proof that there cannot be any better solution when reaching its proper termination point if applied to a problem instance.&nbsp;[@MRS2021ATEOPBABA]}
 
-The second point is important.
-A metaheuristic algorithm, for example, may also find the best possible solution of a problem.
+A metaheuristic algorithm may also find the best possible solution of a problem.
 But it usually cannot guarantee that there is no better solution elsewhere in the search space.
-Well, sometimes it can, if we have a lower bound for the solution quality (see [@sec:objectiveFunctionBound]) and the best solution discovered has this quality.
-But we will not be able to *guarantee* to *always* find such a solution.
+And this is important:
+We can only claim that we have the globally optimal solution if we know for certain that there is no better solution elsewhere.
 
-Moreover, exact algorithms often can discover their final optimal solution relatively early on.
+One simple idea to achieve this would be to enumerate all possible solutions.
+If we do this, we will sooner or later encounter the global optimum.
+However, only after we have finished the complete enumeration, we really know that this indeed was the global optimum.
+Exact algorithms, of course, do this in a more clever way.
+
+However, exact algorithms often may discover the final optimal solution relatively early on.
 But they may need a long time to rule out that there cannot be any other, better solution.
 
 One more issue is that the complexity problem does not only hold for seeking the *optimal* solution.
@@ -135,9 +139,9 @@ Basically, we can mitigate the runtime problem by dropping any part of the sente
    For the TSP, for instance, the Concorde tool is incredibly fast on many relatively large problems.
    If we really encounter a worst-case instance where the runtime is infeasible, then we may just stop the algorithm and give up on that one.
    Getting optimal solutions 99% of the time may be good enough.
-3. We can also break the statement by using exact algorithms as heuristics:
+3. We can also break the statement by using exact algorithms that are anytime algorithms (see \def.ref{anytimeAlgorithm}) as heuristics:
    As mentioned earlier, exact algorithms often find the optimal solution early, but spend much time in searching the rest of the search space to make sure that there is not any better solution lurking elsewhere.
-   We may terminate exact algorithms earlier if necessary and take their current best result.
+   We may terminate exact algorithms earlier if necessary and take their current best result&nbsp;[@WO2013ABABAFQCSFD].
    We lose the guaranteed optimality, but the result we get could still be optimal.
    This goes especially well in combination with the second point above.
 

@@ -49,14 +49,14 @@ In other words, the JSSP instance structure described here already encompasses a
 This means that if we can build an algorithm which can solve this general type of JSSP well, it can also automatically solve the above-mentioned special cases.
 
 
-#### Sources for JSSP Instances
+#### JSSP Benchmark Instances
 
 In order to practically play around with optimization algorithms, we need some concrete instances of the JSSP.
 Luckily, the optimization community provides "benchmark instances" for many different optimization problems.
 Such common, well-known instances are important, because they allow researchers to compare their algorithms.
 
-The eight classical and most commonly used sets of benchmark instances are published in&nbsp;[@FT1963PLCOLJSSR; @ABZ1988TSBPFJSS; @AC1991ACSOTJSSP; @SWV1992NSSFSPWATJSS; @YN1992AGAATLSJSI; @L1998RCPSAEIOHSTS; @DMU1998BFSSP; @T199BFBSP].
-Their data can be found (sometimes partially) in several repositories in the internet, such as
+The eight classical and most commonly used sets of benchmark instances&nbsp;[@H2002PJSSP] are published in&nbsp;[@FT1963PLCOLJSSR; @ABZ1988TSBPFJSS; @AC1991ACSOTJSSP; @SWV1992NSSFSPWATJSS; @YN1992AGAATLSJSI; @L1998RCPSAEIOHSTS; @DMU1998BFSSP; @T199BFBSP].
+Their data can be found (sometimes partially) in several repositories in the Internet, such as
 
 - the [*OR&#8209;Library*](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/jobshopinfo.html) managed by Beasley&nbsp;[@B1990OLDTPBEM],
 - the comprehensive [set of JSSP instances](http://jobshop.jjvh.nl/) provided by van&nbsp;Hoorn&nbsp;[@vH2015JSIAS; @vH2018TCSOBOBIOTJSSP], where also state-of-the-art results are listed,
@@ -71,17 +71,25 @@ We have to pick a small representative subset of instances.
 They will serve as illustrative example of how to approach optimization problems.
 In order to keep the example and analysis simple, we will focus on only eight instances, namely
 
-1. instance `abz8` by Adams et&nbsp;al.&nbsp;[@ABZ1988TSBPFJSS] with 20&nbsp;jobs and 15&nbsp;machines,
-2. instance `dmu40` by Demirkol et&nbsp;al.&nbsp;[@DMU1998BFSSP] with 50&nbsp;jobs and 20&nbsp;machines,
-3. instance `ft06` by Fisher and Thompson&nbsp;[@FT1963PLCOLJSSR] with 6&nbsp;jobs and 6&nbsp; machines (which is the smallest of the well-known benchmark instances),
-4. instance `la09` by Lawrence&nbsp;[@L1998RCPSAEIOHSTS] with 15&nbsp;jobs and 5&nbsp;machines,
-5. instance `swv18` by Storer et&nbsp;al.&nbsp;[@SWV1992NSSFSPWATJSS] with 50&nbsp;jobs and 10&nbsp;machines,
-6. instance `ta54` by Taillard&nbsp;[@T199BFBSP] with 50&nbsp;jobs and 15&nbsp;machines,
-7. instance `ta79` by Taillard&nbsp;[@T199BFBSP] with 100&nbsp;jobs and 20&nbsp;machines (which is one of the largest of the well-known benchmark instances), and
-8. instance `yn2` by Yamada and Nakano&nbsp;[@YN1992AGAATLSJSI] with 20&nbsp;jobs and 20&nbsp;machines.
+1. Instance `abz8` by Adams et&nbsp;al.&nbsp;[@ABZ1988TSBPFJSS] has 20&nbsp;jobs and 15&nbsp;machines.
+   The processing times of its operations were chosen from the interval&nbsp;11\dots40.
+2. Instance `dmu40` by Demirkol et&nbsp;al.&nbsp;[@DMU1998BFSSP] has 50&nbsp;jobs and 20&nbsp;machines.
+   Its  processing times were chosen from the interval&nbsp;1\dots200.
+3. Instance `ft06` by Fisher and Thompson&nbsp;[@FT1963PLCOLJSSR] with 6&nbsp;jobs and 6&nbsp; machines is the smallest of the well-known benchmark instances.
+   The processing times of its operations were chosen from the interval&nbsp;1\dots10.
+4. Instance `la09` by Lawrence&nbsp;[@L1998RCPSAEIOHSTS] has 15&nbsp;jobs and 5&nbsp;machines.
+   Its processing times are from&nbsp;5\dots99.
+5. Instance `swv18` by Storer et&nbsp;al.&nbsp;[@SWV1992NSSFSPWATJSS] has 50&nbsp;jobs and 10&nbsp;machines.
+   Its processing times are from the interval&nbsp;1\dots100.
+6. Instance `ta54` by Taillard&nbsp;[@T199BFBSP] has 50&nbsp;jobs and 15&nbsp;machines.
+   Its processing times are from the interval&nbsp;1\dots99.
+7. Instance `ta79` by Taillard&nbsp;[@T199BFBSP] with 100&nbsp;jobs and 20&nbsp;machines.
+   It is one of the largest of the well-known benchmark instances.
+   Its processing times are from the interval&nbsp;1\dots99.
+8. Instance `yn2` by Yamada and Nakano&nbsp;[@YN1992AGAATLSJSI] has 20&nbsp;jobs and 20&nbsp;machines.
+   Its processing times are from the interval&nbsp;10\dots50.
 
-These instances are contained in text files available at <http://people.brunel.ac.uk/~mastjjb/jeb/orlib/files/jobshop1.txt>, <http://raw.githubusercontent.com/thomasWeise/jsspInstancesAndResults/master/data-raw/instance-data/instance_data.txt>, and in <http://jobshop.jjvh.nl/>.
-They are also part of the `moptipy` Python package with the sources for our experiments.
+The raw data of these instances is part of the [`moptipy`](\repo{mp}{repo.url}) Python package with the sources for our experiments as resource <\repo{mp}{repo.url}/blob/main/moptipy/examples/jssp/instances.txt>.
 
 Of course, if we really want to solve a new type of problem, we will usually use many benchmark problem instances to get a good understand about the performance of our algorithm(s).
 Only for the sake of clarity of presentation, we will here limit ourselves to these above eight problems.

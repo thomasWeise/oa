@@ -1,7 +1,7 @@
 ## Software Development and Reproducibility
 
 The very first and maybe one of the most important issues when evaluating an optimization algorithms is that you *never* evaluate an optimization algorithm.
-You always evaluate an *implementation* of an optimization algorithm.
+You always evaluate an *implementation* of an optimization algorithm&nbsp;[@MRS2021ATEOPBABA].
 You always compare *implementations* of different algorithms.
 
 Software development is an essential part of optimization.
