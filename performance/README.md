@@ -17,7 +17,7 @@ If we have only a single method that can be applied to an optimization problem, 
 Instead, we often start by first developing one idea and then try to improve it.
 Of course, we need to compare each new approach with the ones we already have.
 Alternatively, especially if we work in a research scenario, maybe we have a new idea which then needs to be compared to a set of existing state-of-the-art algorithms.
-Let us now discuss how such comparisons can be conducted in a rigorous, reliable, and reproducible way.
+The art of assessing the performance of algorithms is a research field in itself&nbsp;[@MRS2021ATEOPBABA; @BBDvdBBCEFKLCLIMMNOVWW2020BIOBPAOIV2].
 
 \rel.input{codingAndReproducibility/README.md}
 \rel.input{time/README.md}
