@@ -132,7 +132,13 @@ If we have a bug in our algorithm implementation that only very rarely has an im
 If our algorithm on a few problem instances needs particularly long to converge, we will see it in the mean but not in the median.
 *For this reason, I now find the mean to be the more important metric.*
 
-But we do not need to decide which is better.
+There is one more issue though:
+Let us say that we do not average result qualities, but times measured to reach certain goal, i.e., apply the horizontal performance view.
+If one run fails, then the arithmetic mean becomes undefined, which is a problem&nbsp;[@I1971OTEOSFCAP].
+The median will remain defined as long as at least half of the runs succeed.
+
+Well.
+We do not need to decide which is better.
 I think there is no reason for us to limit ourselves to only one measure of the average.
 I suggest to report both, the median and the mean, to be on the safe side &ndash; as we did in our JSSP experiments.
 Indeed, the maybe best idea would be to consider both the mean and median value and then take the worst of the two.

@@ -151,3 +151,11 @@ Basically, we can mitigate the runtime problem by dropping any part of the sente
 *Any* algorithm will need more time if the number of decision variables grows for any (non-trivial) problem.
 In other words, the *"curse of dimensionality"*&nbsp;[@B1957DP; @B1961ACPAGT] will also strike metaheuristics that give no guarantee about the result quality.
 
+
+### Summary
+
+There is one more pitfall that lurks in the problem of how our algorithms scale with the problem size.
+Sometimes, a researcher may realize that doing experiments on large-scale problems will take a long time.
+They may decide to test their algorithms only on small-scale problems.
+This has been identified as a bad practice more than fifty years ago already&nbsp;[@I1971OTEOSFCAP].
+The performance observed in experiments with small problems does not necessarily carry over to practical (larger) problems.  

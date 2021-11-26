@@ -6,6 +6,22 @@ You always compare *implementations* of different algorithms.
 
 Software development is an essential part of optimization.
 This has several important implications.
+Here we will look into three engineering aspects.
+
+
+### Performance Depends on Implementation
+
+The performance we measure depends on implementation factors&nbsp;[@MRS2021ATEOPBABA].
+First, it depends the abstractions used to implement algorithm details, such the data structures used.
+Let's say our algorithm requires us to maintain a set of unique elements.
+This can be implemented as an unsorted linear list that is always checked from beginning to end whenever we need to know whether a new element to preserve is unique or not.
+It could be implemented as a sorted list.
+Or we could implement it as a hash set.
+All three data structures have different time complexities for searching and inserting elements.
+These will result in different algorithm performances.
+Moreover, the performance may also depend on the hardware.
+Maybe the above set is always small enough to fit into the cache of the CPU and as a result, the linear unsorted list implementation is fastest.
+Finally, all performance measurements may also depend on the software environment, programming language, and compiler optimization.
 
 
 ### Unit Testing and Code Analysis {#sec:unit_testing_and_analysis}
@@ -67,7 +83,7 @@ Because then errors will just aggregate and eventually become so many that fixin
 
 ### Reproducibility
 
-A very important aspect of rigorous research is that experiments are *reproducible*&nbsp;[@J2002ATGTTEAOA; @GGA2018ORATRROSADSIAP].
+A very important aspect of rigorous research is that experiments are *reproducible*&nbsp;[@J2002ATGTTEAOA; @GGA2018ORATRROSADSIAP; @CDM1978RCEIMP].
 The Terminology section of the "[Artifact Review and Badging](https://www.acm.org/publications/policies/artifact-review-and-badging-current)" documentation of the ACM&nbsp;[@ACM2020ARABV1] introduces the following three terms:
 
 - *Repeatability* (Same team, same experimental setup):

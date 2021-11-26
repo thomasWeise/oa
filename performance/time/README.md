@@ -11,7 +11,7 @@ If we want to compare algorithms, we need a concept of time.
 ### Clock Time
 
 Of course, we already know a very well-understood concept of time.
-We use it every day: the clock time.
+We use it every day: the clock time&nbsp;[@CDM1978RCEIMP].
 In our experiments with the JSSP, we have measured the runtime mainly in terms of milliseconds that have passed on the clock as well.
 
 \definition{def}{clockTime}{The consumed *clock time* is the time that has passed since the optimization process was started.}
@@ -56,7 +56,7 @@ It can also be bad, if we perform fundamental research on algorithmic characteri
 ### Consumed Function Evaluations {#sec:comparing:time:FEs}
 
 Instead of measuring how many milliseconds our algorithm needs, we often want a more abstract measure.
-One such idea is to count the so-called (objective) *function evaluations* or FEs for short.
+One such idea is to count the so-called (objective) *function evaluations* or FEs for short&nbsp;[@CDM1978RCEIMP].
 
 \definition{def}{fes}{The consumed *function evaluations*&nbsp;(FEs) are the number of calls to the objective function issued since the beginning of the optimization process.}
 
