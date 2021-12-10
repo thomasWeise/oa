@@ -23,7 +23,7 @@ I believe there are some very simple steps to follow:
    b. Is this algorithm good enough for my use case?
    c. &hellip:
 3. Design an experiment suitable to answer them, including:
-   a. the choice of problems and problem instances or problem generators&nbsp;[@G1990CTWHAHM], which must be sufficient to investigate the research question thoroughly,
+   a. the choice of problems and problem instances or problem generators&nbsp;[@G1990CTWHAHM; @J2002ATGTTEAOA], which must be sufficient to investigate the research question thoroughly,
    b. the choice of algorithms (and their implementations),
    c. the choice of algorithm parameter settings,
    d. the choice of termination criteria,

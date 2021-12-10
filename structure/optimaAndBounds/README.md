@@ -25,7 +25,7 @@ If we solve a JSSP for a factory, our goal is to find the *shortest* makespan.
 If we try to pack the factory's products into containers, we look for the packing that needs the *least* amount of containers.
 If we solve a vehicle routing problem to serve several customers, then we may either want to serve the *most* customers, use the *least* amount of vehicles, or travel the *shortest* overall distance.
 Thus, optimization means searching for such superlatives, as illustrated in [@fig:optimization_superlatives].
-Vice versa, whenever we are looking for the cheapest, fastest, strongest, best, biggest or smallest "thing", then we have an optimization problem at our hands.
+Vice versa, whenever we are looking for the cheapest, fastest, strongest, best, biggest or smallest "thing", then we have an optimization problem at our hands&nbsp;[@KBBDCGJLMPQSVBY2016GLPFOR].
 
 \rel.figure{optimization_superlatives}{Optimization is the search for superlatives&nbsp;[@BB2008NO].}{optimization_superlatives.svgz}{width=72%}
 

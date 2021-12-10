@@ -1,7 +1,7 @@
 ## Software Development and Reproducibility
 
 The very first and maybe one of the most important issues when evaluating an optimization algorithms is that you *never* evaluate an optimization algorithm.
-You always evaluate an *implementation* of an optimization algorithm&nbsp;[@JBNP1990GFRROCEROTAHC; @MRS2021ATEOPBABA].
+You always evaluate an *implementation* of an optimization algorithm&nbsp;[@JBNP1990GFRROCEROTAHC; @MRS2021ATEOPBABA; @M2001EAOA].
 You always compare *implementations* of different algorithms.
 
 Software development is an essential part of optimization.
@@ -22,10 +22,11 @@ It could be implemented as a sorted list.
 Or we could implement it as a hash set.
 All three data structures have different time complexities for searching and inserting elements.
 These will result in different algorithm performances.
+Using efficient data structures can very significantly improve the algorithm performance&nbsp;[@J2002ATGTTEAOA; @WWLC2019IIIOADTM]. 
 
 Moreover, the performance may also depend on how the hardware supports the implementation.
-Maybe the set mentioned above is always small enough to fit into the cache of the CPU.
-As a result, the linear unsorted list implementation may be fastest, although it has the worst theoretical complexity.
+Maybe the set mentioned above is always small enough to fit into the cache of the CPU&nbsp;[@M2001EAOA] if implemented as simple list, but a hash implementation would be too large.
+As a result, the linear unsorted list implementation may be fastest, although it has the worst theoretical complexity for searching.
 Finally, all performance measurements may also depend on the software environment, programming language, and compiler optimization.
 
 
@@ -158,7 +159,7 @@ Additionally to the points mentioned above, the following measures can be taken 
    If we initialize the (same) random number generator with the same seed, it will produce the same sequence of random numbers.
    If we know the random seed used for an experiment, then we can start the same algorithm again with the same initialization of the random number generator.
    Then, even if our optimization method is randomized (see [@sec:randomizedAlgos]), it will make the same "random" decisions.
-   In other words, we should be able to repeat the experiments and get identical results.
+   In other words, we should be able to repeat the experiments and get identical results&nbsp;[@KBBDCGJLMPQSVBY2016GLPFOR].
    You can actually do this with the experiments in this book!
    There might be differences if numpy changes the implementation of their [random number generator](https://numpy.org/devdocs/reference/random/generator.html) or if the termination criterion is time-based and a different computer is used.
 5. Ensure that all random seeds in the experiments are generated in a deterministic way.    
@@ -170,7 +171,7 @@ Additionally to the points mentioned above, the following measures can be taken 
 7. *All* program code should be designed for being published and useful for others from the very beginning.
    We should prepare it with the same care and diligence that we wish our name to be associated with.
 8. The program code for an experiment not just consists of the algorithm implementation, but also the code for running the experiment and the code for evaluating the results, i.e., the code for generating tables and figures. 
-9. If we are conducting research work, we should publish all artifacts of our work, all code and data, online:
+9. If we are conducting research work, we should publish all artifacts of our work, all code, data, and results, online&nbsp;[@KBBDCGJLMPQSVBY2016GLPFOR]:
    a. For code, several free platforms such as [GitHub](http://www.github.com) or [bitbucket](http://bitbucket.org/) exist.
       These platforms often integrate with free continuous integration platforms, which can automatically compile code and run unit tests.
    b. For results, there, too, are free platforms such as [zenodo](http://zenodo.org/).

@@ -8,8 +8,10 @@ Such an algorithm can behave differently every time it is executed.
 
 Each *run* is considered as independent of any previous and subsequent runs.
 Each run may have a different result.
-This also means that the measurements of the basic performance indicators discussed in [@sec:basicPerformanceIndicators] can take on different values as well.
-We may measure $k$&nbsp;different result solution qualities at the end of $k$&nbsp;applications of the same algorithm to the same problem instance (which is also visible in&nbsp;[@fig:performance_indicators_cuts]).
+This means that the measurements of the basic performance indicators discussed in [@sec:basicPerformanceIndicators] can take on different values as well.
+Therefore, it is not permissible to conduct only one single run of an algorithm to draw any conclusion&nbsp;[@@WWLC2019IIIOADTM].
+We need to perform multiple runs.
+At the end of $k$&nbsp;applications of the same algorithm to the same problem instance, we may have measured $k$&nbsp;different result solution qualities (which is also visible in&nbsp;[@fig:performance_indicators_cuts]).
 In order to get an overview about what is going on, we often want to reduce this potentially large amount of information to a few, meaningful and easy-to-interpret values.
 These values are statistical measures.
 Of course, this here is neither a book about statistics nor probability, so we can only scratch on the surface of these topics.

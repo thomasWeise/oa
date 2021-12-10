@@ -30,10 +30,10 @@ However, reporting the clock time consumed by an algorithm implementation also h
 
 - The measured time strongly depends on your computer and system configuration.
   Runtimes measured on different machines or on different system setups are inherently incomparable or, at least, it is easy to make mistakes here.
-  The runtime is influenced at least by the CPU type and speed, the memory type, speed, and size, the operating system, the size of caches, and many more aspects of computer performance&nbsp;[@L2000MCPAPG].
+  The runtime is influenced at least by the CPU type and speed, the memory type, speed, and size, the operating system, the size of caches, and many more aspects of computer performance&nbsp;[@L2000MCPAPG; @M2001EAOA].
   Runtimes that were reported twenty years ago are basically useless now, unless they differ from current measurements very significantly, by orders of magnitudes.
 - Runtime measurements also are measurements based on a given *implementation*, not *algorithm*.
-  An algorithm implemented in the `C` programming language may perform very different compared to the very same algorithm implemented in `Python`.
+  An algorithm implemented in the `C` programming language may perform very different compared to the very same algorithm implemented in `Python`&nbsp;[@M2001EAOA].
   Also, many "components" and data structures used in algorithms can be realized differently, which can have a tremendous impact of the performance of the implementations&nbsp;[@WWLC2019IIIOADTM].
   Remember the different sorting methods you learned in basic computer science classes, for instance.
   An algorithm implementation using a hash map to store and retrieve certain objects may perform entirely different from the same algorithm implemented using a sorted list.

@@ -67,7 +67,7 @@ Some air travel planning problems fall into this category&nbsp;[@dM2003CCOATP].
 
 The next ingredient in the high runtime requirement for solving $\NPprefix$-hard problems is the *guaranteed optimality*.
 
-\definition{def}{exactAlgorithm}{An *exact algorithm* will always find the globally optimal solution *and* provides a proof that there cannot be any better solution when reaching its proper termination point if applied to a problem instance.&nbsp;[@MRS2021ATEOPBABA]}
+\definition{def}{exactAlgorithm}{An *exact algorithm* will always find the globally optimal solution *and* provides a proof that there cannot be any better solution when reaching its proper termination point if applied to a problem instance.&nbsp;[@MRS2021ATEOPBABA; @CS2000SAOCTOAAH]}
 
 A metaheuristic algorithm may also find the best possible solution of a problem.
 But it usually cannot guarantee that there is no better solution elsewhere in the search space.

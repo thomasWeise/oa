@@ -3,7 +3,7 @@
 Assume that we have obtained a sample&nbsp;$A=(\arrayIndex{a}{0},\arrayIndex{a}{1}, \dots, \arrayIndex{a}{n-1})$ of $n$&nbsp;observations from an experiment, e.g., we have measured the quality of the best discovered solutions of 11&nbsp;independent runs of an optimization algorithm.
 We usually want to get reduce this set of numbers to a single value which can give us an impression of what the "average outcome" (or result quality) is.
 
-We could just report the best solution encountered over all runs, but this would not be a good idea&nbsp;[@BD2007HTAARTPOASAOAPMOBROANOR].
+We could just report the best solution encountered over all runs, but this would not be a good idea&nbsp;[@BD2007HTAARTPOASAOAPMOBROANOR; @J2002ATGTTEAOA].
 First, it would not really tell us about the performance of our algorithm, but about our algorithm *with restarts*.
 Second, the best result over many runs could also be a fluke, e.g., just one lucky hit that will not occur again.
 Third, the best encountered solution is just one value from&nbsp;$n$ runs which is not influenced by the results of the other $n-1$&nbsp;runs.
