@@ -80,8 +80,9 @@ If we do this, we will sooner or later encounter the global optimum.
 However, only after we have finished the complete enumeration, we really know that this indeed was the global optimum.
 Exact algorithms, of course, do this in a more clever way.
 
-However, exact algorithms often may discover the final optimal solution relatively early on.
-But they may need a long time to rule out that there cannot be any other, better solution.
+Exact algorithms often may discover the final optimal solution relatively early on.
+Yet, they may need a long time to rule out that there cannot be any other, better solution.
+Branch and bound, for example, may first discover some solution, then the optimal solution, and then need a longer time to prove the optimality&nbsp;[@OD2011AAODFSFCO].
 
 One more issue is that the complexity problem does not only hold for seeking the *optimal* solution.
 For some problems, even guaranteeing to find a solution not worse than the optimum by a certain *factor* incurs this problem&nbsp;[@MS2011HOAFAJSSP] (see [@sec:jssp:termination]).
