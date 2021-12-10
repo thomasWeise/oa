@@ -1,4 +1,4 @@
-## Scalability
+## Large Instance Sizes are Bad for Performance
 
 Every problem instance has a certain "size"&nbsp;$s$.
 For example, the size of an instance of the Job Shop Scheduling Problem (JSSP) is determined by the number of jobs&nbsp;$\jsspJobs$ and machines&nbsp;$\jsspMachines$.
@@ -8,9 +8,10 @@ The more items we want to sort, the longer it is going to take.
 The same holds for optimization problems like the JSSP:
 The more machines and jobs we have, the longer we will need to get a good solution.
 
-There are two ways in which this hits us:
+There are three ways in which this hits us:
 First, there are theoretical limitations on how long it will take or how much memory we will need if we want to solve the problem *exactly* or guarantee to reach a certain solution quality.
 Second, algorithms will slow down, i.e., need more time per iteration, on large problems also simply because there are more variables to consider.
+Third, the solutions we will obtain with metaheuristics will get comparatively worse when the problem becomes larger.
 
 
 ### The Problem: $\NPprefix$-Hardness and Runtime {#sec:nphardnessAndRuntime}
