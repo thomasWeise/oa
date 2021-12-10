@@ -1,7 +1,7 @@
 ## Software Development and Reproducibility
 
 The very first and maybe one of the most important issues when evaluating an optimization algorithms is that you *never* evaluate an optimization algorithm.
-You always evaluate an *implementation* of an optimization algorithm&nbsp;[@MRS2021ATEOPBABA].
+You always evaluate an *implementation* of an optimization algorithm&nbsp;[@JBNP1990GFRROCEROTAHC; @MRS2021ATEOPBABA].
 You always compare *implementations* of different algorithms.
 
 Software development is an essential part of optimization.
@@ -12,15 +12,20 @@ Here we will look into three engineering aspects.
 ### Performance Depends on Implementation
 
 The performance we measure depends on implementation factors&nbsp;[@MRS2021ATEOPBABA].
-First, it depends the abstractions used to implement algorithm details, such the data structures used.
+An algorithm is a description of a computation, usually with some details left unspecified&nbsp;[@JBNP1990GFRROCEROTAHC].
+Often, it can be implemented in many different ways, using different data structures or different coding paradigms&nbsp;[@WWLC2019IIIOADTM].
+Therefore, first, the performance we measure for an "algorithm" depends the abstractions used to implement algorithmic details, such the data structures used.
+
 Let's say our algorithm requires us to maintain a set of unique elements.
 This can be implemented as an unsorted linear list that is always checked from beginning to end whenever we need to know whether a new element to preserve is unique or not.
 It could be implemented as a sorted list.
 Or we could implement it as a hash set.
 All three data structures have different time complexities for searching and inserting elements.
 These will result in different algorithm performances.
-Moreover, the performance may also depend on the hardware.
-Maybe the above set is always small enough to fit into the cache of the CPU and as a result, the linear unsorted list implementation is fastest.
+
+Moreover, the performance may also depend on how the hardware supports the implementation.
+Maybe the set mentioned above is always small enough to fit into the cache of the CPU.
+As a result, the linear unsorted list implementation may be fastest, although it has the worst theoretical complexity.
 Finally, all performance measurements may also depend on the software environment, programming language, and compiler optimization.
 
 
@@ -88,7 +93,7 @@ The Terminology section of the "[Artifact Review and Badging](https://www.acm.or
 
 - *Repeatability* (Same team, same experimental setup):
   The measurement can be obtained with stated precision by the same team using the same measurement procedure, the same measuring system, under the same operating conditions, in the same location on multiple trials.
-  For computational experiments, this means that a researcher can reliably repeat her own computation.
+  For computational experiments, this means that a researcher can reliably repeat her own computation&nbsp;[@CDM1978RCEIMP].
 - *Reproducibility* (Different team, same experimental setup):
   The measurement can be obtained with stated precision by a different team using the same measurement procedure, the same measuring system, under the same operating conditions, in the same or a different location on multiple trials.
   For computational experiments, this means that an independent group can obtain the same result using the author's own artifacts.
@@ -99,7 +104,7 @@ The Terminology section of the "[Artifact Review and Badging](https://www.acm.or
 These definitions may have been designed for research, but they are valuable also for practical applications.
 Regardless whether we want to invent a new algorithm as part of a scientific work or whether we try to solve a very practical problem for a customer, our work should *always be replicable*.
 It should be possible that someone else can read our algorithm, implement it by themselves, perform similar experiments, get similar results, and reach the same conclusions as we do.
-This may require a lot of work and how exactly this work is done is not in our hands.
+This may require a lot of work and how exactly this work is done is not in our hands, but we need to provide all the information to make it possible.
 
 #### Basic Advice
 

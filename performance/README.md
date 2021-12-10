@@ -19,6 +19,7 @@ Of course, we need to compare each new approach with the ones we already have.
 Alternatively, especially if we work in a research scenario, maybe we have a new idea which then needs to be compared to a set of existing state-of-the-art algorithms.
 The art of assessing the performance of algorithms is a research field in itself&nbsp;[@MRS2021ATEOPBABA; @BBDvdBBCEFKLCLIMMNOVWW2020BIOBPAOIV2].
 
+\rel.input{experimentDesign/README.md}
 \rel.input{codingAndReproducibility/README.md}
 \rel.input{time/README.md}
 \rel.input{performanceIndicators/README.md}

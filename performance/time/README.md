@@ -30,7 +30,7 @@ However, reporting the clock time consumed by an algorithm implementation also h
 
 - The measured time strongly depends on your computer and system configuration.
   Runtimes measured on different machines or on different system setups are inherently incomparable or, at least, it is easy to make mistakes here.
-  The runtime is influenced at least by the CPU type and speed, the memory type, speed, and size, the operating system, and the size of caches.
+  The runtime is influenced at least by the CPU type and speed, the memory type, speed, and size, the operating system, the size of caches, and many more aspects of computer performance&nbsp;[@L2000MCPAPG].
   Runtimes that were reported twenty years ago are basically useless now, unless they differ from current measurements very significantly, by orders of magnitudes.
 - Runtime measurements also are measurements based on a given *implementation*, not *algorithm*.
   An algorithm implemented in the `C` programming language may perform very different compared to the very same algorithm implemented in `Python`.
@@ -40,7 +40,7 @@ However, reporting the clock time consumed by an algorithm implementation also h
   Hence, effort should be invested to create good implementations before measuring their consumed runtime and, very important, the same effort should be invested into all compared algorithms&hellip;
 - Runtime measurements are not always very accurate.
   There may be many effects which can mess up our measurements, ranging from
-  + other processes being executed on the same system and slowing down our process,
+  + other processes being executed on the same system and slowing down our process&nbsp;[@GHJLSS1977MAAFCDLLAC],
   + delays caused by swapping or paging,
   + time lost when a Just in Time compiler suddenly kicks in to compile a frequently used code piece in our Java or Python programs, to
   + shifts of CPU speeds due to dynamic CPU clocking.
@@ -50,7 +50,9 @@ However, reporting the clock time consumed by an algorithm implementation also h
 There exist ideas to mitigate the drawback that clock times are hard to compare&nbsp;[@JMG2004EAOHFTS; @WCTLTCMY2014BOAAOSFFTTSP].
 The key point is that clock times always lead to measurements of the algorithm *implementation* performance on a specific system.
 This can be good, if we design a practical implementation.
-It can also be bad, if we perform fundamental research on algorithmic characteristics and want fundamental conclusions about performance that are valid independent of what kind of hardware is used. 
+It can also be bad, if we perform fundamental research on algorithmic characteristics and want fundamental conclusions about performance that are valid independent of what kind of hardware is used.
+Either way:
+If we report clock times, then we *must* include a reasonably complete specification of the computer we used in the report as well&nbsp;[@CDM1978RCEIMP].
 
 
 ### Consumed Function Evaluations {#sec:comparing:time:FEs}

@@ -13,7 +13,7 @@ First, there are theoretical limitations on how long it will take or how much me
 Second, algorithms will slow down, i.e., need more time per iteration, on large problems also simply because there are more variables to consider.
 
 
-### The Problem: $\NPprefix$-Hardness and Runtime
+### The Problem: $\NPprefix$-Hardness and Runtime {#sec:nphardnessAndRuntime}
 
 Most of the problems that we try to solve with metaheuristic algorithms are (at least) $\NPprefix$-hard.
 Sometimes we know this, as in the case of the JSSP, satisfiability tasks, or the Traveling Salesperson Problem (TSP).

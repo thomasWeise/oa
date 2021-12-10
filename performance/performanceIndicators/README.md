@@ -1,6 +1,6 @@
 ## Performance Indicators {#sec:basicPerformanceIndicators}
 
-Unfortunately, many optimization problems are computationally hard.
+Unfortunately, many optimization problems are computationally hard, as we discuss in detail in [@sec:nphardnessAndRuntime].
 If we want to guarantee that we can solve them to optimality, this would often incur an unacceptably long runtime.
 Assume that an algorithm&nbsp;$\algorithmStyle{A}$ can solve a problem instance in ten million years while algorithm&nbsp;$\algorithmStyle{B}$ only needs one million years.
 In a practical scenario, usually neither is useful nor acceptable and the fact that&nbsp;$\algorithmStyle{B}$ is better than&nbsp;$\algorithmStyle{A}$ would not matter.
