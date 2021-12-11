@@ -148,10 +148,21 @@ Basically, we can mitigate the runtime problem by dropping any part of the sente
    This goes especially well in combination with the second point above.
 
 
-### The Problem: Lack of Scalability
+### The Problem: Bad Scaling with Instance Size
 
-*Any* algorithm will need more time if the number of decision variables grows for any (non-trivial) problem.
-In other words, the *"curse of dimensionality"*&nbsp;[@B1957DP; @B1961ACPAGT] will also strike metaheuristics that give no guarantee about the result quality.
+*Any* algorithm will need more time if the number of decision variables grows for any (non-trivial) problem, because its fundamental operations, such as objective function evaluations and copying of solutions, get slower.
+But also the quality of the solutions we can get within a given time frame usually gets worse.
+The reason is that the search space often grows exponentially with the number of decision variables.
+
+Solving an optimization problem means to find the right settings for all decision variables.
+Let us say that our decision variables each can take on 10&nbsp;different values.
+If we have only two decision variables, then we can test all $|\searchSpace|=10^2=100$ possible settings by sampling exactly 100&nbsp;solutions.
+For three decision variables, then these 100&nbsp;samples are only enough to test one tenth of the possible settings.
+If we have four variables, then only one hundredth of the possible value combinations are tested after 100&nbsp;FEs.
+Our algorithms learn less information about the structure of the search space within a fixed number of samples if the number of decision variables increases.
+Therefore, they become less likely to spot the really good solutions.    
+In machine learning, this phenomenon is called the *"curse of dimensionality"*&nbsp;[@B1957DP; @B1961ACPAGT].
+The more features (decision variables) there are, the less  meaningful information can be obtained with a constant number of samples.
 
 
 ### Summary
