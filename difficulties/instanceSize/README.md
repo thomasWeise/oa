@@ -129,9 +129,12 @@ So sometimes, maybe even often, we may be lucky and have a quick runtime when us
 In general, the runtime needed to solve the problems to optimality will grow exponentially. 
   
 
-### Countermeasures
+### Countermeasures against $\NPprefix$-Hardness
 
-The main problem statement was:
+Well, we cannot do anything against $\NPprefix$-Hardness.
+If we were able to solve find an efficient algorithm for $\NPprefix$-Hard problems, we would win all sorts or prestigious awards, like the [Millenium Prize](https://www.claymath.org/millennium-problems/millennium-prize-problems)&nbsp;[@C2021PVNPTMPP].
+However, even for $\NPprefix$-hard problems, we may obtain good solutions.
+Remember that the main problem statement was that
 "Any algorithm that can *guarantee* to always find the globally optimal solution of such an ($\NPprefix$-hard) problem will require *exponential* runtime in the *worst case*."
 Basically, we can mitigate the runtime problem by dropping any part of the sentence.
 
@@ -163,6 +166,41 @@ Our algorithms learn less information about the structure of the search space wi
 Therefore, they become less likely to spot the really good solutions.    
 In machine learning, this phenomenon is called the *"curse of dimensionality"*&nbsp;[@B1957DP; @B1961ACPAGT].
 The more features (decision variables) there are, the less  meaningful information can be obtained with a constant number of samples.
+
+
+### Countermeasures to Scale better with Instance Size
+
+#### Parallelization and Distribution
+
+First, we can try to improve the performance of our algorithms by parallelization and distribution.
+Parallelization means that we utilize multiple CPUs or CPU cores on the same machine at the same time.
+Distribution means that we use multiple computers connected by network.
+Using either approach approach makes sense if we already perform "close to acceptable," i.e., if we are not more than one hundred times too slow.
+
+For example, I could try to use the four CPU cores on my laptop computer to solve a JSSP instance instead of only one.
+I could, for instance, execute four separate runs of the hill climber or Simulated Annealing in parallel and then just take the best result after two minutes have elapsed.
+Matter of fact, I could run four different algorithm setups or four entirely different algorithms at once.
+It makes sense to assume that this would give me a better chance to obtain a good solution.
+However, it is also clear that, overall, I am still just utilizing the variance of the results.
+In other words, the result I obtain this way will not really be better than the results I could expect from the best of setups or algorithms if run alone.
+
+Maybe I need to solve 1000&nbsp;problem instances in 10&nbsp;hour.
+On my PC doing this could maybe take 500&nbsp;hours.
+Now I could think:
+OK, I can do $1000/500=2$ problem instances per hour.
+I have only 10&nbsp;hours in total, so I would need to be able to do $1000/10=100$ instances per hour.
+So I actually need $100/2=50$&nbsp;PCs to do the job in time.
+Each of the 50&nbsp;PCs can do 100&nbsp;instances per hour, meaning that I can complete $10*100=1000$ instances in 10&nbsp;hours.
+
+Both of the above examples work because I use more computer power to conduct multiple runs in parallel.
+No communication is necessary between the different runs and I have sufficient time to let each run reach its natural end.
+This is the ideal situation.  
+
+One more interesting option is that I could run a metaheuristic together with an exact algorithm which can guarantee to find the optimal solution.
+For the JSSP, for instance, there exists an efficient dynamic programming algorithm which can solve several well-known benchmark instances within seconds or minutes&nbsp;[@vH2016DPFRASOSOD; @vHNOG2017ACOTPSTJSSPOBDP; @GvHSGT2010STJSSPOBDP].
+Of course, there can and will be instances that it cannot solve.
+So the idea would be that in case the exact algorithm can find the optimal solution within the computational budget, we take it.
+In case it fails, one or multiple metaheuristics running other CPUs may give us a good approximate solution.
 
 
 ### Summary
