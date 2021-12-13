@@ -202,6 +202,21 @@ Of course, there can and will be instances that it cannot solve.
 So the idea would be that in case the exact algorithm can find the optimal solution within the computational budget, we take it.
 In case it fails, one or multiple metaheuristics running other CPUs may give us a good approximate solution.
 
+Alternatively, I could take a population-based metaheuristic like an Evolutionary Algorithm.
+Instead of executing $\nu$&nbsp;independent runs on $\nu$&nbsp;CPU cores, I could divide the offspring generation between the different cores.
+In other words, each core could create, map, and evaluate roughly $\lambda/\nu$&nbsp;offsprings.
+This would allow me to complete more generations of the algorithm within the same time frame.
+Later populations are more likely to find better solutions, but require more computational time to do so. 
+By parallelizing them, I thus could utilize this power without needed to wait longer.
+Similar approaches can be applied to other population-based algorithms like, e.g., Ant Colony Optimization&nbsp;[@GOPBD2022AEACOFFHE].
+
+However, there is a limit to the speed-up we can achieve with either parallelization or distribution.
+Amdahl's Law&nbsp;[@A1967VOTSPATALSCC], in particular with the refinements by Kalfa&nbsp;[@K1988B] shows that we can get at most a sub-linear speed-up.
+On the one hand, only a certain fraction of a program can be parallelized and each parallel block has a minimum required execution time (e.g., a block must take at least as long as one single CPU instruction).
+On the other hand, communication and synchronization between the&nbsp;$\nu$ involved threads or processes is required, and the amount of it grows with their number&nbsp;$\nu$.
+There is a limit value for the number of parallel processes&nbsp;$\nu$ above which no further runtime reduction can be achieved.
+In summary, when battling an exponential growth of the search space size with a sub-linear gain in speed, we will hit certain limits, which may only be surpassed by qualitatively better algorithms.
+
 
 ### Summary
 
