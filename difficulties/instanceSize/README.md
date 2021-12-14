@@ -260,7 +260,15 @@ This will then be faster.
 
 ### Summary
 
-There is one more pitfall that lurks in the problem of how our algorithms scale with the problem size.
+Problems with many decision variables are always annoying.
+It takes longer to create and modify candidate solutions.
+Sometimes internal data structures, such as the pheromone matrix in Ant Colony Optimization, grow polynomially with the number of decision variables and occupy much memory for larger problems.
+Also, the search space size grows exponentially with the number of decision variables.
+This means that we need to sample more solutions to learn about its structure.
+Most of the practically relevant problems are \NPprefix-hard, which means that finding a guaranteed optimal solution will also take a time growing exponentially with the number of decision variables as well.
+These are fundamental problems and there are few techniques we can use to mitigate them.
+
+Moreover, is another pitfall that lurks in the problem of how our algorithms scale with the problem size.
 Sometimes, a researcher may realize that doing experiments on large-scale problems will take a long time.
 They may decide to test their algorithms only on small-scale problems.
 This has been identified as a bad practice more than fifty years ago already&nbsp;[@I1971OTEOSFCAP].
