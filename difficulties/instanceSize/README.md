@@ -168,13 +168,13 @@ In machine learning, this phenomenon is called the *"curse of dimensionality"*&n
 The more features (decision variables) there are, the less  meaningful information can be obtained with a constant number of samples.
 
 
-### Countermeasures to Scale better with Instance Size
+### Countermeasures to Improve the Scaling with the Instance Size
 
 #### Parallelization and Distribution
 
 First, we can try to improve the performance of our algorithms by parallelization and distribution.
-Parallelization means that we utilize multiple CPUs or CPU cores on the same machine at the same time.
-Distribution means that we use multiple computers connected by network.
+*Parallelization* means that we utilize multiple CPUs or CPU cores or GPUs on the same machine at the same time.
+*Distribution* means that we use multiple computers connected by network.
 Using either approach approach makes sense if we already perform "close to acceptable," i.e., if we are not more than one hundred times too slow.
 
 For example, I could try to use the four CPU cores on my laptop computer to solve a JSSP instance instead of only one.
@@ -202,13 +202,14 @@ Of course, there can and will be instances that it cannot solve.
 So the idea would be that in case the exact algorithm can find the optimal solution within the computational budget, we take it.
 In case it fails, one or multiple metaheuristics running other CPUs may give us a good approximate solution.
 
-Alternatively, I could take a population-based metaheuristic like an Evolutionary Algorithm.
+Alternatively, I could take a population-based metaheuristic like an Evolutionary Algorithm and parallelize or distribute in&nbsp;[@CPG2000EPGATAP; @LA2011PGATARWA].
 Instead of executing $\nu$&nbsp;independent runs on $\nu$&nbsp;CPU cores, I could divide the offspring generation between the different cores.
 In other words, each core could create, map, and evaluate roughly $\lambda/\nu$&nbsp;offsprings.
 This would allow me to complete more generations of the algorithm within the same time frame.
 Later populations are more likely to find better solutions, but require more computational time to do so. 
 By parallelizing them, I thus could utilize this power without needed to wait longer.
-Similar approaches can be applied to other population-based algorithms like, e.g., Ant Colony Optimization&nbsp;[@GOPBD2022AEACOFFHE].
+Similar approaches can be applied to other population-based algorithms such as Ant Colony Optimization&nbsp;[@GOPBD2022AEACOFFHE] and Differential Evolution&nbsp;[@TPPV2004PDE].
+We can also combine different metaheuristics, e.g., let different nodes or CPUs execute different algorithms and exchange candidate solutions among them&nbsp;[@WG2006DAAFFDMOSAATTGPOSN].
 
 However, there is a limit to the speed-up we can achieve with either parallelization or distribution.
 Amdahl's Law&nbsp;[@A1967VOTSPATALSCC], in particular with the refinements by Kalfa&nbsp;[@K1988B] shows that we can get at most a sub-linear speed-up.
@@ -216,6 +217,45 @@ On the one hand, only a certain fraction of a program can be parallelized and ea
 On the other hand, communication and synchronization between the&nbsp;$\nu$ involved threads or processes is required, and the amount of it grows with their number&nbsp;$\nu$.
 There is a limit value for the number of parallel processes&nbsp;$\nu$ above which no further runtime reduction can be achieved.
 In summary, when battling an exponential growth of the search space size with a sub-linear gain in speed, we will hit certain limits, which may only be surpassed by qualitatively better algorithms.
+
+
+#### Indirect Representations
+
+In several application areas, we can try to speed up the search by reducing the size of the search space.
+The idea is to define a small search space&nbsp;$\searchSpace$ which is translated by a function&nbsp;$\encoding:\searchSpace\mapsto\solutionSpace$ to a much larger solution space&nbsp;$\solutionSpace$, i.e., $|\searchSpace|\ll|\solutionSpace|$&nbsp;[@BK1999TWTGDACOEFAEDP; @D2009WAWDINGADS].
+
+The first group of indirect representations uses so-called *generative mappings* assume some underlying structure, usually forms of symmetry, in&nbsp;$\solutionSpace$&nbsp;[@DAS2007ANGEFENNSAOG; @RCON1998GPGE].
+When trying to optimize, e.g., the profile of a tire, it makes sense to assume that it will by symmetrically repeated over the whole tire.
+Most houses, bridges, trains, car frames, or even plants are symmetric, too.
+Many physical or chemical processes exhibit symmetries towards the surrounding system or vessel as well.
+Representing both sides of a symmetric solution separately would be a form of redundancy.
+If a part of a structure can be repeated, rotated, scaled, or copied to obtain "the whole", then we only need to represent this part.
+Of course, there might be asymmetric tire profiles or oddly-shaped bridges which could perform even better and which we would then be unable to discover.
+Yet, the gain in optimization speed may make up for this potential loss.
+
+If there are two decision variables $\arrayIndex{\sespel}{1}$ and $\arrayIndex{\sespel}{2}$ and, usually, $\arrayIndex{\sespel}{2}\approx-\arrayIndex{\sespel}{1}$, for example, we could reduce the number of decision variables by one by always setting&nbsp;$\arrayIndex{\sespel}{2}=-\arrayIndex{\sespel}{1}$.
+Of course, we then cannot investigate solutions where $\arrayIndex{\sespel}{2}\neq-\arrayIndex{\sespel}{1}$, so we may lose some generality.
+
+Based on these symmetries, indirect representations create a "compressed" version&nbsp;$\searchSpace$ of&nbsp;$\solutionSpace$ of a much smaller size&nbsp;$|\searchSpace|\ll|\solutionSpace|$.
+The search then takes place in this compressed search space and thus only needs to consider much fewer possible solutions.
+If the assumptions about the structure of the search space is correct, then we will lose only very little solution quality.
+
+A second form of indirect representations is called *ontogenic representation* or *developmental mappings*&nbsp;[@DWT2012ASOSRFEOOGS; @D2009WAWDINGADS; @EL2007DBELOSEI].
+They are similar to generative mapping in that the search space is smaller than the solution space.
+However, their representational mappings are more complex and often iteratively transform an initial candidate solution with feedback from simulations.
+Assume that we want to optimize a metal structure composed of hundreds of beams.
+Instead of encoding the diameter of each beam, we encode a neural network that tells us how the diameter of a beam should be changed based on the stress on it.
+Then, some initial truss structure is simulated several times.
+After each simulation, the diameters of the beams are updated according to the neural network, which is fed with the stress computed in the simulation.
+Here, the search space encodes the weights of the neural network&nbsp;$\searchSpace$ while the solution space&nbsp;$\solutionSpace$ represents the diameters of the beams. 
+Notice that the size of&nbsp;$\searchSpace$ is unrelated to the size of&nbsp;$\solutionSpace$, i.e., could be the same for 100 or for 1000 beam structures.
+
+
+#### Exploiting Separability
+
+Sometimes, some decision variables may be unrelated to each other.
+If this information can be discovered, the groups of independent decision variables can be optimized separately.
+This will then be faster.
 
 
 ### Summary
