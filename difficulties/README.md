@@ -10,3 +10,5 @@ It is natural to ask *Why is optimization difficult?*&nbsp;[@WZCN2009WIOD; @WCT2
 
 \rel.input{instanceSize/README.md}
 \rel.input{prematureConvergence/README.md}
+\rel.input{ruggedness/README.md}
+\rel.input{deceptiveness/README.md}
