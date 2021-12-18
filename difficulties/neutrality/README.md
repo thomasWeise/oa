@@ -14,7 +14,7 @@ From the perspective of an optimization process, exploring the neighborhood of a
 If half of the candidate solutions have the same objective value, then every second search step cannot lead to an improvement and, for most algorithms, does not yield useful information.
 This will slow down the search.
 
-\definition{dev}{evolvability}{The *evolvability* of an optimization process in its current state defines how likely the search operations will lead to candidate solutions with new (and eventually, better) objectives values.}
+\definition{def}{evolvability}{The *evolvability* of an optimization process in its current state defines how likely the search operations will lead to candidate solutions with new (and eventually, better) objectives values.}
 
 While there are various slightly differing definitions of evolvability both in optimization and evolutionary biology (see&nbsp;[@H2010EAROEIEC]), they all condense to the ability to eventually produce better offspring.
 Researchers in the late 1990s and early 2000s hoped that *adding* neutrality to the representation could increase the evolvability in an optimization process and may hence lead to better performance&nbsp;[@B1998RANTNKPFOFL; @S1999GRDOPFEA; @TI2002NANFSA].
