@@ -13,3 +13,4 @@ It is natural to ask *Why is optimization difficult?*&nbsp;[@WZCN2009WIOD; @WCT2
 \rel.input{ruggedness/README.md}
 \rel.input{deceptiveness/README.md}
 \rel.input{neutrality/README.md}
+\rel.input{epistasis/README.md}
