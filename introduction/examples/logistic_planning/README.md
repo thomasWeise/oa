@@ -25,6 +25,6 @@ And it should do so within a limited, feasible time.
 \rel.figure{tsp_china}{A Traveling Salesperson Problem (TSP) through eleven cities in China.}{tsp_china.svgz}{width=55%}
 
 Of course, there is a wide variety of possible logistics planning tasks.
-Besides our real-world example above, a classical task is the Traveling Salesperson Problem (TSP)&nbsp;[@ABCC2006TTSPACS; @LLKS1985TTSPAGTOCO; @GP2002TTSPAIV], where the goal is to find the shortest round-trip tour through$n$&nbsp;cities, as sketched in [@fig:tsp_china].
+Besides our real-world example above, a classical task is the Traveling Salesperson Problem (TSP)&nbsp;[@ABCC2006TTSPACS; @LLKS1985TTSPAGTOCO; @GP2002TTSPAIV], where the goal is to find the shortest round-trip tour through $n$&nbsp;cities, as sketched in [@fig:tsp_china].
 Many other scenarios can be modeled as such logistics questions, too:
 If a robot arm needs to several drill holes into a circuit board, finding the shortest tour means solving a TSP and will speed up the production process, for instance&nbsp;[@GJR1991OCOPADMACS].
