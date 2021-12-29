@@ -35,7 +35,7 @@ The algorithm has prematurely converged.
 
 What can we do to prevent premature convergence?
 Actually, we already learned a wide set of techniques!
-Many of them boil down to balancing exploitation and exploration, as already discovered back in [@sec:ea:exploration:exploitation].
+Many of them boil down to balancing exploitation and exploration.
 
 
 #### Restarts
