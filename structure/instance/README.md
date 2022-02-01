@@ -73,15 +73,18 @@ In order to keep the example and analysis simple, we will focus on only eight in
 
 1. Instance `abz8` by Adams et&nbsp;al.&nbsp;[@ABZ1988TSBPFJSS] has 20&nbsp;jobs and 15&nbsp;machines.
    The processing times of its operations were chosen from the interval&nbsp;11\dots40.
-2. Instance `dmu40` by Demirkol et&nbsp;al.&nbsp;[@DMU1998BFSSP] has 50&nbsp;jobs and 20&nbsp;machines.
+2. Instance `dmu73` by Demirkol et&nbsp;al.&nbsp;[@DMU1998BFSSP] has 50&nbsp;jobs and 15&nbsp;machines.
    Its  processing times were chosen from the interval&nbsp;1\dots200.
-3. Instance `ft06` by Fisher and Thompson&nbsp;[@FT1963PLCOLJSSR] with 6&nbsp;jobs and 6&nbsp; machines is the smallest of the well-known benchmark instances.
-   The processing times of its operations were chosen from the interval&nbsp;1\dots10.
-4. Instance `la09` by Lawrence&nbsp;[@L1998RCPSAEIOHSTS] has 15&nbsp;jobs and 5&nbsp;machines.
+   This instance is structured such that first, the jobs first need to pass one (randomly chosen) half of the machines and then the other.
+3. Instance `ft10` by Fisher and Thompson&nbsp;[@FT1963PLCOLJSSR] has 10&nbsp;jobs and 10&nbsp; machines.
+   The processing times of its operations were chosen from the interval&nbsp;1\dots99.
+   To simulate practical JSSP instances, machines with lower indices receive early operations and machines with higher indices get operations with higher indices assigned to them.
+4. Instance `la05` by Lawrence&nbsp;[@L1998RCPSAEIOHSTS] has 10&nbsp;jobs and 5&nbsp;machines.
    Its processing times are from&nbsp;5\dots99.
-5. Instance `swv18` by Storer et&nbsp;al.&nbsp;[@SWV1992NSSFSPWATJSS] has 50&nbsp;jobs and 10&nbsp;machines.
+5. Instance `swv14` by Storer et&nbsp;al.&nbsp;[@SWV1992NSSFSPWATJSS] has 50&nbsp;jobs and 10&nbsp;machines.
    Its processing times are from the interval&nbsp;1\dots100.
-6. Instance `ta54` by Taillard&nbsp;[@T199BFBSP] has 50&nbsp;jobs and 15&nbsp;machines.
+   Like in the case of `dmu73`, the jobs first need to pass one (randomly chosen) half of the machines and then the other.
+6. Instance `ta65` by Taillard&nbsp;[@T199BFBSP] has 50&nbsp;jobs and 20&nbsp;machines.
    Its processing times are from the interval&nbsp;1\dots99.
 7. Instance `ta79` by Taillard&nbsp;[@T199BFBSP] with 100&nbsp;jobs and 20&nbsp;machines.
    It is one of the largest of the well-known benchmark instances.
