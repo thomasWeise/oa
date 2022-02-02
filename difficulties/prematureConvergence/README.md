@@ -45,7 +45,7 @@ This can help us to exploit the variance in the end solution quality, but whethe
 Assume that we have an objective function with $s$&nbsp;optima and that one of which is the global optimum.
 Further assume that the basins of attraction of all optima have the same size and are uniformly distributed over the search space.
 One would then expect that we need to restart an hill climber about $s$&nbsp;times in average to discover the global optimum.
-Unfortunately, there are problems where the number of optima grows exponentially with the dimension of the search space&nbsp;[@FHRA2009RPBBOB2POTNF], so restarts alone will often not help us to discover the global optimum.
+Unfortunately, there are problems where the number of optima grows exponentially with the dimension of the search space&nbsp;[@HFRA2009RPBBOB2NFD], so restarts alone will often not help us to discover the global optimum.
 
 
 #### Search Operator Design

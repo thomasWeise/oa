@@ -111,25 +111,23 @@ We know no solution can be better than this, but we do not know whether a soluti
 However, if our algorithms produce solutions with a quality close to&nbsp;$\lowerBound(\objf)$, we know that we are doing well.
 Also, if we would actually find a solution with that makespan, then we would know that we have perfectly solved the problem.
 
-
 |name|$\jsspJobs$|$\jsspMachines$|$\lowerBound(\objf)$|$\lowerBound(\objf)^{\star}$|source for&nbsp;$\lowerBound(\objf)^{\star}$|
 |:--|--:|--:|--:|--:|:--|
 |`demo`|5|4|180|180|[@eq:jsspLowerBound]|
-|**`abz8`**|15|20|566|648|[@VLS2015FDSFCBS]|
-|`dmu40`|20|50|5577|5577|[@DMU1996BFSSP]|
-|`ft06`|6|6|52|55|[@FTM1971AIEAFTMSP]|
-|`la09`|5|15|951|951|[@ABZ1988TSBPFJSS]|
-|`swv18`|10|50|2852|2852|[@SWV1992NSSFSPWATJSS]|
-|`ta54`|15|50|2813|2839|[@T199BFBSP]|
-|`ta79`|20|100|5358|5358|[@T199BFBSP]|
-|**`yn2`**|20|20|732|870|[@BB2001SOBIFTJSPBPHTA]|
+**`abz8`**|20|15|566|648|[@VLS2015FDSFCBS]|
+**`dmu73`**|50|15|5935|6001|[@GL2010ETSMBRSFTJSSP]|
+`ft10`|10|10|796|930|[@CP1989AAFSTJSP]|
+`la05`|10|5|593|593|[@ABZ1988TSBPFJSS]|
+`swv14`|50|10|2968|2968|[@eq:jsspLowerBound]|
+`ta65`|50|20|2725|2725|[@eq:jsspLowerBound]|
+`ta79`|100|20|5358|5358|[@eq:jsspLowerBound]|
+**`yn4`**|20|20|818|929|[@VLS2015FDSFCBS]|
 
 : The lower bounds&nbsp;$\lowerBound{\objf}$ for the makespan of the optimal solutions for our example problems. For some instances, research literature ([@W2019JRDAIOTJSSP], last column) provides better (i.e., higher) lower bounds&nbsp;$\lowerBound(\objf)^{\star}$ than our algorithm in [@lst:jssp_makespan_lb]. {#tbl:jsspLowerBoundsTable}
 
-
 The lower bounds for the makespans of our example problems are illustrated in [@tbl:jsspLowerBoundsTable].
-Only for the two instances `abz8` and `yn2`, no solutions have been found yet that have a makespan equal to the best available lower bound.
-This means that these two problems have not yet been solved to optimality.
+At the time of this writing, there are three instances (`abz8`, `dmu73`, and `yn4`) in our benchmark set for which no solutions have been found yet whose makespan equals the best available lower bound.
+This means that these three problems may have not yet been solved to optimality.
 In the table, we also provide better, i.e., higher lower bounds&nbsp;$\lowerBound(\objf)^{\star}$ that are available for some instances.
 We took these from our meta-study&nbsp;[@W2019JRDAIOTJSSP], which aggregates many results from different papers and existing studies.
 

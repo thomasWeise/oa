@@ -69,23 +69,26 @@ And so on.
 
 If we wanted to create a Python class to represent the complete information from a Gantt diagram, it could look like [@lst:jssp_gantt].
 An instance of our `Gantt` class holds a reference to the JSSP instance (see [lst:jssp_instance]).
-Furthermore, it holds a three dimensional array `times`, which has one row for each of the $\jsspJobs$&nbsp;jobs.
-Each job-row has one column for each of the $\jsspMachines$&nbsp;operations of the job (there is one operation for each of the $\jsspMachines$&nbsp;machines).
+Furthermore, it holds a three dimensional array `times`, which has one row for each of the $\jsspMachines$&nbsp;machines.
+Each machine will process one operation of each job.
+Therefore, each machine-row has one column for each of the $\jsspJobs$&nbsp;jobs.
 Each of these columns, in turn, stores the start and the end time of the operation of that job on this machine.
 
 \git.code{mp}{jssp_gantt}{Excerpt from a Python class for representing a Gantt chart, i.e., the data of a candidate solution to a JSSP.}{moptipy/examples/jssp/gantt.py}{}{book}{doc,hints}
 
 The `times` for the `Gantt` instance corresponding to [@fig:gantt_demo_without_makespan] would look as follows:
-For job&nbsp;0 and operation&nbsp;0, it would hold `[0, 10]` since this operation indeed takes place during the first 10&nbsp; time units of the schedule.
-For operation&nbsp;1 of the job (which is executed on machine&nbsp;1) it holds `[70, 90]`, for operation&nbsp;2 (on machine&nbsp;2), we get `[160,180]`, for operation&nbsp;3 (on machine&nbsp;3), we find `[180,220]`, and for operation&nbsp;4 (which is the last operation and takes place on machine&nbsp;4), we get `[220,230]`.
+The first entry on machine&nbsp;0, is for job&nbsp;0.
+It holds the values `[0, 10]`, since the operation of jobs&bsp;0 takes place during the first 10&nbsp; time units of the schedule.
+Then the entry `[70, 90]` for job&nbsp;1 follows, indicating that this job is processed for the 20&nbsp;time units starting at time index&nbsp;70 at machine&nbsp;0.
+The third entry, `[150, 160]` is for job&nbsp;2, which arrives at the machine at time unit&nbsp;150 and is processed for 10&nbsp;time units.
+The fourth and last entry is for job&nbsp;3.
+Its values `[95, 115]` show that it is processed by the machine before job&nbsp;2.
+Here we see that the data structure holds the entries sorted by job, not by time.  
 
 \rel.code{jssp_example_solution_times}{The contents of the `times` array of an instance of `Gantt` (see [lst:jssp_gantt]) representing the solution illustrated in [@fig:gantt_demo_without_makespan].}{jssp_example_solution_times.py}{}{}{format}
 
-More interesting are the contents for job&nbsp;2.
-Its first operation will be executed on machine&nbsp;2, where it can actually start immediately.
-This is signified by its third component array having values `[0, 30]`.
-It will arrive at machine&nbsp;0 much later, after having passed through all other machines.
-Its values for the operation on this machine, which come first in its component array, are `[150, 160]`.
+The second row is for machine&nbsp;1.
+Its entries `[70, 90]` (job&nbsp;0), `[50, 70]` (job&nbsp;1), `[30, 50]` (job&nbsp;2), and `[115, 130]` (job&nbsp;3) represent the sequence of operations we observed in [@fig:gantt_demo_without_makespan]: job&nbsp;2 is first, followed by job&nbsp;1, job&nbsp;0, and, finally, by job&nbsp;3, which starts after 115&nbsp;time units. 
 The complete array contents are illustrated in [@lst:jssp_example_solution_times].
 
 This way to represent Gantt charts as data structures is easy to read, understand, and visualize.
