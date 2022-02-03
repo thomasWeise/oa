@@ -115,9 +115,10 @@ Also, if we would actually find a solution with that makespan, then we would kno
 |:--|--:|--:|--:|--:|:--|
 |`demo`|5|4|180|180|[@eq:jsspLowerBound]|
 **`abz8`**|20|15|566|648|[@VLS2015FDSFCBS]|
-**`dmu73`**|50|15|5935|6001|[@GL2010ETSMBRSFTJSSP]|
-`ft10`|10|10|796|930|[@CP1989AAFSTJSP]|
-`la05`|10|5|593|593|[@ABZ1988TSBPFJSS]|
+**`dmu67`**|40|20|5454|5589|[@GL2010ETSMBRSFTJSSP]|
+**`dmu72`**|50|15|6216|6395|[@GL2010ETSMBRSFTJSSP]|
+`la38`|15|15|943|1196|[@VAL1996JSSBLS]|
+`orb06`|10|10|930|1010|[@JM1999DJSSPPAF]
 `swv14`|50|10|2968|2968|[@eq:jsspLowerBound]|
 `ta65`|50|20|2725|2725|[@eq:jsspLowerBound]|
 `ta79`|100|20|5358|5358|[@eq:jsspLowerBound]|
@@ -126,8 +127,8 @@ Also, if we would actually find a solution with that makespan, then we would kno
 : The lower bounds&nbsp;$\lowerBound{\objf}$ for the makespan of the optimal solutions for our example problems. For some instances, research literature ([@W2019JRDAIOTJSSP], last column) provides better (i.e., higher) lower bounds&nbsp;$\lowerBound(\objf)^{\star}$ than our algorithm in [@lst:jssp_makespan_lb]. {#tbl:jsspLowerBoundsTable}
 
 The lower bounds for the makespans of our example problems are illustrated in [@tbl:jsspLowerBoundsTable].
-At the time of this writing, there are three instances (`abz8`, `dmu73`, and `yn4`) in our benchmark set for which no solutions have been found yet whose makespan equals the best available lower bound.
-This means that these three problems may have not yet been solved to optimality.
+At the time of this writing, there are four instances (`abz8`, `dmu67`, `dmu72`, and `yn4`) in our benchmark set for which no solutions have been found yet whose makespan equals the best available lower bound.
+This either means that these four problems have not yet been solved to optimality or that their optimal solution has already been found but has a makespan worse than the lower bound.
 In the table, we also provide better, i.e., higher lower bounds&nbsp;$\lowerBound(\objf)^{\star}$ that are available for some instances.
 We took these from our meta-study&nbsp;[@W2019JRDAIOTJSSP], which aggregates many results from different papers and existing studies.
 

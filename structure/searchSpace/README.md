@@ -230,14 +230,14 @@ $$ \left|\searchSpace\right| = \frac{\left(\jsspMachines*\jsspJobs\right)!}{ \le
 ||5|3|1'728'000|168'168'000|
 ||5|4|207'360'000|305'540'235'000|
 ||5|5|24'883'200'000|$\approx$&nbsp;6.234*10^14^|
-|`la05`|10|5|$\approx$&nbsp;6.292*10^32^|$\approx$&nbsp;4.912*10^43^|
-|`ft10`|10|10|$\approx$&nbsp;3.959*10^65^|$\approx$&nbsp;2.357*10^92^|
+|`orb06`|10|10|$\approx$&nbsp;3.959*10^65^|$\approx$&nbsp;2.357*10^92^|
+|`la38`|15|15|$\approx$&nbsp;5.591*10^181^|$\approx$&nbsp;2.252*10^251^|
 |`abz8`|20|15|$\approx$&nbsp;6.193*10^275^|$\approx$&nbsp;1.432*10^372^|
 |`yn4`|20|20|$\approx$&nbsp;5.278*10^367^|$\approx$&nbsp;1.213*10^501^|
 |`swv14`|50|10|$\approx$&nbsp;6.772*10^644^|$\approx$&nbsp;1.254*10^806^|
-|`dmu73`|50|15|$\approx$&nbsp;1.762*10^967^|$\approx$&nbsp;3.862*10^1'226^|
-|`ta65`|50|20|$\approx$&nbsp;4.587*10^1'289^|$\approx$&nbsp;1.988*10^1'648^|
-|`ta79`|100|20|$\approx$&nbsp;2.512*10^3'159^|$\approx$&nbsp;8.094*10^3'896^|
+|`dmu72`|50|15|$\approx$&nbsp;1.762*10^967^|$\approx$&nbsp;3.862*10^1'226^|
+|`dmu67`|40|20|$\approx$&nbsp;1.710*10^958^|$\approx$&nbsp;2.768*10^1'241^|
+|`ta70`|50|20|$\approx$&nbsp;4.587*10^1'289^|$\approx$&nbsp;1.988*10^1'648^|
 
 : The sizes&nbsp;$\left|\searchSpace\right|$ and&nbsp;$\left|\solutionSpace\right|$ of the search and solution spaces for selected values of the number&nbsp;$\jsspJobs$ of jobs and the number&nbsp;$\jsspMachines$ of machines of an JSSP instance&nbsp;$\instance$. (compare with [@fig:function_growth] and with the size&nbsp;$\left|\solutionSpace\right|$ of the solution space) {#tbl:jsspSearchSpaceTable}
 

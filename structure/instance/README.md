@@ -68,28 +68,27 @@ We will try to solve JSSP instances obtained from these collections.
 The goal of this book is that you can play around with the algorithms and replicate our experiments.
 Therefore, we cannot use all 242&nbsp;instances from the above sets, because then the experiments would take too long.
 We have to pick a small representative subset of instances.
+We therefore first removed 67&nbsp;instances that are relatively easy from the instance set and then tried pick problems with different scales and from different sources.  
 They will serve as illustrative example of how to approach optimization problems.
 In order to keep the example and analysis simple, we will focus on only eight instances, namely
 
 1. Instance `abz8` by Adams et&nbsp;al.&nbsp;[@ABZ1988TSBPFJSS] has 20&nbsp;jobs and 15&nbsp;machines.
    The processing times of its operations were chosen from the interval&nbsp;11\dots40.
-2. Instance `dmu73` by Demirkol et&nbsp;al.&nbsp;[@DMU1998BFSSP] has 50&nbsp;jobs and 15&nbsp;machines.
-   Its  processing times were chosen from the interval&nbsp;1\dots200.
-   This instance is structured such that first, the jobs first need to pass one (randomly chosen) half of the machines and then the other.
-3. Instance `ft10` by Fisher and Thompson&nbsp;[@FT1963PLCOLJSSR] has 10&nbsp;jobs and 10&nbsp; machines.
-   The processing times of its operations were chosen from the interval&nbsp;1\dots99.
-   To simulate practical JSSP instances, machines with lower indices receive early operations and machines with higher indices get operations with higher indices assigned to them.
-4. Instance `la05` by Lawrence&nbsp;[@L1998RCPSAEIOHSTS] has 10&nbsp;jobs and 5&nbsp;machines.
+2. Instance `dmu67` by Demirkol et&nbsp;al.&nbsp;[@DMU1998BFSSP] has 40&nbsp;jobs and 20&nbsp;machines.
+   Its processing times were chosen from the interval&nbsp;1\dots200.
+   This instance is structured such that the jobs first need to pass one (randomly chosen) half of the machines and then the other.
+3. Instance `dmu72` from the same group has the same structure as `dmu67`, but 50&nbsp;jobs and 15&nbsp;machines.
+4. Instance `la38` by Lawrence&nbsp;[@L1998RCPSAEIOHSTS] has 15&nbsp;jobs and 15&nbsp;machines.
    Its processing times are from&nbsp;5\dots99.
-5. Instance `swv14` by Storer et&nbsp;al.&nbsp;[@SWV1992NSSFSPWATJSS] has 50&nbsp;jobs and 10&nbsp;machines.
+5. Instance `orb06` by Applegate and Cook&nbsp;[@AC1991ACSOTJSSP] has 10&nbsp;jobs and 10&nbsp;machines.
+   It was generated in 1986 as part of a set of "specially generated tougher problems"&nbsp;[@JM1999DJSSPPAF; @H2002PJSSP].
+   Nevertheless, it will be the smallest instance in our experiments.
+6. Instance `swv14` by Storer et&nbsp;al.&nbsp;[@SWV1992NSSFSPWATJSS] has 50&nbsp;jobs and 10&nbsp;machines.
    Its processing times are from the interval&nbsp;1\dots100.
-   Like in the case of `dmu73`, the jobs first need to pass one (randomly chosen) half of the machines and then the other.
-6. Instance `ta65` by Taillard&nbsp;[@T199BFBSP] has 50&nbsp;jobs and 20&nbsp;machines.
+   Like in the case of `dmu72`, the jobs first need to pass one (randomly chosen) half of the machines and then the other.
+7. Instance `ta70` by Taillard&nbsp;[@T199BFBSP] has 50&nbsp;jobs and 20&nbsp;machines.
    Its processing times are from the interval&nbsp;1\dots99.
-7. Instance `ta79` by Taillard&nbsp;[@T199BFBSP] with 100&nbsp;jobs and 20&nbsp;machines.
-   It is one of the largest of the well-known benchmark instances.
-   Its processing times are from the interval&nbsp;1\dots99.
-8. Instance `yn2` by Yamada and Nakano&nbsp;[@YN1992AGAATLSJSI] has 20&nbsp;jobs and 20&nbsp;machines.
+8. Instance `yn4` by Yamada and Nakano&nbsp;[@YN1992AGAATLSJSI] has 20&nbsp;jobs and 20&nbsp;machines.
    Its processing times are from the interval&nbsp;10\dots50.
 
 The raw data of these instances is part of the [`moptipy`](\repo{mp}{repo.url}) Python package with the sources for our experiments as resource <\repo{mp}{repo.url}/blob/main/moptipy/examples/jssp/instances.txt>.

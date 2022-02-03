@@ -194,14 +194,14 @@ An optimization algorithm which might sometimes return infeasible solutions will
 ||5|3|91'461|1'728'000|
 ||5|4||207'360'000|
 ||5|5||24'883'200'000|
-|`la05`|10|5||$\approx$&nbsp;6.292*10^32^|
-|`ft10`|10|10||$\approx$&nbsp;3.959*10^65^|
+|`orb06`|10|10||$\approx$&nbsp;3.959*10^65^|
+|`la38`|15|15||$\approx$&nbsp;5.591*10^181^|
 |`abz8`|20|15||$\approx$&nbsp;6.193*10^275^|
 |`yn4`|20|20||$\approx$&nbsp;5.278*10^367^|
 |`swv14`|50|10||$\approx$&nbsp;6.772*10^644^|
-|`dmu73`|50|15||$\approx$&nbsp;1.762*10^967^|
-|`ta65`|50|20||$\approx$&nbsp;4.587*10^1'289^|
-|`ta79`|100|20||$\approx$&nbsp;2.512*10^3'159^|
+|`dmu67`|40|20||$\approx$&nbsp;1.710*10^958^|
+|`dmu72`|50|15||$\approx$&nbsp;1.762*10^967^|
+|`ta70`|50|20||$\approx$&nbsp;4.587*10^1'289^|
 
 : The size&nbsp;$\left|\solutionSpace\right|$ of the solution space&nbsp;$\solutionSpace$ (without schedules that stall uselessly) for selected values of the number&nbsp;$\jsspJobs$ of jobs and the number&nbsp;$\jsspMachines$ of machines of an JSSP instance&nbsp;$\instance$ (later compare also with [@fig:function_growth]). {#tbl:jsspSolutionSpaceTable}
 
@@ -209,10 +209,10 @@ We illustrate some examples for the number&nbsp;$\left|\solutionSpace\right|$ of
 Since we use instances for testing our JSSP algorithms, we have added their settings as well and listed them in column "name".
 Of course, there are infinitely many JSSP instances for a given setting of&nbsp;$\jsspJobs$ and&nbsp;$\jsspMachines$ and our instances always only mark single examples for them.
 
-We find that even small problems with $\jsspMachines=5$ machines and $\jsspJobs=5$ jobs already have trillions of possible solutions.
+We find that even small problems with just $\jsspMachines=5$ machines and $\jsspJobs=5$ jobs have billions of possible solutions.
 The eight more realistic problem instances which we will try to solve here already have more solutions that what we could ever enumerate, list, or store with any conceivable hardware or computer.
-For the smallest of them, `la05`, which has ten jobs and five machines, we already could theoretically construct 629'238'322'197'897'601'351'680'000'000'000 $\approx$&nbsp;6.292\*10^32^ possible Gantt charts (some of which may not be feasible).
-The biggest of them, `ta79`, has 100&nbsp;jobs and 20&nbsp;machines, which means that the number of theoretically possible solutions is about 2.512\*10^3'159^, a number that would easily fill a whole single sheet of paper if written down&hellip;
+For the smallest of them, `orb06`, which has ten jobs and ten machines, we already could theoretically construct 3.959*10^65^ possible Gantt charts (some of which may not be feasible).
+The biggest of them, `ta70`, has 50&nbsp;jobs and 20&nbsp;machines, which means that the number of theoretically possible solutions is about 4.587*10^1'289^, a number that would easily fill a whole single sheet of paper if written down&hellip;
 From this, it becomes immediately clear:
 We cannot simply test all possible solutions and pick the best one.
 We will need some more sophisticated algorithms to solve these problems.
