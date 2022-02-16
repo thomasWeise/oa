@@ -59,13 +59,13 @@ Being surjective is therefore a good feature for&nbsp;$\encoding$.
 
 ### A Programmer's Perspective
 
-In [lst:Space], we already have defined a simple API to provide common operations for (solution) spaces.
+In [@lst:Space], we already have defined a simple API to provide common operations for (solution) spaces.
 We can reuse this very same API for search spaces too.
 Additionally, we need a function that can convert from points in the search space to candidate solutions. 
 
-\git.code{mp}{Encoding}{An abstract base class for encodings.}{moptipy/api/encoding.py}{}{book}{doc,hints}
+\git.code{mp}{Encoding}{An base class for encodings.}{moptipy/api/encoding.py}{}{book}{doc,hints}
 
-The abstract class given in [@lst:Encoding] provides a function `map` which maps one point&nbsp;`x` in the search space to a candidate solution instance&nbsp;`y` of the solution space.
+The class given in [@lst:Encoding] provides the blueprint for a function `map` which maps one point&nbsp;`x` in the search space to a candidate solution instance&nbsp;`y` of the solution space.
 This class corresponds to the general definition $\encoding:\searchSpace\mapsto\solutionSpace$ of the encoding.
 An implementation of `map` will overwrite whatever contents were stored in object&nbsp;`y` in the process, i.e., we assume the objects&nbsp;`y` can be modified.
 
@@ -188,7 +188,7 @@ As a result, it has been discovered by several researchers independently, the ea
 But what do we gain by using this search space and encoding?
 First, well, we now have a very simple data structure&nbsp;$\searchSpace$ to represent our candidate solutions.
 Second, we also have very simple rules for validating a point&nbsp;$\sespel$ in the search space:
-If it contains the numbers&nbsp;$0\dots (\jsspJobs-1)$ each exactly&nbsp;$\jsspMachines$ times, it represents a feasible candidate solution.
+If it contains the numbers&nbsp;$\intRange{0}{(\jsspJobs-1)}$ each exactly&nbsp;$\jsspMachines$ times, it represents a feasible candidate solution.
 
 Third, the candidate solution corresponding to a valid point from the search space will always be *feasible*&nbsp;[@B1995AGPATJSSWGA].
 The mapping&nbsp;$\encoding$ will ensure that the order of the operations per job is always observed.

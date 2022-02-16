@@ -25,9 +25,9 @@ It could be a list, a [numpy array](https://numpy.org/doc/stable/reference/gener
 Earlier, I said that we will do a lot of hands-on learning in this optimization book.
 We will look at things not *only* from the perspective of an algorithm scientist, but also from the perspective of a *programmer*.
 If a programmer is supposed to build algorithms that can deal with arbitrary data structures, she will first think about what kind of operations she will definitely need to perform with them.
-In [lst:Space], we give an excerpt example of such a "space API."
+In [@lst:Space], we give an excerpt example of such a "space API."
 
-\git.code{mp}{Space}{An excerpt of an abstract base class for implementing space handlers.}{moptipy/api/space.py}{}{book}{doc}
+\git.code{mp}{Space}{An excerpt of an base class for implementing space handlers.}{moptipy/api/space.py}{}{book}{format}
 
 We will want to store the solutions we create in a file.
 Ideally in a text file, because then a human can read it.
@@ -68,40 +68,40 @@ It then processes jobs&nbsp;1 and&nbsp;0 consecutively and finishes with job&nbs
 And so on.
 
 If we wanted to create a Python class to represent the complete information from a Gantt diagram, it could look like [@lst:jssp_gantt].
-An instance of our `Gantt` class holds a reference to the JSSP instance (see [lst:jssp_instance]).
-Furthermore, it holds a three dimensional array `times`, which has one row for each of the $\jsspMachines$&nbsp;machines.
+Here, we again just subclass [`numpy.ndarray`](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html) to store all data as three-dimensional array.
+The array has one row for each of the $\jsspMachines$&nbsp;machines.
 Each machine will process one operation of each job.
-Therefore, each machine-row has one column for each of the $\jsspJobs$&nbsp;jobs.
-Each of these columns, in turn, stores the start and the end time of the operation of that job on this machine.
+Therefore, there will be with one column for each of the $\jsspJobs$&nbsp;operations to be executed on the machine.
+Each cell then holds the job&nbsp;ID, the start time, and the end time of the operation.
+Additionally, an instance of our `Gantt` class holds a reference to the JSSP instance (see [@lst:jssp_instance]).
 
-\git.code{mp}{jssp_gantt}{Excerpt from a Python class for representing a Gantt chart, i.e., the data of a candidate solution to a JSSP.}{moptipy/examples/jssp/gantt.py}{}{book}{doc,hints}
+\git.code{mp}{jssp_gantt}{Excerpt from a Python class for representing a Gantt chart, i.e., the data of a candidate solution to a JSSP: a subclass of [`numpy.ndarray`](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html) to hold the data and a pointer to the JSSP instance.}{moptipy/examples/jssp/gantt.py}{}{book}{doc,hints,comments}
 
-The `times` for the `Gantt` instance corresponding to [@fig:gantt_demo_without_makespan] would look as follows:
-The first entry on machine&nbsp;0, is for job&nbsp;0.
-It holds the values `[0, 10]`, since the operation of jobs&bsp;0 takes place during the first 10&nbsp; time units of the schedule.
-Then the entry `[70, 90]` for job&nbsp;1 follows, indicating that this job is processed for the 20&nbsp;time units starting at time index&nbsp;70 at machine&nbsp;0.
-The third entry, `[150, 160]` is for job&nbsp;2, which arrives at the machine at time unit&nbsp;150 and is processed for 10&nbsp;time units.
-The fourth and last entry is for job&nbsp;3.
-Its values `[95, 115]` show that it is processed by the machine before job&nbsp;2.
-Here we see that the data structure holds the entries sorted by job, not by time.  
-
-\rel.code{jssp_example_solution_times}{The contents of the `times` array of an instance of `Gantt` (see [lst:jssp_gantt]) representing the solution illustrated in [@fig:gantt_demo_without_makespan].}{jssp_example_solution_times.py}{}{}{format}
+The first row `Gantt` array corresponding to [@fig:gantt_demo_without_makespan] would look as follows:
+Its first element are the values `[0, 0, 10]`, since the operation of jobs&nbsp;0 takes place during the first 10&nbsp; time units of the schedule on this machine.
+Then the entry `[1, 70, 90]` follows, indicating that job&nbsp;1 is processed for the 20&nbsp;time units starting at time index&nbsp;70 at machine&nbsp;0.
+The third entry, `[3, 95, 115]` states that job&nbsp;3 arrives at the machine&nbsp;0 at time unit&nbsp;95 and is processed for 20&nbsp;time units until time index&nbsp;115.
+The fourth and last entry, `[2, 150, 160]` denotes that job&nbsp;2 is processed by the machine in the time window&nbsp;\intRange{156}{160}
+ 
+\rel.code{jssp_example_solution_times}{The contents of the array data of an instance of `Gantt` (see [@lst:jssp_gantt]) representing the solution illustrated in [@fig:gantt_demo_without_makespan].}{jssp_example_solution_times.py}{}{}{format}
 
 The second row is for machine&nbsp;1.
-Its entries `[70, 90]` (job&nbsp;0), `[50, 70]` (job&nbsp;1), `[30, 50]` (job&nbsp;2), and `[115, 130]` (job&nbsp;3) represent the sequence of operations we observed in [@fig:gantt_demo_without_makespan]: job&nbsp;2 is first, followed by job&nbsp;1, job&nbsp;0, and, finally, by job&nbsp;3, which starts after 115&nbsp;time units. 
+Its entries `[2,  30, 50]`, `[1, 50,  70]`, `[0,  70,  90]`, and `[3, 115, 130]` represent the sequence of operations we observed in [@fig:gantt_demo_without_makespan]:
+job&nbsp;2 is first, followed by job&nbsp;1, job&nbsp;0, and, finally, by job&nbsp;3, which starts after 115&nbsp;time units. 
 The complete array contents are illustrated in [@lst:jssp_example_solution_times].
 
 This way to represent Gantt charts as data structures is easy to read, understand, and visualize.
 Actually, we could also chose a more compact representation:
 We do not necessarily need to store the end times of the operations as well.
 We know how long each job&nbsp;$\jsspJobIndex$ needs on any machine&nbsp;$\jsspMachineIndex$ takes based on the instance data&nbsp;$\jsspOperationTime{\jsspJobIndex}{\jsspMachineIndex'}$.
+We could furthermore order the elements of each row by job and not by starting time, in which case we would not need to store the job IDs either.
 Thus, having only the start times stored would be sufficient.
 Another form of representing a solution would therefore be to just map each operation to a starting time, leading to $\jsspMachines*\jsspJobs$ integer values per candidate solution&nbsp;[@vH2016DPFRASOSOD].
-However, also storing the end times of the operations will make our life a bit easier here.
+However, also storing the job IDs end times of the operations will make our life a bit easier here.
 It allows the human operator to directly see what is going on.
 She can directly tell each machine or worker what to do and when to do it, without needing to look up any additional information from the problem instance data.
 
-\git.code{mp}{jssp_gantt_space}{Excerpt of the implementation of the `Space` API [lst:Space] for Gantt charts.}{moptipy/examples/jssp/gantt_space.py}{}{book}{doc,hints,comments}
+\git.code{mp}{jssp_gantt_space}{Excerpt of the implementation of the `Space` API [@lst:Space] for Gantt charts.}{moptipy/examples/jssp/gantt_space.py}{}{book}{doc,hints,comments}
 
 
 #### Size of the Solution Space {#sec:solutionSpace:size}

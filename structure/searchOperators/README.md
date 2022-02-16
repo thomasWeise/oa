@@ -18,11 +18,11 @@ Special cases of search operators are
 
 If we look at this again from the perspective of the programmer, we can define a few very simple API components.
 
-\git.code{mp}{op0}{An abstract base class for nullary search operators.}{moptipy/api/operators.py}{}{op0}{doc,hints}
+\git.code{mp}{op0}{An base class for nullary search operators.}{moptipy/api/operators.py}{}{op0}{doc,hints}
 
-\git.code{mp}{op1}{An abstract base class for unary search operators.}{moptipy/api/operators.py}{}{op1}{doc,hints}
+\git.code{mp}{op1}{An base class for unary search operators.}{moptipy/api/operators.py}{}{op1}{doc,hints}
 
-\git.code{mp}{op2}{An abstract base class for binary search operators.}{moptipy/api/operators.py}{}{op2}{doc,hints}
+\git.code{mp}{op2}{An base class for binary search operators.}{moptipy/api/operators.py}{}{op2}{doc,hints}
 
 Whether, which, and how such such operators are used depends on the nature of the optimization algorithms and will be discussed later on.
 

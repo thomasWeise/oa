@@ -53,7 +53,7 @@ Despite the above problems, we can apply several measures to prevent and/or find
 
 A very important tool for this purpose is unit testing&nbsp;[@P2022PUTAAOAEUTIP; @S2021LTDDAPGTWUC].
 Here, the code is divided into units, each of which can be tested separately.
-In this book, we try to approach optimization in a structured way and have defined several abstract base classes for the components of an optimization and the representation in [@sec:structure].
+In this book, we try to approach optimization in a structured way and have defined several base classes for the components of an optimization and the representation in [@sec:structure].
 An implementation of such a class can be considered as a unit.
 The classes define methods with input and output values.
 We now can write additional code that tests whether the methods behave as expected, i.e., do not violate their contract.
