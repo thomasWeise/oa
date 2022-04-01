@@ -172,9 +172,9 @@ In [@lst:jssp_encoding], we illustrate how such an encoding can be implemented.
 It basically is a function translating an [numpy integer array](https://numpy.org/doc/stable/user/basics.types.html) to a `Gantt` chart.
 We put the algorithm into a function `decode`, so that we can mark it for compilation with [numba](https://numba.pydata.org/) to improve the performance.
 
-\git.code{mp}{PermutationsWithRepetitions}{Excerpt of the implementation of the `Space` API [@lst:Space] for permutations with repetitions.}{moptipy/spaces/permutationswr.py}{}{book}{doc,hints,comments}
+\git.code{mp}{PermutationsWithRepetitions}{Excerpt of the implementation of the `Space` API [@lst:Space] for permutations with repetitions.}{moptipy/spaces/permutations.py}{}{book}{doc,hints,comments}
 
-In [@lst:PermutationsWithRepetitions], we just provide a very small excerpt of an implementation of the `Space` API for permutations with repetitions stored in [numpy arrays](https://numpy.org/doc/stable/reference/generated/numpy.array.html).
+In [@lst:PermutationsWithRepetitions], we just provide a very small excerpt of an implementation of the `Space` API for permutations of numbers stored in [numpy arrays](https://numpy.org/doc/stable/reference/generated/numpy.array.html).
 Its `create` method will always create a new array which consists of $\jsspMachines$&nbsp;repetitions of the permutation&nbsp;$0..\jsspJobs$.
 We omit the conversion to and from strings, as it can be implemented similarly as in [@lst:jssp_gantt_space].
 Validation can simply check whether each job ID occurs exactly $\jsspMachines$&nbsp;times and is thus also not printed.
@@ -215,6 +215,16 @@ Each element&nbsp;$\sespel\in\searchSpace$ is a permutation of a multiset where 
 This means that the size of the search space can be computed as given in [@eq:jssp_search_space_size].
 
 $$ \left|\searchSpace\right| = \frac{\left(\jsspMachines*\jsspJobs\right)!}{ \left(\jsspMachines!\right)^{\jsspJobs} } $$ {#eq:jssp_search_space_size}
+
+To better understand this equation, imagine the space of all permutations of the sequence $(1, 2, 3, 4)$.
+Clearly there are $4!=2*3*4=24$ such permutations.
+Now let us imagine that one number, say $3$, appears twice, e.g., we want the permutations of $(1, 2, 3, 3, 4)$.
+There are five elements now, so there are $5!=120$ possible ways to arrange them.
+However, the number $3$ appears twice and it does not matter which of the $3$s appears first, so we get $5!/2=60$ possible unique permutations.
+If we add another&nbsp;$3$, i.e., $3$ would appear three times and we have $(1, 2, 3, 3, 3, 4)$, then there would be $6!/3!=720/6=120$ possible arrangements.
+If we now add another two&nbsp;$4$s, we get $(1, 2, 3, 3, 3, 4, 4, 4)$.
+This sequence can be arranged in $8!/(3!*3!)=40320/36=120$ possible ways.
+If each one of $\jsspJobs$ different numbers appears $\jsspMachines$ times, we hence have $(\jsspJobs*\jsspMachines)/(\jsspMachines)^{\jsspJobs}$ different possible permutations &ndash; as shown in [@eq:jssp_search_space_size]. 
 
 |name|$\jsspJobs$|$\jsspMachines$|$\left|\solutionSpace\right|$|$\left|\searchSpace\right|$|
 |:--|--:|--:|--:|--:|

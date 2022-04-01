@@ -22,7 +22,7 @@ Recall that our representation ([@sec:jsspSearchSpace]) requires that each index
 We already learned how to create one such sequence, namely the constant one returned by out `Space` implementation given in [@lst:PermutationsWithRepetitions].
 All we need to do to implement the nullary search operator `Op0` (see [@lst:op0]) for the permutations with repetitions is to first copy this constant sequence into the array `dest` and then shuffle it randomly.
 
-\git.code{mp}{Op0Shuffle}{A nullary search operator for permutations with repetitions which creates random sequences.}{moptipy/operators/pwr/op0_shuffle.py}{}{book}{doc,hints,comments}
+\git.code{mp}{Op0Shuffle}{A nullary search operator for permutations with repetitions which creates random sequences.}{moptipy/operators/permutations/op0_shuffle.py}{}{book}{doc,hints,comments}
 
 This trivial implementation is illustrated in [@lst:Op0Shuffle].
 While it is not specified how the [`shuffle` method](https://numpy.org/devdocs/reference/random/generated/numpy.random.Generator.shuffle.html) of the [numpy random generator](https://numpy.org/devdocs/reference/random/generator.html) works, I assume that it will apply the Fisher-Yates shuffle algorithm&nbsp;[@FY1948STFBAAMR; @K1969SA].
