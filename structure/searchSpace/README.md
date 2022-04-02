@@ -170,7 +170,7 @@ No deadlock can occur and&nbsp;$\solspel$ must therefore be feasible.
 
 In [@lst:jssp_encoding], we illustrate how such an encoding can be implemented.
 It basically is a function translating an [numpy integer array](https://numpy.org/doc/stable/user/basics.types.html) to a `Gantt` chart.
-We put the algorithm into a function `decode`, so that we can mark it for compilation with [numba](https://numba.pydata.org/) to improve the performance.
+We put the algorithm into a function `decode`, so that we can mark it for compilation with [numba](https://numba.pydata.org/) to improve the performance, utilizing the performance tips discussed in [@sec:pythonNumba; @sec:pythonCallingMethodsAndFunctions].
 
 \git.code{mp}{PermutationsWithRepetitions}{Excerpt of the implementation of the `Space` API [@lst:Space] for permutations with repetitions.}{moptipy/spaces/permutations.py}{}{book}{doc,hints,comments}
 

@@ -11,14 +11,16 @@ The only question left for us to answer is how to "create" a point&nbsp;$\sespel
 We can then apply&nbsp;$\encoding(\sespel)$ and get a candidate solution&nbsp;$\solspel$ whose quality we can assess via&nbsp;$\objf(\solspel)$.
 Let us look at the problem as a black box ([@sec:blackbox]).
 In other words, we do not really know structures and features "make" a candidate solution good.
-Hence, we do not know how to "create" a good solution either.
+Hence, we do not know how to intentionally "create" a good solution in a targeted fashion either.
 Then the best we can do is just create the solutions randomly.
+
 
 ### Ingredient: Nullary Search Operation for the JSSP
 
-For this purpose, we need to implement the nullary search operation from [@lst:op0].
-We create a new search operator which needs no input (except the random number generator&nbsp;$\random$) and returns a point in the search space.
-Recall that our representation ([@sec:jsspSearchSpace]) requires that each index&nbsp;$\jsspJobIndex\in\intRange{0}{(\jsspJobs-1)}$ of the&nbsp;$\jsspJobs$ must occur exactly&nbsp;$\jsspMachines$ times in the integer array of length&nbsp;$\jsspMachines*\jsspJobs$, where&nbsp;$\jsspMachines$ is the number of machines in the JSSP instance.
+We can do this by implementing a so-called nullary search operation, whose blueprint was shown in [@lst:op0].
+A nullary search operator receives as input a random number generator&nbsp;$\random$ and a container to fill in a new point in the search space.
+To implement such an operator, recall that our encoding represents solutions as permutations with repetitions ([@sec:jsspSearchSpace]).
+This requires that each job index&nbsp;$\jsspJobIndex\in\intRange{0}{(\jsspJobs-1)}$ of the&nbsp;$\jsspJobs$ must occur exactly&nbsp;$\jsspMachines$ times in the integer array of length&nbsp;$\jsspMachines*\jsspJobs$, where&nbsp;$\jsspMachines$ is the number of machines in the JSSP instance.
 We already learned how to create one such sequence, namely the constant one returned by out `Space` implementation given in [@lst:PermutationsWithRepetitions].
 All we need to do to implement the nullary search operator `Op0` (see [@lst:op0]) for the permutations with repetitions is to first copy this constant sequence into the array `dest` and then shuffle it randomly.
 

@@ -9,3 +9,5 @@
 
 \rel.input{performance/README.md}
 \rel.input{difficulties/README.md}
+
+\rel.input{pythonTips/README.md}

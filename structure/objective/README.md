@@ -56,6 +56,7 @@ Our objective function&nbsp;$\objf$ is thus equivalent to the makespan and subje
 Based on our candidate solution data structure from [@lst:jssp_gantt], we can easily compute&nbsp;$\objf$.
 We simply have to look for the largest number stored in the array `times`, as this array contains the start and end times of all operations of all jobs in the chart.
 In [@lst:jssp_makespan], we implement exactly this concept in the easiest possible way.
+(For the Python aficionado: we apply the performance tricks from [@sec:pythonNumba; @sec:pythonCallingMethodsAndFunctions].)
 
 \git.code{mp}{jssp_makespan}{An implementation of the class [@lst:Objective] to represent the makepan objective function for JSSPs.}{moptipy/examples/jssp/makespan.py}{}{book}{doc,hints}
 
