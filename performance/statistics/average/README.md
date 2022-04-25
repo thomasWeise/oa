@@ -145,7 +145,7 @@ Indeed, the maybe best idea would be to consider both the mean and median value 
 This should always provide a conservative and robust outlook on algorithm performance. 
 
 
-#### The Geometric Mean and Normalized Data
+#### The Geometric Mean and Scaled Data
 
 So far, we have discussed the arithmetic mean and the median.
 
@@ -185,9 +185,9 @@ $\geomean$:   | 20.00&nbsp;s | 20.00&nbsp;s | 20.00&nbsp;s |
 Often, the measured numbers "look messier" and the relationships of the numbers are not so obvious.
 Often, we use more instances and algorithms. 
 It becomes harder to see whether and which algorithms perform different, better, worse, or equal.
-Thus, we may often want to normalize them by picking one algorithm as "standard" and dividing them by its measurements.
+Thus, we may often want to scale them by picking one algorithm as "standard" and dividing them by its measurements.
 Let's say $\algorithmStyle{A}_1$ was a well-known heuristic.
-We want to use it as baseline for comparison and normalize our data by it.
+We want to use it as baseline for comparison and scale our data by it.
 
 | | **$\algorithmStyle{A}_1$** |$\algorithmStyle{A}_2$ | $\algorithmStyle{A}_3$ |
 |--:|--:|--:|--:|
@@ -198,9 +198,9 @@ $\mean$:      | 1.00 | 1.42 | 1.67 |
 $\median$:    | 1.00 | 2.00 | 0.50 |
 $\geomean$:   | 1.00 | 1.00 | 1.00 |
 
-: The data from [@tbl:geometric_mean_example_1], but normalized based on&nbsp;$\algorithmStyle{A}_1$: The runtimes for each instance are divided by the values measured for runtimes measured for algorithm&nbsp;$\algorithmStyle{A}_1$. Now $\algorithmStyle{A}_1$ has the best and $\algorithmStyle{A}_3$ has the worst arithmetic mean, $\algorithmStyle{A}_3$ has the best and $\algorithmStyle{A}_2$ the worst median. {#tbl:geometric_mean_example_2}
+: The data from [@tbl:geometric_mean_example_1], but scaled based on&nbsp;$\algorithmStyle{A}_1$: The runtimes for each instance are divided by the values measured for runtimes measured for algorithm&nbsp;$\algorithmStyle{A}_1$. Now $\algorithmStyle{A}_1$ has the best and $\algorithmStyle{A}_3$ has the worst arithmetic mean, $\algorithmStyle{A}_3$ has the best and $\algorithmStyle{A}_2$ the worst median. {#tbl:geometric_mean_example_2}
 
-OK, so we get the [@tbl:geometric_mean_example_2] with normalized values, which allow us to make sense of the data at first glance.
+OK, so we get the [@tbl:geometric_mean_example_2] with scaled values, which allow us to make sense of the data at first glance.
 If we now compute the arithmetic mean, then algorithm&nbsp;$\algorithmStyle{A}_1$ seems best and algorithm&nbsp;$\algorithmStyle{A}_3$ looks worst.
 According to the median, however, $\algorithmStyle{A}_3$ would be best and $\algorithmStyle{A}_2$ appears to be the worst.
 Only the geometric mean still indicates that the algorithms perform the same&hellip;
@@ -215,23 +215,23 @@ $\mean$:      | 1.67 | 1.00 | 1.42 |
 $\median$:    | 0.50 | 1.00 | 2.00 |
 $\geomean$:   | 1.00 | 1.00 | 1.00 |
 
-: The data from [@tbl:geometric_mean_example_1], but normalized based on&nbsp;$\algorithmStyle{A}_2$: The runtimes for each instance are divided by the values measured for runtimes measured for algorithm&nbsp;$\algorithmStyle{A}_2$. Now $\algorithmStyle{A}_2$ has the best and $\algorithmStyle{A}_1$ has the worst arithmetic mean, $\algorithmStyle{A}_1$ has the best and $\algorithmStyle{A}_3$ the worst median. {#tbl:geometric_mean_example_3}
+: The data from [@tbl:geometric_mean_example_1], but scaled based on&nbsp;$\algorithmStyle{A}_2$: The runtimes for each instance are divided by the values measured for runtimes measured for algorithm&nbsp;$\algorithmStyle{A}_2$. Now $\algorithmStyle{A}_2$ has the best and $\algorithmStyle{A}_1$ has the worst arithmetic mean, $\algorithmStyle{A}_1$ has the best and $\algorithmStyle{A}_3$ the worst median. {#tbl:geometric_mean_example_3}
 
-If we normalize based on algorithm&nbsp;$\algorithmStyle{A}_2$ instead, we get [@tbl:geometric_mean_example_3].
+If we scaled based on algorithm&nbsp;$\algorithmStyle{A}_2$ instead, we get [@tbl:geometric_mean_example_3].
 Now, judging by the arithmetic mean, then $\algorithmStyle{A}_2$ seems to be best and $\algorithmStyle{A}_1$ looks worst.
 However, according to the median, $\algorithmStyle{A}_1$ would be best and $\algorithmStyle{A}_2$ appears to be the worst.
 Again only the geometric mean still indicates that the algorithms perform the same.
 
 We can conclude:
-Almost arbitrary conclusions can be reached based on the arithmetic mean and the median if the data is normalized.
-This means that if the data is normalized, these two averages are not useful. 
-The geometric mean is the only meaningful average if we have normalized data&nbsp;[@FW1986HNTLWSTCWTSBR].
+Almost arbitrary conclusions can be reached based on the arithmetic mean and the median if the data is scaled.
+This means that if the data is scaled, these two averages are not useful. 
+The geometric mean is the only meaningful average if we have scaled data&nbsp;[@FW1986HNTLWSTCWTSBR].
 
-We very often have normalized data.
-For example, at least half of the papers on the Job Shop Scheduling Problem normalize the result qualities they obtain on benchmark instances with a Best Known Solutions (BKS) or the highest lower bound at the time when they were written.
+We very often have scaled data.
+For example, at least half of the papers on the Job Shop Scheduling Problem scaled the result qualities they obtain on benchmark instances with a Best Known Solutions (BKS) or the highest lower bound at the time when they were written.
 And many of them then compute the arithmetic mean&hellip;
 
-Then again, using the geometric mean also has some severe downsides&nbsp;[@V2020TGM]:
+Then again, using the geometric mean also has some severe downsides&nbsp;[@V2022TGM]:
 The geometric mean is very sensitive to the underlying probability distribution and its skewness.
 Its estimator ([@eq:geomean1; @eq:geomean2]) exhibits considerable bias under small samples.
 
@@ -251,15 +251,15 @@ If the arithmetic mean is much worse than the median, then maybe we have a bug i
 If the median is much worse than the mean, then the mean is too optimistic, i.e., most of the time we should expect worse results.
 If there are outliers, the value of the arithmetic mean itself may be very different from any actually observed value, while the median is (almost always) similar to some actual measurements.
 
-Often, our data is implicitly or explicitly normalized, e.g.,
+Often, our data is implicitly or explicitly scaled, e.g.,
 
 - if we divide result qualities by results of well-known heuristics or best-known solutions or
-- if we normalize the runtime using another algorithm as standard.
+- if we scale the runtime using another algorithm as standard.
 
 Then, the arithmetic mean and median can be very misleading and the geometric mean needs be computed.
 However, the estimated geometric mean may be biased if we only have few runs.
 
 I think:
 On raw data, we should compute all three measures of average, and pay special attention to the one looking the worst. 
-On normalized data, we should compute the geometric mean, but also consider the arithmetic mean and median if and only if they make our algorithm look worse.
+On scaled data, we should compute the geometric mean, but also consider the arithmetic mean and median if and only if they make our algorithm look worse.
 Especially if we compare with existing methods, it is better to take the pessimistic stance.

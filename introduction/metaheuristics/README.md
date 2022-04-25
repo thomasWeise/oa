@@ -12,7 +12,7 @@ Everyone of us already knows this from the mathematics classes in school.
 Of course, the example problems discussed before cannot be attacked as easily as solving a single linear equation.
 They require algorithms, they require computer science.
 
-\rel.figure{function_growth}{The growth of different functions in a log-log scaled plot. Exponential functions grow very fast, so that an algorithm which needs&nbsp;$\sim 2^s$ steps to solve an optimization problem of size&nbsp;$s$ quickly becomes infeasible.}{function_growth.svgz}{width=99%}
+\rel.figure{function_growth}{The growth of different functions in a log-log scaled plot. Exponential functions grow very fast. This means that an algorithm which needs&nbsp;$\sim 2^s$ steps to solve an optimization problem of size&nbsp;$s$ quickly becomes infeasible if&nbsp;$s$ grows.}{function_growth.svgz}{width=99%}
 
 Ever since primary school, we have learned many problems and types of equations that we can solve.
 Unfortunately, theoretical computer science shows that for many problems, the time we need to find the best-possible solution can grow *exponentially* with the number of involved variables in the worst case.

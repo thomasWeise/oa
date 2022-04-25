@@ -65,7 +65,7 @@ Additionally, we need a function that can convert from points in the search spac
 
 \git.code{mp}{Encoding}{An base class for encodings.}{moptipy/api/encoding.py}{}{book}{doc,hints}
 
-The class given in [@lst:Encoding] provides the blueprint for a function `map` which maps one point&nbsp;`x` in the search space to a candidate solution instance&nbsp;`y` of the solution space.
+The class given in [@lst:Encoding] provides the blueprint for a function `map` which translates one point&nbsp;`x` in the search space to a candidate solution instance&nbsp;`y` of the solution space.
 This class corresponds to the general definition $\encoding:\searchSpace\mapsto\solutionSpace$ of the encoding.
 An implementation of `map` will overwrite whatever contents were stored in object&nbsp;`y` in the process, i.e., we assume the objects&nbsp;`y` can be modified.
 
@@ -74,7 +74,7 @@ An implementation of `map` will overwrite whatever contents were stored in objec
 
 In our JSSP example problem, the candidate solutions are Gantt charts.
 We developed the class `Gantt` given in [@lst:jssp_gantt] to represent their data.
-This data can easily be interpreted by and visualized the user.
+This data can easily be interpreted and visualized by the user.
 Yet, it is not that clear how we can efficiently create such solutions, especially feasible ones, let alone how to *search* in the space of Gantt charts.^[Of course, there are many algorithms that can do that and we could discover one if we would seriously think about it, but here we take the educational route where we investigate the full scenario with&nbsp;$\searchSpace\neq\solutionSpace$.]
 What we would like to have is a *search space*&nbsp;$\searchSpace$, which can represent the possible candidate solutions of the problem in a more machine-tangible, algorithm-friendly way.
 The JSSP is a very well-known problem.
@@ -96,6 +96,8 @@ Such an order can be described as a simple, linear string of job IDs, i.e., of i
 If we process such a string from the beginning to the end and step-by-step assign the jobs, we get a feasible Gantt chart as result.
 It is not possible to produce a deadlock (see [@sec:solutionSpace:feasibility]), because we will only allocate an operation to a machine after having placed all operations that come before it in the same job.
 
+\rel.figure{jssp_encoding}{Illustration of the first five and the second-to-last steps of the encoding of an example point in the search space to a candidate solution.}{jssp_encoding.svgz}{width=97.5%}
+
 This encoding can best be described by an example.
 In the demo instance, we have&nbsp;$\jsspMachines=5$ machines and&nbsp;$\jsspJobs=4$ jobs.
 Each job has&nbsp;$\jsspMachines=5$ operations that must be distributed to the machines.
@@ -105,8 +107,6 @@ We therefore do not need to encode it.
 This means that we just include each job's id&nbsp;$\jsspMachines=5$ times in the string.
 This was the original idea: The encoding represents the order in which we assign the $\jsspJobs$&nbsp;jobs, and each job must be picked $\jsspMachines$&nbsp;times.
 Our search space is thus somehow similar to the set&nbsp;$\mathSpace{P}(\jsspJobs*\jsspMachines)$ of permutations of&nbsp;$\jsspJobs*\jsspMachines$ objects mentioned earlier, but instead of permutations, we have *permutations with repetitions*.
-
-\rel.figure{jssp_encoding}{Illustration of the first five and the second-to-last steps of the encoding of an example point in the search space to a candidate solution.}{jssp_encoding.svgz}{width=97.5%}
 
 A point&nbsp;$\sespel\in\searchSpace$ in the search space&nbsp;$\searchSpace$ for the `demo` JSSP instance would thus be an integer string of length&nbsp;20.
 As example, we choose $\sespel=(0, 2, 3, 2, 2, 3, 1, 1, 0, 3, 1, 3, 2, 1, 3, 2, 0, 1, 0, 0)$.
@@ -166,7 +166,7 @@ The Gantt chart then is complete.
 Whenever we assign a operation&nbsp;$\jsspJobIndex>0$ of any given job to a machine, then we already had assigned all operations at smaller indices first.
 No deadlock can occur and&nbsp;$\solspel$ must therefore be feasible.
 
-\git.code{mp}{jssp_encoding}{An excerpt of the implementation of the operation-based encoding for the JSSP.}{moptipy/examples/jssp/ob_encoding.py}{}{book}{comments,hints}
+\git.code{mp}{jssp_encoding}{An excerpt of the implementation of the operation-based encoding for the JSSP.}{moptipy/examples/jssp/ob_encoding.py}{}{book}{comments}
 
 In [@lst:jssp_encoding], we illustrate how such an encoding can be implemented.
 It basically is a function translating an [numpy integer array](https://numpy.org/doc/stable/user/basics.types.html) to a `Gantt` chart.
@@ -175,14 +175,18 @@ We put the algorithm into a function `decode`, so that we can mark it for compil
 \git.code{mp}{PermutationsWithRepetitions}{Excerpt of the implementation of the `Space` API [@lst:Space] for permutations with repetitions.}{moptipy/spaces/permutations.py}{}{book}{doc,hints,comments}
 
 In [@lst:PermutationsWithRepetitions], we just provide a very small excerpt of an implementation of the `Space` API for permutations of numbers stored in [numpy arrays](https://numpy.org/doc/stable/reference/generated/numpy.array.html).
-Its `create` method will always create a new array which consists of $\jsspMachines$&nbsp;repetitions of the permutation&nbsp;$0..\jsspJobs$.
+This class is quite general:
+It allows us to provide a `blueprint` string of the numbers that we want to arrange in the permutations.
+This could be a true permutation, e.g., $[1, 2, 3]$, or a permutation with repetitions, such as $[1, 1, 2, 2, 3, 3]$.
+The static method `with_repetitions` instantiates the space for $\jsspMachines$&nbsp;repetitions of the permutation&nbsp;$0..\jsspJobs$.
+The `create` method of the `Space` implementation will always return a copy of the blueprint array.
 We omit the conversion to and from strings, as it can be implemented similarly as in [@lst:jssp_gantt_space].
-Validation can simply check whether each job ID occurs exactly $\jsspMachines$&nbsp;times and is thus also not printed.
+Validation can simply check whether each job ID occurs exactly as needed, i.e., $\jsspMachines$&nbsp;times in our case, and is thus also not printed.
 
 
 #### Advantages of this very simple Representation
 
-This is a very nice and natural way to represent Gantt charts with a much simpler data structure.
+This is a natural way to represent Gantt charts with a much simpler data structure.
 As a result, it has been discovered by several researchers independently, the earliest being Gen et&nbsp;al.&nbsp;[@GTK1994SJSSPBGA], Bierwirth&nbsp;[@B1995AGPATJSSWGA; @BMK1996OPRFSP], and Shi et&nbsp;al.&nbsp;[@SIS1997NESFSJSPBGA], all in the 1990s.
 
 But what do we gain by using this search space and encoding?
@@ -192,16 +196,17 @@ If it contains the numbers&nbsp;$\intRange{0}{(\jsspJobs-1)}$ each exactly&nbsp;
 
 Third, the candidate solution corresponding to a valid point from the search space will always be *feasible*&nbsp;[@B1995AGPATJSSWGA].
 The mapping&nbsp;$\encoding$ will ensure that the order of the operations per job is always observed.
-We do not need to worry about the issue of deadlocks mentioned in [@sec:solutionSpace:feasibility].
+We have solved the issue of deadlocks mentioned in [@sec:solutionSpace:feasibility].
 We know from [@tbl:jsspSolutionSpaceTable], that the vast majority of the possible Gantt charts for a given problem might actually be infeasible &ndash; and now we do no longer need to worry about that. 
 Our mapping also makes sure of the more trivial constraints, such as that each machine will process at most one job at a time and that all operations are eventually processed.
 
 Finally, we also could modify our representation mapping&nbsp;$\encoding$ to adapt to more complicated and constraint versions of the JSSP if need be:
-For example, imagine that it would take a job- and machine-dependent time requirement for carrying a job from one machine to another, then we could facilitate this by changing&nbsp;$\encoding$ so that it adds this time to the starting time of the job.
+For example, imagine that it would take a job- and machine-dependent time requirement for carrying a job from one machine to another.
+We could facilitate this by changing&nbsp;$\encoding$ so that it adds this time to the starting time of the job.
 If there was a job-dependent setup time for each machine&nbsp;[@ANCK2008ASOSPWSTOC], which could be different if job&nbsp;1 follows job&nbsp;0 instead of job&nbsp;2, then this could be facilitated easily as well.
 If our operations would be assigned to "machine types" instead of "machines" and there could be more than one machine per machine type, then the representation mapping could assign the operations to the next machine of their type which becomes idle.
 Our representation also trivially covers the situation where each job may have more than&nbsp;$\jsspMachines$ operations, i.e., where a job may need to cycle back and pass one machine twice.
-It is also suitable to simple scenarios, such as the Flow Shop Problem, where all jobs pass through the machines in the same, pre-determined order&nbsp;[@T199BFBSP; @GJS1976TCOFAJS; @W2013GAFSSPAS].
+It is also suitable for simpler scenarios, such as the Flow Shop Problem, where all jobs pass through the machines in the same, pre-determined order&nbsp;[@T199BFBSP; @GJS1976TCOFAJS; @W2013GAFSSPAS].
 
 Many such different problem flavors can now be reduced to investigating the same space&nbsp;$\searchSpace$ using the same optimization algorithms, just with different encodings&nbsp;$\encoding$ and/or objective functions&nbsp;$\objf$.
 Additionally, it becomes  easy to indirectly create and modify candidate solutions by sampling points from the search space and moving to similar points, as we will see in the following chapters.

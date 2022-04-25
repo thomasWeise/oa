@@ -20,3 +20,4 @@ For better discussions, please refer to text books such as&nbsp;[@K2014PTACC; @T
 \rel.input{sampling/README.md}
 \rel.input{average/README.md}
 \rel.input{spread/README.md}
+\rel.input{metrics/README.md}
