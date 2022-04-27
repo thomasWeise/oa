@@ -258,12 +258,16 @@ If each one of $\jsspJobs$ different numbers appears $\jsspMachines$ times, we h
 
 We give some example values for this search space size&nbsp;$\left|\searchSpace\right|$ in [@tbl:jsspSearchSpaceTable].
 From the table, we can immediately see that the number of points in the search space, too, grows very quickly with both the number of jobs&nbsp;$\jsspJobs$ and the number of machines&nbsp;$\jsspMachines$ of an JSSP instance&nbsp;$\instance$.
+If we compare the ordering of our example JSSP instances by search space size with the ordering by solution space, we find that there only is one disagreement:
+`dmu67` has the larger search space&nbsp;$\searchSpace$ but a smaller solution space&nbsp;$\solutionSpace$ compared to `dmu72`.
+Apart from this, larger solution spaces tend to correspond to larger search spaces as well. 
 
-For our `demo` JSSP instance with&nbsp;$\jsspJobs=4$ jobs and&nbsp;$\jsspMachines=5$ machines, we already have about 12&nbsp;billion different points in the search space for 7&nbsp;million possible non-wasteful candidate solutions.
+ For our `demo` JSSP instance with&nbsp;$\jsspJobs=4$ jobs and&nbsp;$\jsspMachines=5$ machines, we already have about 12&nbsp;billion different points in the search space that represent 7&nbsp;million possible non-wasteful candidate solutions.
 
 We now find the drawback of our encoding:
 There is some redundancy in our mapping.
 $\encoding$&nbsp; is not injective.
+Some elements of the search space&nbsp;$\searchSpace$ will map to the same element in the solution space&nbsp;$\solutionSpace$. 
 For example, we could arbitrarily swap the first three numbers in the example string in [@fig:jssp_encoding] and would obtain the same Gantt chart, because jobs&nbsp;0, 2, and&nbsp;3 start at different machines.
 
 As said before, we should avoid redundancy in the search space.

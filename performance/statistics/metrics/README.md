@@ -27,4 +27,3 @@ We can compute the following statistics on such scaled objective values:
 If we want to investigate the total runtime consumed, we may present the following statistics:
 
 - "$\meanTotalMS$" is the arithmetic mean of the total time consumed by each run, measured in milliseconds.
-- "$\geomeanTotalMS$" is the geometric mean of the total time consumed by each run, measured in milliseconds.

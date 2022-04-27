@@ -13,7 +13,7 @@ However, reporting *only* the best result is overly optimistic and we need some 
 Three of the most common options for this purpose, for estimating a central value of a distribution, are the *arithmetic mean*, the *median*, and the *geometric mean*.
 
 
-#### Arithmetic Mean and Median
+#### Arithmetic Mean and Median {#sec:meanAndMedian}
 
 \definition{def}{arithmeticMean}{The arithmetic mean $\mean(A)$ is an estimate of the expected value of a data sample $A=(\arrayIndex{a}{0},\arrayIndex{a}{1}, \dots, \arrayIndex{a}{n-1})$.
 It is computed as the sum of all&nbsp;$n$ elements&nbsp;$\arrayIndex{a}{i}$ in the sample data&nbsp;$A$ divided by the total number&nbsp;$n$ of values.}
@@ -145,7 +145,7 @@ Indeed, the maybe best idea would be to consider both the mean and median value 
 This should always provide a conservative and robust outlook on algorithm performance. 
 
 
-#### The Geometric Mean and Scaled Data
+#### The Geometric Mean and Scaled Data {#sec:geometricMean}
 
 So far, we have discussed the arithmetic mean and the median.
 

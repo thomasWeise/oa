@@ -5,8 +5,8 @@
 |`abz8`|648|`1rs`|1'190|1'343|121.06|2.072|1|
 |`yn4`|929|`1rs`|1'779|2'033|137.00|2.189|1|
 |`swv14`|2'968|`1rs`|5'958|6'310|216.89|2.126|1|
-|`dmu67`|5'589|`1rs`|12'818|14'150|696.44|2.532|1|
 |`dmu72`|6'395|`1rs`|14'384|15'411|534.31|2.410|1|
+|`dmu67`|5'589|`1rs`|12'818|14'150|696.44|2.532|1|
 |`ta70`|2'995|`1rs`|5'403|6'027|315.07|2.012|1|
-|||$\setup$|$\minBestFscaled$|$\geomeanBestFscaled$|$\maxBestFscaled$|$\stddevBestFscaled$|$\geomeanTotalMS$|
+|||$\setup$|$\minBestFscaled$|$\geomeanBestFscaled$|$\maxBestFscaled$|$\stddevBestFscaled$|$\meanTotalMS$|
 |Übersicht||1rs|1.640|2.143|2.721|0.239|1|

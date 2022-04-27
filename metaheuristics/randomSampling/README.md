@@ -51,17 +51,56 @@ Thus, we do not need to take care of this in our algorithm, which makes the impl
 Of course, since the algorithm is *randomized*, it may give us a different result every time we run it.
 In order to understand what kind of solution qualities we can expect, we hence have to run it a couple of times and compute result statistics.
 We therefore execute our program [23&nbsp;times](https://thomasweise.github.io/moptipy/moptipy.examples.jssp.html#moptipy.examples.jssp.experiment.EXPERIMENT_RUNS).
-At this point, I suggest to read [@sec:statisticalMeasures], where we describes which statistical measures exist to summarize experimental results.
-
-\rel.input{end_results_1rs.md}
-
-: The results of the single random sample algorithm&nbsp;`1rs` for each instance $\instance$ in comparison to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$ over 23&nbsp;runs: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality and the mean time until a run was finished ($\meanBestFscaled$, $\meanTotalMS$). The summary line presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$), as well as the geometric mean of the total runtimes ($\geomeanTotalMS$). See [@sec:statisticalMetrics] for more details. {#tbl:singleRandomSampleJSSP}
-
 [@tbl:singleRandomSampleJSSP] lists the summary statistics of this little experiment.
-These statistics are described in [@sec:statisticalMetrics] in detail.
+At this point, I suggest to read [@sec:statisticalMeasures], where we describe which statistical measures exist to summarize experimental results.
+Here, we use four types of simple statistics, namely:
+
+1. The minimum and maximum denote best and worst results.
+2. Arithmetic means represent average results (see \def.ref{arithmeticMean}).
+3. Standard deviations give an impression of how far the results are spread (due to the randomization) from the mean, as described in [@sec:varStdDevQuantiles].
+4. The geometric means are used to average results that are scaled with different factors, as described in [@sec:geometricMean].   
+
+All the statistics used in the table are described in detail in [@sec:statisticalMetrics].
+
+1\rel.input{end_results_1rs.md}
+
+: The results of the single random sample algorithm&nbsp;`1rs` for each instance $\instance$ in comparison to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$ over 23&nbsp;runs: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality and the mean time until a run was finished ($\meanBestFscaled$, $\meanTotalMS$). The summary line presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$), as well as the mean of the total runtimes ($\meanTotalMS$). See [@sec:statisticalMetrics] for more details. {#tbl:singleRandomSampleJSSP}
+
 
 From the table, we find that the best results ($\minBestF$) of any run on any instances are often much worse than theoretically best makespans, i.e., the lower bounds&nbsp;$\lowerBound(\objf)$ of the objective functions&nbsp;$\objf$.
+For the smallest-scale instance, `orb06`, the optimal makespan is&nbsp;1'010.
+The best of the 23&nbsp;runs of `1rs`, however, finds a schedule with a makespan of&nbsp;1'656 (illustrated by statistic $\minBestF$).
+On `dmu67`, the lower bound of the objective function is&nbsp;5'589, but the best solution discovered by any run of `1rs` has a makespan of&nbsp;12'818.
 The arithmetic mean end result qualities ($\meanBestF$) are even worse.
-We obtain the *scaled* end result qualities by dividing the best objective values of each run by the lower bounds of the objective function.
-The arithmetic means $\meanBestFscaled$ of these values tend to be around&nbsp;2, meaning that our `1rs` algorithm delivers Gantt charts which tend to have a makespan twice as long as what could theoretically be possible.
-The standard deviation&nbsp;$\stddevBestF$ of the best result qualities is also relatively large, indicating that different executions ("runs") of the `1rs` algorithm have results that largely differ in quality.
+On `orb06`, this average result is&nbsp;1'932 and on `dmu67`, it is&nbsp;14'150.
+We obtain the *scaled* end result qualities ($\meanBestFscaled$) by dividing the end result objective values of each run by the lower bounds of the objective function.
+On `orb06`, this is&nbsp;1.913, meaning that in average, `1rs` gives us tours about 91% longer than necessary.
+For `dmu67`, with $\meanBestFscaled=2.532$ the average tours are two and a half times as long as the theoretical optima. 
+The standard deviations&nbsp;($\stddevBestF$) of the result qualities is also relatively large for all instances.
+This indicates that different executions ("runs") of the `1rs` algorithm have results that largely differ in quality.
+
+Let us take a look at the summary statistics over all JSSP instances at the bottom of the table.
+First, the minimum&nbsp;$\minBestFscaled$ of the scaled results shows us that no run of the `1rs` algorithm on any of the JSSP instances could provide a schedule with a makespan less than 64% longer than the theoretical optimum.
+The geometric mean&nbsp;$\geomeanBestFscaled$ of the scaled end results is&nbsp;2.143, meaning that the average schedule produced by `1rs` is more than twice as long as necessary.
+The worst scaled results, $\maxBestFscaled$, even&nbsp;2.721 times as long as the lower bound.
+The standard deviation of the scaled results is&nbsp;0.239, which is more than 10% of the geometric mean.
+
+
+\rel.figure{makespan_scaled_1rs}{Violin plots overlaid with box plots to illustrate the distributions of the (scaled) makespans achieved by `1rs` on the different JSSP instances.}{makespan_scaled_1rs.svgz
+}{width=99%}
+
+In [@fig:makespan_scaled_1rs] we visualize how the results of the single runs of our `1rs` algorithm are distributed for the different problem instances.
+We therefore sort the instances based on the size of their search space (see [@tbl:jsspSearchSpaceTable]) and, for each instance, draw a [violin plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.violinplot.html) overlaid with a [box plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.boxplot.html) of the scaled result qualities.
+From the box plots, we can see
+
+- the median (the line in the middle, see also [@sec:meanAndMedian]),
+- the 25% and 75% quantiles (the upper and lower end of the boxes, see also [@sec:varStdDevQuantiles]),
+- the arithmetic mean (triangle symbol),
+- the 5% and 95% quantiles (horizontal whisker lines at bottom and top),
+- the outliers, i.e., data elements outside of the whiskers, as circles, and
+- the 95% confidence intervals for the median (as notches in the boxes).
+
+The violin plots in the background show us the approximate distribution of the data points.
+They are the wider around the horizontal axis the more often the corresponding scaled result qualities were observed in the runs on the instance.
+What we immediately see from these plots is that the larger the search space for a JSSP instance gets, the worst `1rs` tends to deliver.
+One visible exception is instance `ta70`, which is quite large but seems to be easier than most other instances.

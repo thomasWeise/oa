@@ -5,8 +5,8 @@
 |`abz8`|648|`1rs`|1190|1343|121.06|2.072|1|
 |`yn4`|929|`1rs`|1779|2033|137.00|2.189|1|
 |`swv14`|2968|`1rs`|5958|6310|216.89|2.126|1|
-|`dmu67`|5589|`1rs`|1'2818|1'4150|696.44|2.532|1|
 |`dmu72`|6395|`1rs`|1'4384|1'5411|534.31|2.410|1|
+|`dmu67`|5589|`1rs`|1'2818|1'4150|696.44|2.532|1|
 |`ta70`|2995|`1rs`|5403|6027|315.07|2.012|1|
-|||$\setup$|$\minBestFscaled$|$\geomeanBestFscaled$|$\maxBestFscaled$|$\stddevBestFscaled$|$\geomeanTotalMS$|
+|||$\setup$|$\minBestFscaled$|$\geomeanBestFscaled$|$\maxBestFscaled$|$\stddevBestFscaled$|$\meanTotalMS$|
 |总结||1rs|1.640|2.143|2.721|0.239|1|

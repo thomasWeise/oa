@@ -6,7 +6,7 @@ We do not know whether the data we have measured is very similar to the median o
 For finding this out, we can compute a measure of dispersion, i.e., a value that tells us whether the observations are stretched and spread far or squeezed tight around the center.
 
 
-#### Variance, Standard Deviation, and Quantiles 
+#### Variance, Standard Deviation, and Quantiles {#sec:varStdDevQuantiles} 
 
 \definition{def}{variance}{The variance is the expectation of the squared deviation of a random variable from its mean.
 The variance&nbsp;$\variance(A)$ of a data sample&nbsp;$A=(\arrayIndex{a}{0},\arrayIndex{a}{1}, \dots, \arrayIndex{a}{n-1})$ with $n$&nbsp;observations can be estimated as:}
