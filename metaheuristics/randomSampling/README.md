@@ -87,7 +87,8 @@ The standard deviation of the scaled results is&nbsp;0.239, which is more than 1
 
 
 \rel.figure{makespan_scaled_1rs}{Violin plots overlaid with box plots to illustrate the distributions of the (scaled) makespans achieved by `1rs` on the different JSSP instances.}{makespan_scaled_1rs.svgz
-}{width=99%}
+}{width=99.9%}
+
 
 In [@fig:makespan_scaled_1rs] we visualize how the results of the single runs of our `1rs` algorithm are distributed for the different problem instances.
 We therefore sort the instances based on the size of their search space (see [@tbl:jsspSearchSpaceTable]) and, for each instance, draw a [violin plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.violinplot.html) overlaid with a [box plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.boxplot.html) of the scaled result qualities.
@@ -104,3 +105,15 @@ The violin plots in the background show us the approximate distribution of the d
 They are the wider around the horizontal axis the more often the corresponding scaled result qualities were observed in the runs on the instance.
 What we immediately see from these plots is that the larger the search space for a JSSP instance gets, the worst `1rs` tends to deliver.
 One visible exception is instance `ta70`, which is quite large but seems to be easier than most other instances.
+
+Finally, in [@fig:gantt_1rs], we plot the Gantt charts of the results of the&nbsp;`1rs` algorithms of the runs whose makespan is closest to the median makespan delivered for each instance.
+In each chart, we also present the lower bound as vertical line.
+We can clearly see that the Gantt charts tend to be much longer than that (theoretical) optimal solutions.
+The reasons are the many white spaces between the different operations:
+Often, an operation needs to wait quite some time before it can be executed on a machine, because its predecessors operations (in the same job) are not yet finished (on other machines).
+The Gantt charts also reveal the partitioned structure of `dmu67`, `dmu72`, and `swv14`, where the jobs first need to pass through on half of the machines before being processed by the other half (see [@sec:jsspBenchmarkInstances]).
+In summary, we clearly see that `1rs` does not produce good results.
+
+
+\rel.figure{gantt_1rs}{Gantt charts of the median results delivered by `1rs`.}{gantt_1rs.svgz
+}{width=99.9%}

@@ -49,7 +49,7 @@ In other words, the JSSP instance structure described here already encompasses a
 This means that if we can build an algorithm which can solve this general type of JSSP well, it can also automatically solve the above-mentioned special cases.
 
 
-#### JSSP Benchmark Instances
+#### JSSP Benchmark Instances {#sec:jsspBenchmarkInstances}
 
 In order to practically play around with optimization algorithms, we need some concrete instances of the JSSP.
 Luckily, the optimization community provides "benchmark instances" for many different optimization problems.
