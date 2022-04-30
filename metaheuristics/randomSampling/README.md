@@ -62,7 +62,8 @@ Here, we use four types of simple statistics, namely:
 
 All the statistics used in the table are described in detail in [@sec:statisticalMetrics].
 
-1\rel.input{end_results_1rs.md}
+
+\rel.input{end_results_1rs.md}
 
 : The results of the single random sample algorithm&nbsp;`1rs` for each instance $\instance$ in comparison to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$ over 23&nbsp;runs: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality and the mean time until a run was finished ($\meanBestFscaled$, $\meanTotalMS$). The summary line presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$), as well as the mean of the total runtimes ($\meanTotalMS$). See [@sec:statisticalMetrics] for more details. {#tbl:singleRandomSampleJSSP}
 
@@ -106,14 +107,43 @@ They are the wider around the horizontal axis the more often the corresponding s
 What we immediately see from these plots is that the larger the search space for a JSSP instance gets, the worst `1rs` tends to deliver.
 One visible exception is instance `ta70`, which is quite large but seems to be easier than most other instances.
 
-Finally, in [@fig:gantt_1rs], we plot the Gantt charts of the results of the&nbsp;`1rs` algorithms of the runs whose makespan is closest to the median makespan delivered for each instance.
-In each chart, we also present the lower bound as vertical line.
-We can clearly see that the Gantt charts tend to be much longer than that (theoretical) optimal solutions.
-The reasons are the many white spaces between the different operations:
-Often, an operation needs to wait quite some time before it can be executed on a machine, because its predecessors operations (in the same job) are not yet finished (on other machines).
-The Gantt charts also reveal the partitioned structure of `dmu67`, `dmu72`, and `swv14`, where the jobs first need to pass through on half of the machines before being processed by the other half (see [@sec:jsspBenchmarkInstances]).
-In summary, we clearly see that `1rs` does not produce good results.
-
 
 \rel.figure{gantt_1rs}{Gantt charts of the median results delivered by `1rs`.}{gantt_1rs.svgz
 }{width=99.9%}
+
+
+Finally, in [@fig:gantt_1rs], we plot the Gantt charts with the median makespan delivered by the runs of the&nbsp;`1rs` algorithm on each instance (see [@sec:meanAndMedian] regarding what the median is).
+In other words, we sort the 23 Gantt charts we obtained on each instance by their makespan.
+Then we plot the one in the middle of this sorted list.
+
+In each Gantt chart, we can find a lot of empty space between the operations.
+This means that when an operation is assigned to a machine, it first needs to wait some time before it can be executed.
+This is because the predecessor operations of the same job are not yet finished on other machines.
+A lot of time is wasted.
+
+We also present the lower bounds of the makespans as vertical lines in the charts.
+We can clearly see that the Gantt charts tend to need much longer than that (theoretical) optimal solutions to complete.
+
+As a side note:
+The Gantt charts also reveal the partitioned structure of `dmu67`, `dmu72`, and `swv14`, where the jobs first need to pass through on half of the machines before being processed by the other half (see [@sec:jsspBenchmarkInstances]).
+
+In summary, we clearly see that `1rs` does not produce good results.
+This is completely reasonable.
+After all, we just create a single random solution.
+We can hardly assume that doing all jobs of a JSSP in a random order would be good idea.
+
+But we also notice more.
+Let's go back to [@tbl:singleRandomSampleJSSP].
+The mean time $\meanTotalMS$ until the runs stop improving is approximately&nbsp;1ms.
+The reason is that we only perform one single objective function evaluation per run, i.e., 1&nbsp;FE.
+Creating, mapping, and evaluating a solution can be very fast.
+However, we had originally planned to use up to two minutes for optimization.
+Hence, almost all of our time budget remains unused.
+
+We also notice that on `orb06`, the arithmetic mean solution quality $\meanBestF$ is 17% longer than the best obtained one ($\minBestF$).
+On `swv14`, the difference is about 6% and in geometric mean, it's 12%.
+The standard deviation&nbsp;$sd$ of the solution quality also is always above 100&nbsp;time units of makespan.
+In other words:
+For each JSSP instance, we create 23&nbsp;random solutions.
+And these random solutions differ quite a lot in their quality. 
+So why don't we try to make use of this variance and the high speed of solution creation?
