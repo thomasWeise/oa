@@ -147,7 +147,7 @@ So why don't we try to make use of this variance and the high speed of solution 
 
 ### Random Sampling Algorithm  {#sec:randomSamplingAlgo}
 
-\definition{rule}{exploitVariance}{If there is a significant variance in the results of an algorithm and we have sufficient computational resources to execute it multiple times, then multiple executions (in parallel or sequential) can be used to improve the expected result quality.}
+\definition{rule}{exploitVariance}{If there is a large-enough variance in the results of an algorithm and we have sufficient computational resources to execute it multiple times, then multiple executions (sequential or in parallel) can be used to improve the expected result quality.}
 
 
 #### The Algorithm
@@ -201,7 +201,7 @@ Alas, we only have two minutes, so we are still far from this goal.
 
 \rel.input{end_results_rs.md}
 
-: The results of the single random sample algorithm&nbsp;`1rs` and the random sampling algorithm&nbsp;`rs` for each instance $\instance$ with 23&nbsp;runs per algorithm/instance combination. See [@sec:statisticalMetrics] for more details. {#tbl:andomSamplingJSSP}
+: The results of the single random sample algorithm&nbsp;`1rs` and the random sampling algorithm&nbsp;`rs` for each instance $\instance$ with 23&nbsp;runs per algorithm/instance combination. See [@sec:statisticalMetrics] for more details. {#tbl:randomSamplingJSSP}
 
 
 Over all problem instances, the standard deviation&nbsp;$\stddevBestFscaled$ of the scaled result quality of&nbsp;`rs` is slightly higher than of&nbsp;`1rs`. 
@@ -216,7 +216,7 @@ On every single instance, the worst solution discovered by `rs` is much better t
 
 The problem instances are again sorted by the size of their corresponding search spaces.
 We can again clearly observe that larger search spaces lead to worse scaled results.
-At least one of the reasons for this was already clear from the $\meanFEsMS$&nbsp;metric presented [@tbl:andomSamplingJSSP]:
+At least one of the reasons for this was already clear from the $\meanFEsMS$&nbsp;metric presented [@tbl:randomSamplingJSSP]:
 Larger instances mean slower FEs, which means a smaller total number of generated solutions.
 
 If we compare the Gantt charts of the median runs of `rs` sketched [@fig:gantt_rs] with those of `1rs` in [@fig:gantt_1rs], we can observe a clear reduction of the space between the operations.
