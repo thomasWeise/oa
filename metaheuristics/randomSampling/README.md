@@ -52,7 +52,8 @@ Of course, since the algorithm is *randomized*, it may give us a different resul
 In order to understand what kind of solution qualities we can expect, we hence have to run it a couple of times and compute result statistics.
 We therefore execute our program [23&nbsp;times](https://thomasweise.github.io/moptipy/moptipy.examples.jssp.html#moptipy.examples.jssp.experiment.EXPERIMENT_RUNS).
 [@tbl:singleRandomSampleJSSP] lists the summary statistics of this little experiment.
-At this point, I suggest to read [@sec:statisticalMeasures], where we describe which statistical measures exist to summarize experimental results.
+All its statistics used are described in detail in [@sec:statisticalMetrics].
+At this point, I also suggest to read [@sec:statisticalMeasures], where we describe which statistical measures exist to summarize experimental results as well as their benefits and drawbacks.
 Here, we use four types of simple statistics, namely:
 
 1. The minimum and maximum denote best and worst results.
@@ -60,12 +61,10 @@ Here, we use four types of simple statistics, namely:
 3. Standard deviations give an impression of how far the results are spread (due to the randomization) from the mean, as described in [@sec:varStdDevQuantiles].
 4. The geometric means are used to average results that are scaled with different factors, as described in [@sec:geometricMean].   
 
-All the statistics used in the table are described in detail in [@sec:statisticalMetrics].
-
 
 \rel.input{end_results_1rs.md}
 
-: The results of the single random sample algorithm&nbsp;`1rs` for each instance $\instance$ in comparison to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$ over 23&nbsp;runs: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality and the mean time until a run was finished ($\meanBestFscaled$, $\meanTotalMS$). The summary line presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$), as well as the mean of the total runtimes ($\meanTotalMS$). See [@sec:statisticalMetrics] for more details. {#tbl:singleRandomSampleJSSP}
+: The results of the single random sample algorithm&nbsp;`1rs` for each instance $\instance$ with 23&nbsp;runs per instance, in comparison to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality and the mean time until a run was finished ($\meanBestFscaled$, $\meanTotalMS$). The summary line at the bottom presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$), as well as the mean of the total runtimes ($\meanTotalMS$). See [@sec:statisticalMetrics] for more details. {#tbl:singleRandomSampleJSSP}
 
 
 From the table, we find that the best results ($\minBestF$) of any run on any instances are often much worse than theoretically best makespans, i.e., the lower bounds&nbsp;$\lowerBound(\objf)$ of the objective functions&nbsp;$\objf$.
@@ -107,11 +106,6 @@ They are the wider around the horizontal axis the more often the corresponding s
 What we immediately see from these plots is that the larger the search space for a JSSP instance gets, the worst `1rs` tends to deliver.
 One visible exception is instance `ta70`, which is quite large but seems to be easier than most other instances.
 
-
-\rel.figure{gantt_1rs}{Gantt charts of the median results delivered by `1rs`.}{gantt_1rs.svgz
-}{width=99.9%}
-
-
 Finally, in [@fig:gantt_1rs], we plot the Gantt charts with the median makespan delivered by the runs of the&nbsp;`1rs` algorithm on each instance (see [@sec:meanAndMedian] regarding what the median is).
 In other words, we sort the 23 Gantt charts we obtained on each instance by their makespan.
 Then we plot the one in the middle of this sorted list.
@@ -127,6 +121,11 @@ We can clearly see that the Gantt charts tend to need much longer than that (the
 As a side note:
 The Gantt charts also reveal the partitioned structure of `dmu67`, `dmu72`, and `swv14`, where the jobs first need to pass through on half of the machines before being processed by the other half (see [@sec:jsspBenchmarkInstances]).
 
+
+\rel.figure{gantt_1rs}{Gantt charts of the median results delivered by `1rs`.}{gantt_1rs.svgz
+}{width=99.9%}
+
+
 In summary, we clearly see that `1rs` does not produce good results.
 This is completely reasonable.
 After all, we just create a single random solution.
@@ -140,10 +139,9 @@ Creating, mapping, and evaluating a solution can be very fast.
 However, we had originally planned to use up to two minutes for optimization.
 Hence, almost all of our time budget remains unused.
 
-We also notice that on `orb06`, the arithmetic mean solution quality $\meanBestF$ is 17% longer than the best obtained one ($\minBestF$).
-On `swv14`, the difference is about 6% and in geometric mean, it's 12%.
+We also find that on `orb06`, the arithmetic mean solution quality $\meanBestF$ (1'932) is 17% longer than the best obtained one ($\minBestF=1'656$).
+On `swv14`, the difference is about 6% and in geometric mean, it is&nbsp;12%.
 The standard deviation&nbsp;$sd$ of the solution quality also is always above 100&nbsp;time units of makespan.
-In other words:
 For each JSSP instance, we create 23&nbsp;random solutions.
 And these random solutions differ quite a lot in their quality. 
 So why don't we try to make use of this variance and the high speed of solution creation?

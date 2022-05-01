@@ -16,7 +16,7 @@
 我们从非常简单的方法开始，这些方法不能很好地工作，最后转移到有效的元启发式。
 
 我们使用Python编程语言编写的具体示例和优化算法实现。
-这些可以在存储库*[thomasWeise/mopitpy](https://github.com/thomasWeise/moptipy)*中以GNU通用公共许可证版本3,2007年6月29日语言免费获得。
+这些可以在存储库*[thomasWeise/mopitpy](https://thomasweise.github.io/moptipy)*中以GNU通用公共许可证版本3,2007年6月29日语言免费获得。
 每个源代码清单的标题中都有一个*(src)*超链接，链接到存储库中该文件的完整版本。
 书中的源代码清单通常是实际源代码的删节摘要。
 这意味着我们将省略源代码清单中许多对理解算法没有必要的细节。
@@ -25,6 +25,13 @@
 因此，GitHub存储库中的完整代码版本看起来可能与书中插图的删节代码不同。
 为了完全理解代码示例，我们建议读者熟悉Python、[numpy](https://numpy.org/)和[matplotlib](https://matplotlib.org/)。
 当然，如果你只是为了学习算法而阅读这本书，你可以忽略程序源代码示例。
+
+这本书的文本本身是积极编写的，并可在存储库*[thomasWeise/oa](https://github.com/thomasWeise/oa)*中获得。
+在那里，你也可以提交*[issues](https://github.com/thomasWeise/oa/issues)*，比如更改请求、建议、错误、打字错误，或者你可以通知我有什么不清楚的地方，这样我就可以改进这本书。
+本书以*Attribute Non-commercial ShareAlike 4.0 International license*（CC&nbsp;BY&#8209;NC&#8209;SA&nbsp;4.0）发行，摘要见<http://creativecommons.org/licenses/by-nc-sa/4.0/>。
+我试图用多种语言并行开发，但我可能无法保持它们的同步。
+英语可能是最新版本的语言。
+我们在本书中运行的所有实验的结果都可以在[oa_data](https://github.com/thomasWeise/oa_data)存储库中找到。 
 
 本书以“署名-非商业性使用-相同方式共享4.0国际” (CC&nbsp;BY-NC-SA&nbsp;4.0) 许可证发布，请参阅<https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh>以获取摘要。
 我试图用多种语言并行编写这本书，但我可能无法使它们保持同步。

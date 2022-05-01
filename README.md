@@ -9,6 +9,7 @@ We then approach the algorithms that have been developed to solve such problems 
 **If you have any comments or suggestions regarding the book, or if you spotted an error or typo, please feel free to submit an [issue here](https://github.com/thomasWeise/oa/issues).**
 Your feedback would help us to improve the book.
 
+
 ## 2. Resources
 
 We are trying to develop this book in three languages at once.
@@ -42,11 +43,14 @@ For each language, the book is available in several different formats:
 
 </div>
 
-Every algorithm that we discuss is implemented in [Python](http://python.org) and all accompanying sources codes are provided in the repository [moptipy](http://github.com/thomasWeise/moptipy).
+Every algorithm that we discuss is implemented in [Python](http://python.org) and all accompanying sources codes are provided in the repository [moptipy](https://thomasweise.github.io/moptipy).
+The results of all experiments that we run in this book are available in the repository [oa_data](https://github.com/thomasWeise/oa_data).
+
 
 ## 3. License
 
 This book is released under the Attribution-NonCommercial-ShareAlike 4.0 International license (CC&nbsp;BY&#8209;NC&#8209;SA&nbsp;4.0), see [http://creativecommons.org/licenses/by-nc-sa/4.0/](http://creativecommons.org/licenses/by-nc-sa/4.0/) for a summary.
+
 
 ## 4. Contact
 
