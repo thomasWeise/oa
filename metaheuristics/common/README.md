@@ -78,7 +78,7 @@ This is illustrated in [@fig:black_box_metaheuristic].
 Black-box optimization is the highest level of abstraction on which we can work when trying to solve complex problems.
 
 
-### Putting it Together: A simple API
+### Putting it Together: A simple API {sec:blackBoxProcessAPI}
 
 Before, I promised that we will implement all the algorithms discussed in this book.
 
