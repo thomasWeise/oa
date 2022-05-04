@@ -24,15 +24,12 @@ This requires that each job index&nbsp;$\jsspJobIndex\in\intRange{0}{(\jsspJobs-
 We already learned how to create one such sequence, namely the constant one returned by our `Space` implementation given in [@lst:PermutationsWithRepetitions].
 All we need to do to implement the nullary search operator `Op0` (see [@lst:op0]) for the permutations with repetitions is to first copy this constant sequence into the array `dest` and then shuffle it randomly.
 
-
 \git.code{mp}{Op0Shuffle}{A nullary search operator for permutations with repetitions which creates random sequences.}{moptipy/operators/permutations/op0_shuffle.py}{}{book}{doc,comments}
-
 
 This trivial implementation is illustrated in [@lst:Op0Shuffle].
 While it is not specified how the [`shuffle` method](https://numpy.org/devdocs/reference/random/generated/numpy.random.Generator.shuffle.html) of the [numpy random generator](https://numpy.org/devdocs/reference/random/generator.html) works, I assume that it will apply the Fisher-Yates shuffle algorithm&nbsp;[@FY1948STFBAAMR; @K1969SA].
 With this very simple operator, we can now sample points&nbsp;$\sespel$ from the search space&nbsp;$\searchSpace$ uniformly at random.
 Since we can convert such points to Gantt charts using our encoding&nbsp;$\encoding$, this means that we can generate random (but feasible!) Gantt charts, too.
-
 
 
 ### Single Random Sample
@@ -63,11 +60,9 @@ Here, we use four types of simple statistics, namely:
 3. Standard deviations give an impression of how far the results are spread (due to the randomization) from the mean, as described in [@sec:varStdDevQuantiles].
 4. The geometric means are used to average results that are scaled with different factors, as described in [@sec:geometricMean].   
 
-
 \rel.input{end_results_1rs.md}
 
 : The results of the single random sample algorithm&nbsp;`1rs` for each instance&nbsp;$\instance$ with 23&nbsp;runs per instance, in comparison to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality and the mean time until a run was finished ($\meanBestFscaled$, $\meanTotalMS$). The summary line at the bottom presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$), as well as the mean of the total runtimes ($\meanTotalMS$). See [@sec:statisticalMetrics] for more details. {#tbl:singleRandomSampleJSSP}
-
 
 From the table, we find that the best results ($\minBestF$) of any run on any instances are often much worse than theoretically best makespans, i.e., the lower bounds&nbsp;$\lowerBound(\objf)$ of the objective functions&nbsp;$\objf$.
 For the smallest-scale instance, `orb06`, the optimal makespan is&nbsp;1'010.
@@ -87,9 +82,7 @@ The geometric mean&nbsp;$\geomeanBestFscaled$ of the scaled end results is&nbsp;
 The worst scaled results, $\maxBestFscaled$, even&nbsp;2.721 times as long as the lower bound.
 The standard deviation of the scaled results is&nbsp;0.239, which is more than 10% of the geometric mean.
 
-
 \rel.figure{makespan_scaled_1rs}{Violin plots overlaid with box plots to illustrate the distributions of the (scaled) makespans achieved by `1rs` on the different JSSP instances.}{makespan_scaled_1rs.svgz}{width=99.9%}
-
 
 In [@fig:makespan_scaled_1rs] we visualize how the results of the single runs of our `1rs` algorithm are distributed for the different problem instances.
 We therefore sort the instances based on the size of their search space (see [@tbl:jsspSearchSpaceTable]) and, for each instance, draw a [violin plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.violinplot.html) overlaid with a [box plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.boxplot.html) of the scaled result qualities.
@@ -116,9 +109,7 @@ This means that when an operation is assigned to a machine, it first needs to wa
 This is because the predecessor operations of the same job are not yet finished on other machines.
 A lot of time is wasted.
 
-
 \rel.figure{gantt_1rs}{Gantt charts of the median results delivered by `1rs`.}{gantt_1rs.svgz}{width=99.9%}
-
 
 We also present the lower bounds of the makespans as vertical lines in the charts.
 We can clearly see that the Gantt charts tend to need much longer than that (theoretical) optimal solutions to complete.
@@ -158,9 +149,7 @@ The random sampling algorithm, also called random search, repeats creating rando
 It basically applies \def.ref{exploitVariance} to `1rs`.
 In our corresponding Python implementation given in [@lst:RandomSampling], we therefore only needed to add a loop around the code from the single random sampling algorithm from [@lst:SingleRandomSample].
 
-
 \git.code{mp}{RandomSampling}{An excerpt of the implementation of the random sampling algorithm which keeps creating random candidate solutions and remembers the best encountered on until the computational budget is exhausted.}{moptipy/algorithms/random_sampling.py}{}{book}{comments}
-
 
 This algorithm can be described as follows:
 
@@ -200,18 +189,14 @@ Actually, if we would have infinite time for each run (instead of two minutes), 
 The variance would become zero and the mean and best solution would all converge to this global optimum.
 Alas, we only have two minutes, so we are still far from this goal.
 
-
 \rel.input{end_results_rs.md}
 
 : The results of the single random sample algorithm&nbsp;`1rs` and the random sampling algorithm&nbsp;`rs` for each instance $\instance$ with 23&nbsp;runs per algorithm/instance combination. See [@sec:statisticalMetrics] for more details. {#tbl:randomSamplingJSSP}
 
-
 Over all problem instances, the standard deviation&nbsp;$\stddevBestFscaled$ of the scaled result quality of&nbsp;`rs` is slightly higher than of&nbsp;`1rs`. 
 The reason for is just that some problem instances are easier than others.
 
-
 \rel.figure{makespan_scaled_rs}{Violin plots overlaid with box plots to illustrate the distributions of the (scaled) makespans achieved by `1rs` and `rs` on the different JSSP instances.}{makespan_scaled_rs.svgz}{width=99.9%}
-
 
 [@fig:makespan_scaled_rs] shows again the violin plots overlaid with box plots of the scaled results of our algorithms on the JSSP.
 On every single instance, the worst solution discovered by `rs` is much better than the best solution found by `1rs`.
@@ -245,16 +230,13 @@ On one hand, the maximal possible improvement of the solution quality is bounded
 On the other hand, in most practical problems, the amount of solutions that have a certain quality gets the smaller the closer said quality is to the optimal one.
 This is actually what we see in [@fig:progress_rs_log_T]: The chance of randomly guessing a solution of quality&nbsp;$F$ becomes the smaller the better (smaller)&nbsp;$F$ is.
 
-
 \definition{rule}{diminishingReturns}{Optimization algorithms make most of their progress early during the search. Eventually, the improvements upon the best-so-far solution will become smaller and require (often exponentially) more runtime.}
-
 
 From the diagrams we can also see that random sampling is not a good method to solve the JSSP.
 It will not matter very much if we have two minutes, six minutes, or one hour.
 In the end, the improvements we would get by investing more time would probably become smaller and the amount of time we need to invest to get any improvement would keep to increase.
 The progress curves begin to flatten even under the logarithmic scaling of [@fig:progress_rs_log_T], meaning that the algorithm will probably need exponentially more time to find improvements the longer it runs. 
 The fact that random sampling can be parallelized perfectly does not help much here, as we would need to provide an exponentially increasing number of processors to keep improving the solution quality.
- 
 
 \rel.figure{gantt_rs}{Gantt charts of the median results delivered by `rs`.}{gantt_rs.svgz}{width=99.9%}
 
