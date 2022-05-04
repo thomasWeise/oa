@@ -24,3 +24,4 @@ We explore them by again using the Job Shop Scheduling Problem (JSSP) from [@sec
 
 \rel.input{common/README.md}
 \rel.input{randomSampling/README.md}
+\rel.input{localSearch/README.md}

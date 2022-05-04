@@ -53,15 +53,18 @@ But not always.
 In some cases, we be able to compute a *lower bound*&nbsp;$\lowerBound(\objf)$ for the objective value of an optimal solution.
 We then know that it is not possible that any solution can have a quality better than $\lowerBound(\objf)$.
 We may not know, however, whether a solution actually exists that has quality&nbsp;$\lowerBound(\objf)$."
-Having a lower bound therefore is not directly useful for solving the problem.
+Having a lower bound therefore is not directly useful for solving the problem itself.
 Still, it can at least tell us whether our method for solving the problem is good.
-For instance, if we have developed an algorithm for approximately solving a given problem and we the qualities of the solutions we get are close to a the lower bound, then we know that our algorithm is good.
+For instance, if we have developed an algorithm for approximately solving a given problem and the qualities of the solutions we get are close to the lower bound, then we know that our algorithm is good.
 If we even find a solution whose quality equals the lower bound, then we a)&nbsp;know that it is optimal and b)&nbsp;can stop our algorithm immediately, as we cannot further improve on this.
-We then know that improving the result quality of the algorithm may be hard, maybe even impossible, and probably not worthwhile.
+If we get close to the lower bound, then we know that improving the result quality of the algorithm may be hard, maybe even impossible, and probably not worthwhile.
 However, if we cannot produce solutions as good as or close to the lower quality bound, this does not necessarily mean that our algorithm is bad.
 
 It should be noted that it is *not* necessary to know the bounds of objective values.
 Lower bounds are a *"nice to have"* feature allowing us to better understand the performance of our algorithms.
+
+In [@lst:Objective], we presented the API for implementing objective functions.
+We extend this API by a function `lower_bound()` that can return a lower bound or&nbsp;$-\infty$ if no bound is known.
 
 
 ### Example: Job Shop Scheduling {#sec:jssp:lowerBounds}
@@ -100,7 +103,9 @@ As lower bound for the fastest schedule that could theoretically exist, we there
 
 $$ \lowerBound(\objf) = \max\left\{\max_{\jsspJobIndex}\left\{ \sum_{\jsspMachineIndex=0}^{\jsspMachines-1} \jsspOperationTime{\jsspJobIndex}{\jsspMachineIndex}\right\} \;,\; \max_{\jsspMachineIndex} \left\{ \jsspMachineStartIdle{\jsspMachineIndex}+\jsspMachineRuntime{\jsspMachineIndex} +\jsspMachineEndIdle{\jsspMachineIndex}\right\}\right\} $$ {#eq:jsspLowerBound}
 
+
 \git.code{mp}{jssp_makespan_lb}{An implementation of Taillard's algorithm&nbsp;[@T199BFBSP] represented in [@eq:jsspLowerBound] to compute the lower bound of the makespan of a JSSP instance.}{moptipy/examples/jssp/instance.py}{}{lb}{comments}
+
 
 The idea of [@eq:jsspLowerBound] is implemented in [@lst:jssp_makespan_lb], following the ideas from&nbsp;[@T199BFBSP].
 Now, we do not know whether it is actually possible to find a schedule whose makespan equals the lower bound.

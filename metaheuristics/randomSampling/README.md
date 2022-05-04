@@ -24,7 +24,9 @@ This requires that each job index&nbsp;$\jsspJobIndex\in\intRange{0}{(\jsspJobs-
 We already learned how to create one such sequence, namely the constant one returned by our `Space` implementation given in [@lst:PermutationsWithRepetitions].
 All we need to do to implement the nullary search operator `Op0` (see [@lst:op0]) for the permutations with repetitions is to first copy this constant sequence into the array `dest` and then shuffle it randomly.
 
-\git.code{mp}{Op0Shuffle}{A nullary search operator for permutations with repetitions which creates random sequences.}{moptipy/operators/permutations/op0_shuffle.py}{}{book}{doc,hints,comments}
+
+\git.code{mp}{Op0Shuffle}{A nullary search operator for permutations with repetitions which creates random sequences.}{moptipy/operators/permutations/op0_shuffle.py}{}{book}{doc,comments}
+
 
 This trivial implementation is illustrated in [@lst:Op0Shuffle].
 While it is not specified how the [`shuffle` method](https://numpy.org/devdocs/reference/random/generated/numpy.random.Generator.shuffle.html) of the [numpy random generator](https://numpy.org/devdocs/reference/random/generator.html) works, I assume that it will apply the Fisher-Yates shuffle algorithm&nbsp;[@FY1948STFBAAMR; @K1969SA].
@@ -43,7 +45,7 @@ It then takes this point and passes it to the [evaluation](https://thomasweise.g
 Internally, we implemented this function in such a way that it automatically remembers the best candidate solution it ever has evaluated.
 Thus, we do not need to take care of this in our algorithm, which makes the implementation so short.
 
-\git.code{mp}{SingleRandomSample}{An excerpt of the implementation of an algorithm which creates a single random candidate solution.}{moptipy/algorithms/single_random_sample.py}{}{book}{comments}
+\git.code{mp}{SingleRandomSample}{An excerpt of the implementation of an algorithm which creates a single random candidate solution.}{moptipy/algorithms/single_random_sample.py}{}{book}{doc,comments}
 
 
 #### Results on the JSSP
@@ -114,15 +116,15 @@ This means that when an operation is assigned to a machine, it first needs to wa
 This is because the predecessor operations of the same job are not yet finished on other machines.
 A lot of time is wasted.
 
+
+\rel.figure{gantt_1rs}{Gantt charts of the median results delivered by `1rs`.}{gantt_1rs.svgz}{width=99.9%}
+
+
 We also present the lower bounds of the makespans as vertical lines in the charts.
 We can clearly see that the Gantt charts tend to need much longer than that (theoretical) optimal solutions to complete.
 
 As a side note:
 The Gantt charts also reveal the partitioned structure of `dmu67`, `dmu72`, and `swv14`, where the jobs first need to pass through on half of the machines before being processed by the other half (see [@sec:jsspBenchmarkInstances]).
-
-
-\rel.figure{gantt_1rs}{Gantt charts of the median results delivered by `1rs`.}{gantt_1rs.svgz}{width=99.9%}
-
 
 In summary, we clearly see that `1rs` does not produce good results.
 This is completely reasonable.
@@ -228,14 +230,6 @@ In [@fig:progress_rs], we visualize the arithmetic mean of the best-so-far objec
 We find that on all JSSP instances, the most progress is made during the first 20&nbsp;seconds of the runs.
 After about one minute of runtime, the improvements get smaller and less frequent. 
 
-
-\rel.figure{gantt_rs}{Gantt charts of the median results delivered by `rs`.}{gantt_rs.svgz}{width=99.9%}
-
-\rel.figure{progress_rs}{The arithmetic mean of the best-so-far solution quality of `rs` over time.}{progress_rs.svgz}{width=99.9%}
-
-\rel.figure{progress_rs_log_T}{The arithmetic mean of the best-so-far solution quality of `rs` over time (with log-scaled time axis).}{progress_rs_log_T.svgz}{width=99.9%}
-
-
 [@fig:progress_rs_log_T] shows the same statistic, but plotted over a logarithmically scaled time axis.
 From these diagrams we find that the solution quality improves in the first 100&nbsp;milliseconds of the runs about as same as much as in the remaining 119'900&nbsp;milliseconds.
 
@@ -261,6 +255,13 @@ In the end, the improvements we would get by investing more time would probably 
 The progress curves begin to flatten even under the logarithmic scaling of [@fig:progress_rs_log_T], meaning that the algorithm will probably need exponentially more time to find improvements the longer it runs. 
 The fact that random sampling can be parallelized perfectly does not help much here, as we would need to provide an exponentially increasing number of processors to keep improving the solution quality.
  
+
+\rel.figure{gantt_rs}{Gantt charts of the median results delivered by `rs`.}{gantt_rs.svgz}{width=99.9%}
+
+\rel.figure{progress_rs}{The arithmetic mean of the best-so-far solution quality of `rs` over time.}{progress_rs.svgz}{width=99.9%}
+
+\rel.figure{progress_rs_log_T}{The arithmetic mean of the best-so-far solution quality of `rs` over time (with log-scaled time axis).}{progress_rs_log_T.svgz}{width=99.9%}
+
 
 ### Summary
 

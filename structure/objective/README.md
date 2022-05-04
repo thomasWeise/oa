@@ -34,7 +34,8 @@ From the perspective of a Python programmer, the general concept of objective fu
 The `evaluate` function of this class accepts one instance&nbsp;`x` of the solution space and returns a numerical value.
 We can implement this function in any way we want, meaning that we can accommodate all types of solution spaces and optimization goals.
 
-\git.code{mp}{Objective}{An base class for objective functions.}{moptipy/api/objective.py}{}{book}{doc,hints}
+
+\git.code{mp}{Objective}{An base class for objective functions.}{moptipy/api/objective.py}{}{book}{doc}
 
 
 ### Example: Job Shop Scheduling {#sec:jsspObjectiveFunction}
@@ -58,6 +59,8 @@ We simply have to look for the largest number stored in the array `times`, as th
 In [@lst:jssp_makespan], we implement exactly this concept in the easiest possible way.
 (For the Python aficionado: we apply the performance tricks from [@sec:pythonNumba; @sec:pythonCallingMethodsAndFunctions].)
 
-\git.code{mp}{jssp_makespan}{An implementation of the class [@lst:Objective] to represent the makepan objective function for JSSPs.}{moptipy/examples/jssp/makespan.py}{}{book}{doc,hints}
+
+\git.code{mp}{jssp_makespan}{An implementation of the class [@lst:Objective] to represent the makepan objective function for JSSPs.}{moptipy/examples/jssp/makespan.py}{}{book}{doc,comments}
+
 
 With this objective function&nbsp;$\objf$, subject to minimization, we have defined that a Gantt chart&nbsp;$\solspel_1$ is better than another Gantt chart&nbsp;$\solspel_2$ if and only if $\objf(\solspel_1)<\objf(\solspel_2)$.^[under the assumption that both are feasible, of course]

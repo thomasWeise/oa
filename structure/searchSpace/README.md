@@ -63,7 +63,9 @@ In [@lst:Space], we already have defined a simple API to provide common operatio
 We can reuse this very same API for search spaces too.
 Additionally, we need a function that can convert from points in the search space to candidate solutions. 
 
-\git.code{mp}{Encoding}{An base class for encodings.}{moptipy/api/encoding.py}{}{book}{doc,hints}
+
+\git.code{mp}{Encoding}{An base class for encodings.}{moptipy/api/encoding.py}{}{book}{doc}
+
 
 The class given in [@lst:Encoding] provides the blueprint for a function `map` which translates one point&nbsp;`x` in the search space to a candidate solution instance&nbsp;`y` of the solution space.
 This class corresponds to the general definition $\encoding:\searchSpace\mapsto\solutionSpace$ of the encoding.
@@ -96,7 +98,9 @@ Such an order can be described as a simple, linear string of job IDs, i.e., of i
 If we process such a string from the beginning to the end and step-by-step assign the jobs, we get a feasible Gantt chart as result.
 It is not possible to produce a deadlock (see [@sec:solutionSpace:feasibility]), because we will only allocate an operation to a machine after having placed all operations that come before it in the same job.
 
+
 \rel.figure{jssp_encoding}{Illustration of the first five and the second-to-last steps of the encoding of an example point in the search space to a candidate solution.}{jssp_encoding.svgz}{width=97.5%}
+
 
 This encoding can best be described by an example.
 In the demo instance, we have&nbsp;$\jsspMachines=5$ machines and&nbsp;$\jsspJobs=4$ jobs.
@@ -166,13 +170,17 @@ The Gantt chart then is complete.
 Whenever we assign a operation&nbsp;$\jsspJobIndex>0$ of any given job to a machine, then we already had assigned all operations at smaller indices first.
 No deadlock can occur and&nbsp;$\solspel$ must therefore be feasible.
 
-\git.code{mp}{jssp_encoding}{An excerpt of the implementation of the operation-based encoding for the JSSP.}{moptipy/examples/jssp/ob_encoding.py}{}{book}{comments}
+
+\git.code{mp}{jssp_encoding}{An excerpt of the implementation of the operation-based encoding for the JSSP.}{moptipy/examples/jssp/ob_encoding.py}{}{book}{comments,doc}
+
 
 In [@lst:jssp_encoding], we illustrate how such an encoding can be implemented.
 It basically is a function translating an [numpy integer array](https://numpy.org/doc/stable/user/basics.types.html) to a `Gantt` chart.
 We put the algorithm into a function `decode`, so that we can mark it for compilation with [numba](https://numba.pydata.org/) to improve the performance, utilizing the performance tips discussed in [@sec:pythonNumba; @sec:pythonCallingMethodsAndFunctions].
 
-\git.code{mp}{PermutationsWithRepetitions}{Excerpt of the implementation of the `Space` API [@lst:Space] for permutations with repetitions.}{moptipy/spaces/permutations.py}{}{book}{doc,hints,comments}
+
+\git.code{mp}{PermutationsWithRepetitions}{Excerpt of the implementation of the `Space` API [@lst:Space] for permutations with (or without) repetitions.}{moptipy/spaces/permutations.py}{}{book}{doc,comments}
+
 
 In [@lst:PermutationsWithRepetitions], we just provide a very small excerpt of an implementation of the `Space` API for permutations of numbers stored in [numpy arrays](https://numpy.org/doc/stable/reference/generated/numpy.array.html).
 This class is quite general:

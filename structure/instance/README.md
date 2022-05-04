@@ -135,7 +135,9 @@ Each `Instance` is an array with one row for each job, one column for each opera
 In other words, an $\instance[\jsspJobIndex, \jsspMachineIndex, 0]$ holds the machine&nbsp;$\jsspOperationMachine{\jsspJobIndex}{\jsspMachineIndex}$ for the operation&nbsp;$\jsspMachineIndex$ of job&nbsp;$\jsspJobIndex$. 
 $\instance[\jsspJobIndex, \jsspMachineIndex, 1]$ holds the time&nbsp;$\jsspOperationTime{\jsspJobIndex}{\jsspMachineIndex}$ that job&nbsp;$\jsspJobIndex$ will spend on machine&nbsp;$k$.
 
+
 \git.code{mp}{jssp_instance}{Excerpt from a Python class for representing the data of a JSSP instance.}{moptipy/examples/jssp/instance.py}{}{book}{doc,hints,comments}
+
 
 We add a static method `from_resource(name)` to this class that can load any of the aforementioned benchmark JSSP instances directly based on its name.
 This way, we can conveniently access all the necessary data of a job shop scheduling task.

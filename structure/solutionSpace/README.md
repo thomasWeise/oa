@@ -27,7 +27,9 @@ We will look at things not *only* from the perspective of an algorithm scientist
 If a programmer is supposed to build algorithms that can deal with arbitrary data structures, she will first think about what kind of operations she will definitely need to perform with them.
 In [@lst:Space], we give an excerpt example of such a "space API."
 
+
 \git.code{mp}{Space}{An excerpt of an base class for implementing space handlers.}{moptipy/api/space.py}{}{book}{format}
+
 
 We will want to store the solutions we create in a file.
 Ideally in a text file, because then a human can read it.
@@ -75,7 +77,9 @@ Therefore, there will be with one column for each of the $\jsspJobs$&nbsp;operat
 Each cell then holds the job&nbsp;ID, the start time, and the end time of the operation.
 Additionally, an instance of our `Gantt` class holds a reference to the JSSP instance (see [@lst:jssp_instance]).
 
-\git.code{mp}{jssp_gantt}{Excerpt from a Python class for representing a Gantt chart, i.e., the data of a candidate solution to a JSSP: a subclass of [`numpy.ndarray`](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html) to hold the data and a pointer to the JSSP instance.}{moptipy/examples/jssp/gantt.py}{}{book}{doc,hints,comments}
+
+\git.code{mp}{jssp_gantt}{Excerpt from a Python class for representing a Gantt chart, i.e., the data of a candidate solution to a JSSP: a subclass of [`numpy.ndarray`](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html) to hold the data and a pointer to the JSSP instance.}{moptipy/examples/jssp/gantt.py}{}{book}{doc,comments}
+
 
 The first row `Gantt` array corresponding to [@fig:gantt_demo_without_makespan] would look as follows:
 Its first element are the values `[0, 0, 10]`, since the operation of jobs&nbsp;0 takes place during the first 10&nbsp; time units of the schedule on this machine.
@@ -101,7 +105,7 @@ However, also storing the job IDs end times of the operations will make our life
 It allows the human operator to directly see what is going on.
 She can directly tell each machine or worker what to do and when to do it, without needing to look up any additional information from the problem instance data.
 
-\git.code{mp}{jssp_gantt_space}{Excerpt of the implementation of the `Space` API [@lst:Space] for Gantt charts.}{moptipy/examples/jssp/gantt_space.py}{}{book}{doc,hints,comments}
+\git.code{mp}{jssp_gantt_space}{Excerpt of the implementation of the `Space` API [@lst:Space] for Gantt charts.}{moptipy/examples/jssp/gantt_space.py}{}{book}{doc,comments}
 
 
 #### Size of the Solution Space {#sec:solutionSpace:size}

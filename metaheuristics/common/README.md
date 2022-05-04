@@ -2,6 +2,7 @@
 
 Before we delve into our first algorithms, let us first take a look on some things that all metaheuristics have in common.
 
+
 ### Anytime Algorithms {#sec:anytimeAlgorithm}
 
 \definition{def}{anytimeAlgorithm}{An *anytime algorithm* is an algorithm which can provide an approximate result during almost any time of its execution.}
@@ -118,9 +119,11 @@ At the same time, we will develop the components that we need to plug into them 
 In this book, we will not really care much about the third point &ndash; but in our [\repo{mp}{repo.name}](\repo{mp}{repo.url}) package, you can find all the implementations and code.
 Here, we will only very shortly outline them.
 
+
 \git.code{mp}{Process}{An excerpt of the base class for the Process API.}{moptipy/api/process.py}{}{book}{format}
 
-\git.code{mp}{Algorithm}{An excerpt of the base class for the API for implementing optimization algorithms.}{moptipy/api/algorithm.py}{}{book}{doc,hints}
+\git.code{mp}{Algorithm}{An excerpt of the base class for the API for implementing optimization algorithms.}{moptipy/api/algorithm.py}{}{book}{doc,comments}
+
 
 The core component for executing experiments is the class `Process`, a part of which is illustrated in [@lst:Process].
 Instances of this class are passed to the optimization algorithm implementations that inherit from class `Algorithm` given in [@lst:Algorithm].
