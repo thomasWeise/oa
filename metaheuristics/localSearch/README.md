@@ -103,3 +103,9 @@ It proceeds as follows:
 This algorithm is implemented in [@lst:HillClimber] and we will refer to it as&nbsp;`hc`.
 
 \git.code{mp}{HillClimber}{An excerpt of the implementation of the Hill Climbing algorithm `hc`, which remembers the best-so-far solution and tries to find better solutions in its neighborhood.}{moptipy/algorithms/hill_climber.py}{}{book}{doc,comments}
+
+
+#### Results on the JSSP {#sec:hc_swap2:jssp:results}
+
+We now plug our unary operator&nbsp;`swap2` into our `hc`&nbsp;algorithm and apply it to the JSSP.
+We will refer to this setup as&nbsp;`hc_1swap` and present its results with those of&nbsp;`rs` in [@tbl:jssp_hc_1swap_results].
