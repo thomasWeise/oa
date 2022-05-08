@@ -33,18 +33,9 @@ We can compute the following statistics on such scaled objective values, which h
 
 If we want to investigate the performance from the perspective of runtime, we may present the following statistics:
 
-- "$\meanTotalMS$" is the arithmetic mean of the total time consumed by each run, measured in milliseconds.
-  If we have a certain maximum runtime budget and $\meanTotalMS$ is smaller than this, then there can only be two reasons:
-  1.&nbsp;The algorithm has stopped because it found a solution with a quality equal to the lower bound of the objective function.
-  If this is the case, then the smaller&nbsp;$\stddevBestF$, the better.
-  2.&nbsp;The algorithm has stopped for some other reason.
-  In this case, the rest of the computational budget is wasted.
-- "$\meanFEsMS$" is the arithmetic mean of the total number of objective function evaluations (FEs) performed divided by the total time consumed by each run.
-  This gives us the (arithmetic mean of the) approximate number of FEs per milliseconds.
-  If this number is high, the algorithm has a low overhead and can do many steps in a short time.
-  If this number is low, then either the search operations are slow or the overhead of the algorithm is high.
-- "$\geomeanFEsMS$" is the geometric mean of the number of FEs per millisecond and has a similar interpretation as the&nbsp;$\meanFEsMS$.
 - "$\meanLIMS$" is the arithmetic mean of the time when the last improving move was finished during a run, measured in milliseconds.
   This tells us when the run stopped improving.
   If this happens very early, then we waste a lot of computational budget.
+- "$\meanLIFE$" is the arithmetic mean of the time when the index of the objective function evaluation (FE) of the last improving move during a run.
+  This metric has the same meaning as $\meanLIMS$, but is a machine-independent measure. 
 

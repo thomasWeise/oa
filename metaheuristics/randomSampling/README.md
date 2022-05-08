@@ -62,7 +62,7 @@ Here, we use four types of simple statistics, namely:
 
 \rel.input{end_results_1rs.md}
 
-: The results of the single random sample algorithm&nbsp;`1rs` for each instance&nbsp;$\instance$ with 23&nbsp;runs per instance, in comparison to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality and the mean time until a run was finished ($\meanBestFscaled$, $\meanTotalMS$). The summary line at the bottom presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$), as well as the mean of the total runtimes ($\meanTotalMS$). See [@sec:statisticalMetrics] for more details. {#tbl:singleRandomSampleJSSP}
+: The results of the single random sample algorithm&nbsp;`1rs` compared to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality $\meanBestFscaled$, as well as the mean of the milliseconds when the last improvement took place in the runs ($\meanLIFE$, $\meanLIMS$). The summary line at the bottom presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$), as well as $\meanLIFE$ and $\meanLIMS$. See [@sec:statisticalMetrics] for more details. {#tbl:singleRandomSampleJSSP}
 
 From the table, we find that the best results ($\minBestF$) of any run on any instances are often much worse than theoretically best makespans, i.e., the lower bounds&nbsp;$\lowerBound(\objf)$ of the objective functions&nbsp;$\objf$.
 For the smallest-scale instance, `orb06`, the optimal makespan is&nbsp;1'010.
@@ -124,7 +124,7 @@ We can hardly assume that doing all jobs of a JSSP in a random order would be go
 
 But we also notice more.
 Let's go back to [@tbl:singleRandomSampleJSSP].
-The mean time $\meanTotalMS$ until the runs stop improving is approximately&nbsp;1ms.
+The mean time $\meanLIMS$ until the runs stop improving is approximately&nbsp;1ms.
 The reason is that we only perform one single objective function evaluation per run, i.e., 1&nbsp;FE.
 Creating, mapping, and evaluating a solution can be very fast.
 However, we had originally planned to use up to two minutes for optimization.
@@ -176,10 +176,8 @@ Its best and mean result qualities are significantly better.
 Indeed, the overall best scaled result&nbsp;$\minBestFscaled$ discovered by *any* run of&nbsp;`1rs` is worse than the geometric mean $\geomeanBestFscaled$ of the best scaled result over *all* runs of&nbsp;`rs`.
 
 Performing "1&nbsp;FE" means to create one candidate solution and to evaluate it with the objective function.
-The metric&nbsp;$\meanFEsMS$ is the average number FEs that we performed in every single millisecond in our experiments.
-It ranges from about&nbsp;110 on the smallest problem instance (`orb06`) to 28.9 on the largest one (`ta70`).
-This means that even on the very largest of our problem instances, we can evaluate more solutions per millisecond of a single run of `rs` than in all of our 23&nbsp;runs of the `1rs`.
-Since each execution of the algorithm takes 2&nbsp;minutes = 120'000&nbsp;ms, this means that `rs` samples more than 3'470'000&nbsp;solutions per run &ndash; and returns the best one of it.
+From the $\meanLIFE$ metric, we find that the `rs` algorithm *keeps improving* for at least 1.4&nbsp;million FEs in average on `ta70` and, over all problems, in average for 3.6&nbsp:million.
+When it stops improving, it has consumed roughly half of the available runtime ($\meanLIMS$).   
 
 By remembering the best of millions of created solutions, what we effectively do is we exploit the variance of the quality of the random solutions.
 As a result, the standard deviation of the results becomes lower on each instance.
@@ -191,7 +189,7 @@ Alas, we only have two minutes, so we are still far from this goal.
 
 \rel.input{end_results_rs.md}
 
-: The results of the single random sample algorithm&nbsp;`1rs` and the random sampling algorithm&nbsp;`rs` for each instance $\instance$ with 23&nbsp;runs per algorithm/instance combination. See [@sec:statisticalMetrics] for more details. {#tbl:randomSamplingJSSP}
+: The results of the single random sample algorithm&nbsp;`1rs` compared to the random sampling algorithm&nbsp;`rs` and to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality $\meanBestFscaled$, as well as the mean of the milliseconds when the last improvement took place in the runs ($\meanLIFE$, $\meanLIMS$). The summary line at the bottom presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$), as well as $\meanLIFE$ and $\meanLIMS$. See [@sec:statisticalMetrics] for more details. {#tbl:randomSamplingJSSP}
 
 Over all problem instances, the standard deviation&nbsp;$\stddevBestFscaled$ of the scaled result quality of&nbsp;`rs` is slightly higher than of&nbsp;`1rs`. 
 The reason for is just that some problem instances are easier than others.
@@ -203,15 +201,14 @@ On every single instance, the worst solution discovered by `rs` is much better t
 
 The problem instances are again sorted by the size of their corresponding search spaces.
 We can again clearly observe that larger search spaces lead to worse scaled results.
-At least one of the reasons for this was already clear from the $\meanFEsMS$&nbsp;metric presented [@tbl:randomSamplingJSSP]:
-Larger instances mean slower FEs, which means a smaller total number of generated solutions.
+At least one of the reasons for this is that larger instances mean slower FEs, which means a smaller total number of generated solutions.
 
 If we compare the Gantt charts of the median runs of `rs` sketched [@fig:gantt_rs] with those of `1rs` in [@fig:gantt_1rs], we can observe a clear reduction of the space between the operations.
 While the schedules are still far longer than the lower bounds, they are significantly better than before. 
 
 So far, we have focused only on end-of-run statistics, such as the mean end result quality.
 Let us now plot the progress that `rs` makes over time.
-In [@fig:progress_rs], we visualize the arithmetic mean of the best-so-far objective value achieved at each point in time during over the 23&nbsp;runs.
+In [@fig:progress_rs_T], we visualize the arithmetic mean of the best-so-far objective value achieved at each point in time during over the 23&nbsp;runs.
 We find that on all JSSP instances, the most progress is made during the first 20&nbsp;seconds of the runs.
 After about one minute of runtime, the improvements get smaller and less frequent. 
 
@@ -240,7 +237,7 @@ The fact that random sampling can be parallelized perfectly does not help much h
 
 \rel.figure{gantt_rs}{Gantt charts of the median results delivered by `rs`.}{gantt_rs.svgz}{width=99.9%}
 
-\rel.figure{progress_rs}{The arithmetic mean of the best-so-far solution quality of `rs` over time.}{progress_rs.svgz}{width=99.9%}
+\rel.figure{progress_rs_T}{The arithmetic mean of the best-so-far solution quality of `rs` over time.}{progress_rs_T.svgz}{width=99.9%}
 
 \rel.figure{progress_rs_log_T}{The arithmetic mean of the best-so-far solution quality of `rs` over time (with log-scaled time axis).}{progress_rs_log_T.svgz}{width=99.9%}
 

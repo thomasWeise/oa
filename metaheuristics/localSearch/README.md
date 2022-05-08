@@ -108,4 +108,27 @@ This algorithm is implemented in [@lst:HillClimber] and we will refer to it as&n
 #### Results on the JSSP {#sec:hc_swap2:jssp:results}
 
 We now plug our unary operator&nbsp;`swap2` into our `hc`&nbsp;algorithm and apply it to the JSSP.
-We will refer to this setup as&nbsp;`hc_1swap` and present its results with those of&nbsp;`rs` in [@tbl:jssp_hc_1swap_results].
+We will refer to this setup as&nbsp;`hc` and present its results with those of&nbsp;`rs` in [@tbl:jssp_hc_results].
+
+\rel.input{end_results_hc.md}
+
+: The results of the hill climber `hc` with the `swap2` operator compared to those of the random sampling algorithm&nbsp;`rs` and to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality $\meanBestFscaled$, as well as the mean of the milliseconds when the last improvement took place in the runs ($\meanLIFE$, $\meanLIMS$). The summary line at the bottom presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$), as well as $\meanLIFE$ and $\meanLIMS$. See [@sec:statisticalMetrics] for more details. {#tbl:jssp_hc_results}
+
+[@tbl:jssp_hc_results] tells us very clearly that our simple hill climber&nbsp;`hc` performs much better than the random sampling algorithm&nbsp;`rs`. 
+It wins in terms of $\minBestF$ and $\meanBestF$ on every single problem instance.
+It also has the overall better scaled objective values ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$).
+
+\rel.figure{makespan_scaled_hc}{Violin plots overlaid with box plots to illustrate the distributions of the (scaled) makespans achieved by `hc` and `rs` on the different JSSP instances.}{makespan_scaled_hc.svgz}{width=99.9%}
+
+\rel.figure{gantt_hc}{The Gantt charts corresponding to the median results of the hill climber&nbsp;`hc`.}{gantt_hc.svgz}{width=99.9%}
+
+The impression on the superior performance of `hc` compared to `rs` is confirmed in [@fig:makespan_scaled_hc], where we plot the scaled end result qualities of our hill climber versus those of random sampling over all JSSP instances.
+With the exception of the two smallest-scale instances, the worst result delivered by the hill climber is better than the best result of random sampling.
+The median Gantt charts produced by `hc`, illustrated in [@fig:gantt_hc], also appear to be denser with less wasted time than those of `rs` (see [@fig:gantt_rs]).
+
+We also notice from [@tbl:jssp_hc_results] that our `hc`&nbsp;algorithm tends to have a higher per-instance standard deviation of the result qualities ($\stddevBestF$) compared to `rs`.
+It also stops improving much earlier:
+On `orb06`, its last improvement happens in average after $\meanLIMS=53$&nbsp;milliseconds.
+`dmu67` is the instance where it keeps improving the longest, in average, namely for 8.5&nbsp;seconds.
+Overall, the `hc`&nbsp;algorithm only makes efficient use of 2.7&nbsp;seconds in mean, i.e., 2.3%&nbsp;of the two minutes of computational budget per run.
+
