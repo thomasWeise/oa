@@ -14,7 +14,7 @@ Wir lernen, wie man die Performanz von Algorithmenimplementierungen vergleicht.
 Wir versuchen, Algorithmen Schritt für Schritt zu verbessern und arbeiten uns von einfachen Ansätzen, die nicht gut funktionieren, hin zu effizienten Metaheuristiken vor. 
 
 Wir verwenden konkrete Beispiele und Algorithmusimplementierungen in [Python](https://python.org).
-Diese werden frei im Repository *[thomasWeise/mopitpy](https://thomasweise.github.io/moptipy)* unter der GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 Lizenz zur Verfügung gestellt.
+Diese werden frei im Repository *[thomasWeise/moptipy](https://thomasweise.github.io/moptipy)* unter der GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 Lizenz zur Verfügung gestellt.
 Jedes Quellkode-Listing im Buch ist mit einem *(src)*-Link in der Überschrift versehen, mit dem man zur vollen Version des Kodes im Repository kommt.
 Diese Quellkode-Listings sind normalerweise verkürtzte Ausschnitte des tatsächlichen Kodes.
 Wir werden viele Details weglassen, die für das Verständnis der Algorithmen nicht notwendig sind, wie zum Beispiel Type Hints, Parameterüberprüfungen, oder auch ganze Methoden.

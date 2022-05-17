@@ -1,4 +1,4 @@
-## The Search Space and Encoding {#sec:searchSpace}
+## The Search Space {#sec:searchSpace}
 
 The solution space&nbsp;$\solutionSpace$ is the data structure that "makes sense" from the perspective of the user, the decision maker, who will be supplied with one instance of this structure (a candidate solution) at the end of the optimization procedure.
 But&nbsp;$\solutionSpace$ not necessarily is the space that is most suitable for searching inside.
@@ -6,6 +6,7 @@ But&nbsp;$\solutionSpace$ not necessarily is the space that is most suitable for
 We have already seen that there are several constraints that apply to the Gantt charts.
 For every problem instance, different solutions may be feasible.
 Besides the constraints, the space of Gantt charts also looks kind of unordered, unstructured, and messy.
+Actually, many data structures that represent real-world objects with their features, be it Gantt charts, construction plans of airplane wings, or plans for electronic circuits are specialized and do not lend them themselves to be directly processed by general algorithms.
 It would be nice to have a compact, clear, and easy-to-understand representation of the candidate solutions.
 
 
@@ -15,46 +16,50 @@ It would be nice to have a compact, clear, and easy-to-understand representation
 
 \definition{def}{searchSpacePoint}{The elements&nbsp;$\sespel\in\searchSpace$ of the search space $\searchSpace$ are called *points* in the search space.}
 
-\definition{def}{encoding}{The *encoding*&nbsp;$\encoding:\searchSpace\mapsto\solutionSpace$ is a left-total relation which maps each point&nbsp;$\sespel\in\searchSpace$ of the search space&nbsp;$\searchSpace$ to one candidate solutions&nbsp;$\solspel\in\solutionSpace$ in the solution space&nbsp;$\solutionSpace$.}
+\definition{def}{decoding}{The *decoding function*&nbsp;$\decode:\searchSpace\mapsto\solutionSpace$ is a left-total relation which maps each point&nbsp;$\sespel\in\searchSpace$ of the search space&nbsp;$\searchSpace$ to one candidate solutions&nbsp;$\solspel\in\solutionSpace$ in the solution space&nbsp;$\solutionSpace$.}
 
-\definition{def}{representation}{The search space and encoding together are called the *representation*.}
+\definition{def}{encoding}{The search space&nbsp;$\searchSpace$ and decoding function&nbsp;$\decode$ together are called the *encoding* or the *representation*.}
 
 The solution space&nbsp;$\solutionSpace$ is what the user cares about.
 The optimization algorithm *only* works on the search space&nbsp;$\searchSpace$.
 It does not need to know or care about what the candidate solutions are.
 The candidate solutions can be complex structures, such as the shape of the nose of a fast train&nbsp;[@IMNFM1997ENSFRTSB; @KIF2011OOTNSFRMPWRFTE].
-It is hard to imagine how to search such shapes in a targeted way.
+It is hard to imagine how to search inside the space of all possible such shapes in a targeted way.
 However, maybe we could encode the surfaces of the train noses as vectors of real numbers.
 The search space could then just be an $n$-dimensional real vector space.
 This changes everything.
 We know and understand these vector spaces since high school.
-We have all kinds of tools available, ranging from distance metrics to vector mathematics, to search in it in an ordered fashion.
+We have all kinds of tools available to search in it in an ordered fashion, ranging from distance metrics to vector mathematics.
 Suddenly, the problem becomes easier to approach algorithmically.
 Moreover, since real vector spaces are very common, there already exists a wide variety of algorithms that can perform optimization over them.
-A good search space and encoding therefore can make our life much easier. 
+A good encoding, i.e., a suitable search space&nbsp;$\searchSpace$ and mapping&nbsp;$\decode:\searchSpace\mapsto\solutionSpace$ therefore can make our life much easier. 
 
 For applying an optimization algorithm, we therefore usually choose a data structure&nbsp;$\searchSpace$ which we can understand intuitively.
 Ideally, it should be possible to define concepts such as distances, similarity, or neighborhoods on this data structure.
 Spaces that are especially suitable for searching in include, for example:
 
 1. subsets of $n$-dimensional real vectors, i.e., $\realNumbers^n$,
-2. the set&nbsp;$\mathSpace{P}(n)$ of sequences/permutations of&nbsp;$n$ objects, and
-3. a number of&nbsp;$n$ yes-no decisions, which can be represented as bit strings of length&nbsp;$n$ and spans the space&nbsp;$\{0,1\}^n$.
+2. the set&nbsp;$\mathSpace{P}(n)$ of permutations of&nbsp;$n$ objects, and
+3. a number of&nbsp;$n$ yes-no decisions, which can be represented as bit strings of length&nbsp;$n$, spanning the space&nbsp;$\{0,1\}^n$.
 
 For such spaces, we can relatively easily define good search methods and can rely on a large amount of existing research work and literature.
 If we are lucky, then our solution space&nbsp;$\solutionSpace$ is already "similar" to one of these well-known and well-researched data structures.
-Then, we can set&nbsp;$\searchSpace=\solutionSpace$ and use the identity mapping&nbsp;$\encoding(\sespel)=\sespel\;\forall \sespel\in\searchSpace$ as encoding.
-In other cases, we will often prefer to map&nbsp;$\solutionSpace$ to something similar to these spaces and define&nbsp;$\encoding$ accordingly.  
+Then, we can set&nbsp;$\searchSpace=\solutionSpace$ and use the identity mapping&nbsp;$\decode(\sespel)=\sespel\;\forall \sespel\in\searchSpace$ as decoding function.
+In other cases, we will often prefer to map&nbsp;$\solutionSpace$ to something similar to these spaces and define&nbsp;$\decode$ accordingly.  
 
-The mapping&nbsp;$\encoding$ does not need to be injective, as it may map two points&nbsp;$\sespel_1$ and&nbsp;$\sespel_2$ to the same candidate solution even though they are different ($\sespel_1\neq \sespel_2$).
+The mapping&nbsp;$\decode$ does not need to be injective, as it may map two points&nbsp;$\sespel_1$ and&nbsp;$\sespel_2$ to the same candidate solution even though they are different ($\sespel_1\neq \sespel_2$).
 Then, there exists some redundancy in the search space.
 We would normally like to avoid redundancy, as it tends to slow down the optimization process&nbsp;[@KW2002OTUOREIMBES].
-Being injective is therefore a good feature for&nbsp;$\encoding$.
+Being injective is therefore a good feature for&nbsp;$\decode$.
 
-The mapping&nbsp;$\encoding$ also does not necessarily need to be surjective, i.e., there can be candidate solutions&nbsp;$\solspel\in\solutionSpace$ for which no&nbsp;$\sespel\in\searchSpace$ with $\encoding(\sespel)=\solspel$ exists.
+The mapping&nbsp;$\decode$ also does not necessarily need to be surjective, i.e., there can be candidate solutions&nbsp;$\solspel\in\solutionSpace$ for which no&nbsp;$\sespel\in\searchSpace$ with $\decode(\sespel)=\solspel$ exists.
 However, such solutions then can never be discovered.
 If the optimal solution would be among those unreachable ones, then, well, it could not be found by the optimization process.
-Being surjective is therefore a good feature for&nbsp;$\encoding$.
+Being surjective is therefore a good feature for&nbsp;$\decode$.
+
+Finally, and as a side note:
+Technically speaking, $\decode$ does not even necessarily be a function.
+It could be a randomized procedure, meaning that two invocations could lead to different results.
 
 
 ### A Programmer's Perspective
@@ -68,7 +73,7 @@ Additionally, we need a function that can convert from points in the search spac
 
 
 The class given in [@lst:Encoding] provides the blueprint for a function `map` which translates one point&nbsp;`x` in the search space to a candidate solution instance&nbsp;`y` of the solution space.
-This class corresponds to the general definition $\encoding:\searchSpace\mapsto\solutionSpace$ of the encoding.
+This `map` function corresponds to the general definition $\decode:\searchSpace\mapsto\solutionSpace$ of the encoding.
 An implementation of `map` will overwrite whatever contents were stored in object&nbsp;`y` in the process, i.e., we assume the objects&nbsp;`y` can be modified.
 
 
@@ -80,7 +85,8 @@ This data can easily be interpreted and visualized by the user.
 Yet, it is not that clear how we can efficiently create such solutions, especially feasible ones, let alone how to *search* in the space of Gantt charts.^[Of course, there are many algorithms that can do that and we could discover one if we would seriously think about it, but here we take the educational route where we investigate the full scenario with&nbsp;$\searchSpace\neq\solutionSpace$.]
 What we would like to have is a *search space*&nbsp;$\searchSpace$, which can represent the possible candidate solutions of the problem in a more machine-tangible, algorithm-friendly way.
 The JSSP is a very well-known problem.
-Comprehensive overviews about different such search spaces for the JSSP can be found in [@CGT1996ATSOJSSPUGAIR;@W2013GAFSSPAS;@A2010RIGAFTJSPACS;@YN1997GAFJSSP], we here develop only one single idea which I find particularly appealing.
+Comprehensive overviews about different such search spaces for the JSSP can be found in [@CGT1996ATSOJSSPUGAIR;@W2013GAFSSPAS;@A2010RIGAFTJSPACS;@YN1997GAFJSSP].
+We here will develop only one single idea which I find particularly appealing.
 
 
 #### Idea: 1-dimensional Encoding
@@ -99,22 +105,23 @@ If we process such a string from the beginning to the end and step-by-step assig
 It is not possible to produce a deadlock (see [@sec:solutionSpace:feasibility]), because we will only allocate an operation to a machine after having placed all operations that come before it in the same job.
 
 
-\rel.figure{jssp_encoding}{Illustration of the first five and the second-to-last steps of the encoding of an example point in the search space to a candidate solution.}{jssp_encoding.svgz}{width=97.5%}
+\rel.figure{jssp_encoding}{Illustration of the first five and the second-to-last steps of the decoding of an example point in the search space to a candidate solution.}{jssp_encoding.svgz}{width=97.5%}
 
 
-This encoding can best be described by an example.
+This decoding procedure can best be described by an example.
 In the demo instance, we have&nbsp;$\jsspMachines=5$ machines and&nbsp;$\jsspJobs=4$ jobs.
 Each job has&nbsp;$\jsspMachines=5$ operations that must be distributed to the machines.
 We use a string of length&nbsp;$\jsspMachines*\jsspJobs=20$ denoting the priority of the operations.
 We *know* the order of the operations per job as part of the problem instance data&nbsp;$\instance$.
 We therefore do not need to encode it.
 This means that we just include each job's id&nbsp;$\jsspMachines=5$ times in the string.
-This was the original idea: The encoding represents the order in which we assign the $\jsspJobs$&nbsp;jobs, and each job must be picked $\jsspMachines$&nbsp;times.
+This was the original idea:
+The encoding represents the order in which we assign the $\jsspJobs$&nbsp;jobs, and each job must be picked $\jsspMachines$&nbsp;times.
 Our search space is thus somehow similar to the set&nbsp;$\mathSpace{P}(\jsspJobs*\jsspMachines)$ of permutations of&nbsp;$\jsspJobs*\jsspMachines$ objects mentioned earlier, but instead of permutations, we have *permutations with repetitions*.
 
 A point&nbsp;$\sespel\in\searchSpace$ in the search space&nbsp;$\searchSpace$ for the `demo` JSSP instance would thus be an integer string of length&nbsp;20.
 As example, we choose $\sespel=(0, 2, 3, 2, 2, 3, 1, 1, 0, 3, 1, 3, 2, 1, 3, 2, 0, 1, 0, 0)$.
-Let us now exercise the encoding&nbsp;$\encoding(\sespel)$.
+Let us now exercise the decoding procedure&nbsp;$\decode(\sespel)$.
 In [@fig:jssp_encoding], we sketch several of its steps.
 For each step, we show the instance data&nbsp;$\instance$ on the left, the point&nbsp;$\sespel$ in the search space in the middle, and the current state of the Gantt chart&nbsp;$\solspel$ on the right hand side.
 
@@ -184,39 +191,39 @@ We put the algorithm into a function `decode`, so that we can mark it for compil
 
 In [@lst:PermutationsWithRepetitions], we just provide a very small excerpt of an implementation of the `Space` API for permutations of numbers stored in [numpy arrays](https://numpy.org/doc/stable/reference/generated/numpy.array.html).
 This class is quite general:
-It allows us to provide a `blueprint` string of the numbers that we want to arrange in the permutations.
+We provide a `blueprint` string of the numbers that we want to arrange in the permutations.
 This could be a true permutation, e.g., $[1, 2, 3]$, or a permutation with repetitions, such as $[1, 1, 2, 2, 3, 3]$.
-The static method `with_repetitions` instantiates the space for $\jsspMachines$&nbsp;repetitions of the permutation&nbsp;$0..\jsspJobs$.
-The `create` method of the `Space` implementation will always return a copy of the blueprint array.
-We omit the conversion to and from strings, as it can be implemented similarly as in [@lst:jssp_gantt_space].
+The `create` method of the `Space` implementation will always return a copy of that blueprint array.
+We omit the conversion to and from text strings, as it can be implemented similarly as in [@lst:jssp_gantt_space].
 Validation can simply check whether each job ID occurs exactly as needed, i.e., $\jsspMachines$&nbsp;times in our case, and is thus also not printed.
+The static method `with_repetitions` instantiates the space for $\jsspMachines$&nbsp;repetitions of the permutation&nbsp;$0..\jsspJobs$.
 
 
-#### Advantages of this very simple Representation
+#### Advantages of this very simple Encoding
 
 This is a natural way to represent Gantt charts with a much simpler data structure.
 As a result, it has been discovered by several researchers independently, the earliest being Gen et&nbsp;al.&nbsp;[@GTK1994SJSSPBGA], Bierwirth&nbsp;[@B1995AGPATJSSWGA; @BMK1996OPRFSP], and Shi et&nbsp;al.&nbsp;[@SIS1997NESFSJSPBGA], all in the 1990s.
 
-But what do we gain by using this search space and encoding?
+But what do we gain by using this encoding?
 First, well, we now have a very simple data structure&nbsp;$\searchSpace$ to represent our candidate solutions.
 Second, we also have very simple rules for validating a point&nbsp;$\sespel$ in the search space:
 If it contains the numbers&nbsp;$\intRange{0}{(\jsspJobs-1)}$ each exactly&nbsp;$\jsspMachines$ times, it represents a feasible candidate solution.
 
 Third, the candidate solution corresponding to a valid point from the search space will always be *feasible*&nbsp;[@B1995AGPATJSSWGA].
-The mapping&nbsp;$\encoding$ will ensure that the order of the operations per job is always observed.
+The mapping&nbsp;$\decode$ will ensure that the order of the operations per job is always observed.
 We have solved the issue of deadlocks mentioned in [@sec:solutionSpace:feasibility].
 We know from [@tbl:jsspSolutionSpaceTable], that the vast majority of the possible Gantt charts for a given problem might actually be infeasible &ndash; and now we do no longer need to worry about that. 
-Our mapping also makes sure of the more trivial constraints, such as that each machine will process at most one job at a time and that all operations are eventually processed.
+Our mapping&nbsp;$\decode$ also obeys the more trivial constraints, such as that each machine will process at most one job at a time and that all operations are eventually processed.
 
-Finally, we also could modify our representation mapping&nbsp;$\encoding$ to adapt to more complicated and constraint versions of the JSSP if need be:
+Finally, we also could modify our decoding function&nbsp;$\decode$ to adapt to more complicated and constraint versions of the JSSP if need be:
 For example, imagine that it would take a job- and machine-dependent time requirement for carrying a job from one machine to another.
-We could facilitate this by changing&nbsp;$\encoding$ so that it adds this time to the starting time of the job.
+We could facilitate this by changing&nbsp;$\decode$ so that it adds this time to the starting time of the job.
 If there was a job-dependent setup time for each machine&nbsp;[@ANCK2008ASOSPWSTOC], which could be different if job&nbsp;1 follows job&nbsp;0 instead of job&nbsp;2, then this could be facilitated easily as well.
 If our operations would be assigned to "machine types" instead of "machines" and there could be more than one machine per machine type, then the representation mapping could assign the operations to the next machine of their type which becomes idle.
 Our representation also trivially covers the situation where each job may have more than&nbsp;$\jsspMachines$ operations, i.e., where a job may need to cycle back and pass one machine twice.
 It is also suitable for simpler scenarios, such as the Flow Shop Problem, where all jobs pass through the machines in the same, pre-determined order&nbsp;[@T199BFBSP; @GJS1976TCOFAJS; @W2013GAFSSPAS].
 
-Many such different problem flavors can now be reduced to investigating the same space&nbsp;$\searchSpace$ using the same optimization algorithms, just with different encodings&nbsp;$\encoding$ and/or objective functions&nbsp;$\objf$.
+Many such different problem flavors can now be reduced to investigating the same space&nbsp;$\searchSpace$ using the same optimization algorithms, just with different decoding function&nbsp;$\decode$ and/or objective functions&nbsp;$\objf$.
 Additionally, it becomes  easy to indirectly create and modify candidate solutions by sampling points from the search space and moving to similar points, as we will see in the following chapters.
 
 
@@ -274,7 +281,7 @@ Apart from this, larger solution spaces tend to correspond to larger search spac
 
 We now find the drawback of our encoding:
 There is some redundancy in our mapping.
-$\encoding$&nbsp; is not injective.
+$\decode$&nbsp; is not injective.
 Some elements of the search space&nbsp;$\searchSpace$ will map to the same element in the solution space&nbsp;$\solutionSpace$. 
 For example, we could arbitrarily swap the first three numbers in the example string in [@fig:jssp_encoding] and would obtain the same Gantt chart, because jobs&nbsp;0, 2, and&nbsp;3 start at different machines.
 

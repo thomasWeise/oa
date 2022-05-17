@@ -41,8 +41,8 @@ Our search algorithms are working in the search space&nbsp;$\searchSpace$.
 So we need one operation which accepts an existing point&nbsp;$\sespel\in\searchSpace$ and produces a slightly modified copy of it as result.
 In other words, we need to implement a unary search operator!
 
-On a JSSP with $\jsspMachines$&nbsp;machines and $\jsspJobs$&nbsp;jobs, our representation&nbsp;$\searchSpace$ encodes a schedule as an integer array of length&nbsp;$\jsspMachines*\jsspJobs$ containing each of the job IDs from&nbsp;$0$ to&nbsp;$(\jsspJobs-1)$ exactly $\jsspMachines$&nbsp;times.
-The sequence in which these job IDs occur then defines the order in which the jobs are assigned to the machines, which is realized by the encoding function&nbsp;$\encoding$ (see [@lst:jssp_encoding]).
+On a JSSP with $\jsspMachines$&nbsp;machines and $\jsspJobs$&nbsp;jobs, our representation encodes a schedule as an integer array of length&nbsp;$\jsspMachines*\jsspJobs$ containing each of the job IDs from&nbsp;$0$ to&nbsp;$(\jsspJobs-1)$ exactly $\jsspMachines$&nbsp;times.
+The sequence in which these job IDs occur then defines the order in which the jobs are assigned to the machines, which is realized by the decoding function&nbsp;$\decode$ (see [@lst:jssp_encoding]).
 
 One idea to create a slightly modified copy of such a point&nbsp;$\sespel$ in the search space would be to simply swap two of the jobs in it.
 Such a&nbsp;`swap2` operator can be implemented as follows:
@@ -62,18 +62,18 @@ We would actually not make a "move" and just waste time, because we already have
 We implemented this operator in [@lst:Op1Swap2].
 Notice that the operator is randomized, i.e., applying it twice to the same point in the search space will likely yield different results.
 
-\rel.figure{jssp_unary_swap2_demo}{An example for the application of `1swap` to an existing point in the search space (top-left) for the `demo` JSSP instance. It yields a slightly modified copy (top-right) with two jobs swapped. If we map these to the solution space (bottom) using the encoding&nbsp;$\encoding$, the changes marked with violet frames occur (bottom-right).}{jssp_unary_swap2_demo.svgz}{width=99.9%}
+\rel.figure{jssp_unary_swap2_demo}{An example for the application of `1swap` to an existing point in the search space (top-left) for the `demo` JSSP instance. It yields a slightly modified copy (top-right) with two jobs swapped. If we map these to the solution space (bottom) using the decoding function&nbsp;$\decode$, the changes marked with violet frames occur (bottom-right).}{jssp_unary_swap2_demo.svgz}{width=99.9%}
 
 In [@fig:jssp_unary_swap2_demo], we illustrate the application of this `swap2` operator to one point&nbsp;$\sespel$ in the search space for our&nbsp;`demo` JSSP instance.
 It swaps the two jobs at index&nbsp;$i=10$ and&nbsp;$j=15$ of&nbsp;$\sespel$.
 In the new, modified copy&nbsp;$\sespel'$, the jobs&nbsp;$3$ and&nbsp;$0$ at these indices have thus traded places.
-The impact of this modification becomes visible when we map both&nbsp;$\sespel$ and&nbsp;$\sespel'$ to the solution space using the encoding&nbsp;$\encoding$.
+The impact of this modification becomes visible when we map both&nbsp;$\sespel$ and&nbsp;$\sespel'$ to the solution space using the decoding function&nbsp;$\decode$.
 The&nbsp;$3$ which has been moved forward now means that job&nbsp;$3$ will be scheduled before job&nbsp;$1$ on machine&nbsp;$2$.
 As a result, the last two operations of job&nbsp;$3$ can now finish earlier on machines&nbsp;$0$ and&nbsp;$1$, respectively.
 However, time is wasted on machine&nbsp;$2$, as we first need to wait for the first two operations of job&nbsp;$3$ to finish before we can execute it there.
 Also, job&nbsp;$1$ finishes now later on that machine, which also delays its last operation to be executed on machine&nbsp;$4$.
 This pushes back the last operation of job&nbsp;$0$ (on machine&nbsp;$4$) as well.
-The new candidate solution&nbsp;$\encoding(\sespel')$ thus has a longer makespan of&nbsp;$\objf(\encoding(\sespel'))=195$ compared to the original solution with&nbsp;$\objf(\encoding(\sespel))=180$.
+The new candidate solution&nbsp;$\decode(\sespel')$ thus has a longer makespan of&nbsp;$\objf(\decode(\sespel'))=195$ compared to the original solution with&nbsp;$\objf(\decode(\sespel))=180$.
 
 In other words, our application of&nbsp;`swap2` in [@fig:jssp_unary_swap2_demo] has led us to a worse solution.
 This will happen most of the time.
@@ -91,11 +91,11 @@ It is also sometimes called localized random search&nbsp;[@S2003ITSSAO].
 It proceeds as follows:
 
 1. Create one random point&nbsp;$\sespel$ in the search space&nbsp;$\searchSpace$ using the nullary search operator.
-2. Map the point&nbsp;$\sespel$ to a candidate solution&nbsp;$\solspel$ by applying the encoding&nbsp;$\solspel=\encoding(\sespel)$.
+2. Map the point&nbsp;$\sespel$ to a candidate solution&nbsp;$\solspel$ by applying the decoding function&nbsp;$\solspel=\decode(\sespel)$.
 3. Compute the objective value by invoking the objective function&nbsp;$\obspel=\objf(\solspel)$.
 4. Repeat until the termination criterion is met:
     a. Apply the unary search operator to&nbsp;$\sespel$ to get a slightly modified copy&nbsp;$\sespel'$ of it.
-    b. Map the point&nbsp;$\sespel'$ to a candidate solution&nbsp;$\solspel'$ by applying the encoding&nbsp;$\solspel'=\encoding(\sespel')$.
+    b. Map the point&nbsp;$\sespel'$ to a candidate solution&nbsp;$\solspel'$ by applying the decoding function&nbsp;$\solspel'=\decode(\sespel')$.
     c. Compute the objective value&nbsp;$\obspel'$ by invoking the objective function&nbsp;$\obspel'=\objf(\solspel')$.
     d. If&nbsp;$\obspel'<\obspel$, then store $\sespel'$&nbsp;in&nbsp;$\sespel$, store $\solspel'$&nbsp;in&nbsp;$\solspel$, and store $\obspel'$&nbsp;in&nbsp;$\obspel$.
 6. Return the best encountered objective value&nbsp;$\obspel$ and the best encountered solution&nbsp;$\solspel$ to the user.

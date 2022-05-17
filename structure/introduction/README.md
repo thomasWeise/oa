@@ -34,7 +34,7 @@ It would be subject to minimization.
 Usually, in order to actually practically implement an optimization approach, there often will also be
 
 4. a search space&nbsp;$\searchSpace$, i.e., a simpler data structure for internal use, which can more efficiently be processed by an optimization algorithm than&nbsp;$\solutionSpace$ ([@sec:searchSpace]),
-5. an encoding&nbsp;$\encoding:\searchSpace\mapsto\solutionSpace$, which translates "points"&nbsp;$\sespel\in\searchSpace$ from the search space&nbsp;$\searchSpace$ to candidate solutions&nbsp;$\solspel\in\solutionSpace$ in the solution space&nbsp;$\solutionSpace$ ([@sec:searchSpace]),
+5. a mapping&nbsp;$\decode:\searchSpace\mapsto\solutionSpace$, which decodes the "points"&nbsp;$\sespel\in\searchSpace$ from the search space&nbsp;$\searchSpace$ to candidate solutions&nbsp;$\solspel\in\solutionSpace$ in the solution space&nbsp;$\solutionSpace$ ([@sec:searchSpace]),
 6. search operators&nbsp;$\searchOp:\searchSpace^n\mapsto\searchSpace$, which allow for the iterative exploration of the search space&nbsp;$\searchSpace$ ([@sec:searchOperators]), and
 7. a termination criterion, which tells the optimization process when to stop ([@sec:terminationCriterion]).
 

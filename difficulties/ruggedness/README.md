@@ -44,7 +44,7 @@ From its perspective, the objective function looks more smoothly.
 
 A similar idea is utilizing the Baldwin Effect&nbsp;[@HN1987HLCGE; @WGM1994LETBEAFO; @GW1993ALTTCDONNEATBE].
 Here, the global optimization algorithm still works in the search space&nbsp;$\searchSpace$ while the local search (in this context also called "learning") is applied in the solution space&nbsp;$\solutionSpace$.
-In other words, the hosting algorithm generates new points&nbsp;$\sespel\in\searchSpace$ in the search space and maps them to points&nbsp;$\solspel=\encoding(\sespel)$ in the solution space&nbsp;$\solutionSpace$ by applying the representation mapping&nbsp;$\encoding$.
+In other words, the hosting algorithm generates new points&nbsp;$\sespel\in\searchSpace$ in the search space and maps them to points&nbsp;$\solspel=\decode(\sespel)$ in the solution space&nbsp;$\solutionSpace$ by applying the decoding function&nbsp;$\decode$.
 These points are then refined directly in the solution space, but the refinements are *not* coded back by some reverse mapping.
 Instead, only their objective values are assigned to the original points in the search space.
 The algorithm will remember the overall best-ever candidate solution, of course.

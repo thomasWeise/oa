@@ -12,7 +12,7 @@ We learn how to compare the performance of different algorithms.
 We try to improve the algorithms step-by-step, moving from very simple approaches, which do not work well, to efficient metaheuristics.
 
 We use concrete examples and algorithm implementations written in [Python](https://python.org).
-These are freely available in the repository *[thomasWeise/mopitpy](https://thomasweise.github.io/moptipy)* under the GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007.
+These are freely available in the repository *[thomasWeise/moptipy](https://thomasweise.github.io/moptipy)* under the GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007.
 Each source code listing is accompanied by a *(src)* link in the caption linking to the full version of the file in the repository.
 The listings will usually be abridged excerpts.
 This means that we will omit a lot of details unnecessary for understanding the algorithms in play, such as type hints, sanity checks, or even complete methods.

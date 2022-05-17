@@ -65,7 +65,7 @@ The only thing that matters is that gives a rating of a candidate solution&nbsp;
 
 There are different degrees of how general black-box metaheuristics can be.
 For the most general algorithms, it does not matter what exactly the search operators do or even what data structure is used as search space&nbsp;$\searchSpace$.
-For them, it only matters that these operators can be used to get to new points in the search space (which can be mapped to candidate solutions&nbsp;$\solspel$ via a representation mapping&nbsp;$\encoding$ whose nature is also unimportant for the metaheuristic).
+For them, it only matters that these operators can be used to get to new points in the search space (which can be mapped to candidate solutions&nbsp;$\solspel$ via a decoding function&nbsp;$\decode$ whose nature is also unimportant for the metaheuristic).
 Then, even the nature of the candidate solutions&nbsp;$\solspel\in\solutionSpace$ and the solution space&nbsp;$\solutionSpace$ play no big role for black-box optimization methods, as they only work on and explore the search space&nbsp;$\searchSpace$.
 
 Then there are also black-box metaheuristics that demand a special type of search space, e.g., a specific subset of the $n$-dimensional real numbers ($\searchSpace\subset\realNumbers^n$), bit strings of a given length, or permutations of the first $n$&nbsp;natural numbers.
@@ -130,7 +130,7 @@ Instances of this class are passed to the optimization algorithm implementations
 It inherits from `Space` (see [@lst:Space]) and provides all of its method to directly access the search space&nbsp;$\searchSpace$.
 And algorithm can therefore use an instance of `Process` to create and copy points in the search space.
 `Process` also inherits from `Objective` (see [@lst:Objective]).
-It represents a wrapper&nbsp;$\objf':\searchSpace\mapsto\realNumbers$ that embodies both the encoding and the original objective function, i.e., $\objf'(\sespel)=\objf(\encoding(\sespel))\;\forall\sespel\in\searchSpace$.
+It represents a wrapper&nbsp;$\objf':\searchSpace\mapsto\realNumbers$ that embodies both the decoding function and the original objective function, i.e., $\objf'(\sespel)=\objf(\decode(\sespel))\;\forall\sespel\in\searchSpace$.
 This means that an optimization algorithm indeed only needs to care about the search space and has basically no contact with the solution space&nbsp;$\solutionSpace$.
 
 Since `Process` forwards calls of `evaluate` (again, see [@lst:Objective]), it has one other advantage:

@@ -62,7 +62,7 @@ One such idea is to count the so-called (objective) *function evaluations* or FE
 
 \definition{def}{fes}{The consumed *function evaluations*&nbsp;(FEs) are the number of calls to the objective function issued since the beginning of the optimization process.}
 
-Performing one function evaluation means to take one point from the search space&nbsp;$\sespel\in\searchSpace$, map it to a candidate solution&nbsp;$\solspel\in\solutionSpace$ by applying the encoding method&nbsp;$\solspel=\encoding(\sespel)$, and then computing the quality of&nbsp;$\solspel$ by evaluating the objective function&nbsp;$\objf(\solspel)$.
+Performing one function evaluation means to take one point from the search space&nbsp;$\sespel\in\searchSpace$, map it to a candidate solution&nbsp;$\solspel\in\solutionSpace$ by applying the decoding function&nbsp;$\solspel=\decode(\sespel)$, and then computing the quality of&nbsp;$\solspel$ by evaluating the objective function&nbsp;$\objf(\solspel)$.
 Usually, the number of FEs is also equal to the number of search operations applied, which means that each FE includes one application of either a nullary, unary, or binary search operator.
 Counting the FEs instead of measuring time directly has the following *advantages*:
 

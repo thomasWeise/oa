@@ -15,7 +15,7 @@ A problem is deceptive if following such a trail of improving solutions leads us
 
 \def.ref{deceptiveness} is an attempt to formalize this concept.
 We define a specific area&nbsp;$\searchSpaceSubset\subseteq\searchSpace$ of the search space&nbsp;$\searchSpace$.
-In this area, we can apply a hill climbing algorithm using a unary search operator&nbsp;$\searchOp$ and an encoding&nbsp;$\encoding:\searchSpace \mapsto \solutionSpace$ to optimize an objective function&nbsp;$\objf$.
+In this area, we can apply a hill climbing algorithm using a unary search operator&nbsp;$\searchOp$ and a decoding function&nbsp;$\decode:\searchSpace \mapsto \solutionSpace$ to optimize an objective function&nbsp;$\objf$.
 If this objective function&nbsp;$\objf$ is deceptive on&nbsp;$\searchSpaceSubset$, then regardless where we start the hill climber, it will move away from the nearest global optimum&nbsp;$\globalOptimum{\sespel}$.
 "Move away" here means that we also need to have some way to measure the distance between&nbsp;$\globalOptimum{\sespel}$. and another point in the search space and that this distance increases while the hill climber proceeds.
 OK, maybe not a very handy definition after all &ndash; but it describes the phenomena shown in [@fig:increasing_deceptiveness].

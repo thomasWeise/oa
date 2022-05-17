@@ -27,7 +27,7 @@ The following steps then are our own responsibility:
    If yes, then we are good.
    If not, then we should think about whether we can define an alternative search space&nbsp;$\searchSpace$, a simpler data structure.
    Creating and modifying instances of such a simple data structure&nbsp;$\searchSpace$ should be much easier than&nbsp;$\solutionSpace$.
-   Of course, defining such a data structure&nbsp;$\searchSpace$ makes only sense if we can also define an encoding&nbsp;$\encoding$ from&nbsp;$\searchSpace$ to&nbsp;$\solutionSpace$.
+   Of course, defining such a data structure&nbsp;$\searchSpace$ makes only sense if we can also define an decoding function&nbsp;$\decode$ from&nbsp;$\searchSpace$ to&nbsp;$\solutionSpace$.
 6. We select optimization algorithms and plug in the representation and objective function.
    We may need to implement some other algorithmic modules, such as search operations.
    In the following chapters, we discuss a variety of methods for this.

@@ -222,7 +222,7 @@ In summary, when battling an exponential growth of the search space size with a 
 #### Indirect Representations
 
 In several application areas, we can try to speed up the search by reducing the size of the search space.
-The idea is to define a small search space&nbsp;$\searchSpace$ which is translated by a function&nbsp;$\encoding:\searchSpace\mapsto\solutionSpace$ to a much larger solution space&nbsp;$\solutionSpace$, i.e., $|\searchSpace|\ll|\solutionSpace|$&nbsp;[@BK1999TWTGDACOEFAEDP; @D2009WAWDINGADS].
+The idea is to define a small search space&nbsp;$\searchSpace$ which is translated by a function&nbsp;$\decode:\searchSpace\mapsto\solutionSpace$ to a much larger solution space&nbsp;$\solutionSpace$, i.e., $|\searchSpace|\ll|\solutionSpace|$&nbsp;[@BK1999TWTGDACOEFAEDP; @D2009WAWDINGADS].
 
 The first group of indirect representations uses so-called *generative mappings* assume some underlying structure, usually forms of symmetry, in&nbsp;$\solutionSpace$&nbsp;[@DAS2007ANGEFENNSAOG; @RCON1998GPGE].
 When trying to optimize, e.g., the profile of a tire, it makes sense to assume that it will by symmetrically repeated over the whole tire.

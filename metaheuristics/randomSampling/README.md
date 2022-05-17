@@ -1,16 +1,16 @@
 ## Random Sampling {#sec:randomSampling}
 
-If we have our optimization problem and its components properly defined according to [@sec:structure], then we already have the proper tools to solve the problem.
+If we have our optimization problem and its components properly defined according to [@sec:structure], then we already have the necessary tools to obtain some solutions to the problem.
 We know
 
 - how a solution can internally be represented as "point"&nbsp;$\sespel$ in the search space&nbsp;$\searchSpace$ ([@sec:searchSpace]),
-- how we can map such a point&nbsp;$\sespel\in\searchSpace$ to a candidate solution&nbsp;$\solspel$ in the solution space&nbsp;$\solutionSpace$ ([@sec:solutionSpace]) via the representation mapping&nbsp;$\encoding:\searchSpace\mapsto\solutionSpace$ ([@sec:searchSpace]), and
+- how we can map such a point&nbsp;$\sespel\in\searchSpace$ to a candidate solution&nbsp;$\solspel$ in the solution space&nbsp;$\solutionSpace$ ([@sec:solutionSpace]) via the decoding function&nbsp;$\decode:\searchSpace\mapsto\solutionSpace$ ([@sec:searchSpace]), and
 - how to rate a candidate solution&nbsp;$\solspel\in\solutionSpace$ with the objective function&nbsp;$\objf$ ([@sec:objectiveFunction]).
 
 The only question left for us to answer is how to "create" a point&nbsp;$\sespel$ in the search space.
-We can then apply&nbsp;$\encoding(\sespel)$ and get a candidate solution&nbsp;$\solspel$ whose quality we can assess via&nbsp;$\objf(\solspel)$.
+We can then apply&nbsp;$\decode(\sespel)$ and get a candidate solution&nbsp;$\solspel$ whose quality we can assess via&nbsp;$\objf(\solspel)$.
 Let us look at the problem as a black box ([@sec:blackbox]).
-In other words, we do not really know structures and features "make" a candidate solution good.
+In other words, we do not really know which structures and features "make" a candidate solution good.
 Hence, we do not know how to intentionally "create" a good solution in a targeted fashion either.
 Then the best we can do is just create the solutions randomly.
 
@@ -19,17 +19,21 @@ Then the best we can do is just create the solutions randomly.
 
 We can do this by implementing a so-called nullary search operation, whose blueprint was shown in [@lst:op0].
 A nullary search operator receives as input a random number generator&nbsp;$\random$ and a container to fill in a new point in the search space.
-To implement such an operator, recall that our encoding represents solutions as permutations with repetitions ([@sec:jsspSearchSpace]).
+To implement such an operator for the JSSP, recall that our encoding represents solutions as permutations with repetitions ([@sec:jsspSearchSpace]).
 This requires that each job index&nbsp;$\jsspJobIndex\in\intRange{0}{(\jsspJobs-1)}$ of the&nbsp;$\jsspJobs$ must occur exactly&nbsp;$\jsspMachines$ times in the integer array of length&nbsp;$\jsspMachines*\jsspJobs$, where&nbsp;$\jsspMachines$ is the number of machines in the JSSP instance.
-We already learned how to create one such sequence, namely the constant one returned by our `Space` implementation given in [@lst:PermutationsWithRepetitions].
-All we need to do to implement the nullary search operator `Op0` (see [@lst:op0]) for the permutations with repetitions is to first copy this constant sequence into the array `dest` and then shuffle it randomly.
+A constant array with exactly these contents is stored in our `Space` implementation `Permutations` given in [@lst:PermutationsWithRepetitions].
+All we need to do to implement the nullary search operator `Op0` (see [@lst:op0]) for permutations with repetitions is to first copy this constant sequence into the array `dest` and then shuffle `dest` randomly.
 
-\git.code{mp}{Op0Shuffle}{A nullary search operator for permutations with repetitions which creates random sequences.}{moptipy/operators/permutations/op0_shuffle.py}{}{book}{doc,comments}
+\git.code{mp}{Op0Shuffle}{A nullary search operator for permutations (with repetitions) which creates random sequences.}{moptipy/operators/permutations/op0_shuffle.py}{}{book}{doc,comments}
+
+\rel.code{fisher_yates}{An example implementation of the Fisher-Yates shuffle.}{fisher_yates.py}{}{}{doc,comments}
 
 This trivial implementation is illustrated in [@lst:Op0Shuffle].
 While it is not specified how the [`shuffle` method](https://numpy.org/devdocs/reference/random/generated/numpy.random.Generator.shuffle.html) of the [numpy random generator](https://numpy.org/devdocs/reference/random/generator.html) works, I assume that it will apply the Fisher-Yates shuffle algorithm&nbsp;[@FY1948STFBAAMR; @K1969SA].
-With this very simple operator, we can now sample points&nbsp;$\sespel$ from the search space&nbsp;$\searchSpace$ uniformly at random.
-Since we can convert such points to Gantt charts using our encoding&nbsp;$\encoding$, this means that we can generate random (but feasible!) Gantt charts, too.
+While we will use the optimized library method in [@lst:Op0Shuffle], for the sake of completeness, we show how the Fisher-Yates shuffle could be implemented in [@lst:fisher_yates].
+If we wanted, we could also replace the `random.shuffle(dest)` with `shuffle(dest, random)` in [@lst:Op0Shuffle].
+Anyway, with this very simple operator, we can now sample points&nbsp;$\sespel$ from the search space&nbsp;$\searchSpace$ uniformly at random.
+Since we can convert such points to Gantt charts using our decoding function&nbsp;$\decode$, this means that we can generate random (but feasible!) Gantt charts, too.
 
 
 ### Single Random Sample
@@ -38,7 +42,7 @@ Since we can convert such points to Gantt charts using our encoding&nbsp;$\encod
 
 Now that we have all ingredients ready, we can test the idea.
 In [@lst:SingleRandomSample], we implement this algorithm (here called `1rs`) which creates exactly one random point&nbsp;$\sespel$ in the search space.
-It then takes this point and passes it to the [evaluation](https://thomasweise.github.io/moptipy/moptipy.api.html#moptipy.api.process.Process.evaluate) function of our black-box [`process`](https://thomasweise.github.io/moptipy/moptipy.api.html#moptipy.api.process.Process), which will perform the decoding&nbsp;$\solspel=\encoding(\sespel)$ and compute the objective value&nbsp;$\objf(\solspel)$.
+It then takes this point and passes it to the [evaluation](https://thomasweise.github.io/moptipy/moptipy.api.html#moptipy.api.process.Process.evaluate) function of our black-box [`process`](https://thomasweise.github.io/moptipy/moptipy.api.html#moptipy.api.process.Process), which will perform the decoding&nbsp;$\solspel=\decode(\sespel)$ and compute the objective value&nbsp;$\objf(\solspel)$.
 Internally, we implemented this function in such a way that it automatically remembers the best candidate solution it ever has evaluated.
 Thus, we do not need to take care of this in our algorithm, which makes the implementation so short.
 
@@ -155,7 +159,7 @@ This algorithm can be described as follows:
 
 1. Set the best-so-far objective value&nbsp;$\obspel$ to&nbsp;$+\infty$ and the best-so-far candidate solution&nbsp;$\solspel$ to&nbsp;`None`. 
 2. Create a random point&nbsp;$\sespel'$ in the search space&nbsp;$\searchSpace$ by using the nullary search operator.
-3. Map the point&nbsp;$\sespel'$ to a candidate solution&nbsp;$\solspel'$ by applying the encoding&nbsp;$\solspel'=\encoding(\sespel')$.
+3. Map the point&nbsp;$\sespel'$ to a candidate solution&nbsp;$\solspel'$ by applying the decoding function&nbsp;$\solspel'=\decode(\sespel')$.
 4. Compute the objective value&nbsp;$\obspel'$ of&nbsp;$\solspel'$ by invoking the objective function&nbsp;$\obspel'=\objf(\solspel')$.
 5. If&nbsp;$\obspel'$ is better than best-so-far-objective value&nbsp;$\obspel$, i.e., $\obspel'<\obspel$, then
     a. store&nbsp;$\obspel'$&nbsp;in&nbsp;$\obspel$ and
