@@ -32,6 +32,7 @@ This trivial implementation is illustrated in [@lst:Op0Shuffle].
 While it is not specified how the [`shuffle` method](https://numpy.org/devdocs/reference/random/generated/numpy.random.Generator.shuffle.html) of the [numpy random generator](https://numpy.org/devdocs/reference/random/generator.html) works, I assume that it will apply the Fisher-Yates shuffle algorithm&nbsp;[@FY1948STFBAAMR; @K1969SA].
 While we will use the optimized library method in [@lst:Op0Shuffle], for the sake of completeness, we show how the Fisher-Yates shuffle could be implemented in [@lst:fisher_yates].
 If we wanted, we could also replace the `random.shuffle(dest)` with `shuffle(dest, random)` in [@lst:Op0Shuffle].
+But &ndash; of course &ndash; it is *always* more efficient and safer to use a function of a well-tested library like [numpy](https://numpy.org/) than re-creating it using our own code.
 Anyway, with this very simple operator, we can now sample points&nbsp;$\sespel$ from the search space&nbsp;$\searchSpace$ uniformly at random.
 Since we can convert such points to Gantt charts using our decoding function&nbsp;$\decode$, this means that we can generate random (but feasible!) Gantt charts, too.
 
@@ -42,8 +43,8 @@ Since we can convert such points to Gantt charts using our decoding function&nbs
 
 Now that we have all ingredients ready, we can test the idea.
 In [@lst:SingleRandomSample], we implement this algorithm (here called `1rs`) which creates exactly one random point&nbsp;$\sespel$ in the search space.
-It then takes this point and passes it to the [evaluation](https://thomasweise.github.io/moptipy/moptipy.api.html#moptipy.api.process.Process.evaluate) function of our black-box [`process`](https://thomasweise.github.io/moptipy/moptipy.api.html#moptipy.api.process.Process), which will perform the decoding&nbsp;$\solspel=\decode(\sespel)$ and compute the objective value&nbsp;$\objf(\solspel)$.
-Internally, we implemented this function in such a way that it automatically remembers the best candidate solution it ever has evaluated.
+It then takes this point and passes it to the [evaluation](https://thomasweise.github.io/moptipy/moptipy.api.html#moptipy.api.process.Process.evaluate) function of our black-box [`process`](https://thomasweise.github.io/moptipy/moptipy.api.html#moptipy.api.process.Process), which will perform the decoding&nbsp;$\solspel=\decode(\sespel)$ and compute the objective value&nbsp;$\objf(\solspel)$ in one step.
+Internally, we implemented thiss function in such a way that it automatically remembers the best candidate solution it ever has evaluated.
 Thus, we do not need to take care of this in our algorithm, which makes the implementation so short.
 
 \git.code{mp}{SingleRandomSample}{An excerpt of the implementation of an algorithm which creates a single random candidate solution.}{moptipy/algorithms/single_random_sample.py}{}{book}{doc,comments}
@@ -55,34 +56,40 @@ Of course, since the algorithm is *randomized*, it may give us a different resul
 In order to understand what kind of solution qualities we can expect, we hence have to run it a couple of times and compute result statistics.
 We therefore execute our program [23&nbsp;times](https://thomasweise.github.io/moptipy/moptipy.examples.jssp.html#moptipy.examples.jssp.experiment.EXPERIMENT_RUNS).
 [@tbl:singleRandomSampleJSSP] lists the summary statistics of this little experiment.
-All its statistics used are described in detail in [@sec:statisticalMetrics].
-At this point, I also suggest to read [@sec:statisticalMeasures], where we describe which statistical measures exist to summarize experimental results as well as their benefits and drawbacks.
+All the statistics used in there are described in detail in [@sec:statisticalMetrics].
+At this point, I suggest to also read [@sec:statisticalMeasures], where we describe which statistical measures exist to summarize experimental results as well as their benefits and drawbacks.
 Here, we use four types of simple statistics, namely:
 
-1. The minimum and maximum denote best and worst results.
-2. Arithmetic means represent average results (see \def.ref{arithmeticMean}).
+1. The minimum and maximum of a metric denote best and worst results.
+2. Arithmetic means represent average results in the same way we learned in high school (see \def.ref{arithmeticMean}).
 3. Standard deviations give an impression of how far the results are spread (due to the randomization) from the mean, as described in [@sec:varStdDevQuantiles].
-4. The geometric means are used to average results that are scaled with different factors, as described in [@sec:geometricMean].   
+4. The geometric means are used to average results that have been scaled with different factors, as described in [@sec:geometricMean].   
 
 \rel.input{end_results_1rs.md}
 
-: The results of the single random sample algorithm&nbsp;`1rs` compared to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality $\meanBestFscaled$, as well as the mean of the milliseconds when the last improvement took place in the runs ($\meanLIFE$, $\meanLIMS$). The summary line at the bottom presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$), as well as $\meanLIFE$ and $\meanLIMS$. See [@sec:statisticalMetrics] for more details. {#tbl:singleRandomSampleJSSP}
+: The results of the single random sample algorithm&nbsp;`1rs` compared to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality $\meanBestFscaled$, as well as the mean of the FEs and milliseconds when the last improvement took place in the runs ($\meanLIFE$, $\meanLIMS$). The summary line at the bottom presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$, and $\stddevBestFscaled$), as well as $\meanLIFE$ and $\meanLIMS$. See [@sec:statisticalMetrics] for more details. {#tbl:singleRandomSampleJSSP}
 
-From the table, we find that the best results ($\minBestF$) of any run on any instances are often much worse than theoretically best makespans, i.e., the lower bounds&nbsp;$\lowerBound(\objf)$ of the objective functions&nbsp;$\objf$.
+From [@tbl:singleRandomSampleJSSP], we find that the best results ($\minBestF$) of any run on any instances are often much worse than theoretically best makespans, i.e., the lower bounds&nbsp;$\lowerBound(\objf)$ of the objective functions&nbsp;$\objf$.
 For the smallest-scale instance, `orb06`, the optimal makespan is&nbsp;1'010.
 The best of the 23&nbsp;runs of `1rs`, however, finds a schedule with a makespan of&nbsp;1'656 (illustrated by statistic&nbsp;$\minBestF$).
 On `dmu67`, the lower bound of the objective function is&nbsp;5'589, but the best solution discovered by any run of `1rs` has a makespan of&nbsp;12'818.
-The arithmetic mean end result qualities ($\meanBestF$) are even worse.
+This best schedule takes more than twice as long to be completed as it should.
+The arithmetic means $\meanBestF$ of the end result qualities are even worse.
 On `orb06`, this average result is&nbsp;1'932 and on `dmu67`, it is&nbsp;14'150.
-We obtain the *scaled* end result qualities ($\meanBestFscaled$) by dividing the end result objective values of each run by the lower bounds of the objective function.
+We obtain the *scaled* end result qualities ($\meanBestFscaled$) by dividing the resulting objective values of each run by the lower bounds of the objective function.
 On `orb06`, this is&nbsp;1.913, meaning that in average, `1rs` gives us tours about 91% longer than necessary.
-For `dmu67`, with $\meanBestFscaled=2.532$ the average tours are two and a half times as long as the theoretical optima. 
-The standard deviations&nbsp;($\stddevBestF$) of the result qualities is also relatively large for all instances.
-This indicates that different executions ("runs") of the `1rs` algorithm have results that largely differ in quality.
+For `dmu67`, with $\meanBestFscaled=2.532$ the average tours are two and a half times as long as the theoretical optimal ones. 
+
+Different executions ("runs") of the `1rs` algorithm have results that largely differ in quality.
+This can be seen in the standard deviations&nbsp;($\stddevBestF$) of the result qualities.
+On `orb06`, for example, $\stddevBestF$ equals 141&nbsp;time units of makespan and on `dmu72`, the results tend to differ by 534&nbsp; makespan units from the average.
+This means that some solutions are better and some are much worse than the average.
+On five of the eight problems (`abz8`, `la38`, `orb06`, `ta70`, and `yn4`), the standard deviation is higher than 5% of the mean of the result qualities, i.e., $\stddevBestF/\meanBestF\geq0.05$.
+If we instead consider how much room we actually have to improve towards the optimum, i.e., compute $\stddevBestF/(\meanBestF-\lowerBound(\objf)$, then on the same five instances we get values above&nbsp;10%.
 
 Let us take a look at the summary statistics over all JSSP instances at the bottom of the table.
-First, the minimum&nbsp;$\minBestFscaled$ of the scaled results shows us that no run of the `1rs` algorithm on any of the JSSP instances could provide a schedule with a makespan less than 64% longer than the theoretical optimum.
-The geometric mean&nbsp;$\geomeanBestFscaled$ of the scaled end results is&nbsp;2.143, meaning that the average schedule produced by `1rs` is more than twice as long as necessary.
+First, the minimum&nbsp;$\minBestFscaled$ of the scaled results shows us that not a single one of the runs of the `1rs` algorithm on any of the JSSP instances could provide a schedule with a makespan less than 64% longer than the theoretical optimum.
+The geometric mean&nbsp;$\geomeanBestFscaled$ of the scaled end results is&nbsp;2.143, meaning that the average schedule produced by `1rs` is more than twice as long as necessary, over all problems.
 The worst scaled results, $\maxBestFscaled$, even&nbsp;2.721 times as long as the lower bound.
 The standard deviation of the scaled results is&nbsp;0.239, which is more than 10% of the geometric mean.
 
@@ -92,12 +99,12 @@ In [@fig:makespan_scaled_1rs] we visualize how the results of the single runs of
 We therefore sort the instances based on the size of their search space (see [@tbl:jsspSearchSpaceTable]) and, for each instance, draw a [violin plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.violinplot.html) overlaid with a [box plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.boxplot.html) of the scaled result qualities.
 From the box plots, we can see
 
-- the median (the line in the middle, see also [@sec:meanAndMedian]),
-- the 25% and 75% quantiles (the upper and lower end of the boxes, see also [@sec:varStdDevQuantiles]),
-- the arithmetic mean (triangle symbol),
-- the 5% and 95% quantiles (horizontal whisker lines at bottom and top),
-- the outliers, i.e., data elements outside of the whiskers, as circles, and
-- the 95% confidence intervals for the median (as notches in the boxes).
+- the medians are the lines in the middle of the boxes, see also [@sec:meanAndMedian]),
+- the 25% and 75% quantiles mark the upper and lower ends of the boxes, respectively (see also [@sec:varStdDevQuantiles]),
+- the arithmetic means as triangle symbols,
+- the 5% and 95% quantiles as horizontal whisker lines at bottom and top, respectively,
+- the outliers, i.e., data elements outside of the whiskers, are drawn as circles, and
+- the 95% confidence intervals for the median as notches in the boxes.
 
 The violin plots in the background show us the approximate distribution of the data points.
 They are the wider around the horizontal axis the more often the corresponding scaled result qualities were observed in the runs on the instance.
@@ -117,6 +124,7 @@ A lot of time is wasted.
 
 We also present the lower bounds of the makespans as vertical lines in the charts.
 We can clearly see that the Gantt charts tend to need much longer than that (theoretical) optimal solutions to complete.
+We know this from [@tbl:singleRandomSampleJSSP] and [@fig:makespan_scaled_1rs].
 
 As a side note:
 The Gantt charts also reveal the partitioned structure of `dmu67`, `dmu72`, and `swv14`, where the jobs first need to pass through on half of the machines before being processed by the other half (see [@sec:jsspBenchmarkInstances]).
@@ -126,7 +134,11 @@ This is completely reasonable.
 After all, we just create a single random solution.
 We can hardly assume that doing all jobs of a JSSP in a random order would be good idea.
 
-But we also notice more.
+Just imagine you would work in a factory and everyone just randomly picked tasks that they want to do.
+Now if projects consist of multiple tasks which depend on each other and someone chose that they want to do "Task 2" of a project before "Task 1" has been completed would the simply sit around waiting.
+Even though the work would eventually get done, this clearly is not a good idea. 
+
+But we also notice more from our results.
 Let's go back to [@tbl:singleRandomSampleJSSP].
 The mean time $\meanLIMS$ until the runs stop improving is approximately&nbsp;1ms.
 The reason is that we only perform one single objective function evaluation per run, i.e., 1&nbsp;FE.
@@ -144,13 +156,14 @@ So why don't we try to make use of this variance and the high speed of solution 
 
 ### Random Sampling Algorithm  {#sec:randomSamplingAlgo}
 
-\definition{rule}{exploitVariance}{If there is a large-enough variance in the results of an algorithm and we have sufficient computational resources to execute it multiple times, then multiple executions (sequential or in parallel) can be used to improve the expected result quality.}
+\definition{rule}{exploitVariance}{If there is a large-enough variance in the results of an algorithm *and* we have sufficient computational resources to execute it multiple times, then multiple executions (sequential or in parallel) can be used to improve the expected result quality.}
 
 
 #### The Algorithm
 
-The random sampling algorithm, also called random search, repeats creating random solutions until the computational budget is exhausted&nbsp;[@S2003ITSSAO].
-It basically applies \def.ref{exploitVariance} to `1rs`.
+Let us apply \def.ref{exploitVariance} to `1rs`.
+We obtain the random sampling algorithm, also called random search.
+It repeats creating random solutions until the computational budget is exhausted&nbsp;[@S2003ITSSAO].
 In our corresponding Python implementation given in [@lst:RandomSampling], we therefore only needed to add a loop around the code from the single random sampling algorithm from [@lst:SingleRandomSample].
 
 \git.code{mp}{RandomSampling}{An excerpt of the implementation of the random sampling algorithm which keeps creating random candidate solutions and remembers the best encountered on until the computational budget is exhausted.}{moptipy/algorithms/random_sampling.py}{}{book}{comments}
@@ -161,7 +174,7 @@ This algorithm can be described as follows:
 2. Create a random point&nbsp;$\sespel'$ in the search space&nbsp;$\searchSpace$ by using the nullary search operator.
 3. Map the point&nbsp;$\sespel'$ to a candidate solution&nbsp;$\solspel'$ by applying the decoding function&nbsp;$\solspel'=\decode(\sespel')$.
 4. Compute the objective value&nbsp;$\obspel'$ of&nbsp;$\solspel'$ by invoking the objective function&nbsp;$\obspel'=\objf(\solspel')$.
-5. If&nbsp;$\obspel'$ is better than best-so-far-objective value&nbsp;$\obspel$, i.e., $\obspel'<\obspel$, then
+5. If&nbsp;$\obspel'$ is better than the best-so-far-objective value&nbsp;$\obspel$, i.e., $\obspel'<\obspel$, then
     a. store&nbsp;$\obspel'$&nbsp;in&nbsp;$\obspel$ and
     b. store&nbsp;$\solspel'$&nbsp;in&nbsp;$\solspel$.
 6. If the termination criterion is not met, return to *step&nbsp;2*.
@@ -196,7 +209,10 @@ Alas, we only have two minutes, so we are still far from this goal.
 : The results of the single random sample algorithm&nbsp;`1rs` compared to the random sampling algorithm&nbsp;`rs` and to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality $\meanBestFscaled$, as well as the mean of the milliseconds when the last improvement took place in the runs ($\meanLIFE$, $\meanLIMS$). The summary line at the bottom presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$), as well as $\meanLIFE$ and $\meanLIMS$. See [@sec:statisticalMetrics] for more details. {#tbl:randomSamplingJSSP}
 
 Over all problem instances, the standard deviation&nbsp;$\stddevBestFscaled$ of the scaled result quality of&nbsp;`rs` is slightly higher than of&nbsp;`1rs`. 
-The reason for is just that some problem instances are easier than others.
+The reason for is just that on some problem instances, it is easier to guess "good" solutions if you just guess often enough than on others.
+On these easy problems like `orb06` and `la38`, we can eventually guess solutions with $\meanBestFscaled$ in the range of $[1.2,1.4]$.
+On the "hard-to-guess" problems like the two `dmu*`-instances, $meanBestFscaled>1.9$ even after guessing many times.
+As a result, the overall standard deviation is higher.
 
 \rel.figure{makespan_scaled_rs}{Violin plots overlaid with box plots to illustrate the distributions of the (scaled) makespans achieved by `1rs` and `rs` on the different JSSP instances.}{makespan_scaled_rs.svgz}{width=99.9%}
 
@@ -205,14 +221,22 @@ On every single instance, the worst solution discovered by `rs` is much better t
 
 The problem instances are again sorted by the size of their corresponding search spaces.
 We can again clearly observe that larger search spaces lead to worse scaled results.
-At least one of the reasons for this is that larger instances mean slower FEs, which means a smaller total number of generated solutions.
+At least one of the reasons for this is that larger instances mean that the solution data structures become larger.
+This means that sampling random solutions is slower and the FEs take longer.
+This then leads to a smaller total number of generated solutions, i.e., fewer guesses.
+Fewer guesses mean that we have a lower chance of guessing good solutions.
+The extreme case of this is already `1rs`, from which we know that it is much worse than `rs`.
 
 If we compare the Gantt charts of the median runs of `rs` sketched [@fig:gantt_rs] with those of `1rs` in [@fig:gantt_1rs], we can observe a clear reduction of the space between the operations.
 While the schedules are still far longer than the lower bounds, they are significantly better than before. 
 
 So far, we have focused only on end-of-run statistics, such as the mean end result quality.
 Let us now plot the progress that `rs` makes over time.
-In [@fig:progress_rs_T], we visualize the arithmetic mean of the best-so-far objective value achieved at each point in time during over the 23&nbsp;runs.
+`1rs` created only a single solution, so we have one solution quality at one point in time.
+`rs`, however, samples many solutions, several solutions per millisecond, over a stretch of two minutes.
+So for each point in time and one problem instance, we could visualize the objective value of the best-so-far solution of one run of the algorithm &hellip; or the average best-so-far objective value over all runs. 
+This is what we do:
+In [@fig:progress_rs_T], we visualize the arithmetic mean of the best-so-far objective value achieved at each point in time over the 23&nbsp;runs on an instance.
 We find that on all JSSP instances, the most progress is made during the first 20&nbsp;seconds of the runs.
 After about one minute of runtime, the improvements get smaller and less frequent. 
 
@@ -227,8 +251,9 @@ Instead, the improvements will become smaller and smaller the more you invest.
 This is exactly the *Law of Diminishing Returns*&nbsp;[@SN2001M] known from the field of economics.
 
 And this makes a lot of sense here.
-On one hand, the maximal possible improvement of the solution quality is bounded by the global optimum &ndash; once we have obtained it, we cannot improve the quality further, even if we invest infinitely much of an resource.
-On the other hand, in most practical problems, the amount of solutions that have a certain quality gets the smaller the closer said quality is to the optimal one.
+On one hand, the maximal possible improvement of the solution quality is bounded by the global optimum.
+Once we have obtained it, we cannot improve the quality further, even if we invest infinitely much of an resource.
+On the other hand, in most practical problems, the number of solutions that have a certain quality gets the smaller the closer said quality is to the optimal one.
 This is actually what we see in [@fig:progress_rs_log_T]: The chance of randomly guessing a solution of quality&nbsp;$F$ becomes the smaller the better (smaller)&nbsp;$F$ is.
 
 \definition{rule}{diminishingReturns}{Optimization algorithms make most of their progress early during the search. Eventually, the improvements upon the best-so-far solution will become smaller and require (often exponentially) more runtime.}
@@ -236,8 +261,9 @@ This is actually what we see in [@fig:progress_rs_log_T]: The chance of randomly
 From the diagrams we can also see that random sampling is not a good method to solve the JSSP.
 It will not matter very much if we have two minutes, six minutes, or one hour.
 In the end, the improvements we would get by investing more time would probably become smaller and the amount of time we need to invest to get any improvement would keep to increase.
-The progress curves begin to flatten even under the logarithmic scaling of [@fig:progress_rs_log_T], meaning that the algorithm will probably need exponentially more time to find improvements the longer it runs. 
-The fact that random sampling can be parallelized perfectly does not help much here, as we would need to provide an exponentially increasing number of processors to keep improving the solution quality.
+The progress curves begin to flatten even under the logarithmic scaling of [@fig:progress_rs_log_T], meaning that the algorithm will probably need *exponentially* more time to find improvements the longer it runs.
+Back in [@sec:approximationOfTheOptimum], we showed in [@fig:function_growth] how awful exponentially increasing time requirements are.  
+The fact that random sampling can be parallelized perfectly does not help, as we would need to provide an exponentially increasing number of processors to keep improving the solution quality.
 
 \rel.figure{gantt_rs}{Gantt charts of the median results delivered by `rs`.}{gantt_rs.svgz}{width=99.9%}
 
@@ -249,24 +275,25 @@ The fact that random sampling can be parallelized perfectly does not help much h
 ### Summary
 
 With random sampling, we now have a very primitive way to tackle optimization problems.
-In each step, the algorithm generates a new, entirely random candidate solution.
+In each step, the algorithm generates a entirely new and entirely random candidate solution.
 It remembers the best solution that it encounters and, after its computational budget is exhausted, returns it to the user.
 
 Obviously, this algorithm cannot be very efficient.
-But we already also learned one method to improve the result quality and reliability of optimization methods: restarts.
+However, we learned one method to improve the result quality and reliability of optimization methods: restarts.
 According to \def.ref{exploitVariance}, restarting an optimization can be beneficial if the following conditions are met:
 
 1. If we have a budget limitation, then most of the improvements made by the algorithm must happen early during the run.
-   If the algorithm already uses its budget well can keep improving even close to its end, then it makes no sense to stop and restart.
+   If the algorithm already uses its budget well and can keep improving even close to its end, then it makes no sense to stop and restart.
    The budget must be large enough so that multiple runs of the algorithm can complete or at least deliver reasonable results.
 2. Different runs of the algorithm must generate results of different quality.
    A restarted algorithm is still *the same* algorithm.
    It just exploits this variance, i.e., we will get something close to the best result of multiple runs.
    If the different runs deliver bad results anyway, doing multiple runs will not solve the problem.
+   If a single run cannot get close to the optimum, the restarting the algorithm "internally" won't solve the problem. 
 
-Above we said that random sampling is not a very efficient algorithm.
+Above we said that random sampling is not a good algorithm.
 This is true in most reasonable scenarios.
 In problems where information about existing good solutions does not help us in any way to find new good solutions, we cannot really do better than random sampling.
 In most reasonable problems that one may try to solve, however, such information is helpful.
-Random sampling then is also a basic yardstick: 
+Still, random sampling is a basic yardstick: 
 An optimization algorithm that does not significantly outperform random sampling is useless.
