@@ -1,4 +1,4 @@
-## Premature Convergence
+## Premature Convergence {#sec:prematureConvergence}  
 
 \definition{def}{convergence}{An optimization process has converged if it cannot reach new candidate solutions anymore or if it keeps on producing candidate solutions from a small subset of the solution space&nbsp;$\solutionSpace$.}
 
@@ -16,7 +16,7 @@ The occurrence of numerous local optima, however, is more complicated, as the ph
 
 ### The Problem: Convergence to a Local Optimum
 
-\definition{def}{prematureConvergence2}{Convergence to a local optimum is called *premature convergence* ([@WCT2012EOPABT; @WZCN2009WIOD].}
+\definition{def}{prematureConvergence2}{Convergence to a local optimum is called *premature convergence* ([@WCT2012EOPABT; @WZCN2009WIOD] (see also \def.ref{prematureConvergence}).}
 
 \rel.figure{premature_convergence}{An example for how a hill climber could get trapped in a local optimum when minimizing over a one-dimensional, real-valued search space.}{premature_convergence.svgz}{width=58%}
 

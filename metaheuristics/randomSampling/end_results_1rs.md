@@ -9,4 +9,4 @@
 |`dmu67`|5'589|`1rs`|12'818|14'150|696.44|2.532|1|1|
 |`ta70`|2'995|`1rs`|5'403|6'027|315.07|2.012|1|1|
 |||\setup|$\minBestFscaled$|$\geomeanBestFscaled$|$\maxBestFscaled$|$\stddevBestFscaled$|$\meanLIFE$|$\meanLIMS$|
-|\summary||1rs|1.640|2.143|2.721|0.239|1|1|
+|\summary||`1rs`|1.640|2.143|2.721|0.239|1|1|

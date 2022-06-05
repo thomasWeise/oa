@@ -150,3 +150,127 @@ Unfortunately, the hill climber tends to only find significant improvements duri
 \rel.figure{progress_hc_log_T}{The arithmetic mean of the best-so-far solution quality of `hc` and `rs` over time (with log-scaled time axis).}{progress_hc_log_T.svgz}{width=99.9%}
 
 \rel.figure{progress_hc_log_FEs}{The arithmetic mean of the best-so-far solution quality of `hc` and `rs` over the number of objective function evaluations (FEs, with log-scaled FE axis).}{progress_hc_log_FEs.svgz}{width=99.9%}
+
+
+### Stochastic Hill Climbing with Restarts {#sec:stochasticHillClimbingWithRestarts}
+
+Upon close inspection of the results, we notice that we are again in the same situation as with the&nbsp;`1rs` algorithm:
+There is some variance between the results and most of the "action" takes place in a short time compared to our total computational budget (1&nbsp;second vs. 2&nbsp;minutes).
+Back in [@sec:randomSamplingAlgo] we made use of this situation by simply repeating&nbsp;`1rs` until the computational budget was exhausted, which we called the `rs`&nbsp;algorithm.
+Now the situation is a bit different, however.
+`1rs`&nbsp;creates exactly one solution and is finished, whereas our hill climber does not actually finish.
+It keeps creating modified copies of the current solution, only that these eventually do not mark improvements anymore.
+Then, the algorithm has converged into a *local optimum*.
+
+\definition{def}{localOptimum}{A *local optimum* is a point&nbsp;$\localOptimum{\sespel}$ in the search space which maps to a better candidate solution than any other points in its neighborhood (see \def.ref{neighborhood}).}
+
+\definition{def}{prematureConvergence}{An optimization process has prematurely converged if it has not yet discovered the global optimum but can no longer improve its approximation quality.&nbsp;[@WCT2012EOPABT; @WZCN2009WIOD]}
+
+We discuss the phenomenon of premature convergence in detail later in [@sec:prematureConvergence].
+Due to the black-box nature of our basic hill climber algorithm, it is not really possible to know when the complete neighborhood of the current solution has been tested.
+We thus do not know whether or not the algorithm is trapped in a local optimum and has *prematurely converged*.
+However, we can try to guess it:
+If there has not been any improvement for a high number&nbsp;$L$ of steps, then the current point&nbsp;$\sespel$ in the search space is probably a local optimum.
+If that happens, we just restart at a new random point in the search space.
+Of course, we will remember the *best-so-far* candidate solution in a special variable&nbsp;$\bestSoFar{\solspel}$ over all restarts and return it to the user in the end.
+
+
+#### The Algorithm {#sec:hillClimberWithRestartAlgo}
+
+1. Set counter&nbsp;$C$ of unsuccessful search steps to&nbsp;$0$.
+2. Set the best-so-far objective value&nbsp;$\bestSoFar{\obspel}$&nbsp;to&nbsp;$+\infty$ and the best-so-far candidate solution&nbsp;$\bestSoFar{\solspel}$ to&nbsp;`None`. 
+3. Create a random point&nbsp;$\sespel$ in the search space&nbsp;$\searchSpace$ using the nullary search operator.
+4. Map the point&nbsp;$\sespel$ to a candidate solution&nbsp;$\solspel$ by applying the decoding function&nbsp;$\solspel=\decode(\sespel)$.
+5. Compute the objective value by invoking the objective function&nbsp;$\obspel=\objf(\solspel)$.
+6. If&nbsp;$\obspel<\bestSoFar{\obspel}$, then store&nbsp;$\obspel$&nbsp;in&nbsp;$\bestSoFar{\obspel}$ and store&nbsp;$\solspel$&nbsp;in&nbsp;$\bestSoFar{\solspel}$.
+7. Repeat until the termination criterion is met:
+    a. Apply the unary search operator to&nbsp;$\sespel$ to get the slightly modified copy&nbsp;$\sespel'$ of it.
+    b. Map the point&nbsp;$\sespel'$ to a candidate solution&nbsp;$\solspel'$ by applying the decoding function&nbsp;$\solspel'=\decode(\sespel')$.
+    c. Compute the objective value&nbsp;$\obspel'$ by invoking the objective function&nbsp;$\obspel'=\objf(\solspel')$.
+    d. If&nbsp;$\obspel'<\obspel$, then
+        i. store&nbsp;$\obspel'$&nbsp;in&nbsp;$\obspel$ and store&nbsp;$\sespel'$&nbsp;in&nbsp;$\sespel$ and
+        ii. set&nbsp;$C$ to&nbsp;$0$.
+        iii. If&nbsp;$\obspel'<\bestSoFar{\obspel}$, then store&nbsp;$\obspel'$&nbsp;in&nbsp;$\bestSoFar{\obspel}$ and store&nbsp;$\solspel'$&nbsp;in&nbsp;$\bestSoFar{\solspel}$.
+        
+       otherwise, i.e., if&nbsp;$\obspel'\geq \obspel$, then
+      
+        iv. increment&nbsp;$C$ by&nbsp;$1$.
+        v. If&nbsp;$C\geq L$, then perform a restart by going back to *step&nbsp;3*.
+8. Return best encountered objective value&nbsp;$\bestSoFar{\obspel}$ and the best encountered solution&nbsp;$\bestSoFar{\solspel}$ to the user.
+
+\git.code{mp}{HillClimberWithRestarts}{An excerpt of the implementation of the Hill Climbing algorithm with restarts, which remembers the best-so-far solution and tries to find better solutions in its neighborhood but restarts if it seems to be trapped in a local optimum.}{moptipy/algorithms/hill_climber_with_restarts.py}{}{book}{doc,comments}
+
+Now this algorithm &ndash; implemented in [@lst:HillClimberWithRestarts] &ndash; is a bit more elaborate.
+Basically, we embed the original hill climber into a loop.
+This inner hill climber will stop after a certain number&nbsp;$L$ of unsuccessful search steps, which then leads to a new round in the outer loop.
+In combination with the `swap2`&nbsp;operator, we refer to this algorithm as `hcr_L_swap2`, where `L`&nbsp;is to be replaced with the actual value of the parameter&nbsp;$L$.
+
+
+#### The Right Setup {#sec:hillClimberWithRestartSetup}
+
+This is the first time that we have an algorithm with a (numerical) parameter.
+Obviously, the performance of our `hcr_L_swap2` algorithm will depend strongly on the value of&nbsp;$L$.
+Unfortunately, we now realize that we actually have no idea which value of&nbsp;$L$ is good.
+If we pick it too low, then the algorithm will restart before it actually converges to a local optimum, i.e., stop while it could still improve.
+If we pick it too high, we waste runtime and do fewer restarts than what we could do.
+
+If we do not know which value for a parameter is reasonable, we can always do an experiment to investigate.
+We simply apply our algorithm for different values of&nbsp;$L$ to all the eight benchmark instances, 23&nbsp;times each.
+Since the order of magnitude of the proper value for&nbsp;$L$ is not yet clear, it makes sense to test exponentially increasing numbers.
+Here, we test the powers of two from $2^7=128$ to $2^{20}=1'048'576$.
+For each value, we plot the geometric mean of the scaled end result quality over the $23*8=184$&nbsp;runs that we get for each setup in total.
+In this diagram, the horizontal axis is logarithmically scaled.
+
+From the plot, we can confirm our expectations:
+Small numbers of&nbsp;$L$ perform bad and high numbers of&nbsp;$L$ cannot really improve above the basic hill climber.
+Actually, if we would set&nbsp;$L$ to a number larger than the overall budget, then we would obtain exactly the original hill climber, as it would never perform any restart.
+
+\rel.figure{hcr_L_swap2_results}{The geometric mean of the best-so-far solution quality of `hcr_L_swap2` at the end of the runs, plotted over different values of the parameter $L$ (with log-scaled horizontal axis).}{hcr_L_swap2_results.svgz}{width=90%}
+
+In [@fig:hcr_L_swap2_results], we present the geometric means of the end result qualities of `hcr_L_swap2` for our eight JSSP instances for the different values of&nbsp;$L$.
+We also show the geometric means over all instances together.
+A value of&nbsp;$L$ is the better, the smaller these mean makespans are. 
+For instances with small search space like `orb06`, small values of&nbsp;$L$ like $2^{11}=2048$ are good.
+For instances with large search spaces like `ta70` or `dmu67`, larger values such as $2^{16}=65'536$ work well.
+If we look at the overall geometric mean, i.e., the thick red line, $L=2^{15}=32'768$ comes out as best setting.
+We will therefore choose this setup and refer to it as `hcr` for the sake of simplicity.  
+
+
+#### Results on the JSSP {#sec:hcr_L_swap2:jssp:results}
+
+Let us now compare the performance this setup, `hcr_32768_swap2` (or `hcr` for brevity), with `hc` and&nbsp;`rs`. 
+From [@tbl:end_results_hcr], we find that `hcr` is better than the other two algorithms on every instance.
+If has the best $\minBestF$, $\meanBestF$, $\stddevBestF$, and $\meanBestFscaled$ on every instance.
+It also has the best overall $\minBestFscaled$, $\geomeanBestFscaled$, and $\maxBestFscaled$.
+
+[fig:makespan_scaled_hcr] shows again the box plots on top of the violin plots of the end results makespans.
+Here, the results of `hcr` look a bit as if we had taken the output of `hc` and squashed it all together at the bottom (best) values.
+This is essentially what `hcr` is doing, it is essentially a restarted version of `hc`.
+But unlike `rs`, which is a restarted version of `1rs`, we cannot perform tens of thousands of restarts.
+
+If we take a look at the progress plots in [@fig:progress_hcr_log_T], we find that the runs of `hcr` initially closely follow those of `hc`.
+Indeed, `hcr` is exactly `hc` until it restarts.
+After the restart takes place, some time needs to pass until one restart exceeds the best solution quality, and then the curves of `hcr` and `hc` will split.
+These splits happen at between $4*10^2 ms = 0.4 s$ (`orb06`, `la38`) and $2*10^3 ms = 2 s$ (e.g., `dmu67`, `swv14`).
+Given a total runtime of two minutes, this means that the algorithm will probably not restart more than 100 to 500 times.
+The performance plots also fit well to our the findings from [@fig:hcr_L_swap2_results]:
+The smaller-scale instances like `orb06` would benefit from earlier restarts (smaller&nbsp;$L$), as they temporarily hit a plateau before improving again.
+Earlier restarts, however, would probably cut off the last few improvements on the larger-scale instances, which do not hit such plateaus.
+(By the way, the progress plots are log-scaled, meaning that a plateau of 0.2&nbsp;seconds length will look much smaller on the right side of the figure of `orb06`, which is why you only see it prominently once although it occurs multiple times.)
+
+Either way:
+While the improvements get smaller and smaller and occur slower and slower towards the end of the computational budget, we still get improvements during all the runtime.
+
+Also, the Gantt charts of the median result of `hcr` illustrated in [@fig:gantt_hcr] are again more compact than those for `hc` ([@fig:gantt_hcr]).
+Matter of fact, on `orb06` the median solution is now very close to the optimal result and also on `la38`, we are not that far away from it.
+While `hcr` is still a very simple method, our results now look somewhat reasonable. 
+
+\rel.input{end_results_hcr.md}
+
+: The results of the hill climber with restarts `hcr` with $L=32'768$ and the `swap2` operator compared to those of the basic hill climber&nbsp;`hc`, random sampling algorithm&nbsp;`rs` and  to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality $\meanBestFscaled$, as well as the mean of the milliseconds when the last improvement took place in the runs ($\meanLIFE$, $\meanLIMS$). The summary line at the bottom presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$), as well as $\meanLIFE$ and $\meanLIMS$. See [@sec:statisticalMetrics] for more details. {#tbl:end_results_hcr}
+
+\rel.figure{makespan_scaled_hcr}{Violin plots overlaid with box plots to illustrate the distributions of the (scaled) makespans achieved by `hcr`, `hc`, and `rs` on the different JSSP instances.}{makespan_scaled_hcr.svgz}{width=99.9%}
+
+\rel.figure{progress_hcr_log_T}{The arithmetic mean of the best-so-far solution quality of `hcr`, `hc`, and `rs` over time (with log-scaled time axis).}{progress_hcr_log_T.svgz}{width=99.9%}
+
+\rel.figure{gantt_hcr}{The Gantt charts corresponding to the median results of the hill climber&nbsp;`hcr` with restarts after $L=32'768$ unsuccessful moves.}{gantt_hcr.svgz}{width=99.9%}
