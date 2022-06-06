@@ -65,7 +65,7 @@ We would actually not make a "move" and just waste time, because we already have
 We implemented this operator in [@lst:Op1Swap2].
 Notice that the operator is randomized, i.e., applying it twice to the same point in the search space will likely yield different results.
 
-\rel.figure{jssp_unary_swap2_demo}{An example for the application of `1swap` to an existing point in the search space (top-left) for the `demo` JSSP instance. It yields a slightly modified copy (top-right) with two jobs swapped. If we map these to the solution space (bottom) using the decoding function&nbsp;$\decode$, the changes marked with violet frames occur (bottom-right).}{jssp_unary_swap2_demo.svgz}{width=99.9%}
+\rel.figure{jssp_unary_swap2_demo}{An example for the application of `swap2` to an existing point in the search space (top-left) for the `demo` JSSP instance. It yields a slightly modified copy (top-right) with two jobs swapped. If we map these to the solution space (bottom) using the decoding function&nbsp;$\decode$, the changes marked with violet frames occur (bottom-right).}{jssp_unary_swap2_demo.svgz}{width=99.9%}
 
 In [@fig:jssp_unary_swap2_demo], we illustrate the application of this `swap2` operator to one point&nbsp;$\sespel$ in the search space for our&nbsp;`demo` JSSP instance.
 It swaps the two jobs at index&nbsp;$i=10$ and&nbsp;$j=15$ of&nbsp;$\sespel$.
@@ -243,7 +243,13 @@ From [@tbl:end_results_hcr], we find that `hcr` is better than the other two alg
 If has the best $\minBestF$, $\meanBestF$, $\stddevBestF$, and $\meanBestFscaled$ on every instance.
 It also has the best overall $\minBestFscaled$, $\geomeanBestFscaled$, and $\maxBestFscaled$.
 
-[fig:makespan_scaled_hcr] shows again the box plots on top of the violin plots of the end results makespans.
+The standard deviation $\stddevBestF$ of the end result qualities of `hcr` is smaller than the one of the other two algorithms.
+This means that we effectively utilized the variance in the results of `hc` to obtain better results (see \def.ref{exploitVariance}).
+The time until the algorithm stops improving ($\meanLIFE$, $\meanLIMS$) of `hcr` is also significantly higher than of `hc`.
+It often keeps improving for ten times as many FEs or milliseconds.
+This means that we now utilize our computational budget much better. 
+
+[@fig:makespan_scaled_hcr] shows again the box plots on top of the violin plots of the end results makespans.
 Here, the results of `hcr` look a bit as if we had taken the output of `hc` and squashed it all together at the bottom (best) values.
 This is essentially what `hcr` is doing, it is essentially a restarted version of `hc`.
 But unlike `rs`, which is a restarted version of `1rs`, we cannot perform tens of thousands of restarts.
@@ -274,3 +280,131 @@ While `hcr` is still a very simple method, our results now look somewhat reasona
 \rel.figure{progress_hcr_log_T}{The arithmetic mean of the best-so-far solution quality of `hcr`, `hc`, and `rs` over time (with log-scaled time axis).}{progress_hcr_log_T.svgz}{width=99.9%}
 
 \rel.figure{gantt_hcr}{The Gantt charts corresponding to the median results of the hill climber&nbsp;`hcr` with restarts after $L=32'768$ unsuccessful moves.}{gantt_hcr.svgz}{width=99.9%}
+
+
+#### Drawbacks of the Idea of Restarts
+
+With our restart method, we could significantly improve the results of the hill climber.
+It did not directly address the problem of premature convergence to a local optimum.
+However, it tried to find a remedy for its symptoms, not for its cause. 
+
+Basically, a restarted algorithm is still the same algorithm &ndash; we just restart it again and again.
+If there are many more local optima than global optima, every restart will probably end again in a local optimum.
+If there are many more ``bad'' local optima than ``good'' local optima, every restart will probably end in a ``bad'' local optimum.
+While restarts improve the chance to find better solutions, they cannot solve the intrinsic shortcomings of an algorithm.
+
+Another problem is:
+With every restart we throw away all accumulated knowledge and information of the current run.
+Restarts are therefore also wasteful.
+
+
+### Hill Climbing with a Different Unary Operator {#sec:hillClimbingWithDifferentUnaryOperator}
+
+#### Small vs. Large Neighborhoods &ndash; and Uniform vs. Non-Uniform Sampling 
+
+One of issues limiting the performance of our restarted hill climber could be the design of the unary operator.
+`swap2`&nbsp;will swap two jobs in an encoded solution.
+Since the solutions are encoded as integer arrays of length&nbsp;$\jsspMachines*\jsspJobs$, there are&nbsp;$\jsspMachines*\jsspJobs$ possible choices when picking the index of the first job to be swapped.
+We swap only with *different* jobs and each job appears&nbsp;$\jsspMachines$ times in the encoding.
+This leaves&nbsp;$\jsspMachines*(\jsspJobs-1)$ choices for the second swap index, because we will only use a second index that points to a different job ID.
+If we think about the size of the neighborhood spanned by `swap2`, we can also ignore equivalent swaps:
+Exchanging the jobs at indexes $(10,5)$ and $(5,10)$, for example, would result in the same outcome.
+In total, from any given point in the search space, `swap2` may reach&nbsp;$0.5*(\jsspMachines*\jsspJobs)*[\jsspMachines*(\jsspJobs-1)]=0.5*\jsspMachines^2(\jsspJobs^2-\jsspJobs)$ different other points.
+Some of these points might still actually encode the same candidate solutions, i.e., identical schedules.
+In other words, the neighborhood spanned by our `swap2`&nbsp;operator equals only a tiny fraction of the huge search space (remember [@tbl:jsspSearchSpaceTable]).
+
+This has two implications:
+      
+1. The chance of premature convergence for a hill climber applying this operator is relatively high, since the neighborhoods are relatively small.
+   If the neighborhood spanned by the operator was larger, it would contain more, potentially better solutions.
+   Hence, it would take longer for the optimization process to reach a point where no improving move can be discovered anymore.
+2. Assume that there is no better solution in the `swap2` neighborhood of the current best point in the search space.
+   There might still be a much better, similar solution.
+   Finding it could, for instance, require swapping three or four jobs &ndash; but the `hc_swap2` algorithm will never find it, because it can only swap two jobs.
+   If the search operator would permit such moves, then even the plain hill climber may discover this better solution.
+
+If we look at it like this, we realize that maybe our unary search operator does indeed limit the performance of our algorithm.
+So let us try to think about how we could define a new unary operator which can access a larger neighborhood.
+As we should always do, we first consider the extreme cases.
+
+On the one hand, we have `swap2` which samples from a relatively small neighborhood.
+Because the neighborhood is small, the stochastic hill climber will eventually have visited all of the solutions it contains.
+If none of them is better than the current best solution, it will not be able to depart from it.
+
+The other extreme could be an operator that can access the complete search space&nbsp;$\searchSpace$ from any point in it.
+Imagine that we build such an operator to *uniformly* sample from&nbsp;$\searchSpace$.
+Actually, we already have this operator:
+It is our nullary operator from [@lst:Op0Shuffle]!
+What would happen if we used this nullary operator as unary operator?
+It would return an entirely random point from the search space&nbsp;$\searchSpace$ and ignore its input.
+Then, each point&nbsp;$\sespel\in\searchSpace$ would have the whole&nbsp;$\searchSpace$ as the neighborhood.
+This would turn the hill climber into random sampling.
+Stop. Halt. No.
+We do not want that.
+
+From this thought experiment we know that unary operators which indiscriminately sample from very large neighborhoods are probably not very good ideas, as they are "too random."
+They also make less use of the causality of the search space, as they make large steps and their produced outputs are very different from their inputs.
+
+Using an operator that creates larger neighborhoods than `swap2`, which are still smaller than&nbsp;$\searchSpace$ would be one idea.
+For example, we could always swap three jobs instead of two.
+The more jobs we swap in each application, the larger the neighborhood gets.
+Then we will be less likely to get trapped in local optima.
+Actually, there would be fewer local optima, because local optima are defined from the perspective of the neighborhood, which, in turn, is defined by the search operator.
+However, if we do more swaps, we will also make less and less use of the causality property, i.e., the solutions we derive from the current best one will be more and more different from it.
+Where should we draw the line?
+How many jobs should we swap?
+
+Hm.
+There is one more aspect of the operators that we did not think about yet.
+An operator does not just span a neighborhood, but it also defines a *probability distribution* over it.
+So far, our `swap2` unary operator samples *uniformly* from the neighborhood of its input.
+In other words, all of the $0.5*\jsspMachines^2(\jsspJobs^2-\jsspJobs)$ new points that it could create in one step have exactly the same probability, the same chance to be chosen.
+
+But we do not need to do it like that.
+We could construct an operator that *often* creates outputs very similar to its input (like `swap2`), but also, *sometimes*, samples points a bit farther away in the search space.
+This operator could have a huge neighborhood &ndash; but sample it *non-uniformly*.
+
+
+#### Second Unary Search Operator for the JSSP {#sec:jsspUnaryOperator2}
+
+We define the `swapn`&nbsp;operator for the JSSP as follows and implement it in [@lst:Op1SwapN]:
+
+\git.code{mp}{Op1SwapN}{A unary search operator that swaps a random number of elements (often few, sometimes many) in a permutation that may contain repeated elements.}{moptipy/operators/permutations/op1_swapn.py}{}{book}{doc,comments}
+
+1. Make a copy&nbsp;$\sespel'$ of the input point&nbsp;$\sespel$ from the search space.
+2. Pick a random index&nbsp;$i$ from $0\dots(\jsspMachines*\jsspJobs-1)$.
+3. Store the job-id at index&nbsp;$i$ in the variable&nbsp;$\mathit{first}$ for holding the very first job, i.e., set&nbsp;$f=\arrayIndex{\sespel'}{i}$.
+4. Set the job-id variable&nbsp;$\mathit{last}$ for holding the last-swapped-job to&nbsp;$\arrayIndex{\sespel'}{i}$ as well.
+5. Set $\mathit{continueAfter}$, the variable deciding whether to do another swap after the current one, to `True`.
+6. While $\mathit{continueAfter}$ is `True`:
+    a. Decide whether we should continue the loop *after* the current iteration (`True`) or not (`False`) with equal probability and remember this decision in variable&nbsp;$\mathit{continueAfter}$.
+    b. Pick a random index&nbsp;$j$ from $0\dots(\jsspMachines*\jsspJobs-1)$.
+    c. If $\mathit{last}=\arrayIndex{\sespel'}{j}$, go back to point&nbsp;b.
+    d. If $\mathit{continueAfter}$ is `False` and $\mathit{first}=\arrayIndex{\sespel}{j}$, go back to point&nbsp;b.
+    e. Store the job-id at index&nbsp;$j$ in the variable&nbsp;$\mathit{last}$.
+    f. Copy the job-id at index&nbsp;$j$ to index&nbsp;$i$, i.e., set&nbsp;$\arrayIndex{\sespel'}{i}=\arrayIndex{\sespel'}{j}$.
+    g. Set&nbsp;$i=j$.
+7. Store the first-swapped job-id&nbsp;$\mathit{first}$ in&nbsp;$\arrayIndex{\sespel'}{i}$.
+8. Return the now modified copy&nbsp;$\sespel'$ of&nbsp;$\sespel$.
+    
+Here, the idea is that we will perform at least one iteration of the loop (*point&nbsp;6*).
+If we would do exactly one iteration, then we would need to pick two indices&nbsp;$i1$ and&nbsp;$i2$ where different job-IDs are stored, as&nbsp;$last$ must be different from&nbsp;$first$ (*point&nbsp;c* and&nbsp;*d*).
+We would then swap the jobs at these indices (*points&nbsp;f*, *g*, and&nbsp;*7*).
+In the case of exactly one iteration of the main loop, this operator behaves the same as&nbsp;`swap2`.
+This takes place with a probability of&nbsp;0.5 (*point&nbsp;a*).
+
+If we do two iterations, i.e., pick `True` the first time we arrive at *point&nbsp;a* and `False` the second time, then we swap three job-IDs instead.
+Let us say we picked indices&nbsp;$\alpha$ at *point&nbsp;2*, $\beta$ at *point&nbsp;b*, and&nbsp;$\gamma$ when arriving the second time at&nbsp;*b*.
+We will store the job-ID originally located at index&nbsp;$\beta$ at index&nbsp;$\alpha$, the job originally stored at index&nbsp;$\gamma$ at index&nbsp;$\beta$, and the job-ID from index&nbsp;$\gamma$ to index&nbsp;$\alpha$.
+*Condition&nbsp;c* prevents index&nbsp;$\beta$ from referencing the same job-ID as index&nbsp;$\alpha$ and index&nbsp;$\gamma$ from referencing the same job-id as what was originally stored at index&nbsp;$\beta$.
+*Condition&nbsp;d* only applies in the last iteration and prevents&nbsp;$\gamma$ from referencing the original job-ID at&nbsp;$\alpha$.
+
+This three-job swap will take place with probability&nbsp;$0.5*0.5=0.25$.
+Similarly, a four-job-swap will happen with half of that probability, and so on.
+In other words, we have something like a Bernoulli process, where we decide whether or not to do another iteration by flipping a fair coin, where each choice has probability&nbsp;0.5.
+The number of iterations will therefore be geometrically distributed with an expectation of two job swaps.
+Of course, we only have&nbsp;$\jsspMachines$ different job-IDs in a finite-length array&nbsp;$\sespel'$, so this is only an approximation.
+Sometimes, a longer sequence of swaps may undo early swaps later on, too.
+In summary, this operator will most often apply small changes and sometimes bigger steps.
+The bigger the search step, the less likely will it be produced.
+The operator therefore can make use of the *causality* while &ndash; at least theoretically &ndash; being able to escape from any local optimum.
