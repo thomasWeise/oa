@@ -120,7 +120,7 @@ We will refer to this setup as&nbsp;`hc` and present its results with those of&n
 
 \rel.input{end_results_hc.md}
 
-: The results of the hill climber `hc` with the `swap2` operator compared to those of the random sampling algorithm&nbsp;`rs` and to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality $\meanBestFscaled$, as well as the mean of the milliseconds when the last improvement took place in the runs ($\meanLIFE$, $\meanLIMS$). The summary line at the bottom presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$), as well as $\meanLIFE$ and $\meanLIMS$. See [@sec:statisticalMetrics] for more details. {#tbl:jssp_hc_results}
+: The results of the hill climber `hc` with the `swap2` operator compared to those of the random sampling algorithm&nbsp;`rs` and to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality $\meanBestFscaled$, as well as the mean of the milliseconds when the last improvement took place in the runs ($\meanLIFE$, $\meanLIMS$). The summary line at the bottom presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$, $\stddevBestFscaled$), as well as $\meanLIFE$ and $\meanLIMS$. See [@sec:statisticalMetrics] for more details. {#tbl:jssp_hc_results}
 
 [@tbl:jssp_hc_results] tells us very clearly that our simple hill climber&nbsp;`hc` performs much better than the random sampling algorithm&nbsp;`rs`. 
 It wins in terms of $\minBestF$ and $\meanBestF$ on every single problem instance.
@@ -273,7 +273,7 @@ While `hcr` is still a very simple method, our results now look somewhat reasona
 
 \rel.input{end_results_hcr.md}
 
-: The results of the hill climber with restarts `hcr` with $L=32'768$ and the `swap2` operator compared to those of the basic hill climber&nbsp;`hc`, random sampling algorithm&nbsp;`rs` and  to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality $\meanBestFscaled$, as well as the mean of the milliseconds when the last improvement took place in the runs ($\meanLIFE$, $\meanLIMS$). The summary line at the bottom presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$), as well as $\meanLIFE$ and $\meanLIMS$. See [@sec:statisticalMetrics] for more details. {#tbl:end_results_hcr}
+: The results of the hill climber with restarts `hcr` with $L=32'768$ and the `swap2` operator compared to those of the basic hill climber&nbsp;`hc`, random sampling algorithm&nbsp;`rs` and  to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality $\meanBestFscaled$, as well as the mean of the milliseconds when the last improvement took place in the runs ($\meanLIFE$, $\meanLIMS$). The summary line at the bottom presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$, $\stddevBestFscaled$), as well as $\meanLIFE$ and $\meanLIMS$. See [@sec:statisticalMetrics] for more details. {#tbl:end_results_hcr}
 
 \rel.figure{makespan_scaled_hcr}{Violin plots overlaid with box plots to illustrate the distributions of the (scaled) makespans achieved by `hcr`, `hc`, and `rs` on the different JSSP instances.}{makespan_scaled_hcr.svgz}{width=99.9%}
 
@@ -408,3 +408,92 @@ Sometimes, a longer sequence of swaps may undo early swaps later on, too.
 In summary, this operator will most often apply small changes and sometimes bigger steps.
 The bigger the search step, the less likely will it be produced.
 The operator therefore can make use of the *causality* while &ndash; at least theoretically &ndash; being able to escape from any local optimum.
+
+
+#### Results on the JSSP
+
+Let us now compare the end results that our hill climbers can achieve using either the `swap2` or the new `swapn`&nbsp;operator after two minutes of runtime on my computer in [@tbl:end_results_hcn].
+We find immediately that `hcn` is better than `hc`, i.e., that the hill climber with the new `swapn` operator can consistently deliver better solutions than hill climber using `swap2`.
+It wins in each instance in terms of $\minBestF$ and $\meanBestF$ as well as in the overall $\minBestFscaled$, $\geomeanBestFscaled$, and $\maxBestFscaled$ against `hc`.
+Surprisingly, on `orb06`, `abz8`, `dmu72`, and `dmu67`, the best result discovered by any run ($\minBestF$) is even better compared to the hill climber with restarts and `swap2`, i.e., `hcr`.
+However, in average, `hcr` is still better than `hcn`.
+
+The `swapn` operator clearly does what it is supposed to do:
+It allows the hill climber to escape from local optima and thus allows it to improve for a longer time.
+Therefore, the values of $\meanLIFE$ and $\meanLIMS$ are higher for `hcn` than for `hc`, although not as high as for `hcr`.
+
+\rel.input{end_results_hcn.md}
+
+: The results of the hill climbers with the `swapn` and the `swap2` operator as well as the hill climber with restarts `hcr` compared to the lower bound&nbsp;$\lowerBound(\objf)$ of the makespan&nbsp;$\objf$: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality $\meanBestFscaled$, as well as the mean of the milliseconds when the last improvement took place in the runs ($\meanLIFE$, $\meanLIMS$). The summary line at the bottom presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$, $\stddevBestFscaled$), as well as $\meanLIFE$ and $\meanLIMS$. See [@sec:statisticalMetrics] for more details. {#tbl:end_results_hcn}
+
+From [@fig:makespan_scaled_hcn], we find that the results of `hcn` are spread wider than those of the hill climber with restarts (`hcr`).
+They are also visibly better than those of the hill climber with `swap2` (`hc`), with one exception:
+On the problem instance `dmu67`, they are just spread over a wider range, but this wider range is not lower (better) but more or less parallel to the result-cloud of `hc`.
+Here, a statistical test (see [@sec:testForSignificance] would probably not find a significant difference between `hc` and `hcn`. 
+
+\rel.figure{makespan_scaled_hcn}{Violin plots overlaid with box plots to illustrate the distributions of the (scaled) makespans achieved by `hcn`, `hcr`, and `hc` on the different JSSP instances.}{makespan_scaled_hcn.svgz}{width=99.9%}
+
+In [@fig:progress_hcn_log_T], we illustrate the best-so-far solution quality over the runtime in milliseconds (log-scaled).
+We find that `hcn` is initially slower than both `hc` and&nbsp;`hcr`.
+Its `swapn` operator samples from a larger neighborhood.
+In \def.ref{causality} and \def.ref{goodCausality}, we learned that similar solutions often have similar qualities.
+In \def.ref{mostSolutionsInNeighborhoodAreBad}, we learned that most solutions in the neighborhood of a good solution are worse than that solution.
+Of course, the bigger the neighborhood, the more worse solution it contains and the longer it will take to find the better ones.
+So initially `hcn` is slower.
+
+`hc` eventually stops improving because it arrived in a local optimum.
+The local optimum is surrounded by better or equally-good solutions.
+With the operator `swap2`, `hc` will not be able to escape.
+`hcn`, however, uses `swapn` which can potentially reach any other point in the search space, only the probability to do decreases with number of jobs that need to be swapped.
+It can therefore keep improving until the end of the budget.
+Its speed of improvement is lower and keeps getting lower towards the end, though.
+
+\rel.figure{progress_hcn_log_T}{The arithmetic mean of the best-so-far solution quality of `hcn`, `hc`, and `hcr` over time (with log-scaled time axis).}{progress_hcn_log_T.svgz}{width=99.9%}
+
+
+### Combining Bigger Neighborhood with Restarts
+
+By now, we have discovered two ways to improve upon the simple hill climber `hc` with the `swap2` operator:
+
+1. We can restart the algorithm to exploit the variance.
+2. We can replace the unary search operator with another one.
+
+Both restarts and the idea of allowing bigger search steps with small probability are intended to decrease the chance of premature convergence.
+We have seen that both measures work separately.
+The fact that `hc`+ `swapn` improves more and more slowly towards the end of the computational budget means that it could be interesting to try to combine both ideas, restarts and larger neighborhoods.
+
+We plug the `swapn` operator into the hill climber with restarts and obtain algorithm `hcr_L_swapn`.
+We perform the same experiment to find the right setting for the restart limit&nbsp;$L$ as for the `hcr_L_swap2` algorithm and illustrate the results in [@fig:hcr_L_swapn_results].
+
+\rel.figure{hcr_L_swapn_results}{The geometric mean of the best-so-far solution quality of `hcr_L_swapn` at the end of the runs, plotted over different values of the parameter $L$ (with log-scaled horizontal axis).}{hcr_L_swapn_results.svgz}{width=90%}
+
+The "sweet spot" for the number of unsuccessful FEs before a restart has increased compared to before.
+This makes sense, because we already know that `swapn` can keep improving longer.
+Overall, it seems that `hcr_65536_swapn` performs best.
+We will refer to this setup as `hcrn` in the following text.
+
+
+#### Results on the JSSP
+
+From the end results statistics in [@tbl:end_results_hcrn], we find that combining the idea of restarts with the larger neighborhood worked out, although not as well as we hoped for.
+The new setup `hcrn` performs best on the small-scale problem instances `orb06` and `la38`.
+It also outperforms its non-restarted variant `hcn` most of the time.
+But it loses against `hcr` on `ta70` and `swv14`.
+
+\rel.input{end_results_hcrn.md}
+
+: The results of the hill climbers with restarts and the `swapn` and the `swap2` operator, `hcrn` and `hcr`, respectively, as well as the results of `hcn`, compared with the $\lowerBound(\objf)$ of the makespan&nbsp;$\objf$: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality $\meanBestFscaled$, as well as the mean of the milliseconds when the last improvement took place in the runs ($\meanLIFE$, $\meanLIMS$). The summary line at the bottom presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$, $\stddevBestFscaled$), as well as $\meanLIFE$ and $\meanLIMS$. See [@sec:statisticalMetrics] for more details. {#tbl:end_results_hcrn}
+
+The distribution of the makespans illustrated in [@fig:makespan_scaled_hcrn] confirm that `hcrn` can clearly harness the variance of the end result quality from `hcn`:
+The results of `hcrn` are spread much thinner than those of `hcn`.
+However, compared to `hcr`, there is no real tangible difference.
+
+This also becomes visible in the performance plots of [@fig:progress_hcrn_log_T].
+Here, all three algorithms, `hcrn`, `hcn`, and `hcr`, have rather similar runtime-quality curves.
+The hill climber `hcn` using `swapn` is not as good as the other two methods.
+But there is no striking reason to prefer any of the two unary search operators as long as restarts are used, i.e., `hcrn` and `hcr` perform more or less the same.
+(Remember here that very small differences in the table and diagrams could as well be caused by the randomness in the experiments.)
+
+\rel.figure{makespan_scaled_hcrn}{Violin plots overlaid with box plots to illustrate the distributions of the (scaled) makespans achieved by `hcrn`, `hcr`, and `hcn` on the different JSSP instances.}{makespan_scaled_hcrn.svgz}{width=99.9%}
+
+\rel.figure{progress_hcrn_log_T}{The arithmetic mean of the best-so-far solution quality of `hcrn`, `hcn`, and `hcr` over time (with log-scaled time axis).}{progress_hcrn_log_T.svgz}{width=99.9%}
