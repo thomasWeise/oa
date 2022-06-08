@@ -104,9 +104,7 @@ Such an order can be described as a simple, linear string of job IDs, i.e., of i
 If we process such a string from the beginning to the end and step-by-step assign the jobs, we get a feasible Gantt chart as result.
 It is not possible to produce a deadlock (see [@sec:solutionSpace:feasibility]), because we will only allocate an operation to a machine after having placed all operations that come before it in the same job.
 
-
 \rel.figure{jssp_encoding}{Illustration of the first five and the second-to-last steps of the decoding of an example point in the search space to a candidate solution.}{jssp_encoding.svgz}{width=97.5%}
-
 
 This decoding procedure can best be described by an example.
 In the demo instance, we have&nbsp;$\jsspMachines=5$ machines and&nbsp;$\jsspJobs=4$ jobs.
@@ -177,17 +175,13 @@ The Gantt chart then is complete.
 Whenever we assign a operation&nbsp;$\jsspJobIndex>0$ of any given job to a machine, then we already had assigned all operations at smaller indices first.
 No deadlock can occur and&nbsp;$\solspel$ must therefore be feasible.
 
-
 \git.code{mp}{jssp_encoding}{An excerpt of the implementation of the operation-based encoding for the JSSP.}{moptipy/examples/jssp/ob_encoding.py}{}{book}{comments,doc}
-
 
 In [@lst:jssp_encoding], we illustrate how such an encoding can be implemented.
 It basically is a function translating an [numpy integer array](https://numpy.org/doc/stable/user/basics.types.html) to a `Gantt` chart.
 We put the algorithm into a function `decode`, so that we can mark it for compilation with [numba](https://numba.pydata.org/) to improve the performance, utilizing the performance tips discussed in [@sec:pythonNumba; @sec:pythonCallingMethodsAndFunctions].
 
-
 \git.code{mp}{PermutationsWithRepetitions}{Excerpt of the implementation of the `Space` API [@lst:Space] for permutations with (or without) repetitions.}{moptipy/spaces/permutations.py}{}{book}{doc,comments}
-
 
 In [@lst:PermutationsWithRepetitions], we just provide a very small excerpt of an implementation of the `Space` API for permutations of numbers stored in [numpy arrays](https://numpy.org/doc/stable/reference/generated/numpy.array.html).
 This class is quite general:
@@ -227,7 +221,7 @@ Many such different problem flavors can now be reduced to investigating the same
 Additionally, it becomes  easy to indirectly create and modify candidate solutions by sampling points from the search space and moving to similar points, as we will see in the following chapters.
 
 
-#### Size of the Search Space
+#### Size of the Search Space {#sec:size_of_jssp_search_space}
 
 It is relatively easy to compute the size&nbsp;$\left|\searchSpace\right|$ of our proposed search space&nbsp;$\searchSpace$&nbsp;[@SIS1997NESFSJSPBGA].
 We do not need to make any assumptions regarding "no useless waiting time", as in [@sec:solutionSpace:size], since this is not possible by default.

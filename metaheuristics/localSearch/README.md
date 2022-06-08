@@ -91,10 +91,15 @@ In summary, we can hope that the chance to find a really good solution by iterat
 
 #### The Algorithm {#sec:hillClimbing:nors:algorithm}
 
-Stochastic Hill Climbing&nbsp;[@RN2002AI; @S2008TADM; @WGOEB] is the simplest implementation of local search.
+Stochastic Hill Climbing&nbsp;[@RN2002AI; @S2008TADM; @JPY1988HEILS; @WGOEB] is the simplest implementation of local search.
 It is also sometimes called localized random search&nbsp;[@S2003ITSSAO].
-It proceeds as follows:
+This algorithm starts at a randomly chosen point&nbsp;$\sespel$ in the search space.
+In each step, it creates a slightly modified copy&nbsp;$\sespel'$ of&nbsp;$\sespel$.
+If $\sespel'$ is better than $\sespel$, it replaces it ($\sespel\leftarrow\sespel'$).
+Otherwise, it is discarded.
+Spelled out, the hill climber proceeds as follows:
 
+<div id="hill_climber_algo">
 1. Create one random point&nbsp;$\sespel$ in the search space&nbsp;$\searchSpace$ using the nullary search operator.
 2. Map the point&nbsp;$\sespel$ to a candidate solution&nbsp;$\solspel$ by applying the decoding function&nbsp;$\solspel=\decode(\sespel)$.
 3. Compute the objective value by invoking the objective function&nbsp;$\obspel=\objf(\solspel)$.
@@ -104,6 +109,7 @@ It proceeds as follows:
     c. Compute the objective value&nbsp;$\obspel'$ by invoking the objective function&nbsp;$\obspel'=\objf(\solspel')$.
     d. If&nbsp;$\obspel'<\obspel$, then store $\sespel'$&nbsp;in&nbsp;$\sespel$, store $\solspel'$&nbsp;in&nbsp;$\solspel$, and store $\obspel'$&nbsp;in&nbsp;$\obspel$.
 6. Return the best encountered objective value&nbsp;$\obspel$ and the best encountered solution&nbsp;$\solspel$ to the user.
+</div>
 
 This algorithm is implemented in [@lst:HillClimber] and we will refer to it as&nbsp;`hc`.
 Notice that `hc` is a very general algorithm, like `rs`.
@@ -497,3 +503,143 @@ But there is no striking reason to prefer any of the two unary search operators 
 \rel.figure{makespan_scaled_hcrn}{Violin plots overlaid with box plots to illustrate the distributions of the (scaled) makespans achieved by `hcrn`, `hcr`, and `hcn` on the different JSSP instances.}{makespan_scaled_hcrn.svgz}{width=99.9%}
 
 \rel.figure{progress_hcrn_log_T}{The arithmetic mean of the best-so-far solution quality of `hcrn`, `hcn`, and `hcr` over time (with log-scaled time axis).}{progress_hcrn_log_T.svgz}{width=99.9%}
+
+
+### Randomized Local Search (RLS)
+
+When defining the hill climbing algorithms in [@sec:hillClimbing:nors:algorithm], we made one interesting implementation choice.
+In each step, we create a modified copy&nbsp;$\sespel'$ of the current-best solution&nbsp;$\sespel$.
+If $\sespel'$ is *better* than&nbsp;$\sespel$, we accept it as the new&nbsp;$\sespel$.
+Otherwise, it is discarded.
+What if it is not better, but *equally good*?
+Well, we will discard it, too.
+
+This might actually not be a very wise decision.
+Solutions of the JSSP are Gantt charts.
+The quality (objective value) of a Gantt chart is its makespan, i.e., the time when the last job finishes.
+Let us look again at some Gantt charts, e.g., those in [@fig:gantt_hc] obtained by the simple hill climber.
+We find that some machines finish their work early, but only the last job on the last machine determines the makespan.
+We could change the order of some of the jobs on the other machines, making them maybe a bit faster or slower.
+But as long as they finish before the very last machine, the new Gantt chart would still have the same makespan.
+This means that there probably exist many Gantt charts which differ in the arrangement of jobs on some machines but that are similar in the job sequence on the "makespan-determining" machine and that have the same makespan.
+Furthermore, as we know from [@sec:size_of_jssp_search_space], the search space&nbsp;$\searchSpace$ that we chose is much larger than the solution space&nbsp;$\solutionSpace$ and many of the permutations in&nbsp;$\searchSpace$ will map to exactly the same Gantt chart.
+In summary:
+We know that there will be many similar points&nbsp;$\sespel_1,\sespel_2$ in the search space&nbsp;$\searchSpace$ with the same objective value&nbsp;$\objf(\sespel_1)=\objf(\sespel_2)$.
+But the hill climber would *never* move from&nbsp;$\sespel_1$ to&nbsp;$\sespel_2$.
+(Regardless of whether we use the `swap2` or `swapn` operator.)
+
+Much later in this book we will discuss features that make optimization problems hard.
+We will discuss that neighboring solutions with the same objective values can form so-called "neutral networks" (\def.ref{neutralNetwork} in [@sec:neutrality:problem]) along which an optimization process can "drift".
+Indeed, we could imagine that our simple hill climber, even with the `swap2` operator, could potentially escape from local optima if we would allow it to also accept solutions of the same quality as the current best solution.
+The algorithm is specified below and implemented in [@lst:RLS]. 
+
+\git.code{mp}{RLS}{An excerpt of the implementation of the random local search (RLS) algorithm, which remembers the best-so-far solution and tries to move to solutions in its neighborhood that are not worse.}{moptipy/algorithms/rls.py}{}{book}{doc,comments}
+
+1. Create one random point&nbsp;$\sespel$ in the search space&nbsp;$\searchSpace$ using the nullary search operator.
+2. Map the point&nbsp;$\sespel$ to a candidate solution&nbsp;$\solspel$ by applying the decoding function&nbsp;$\solspel=\decode(\sespel)$.
+3. Compute the objective value by invoking the objective function&nbsp;$\obspel=\objf(\solspel)$.
+4. Repeat until the termination criterion is met:
+    a. Apply the unary search operator to&nbsp;$\sespel$ to get a slightly modified copy&nbsp;$\sespel'$ of it.
+    b. Map the point&nbsp;$\sespel'$ to a candidate solution&nbsp;$\solspel'$ by applying the decoding function&nbsp;$\solspel'=\decode(\sespel')$.
+    c. Compute the objective value&nbsp;$\obspel'$ by invoking the objective function&nbsp;$\obspel'=\objf(\solspel')$.
+    d. If&nbsp;**$\obspel'\leq\obspel$**, then store $\sespel'$&nbsp;in&nbsp;$\sespel$, store $\solspel'$&nbsp;in&nbsp;$\solspel$, and store $\obspel'$&nbsp;in&nbsp;$\obspel$.
+6. Return the best encountered objective value&nbsp;$\obspel$ and the best encountered solution&nbsp;$\solspel$ to the user.
+
+This version of the algorithm is called *randomized local search* (RLS)&nbsp;[@NW2007RLSEAATMSTP].
+Sometimes it is also called (1+1)-EA, depending on the unary search operator that is applied&nbsp;[@NW2007RLSEAATMSTP].
+But since we will discuss evolutionary algorithms later, we will stick to RLS for now.
+There is only one difference between the definition of RLS and the [basic hill climber algorithm](#hill_climber_algo) from [@sec:hillClimbing:nors:algorithm]:
+In *line&nbsp;4.d*, it accepts the new solution if $\obspel'\leq\obspel$ instead of $\obspel'<\obspel$.
+In other words, in RLS the new solution is accepted if it is *not worse* than the current best one, whereas in `hc`, it is accepted only if it is *better*.
+RLS therefore can drift along neutral pathways in the search space if they exist.
+If they do not exit, RLS and the hill climber will essentially perform the same.
+So let us investigate what we can get on the JSSP.
+
+
+#### Results on the JSSP {#sec:rls_results_on_jssp}
+
+We will test two random local search algorithm setups:
+We call random local search with the `swap2` operator `rls` and will denote random local search with `swapn` as `rlsn`.
+In the end-of-run statistics listed in [@tbl:end_results_rls], we can immediately see that both RLS algorithms outperform both hill climbers with restarts by a large margin.
+They win in the best results they find over all runs ($\minBestF$) and in the average end result quality ($\meanBestF$) on every single instance.
+The geometric mean of the scaled end result qualities over all instances of `rls` is 1.072, whereas `hcr` achieves only 1.223, i.e., is 14% worse.
+Overall, `rls` outperforms `rlsn`, except on the two smallest instances `orb06` and `la38`.
+
+\rel.input{end_results_rlsn.md}
+
+: The results of the randomized local search versus the hill climbers with restarts for both the `swapn` and the `swap2` operator, compared with the $\lowerBound(\objf)$ of the makespan&nbsp;$\objf$: the best and mean result quality and its standard deviation ($\minBestF$, $\meanBestF$, $\stddevBestF$), the mean of the scaled result quality $\meanBestFscaled$, as well as the mean of the milliseconds when the last improvement took place in the runs ($\meanLIFE$, $\meanLIMS$). The summary line at the bottom presents the best, geometric mean, worst, and standard deviation of the scaled result quality over all runs on all instances ($\minBestFscaled$, $\geomeanBestFscaled$, $\maxBestFscaled$, $\stddevBestFscaled$), as well as $\meanLIFE$ and $\meanLIMS$. See [@sec:statisticalMetrics] for more details. {#tbl:end_results_rls}
+
+The distributions of the end result qualities are sketched in [@fig:makespan_scaled_rlsn].
+For the larger six of our eight benchmark instances, the distributions of RLS are so much better that they do not even overlap with those of the restarted hill climbers.
+On the smaller two problems, they are still visibly better.
+`rls` tends to have better median results than `rlsn`.
+
+From [@tbl:end_results_rls], we know that, in average, the last improvement during a run happens for `rls` after 4.4&nbsp;million FEs and for `hcr` after 3.8&nbsp;million FEs.
+In other words, the RLS algorithms improve for a longer time than the hill climbers, even if we restart the hill climbers.
+This is also very visible in the progress charts of [@fig:progress_rlsn_log_T].
+On several of our JSSP instances, the RLS algorithms keep improving until the very end of the computational budget.
+
+\rel.figure{makespan_scaled_rlsn}{Violin plots overlaid with box plots to illustrate the distributions of the (scaled) makespans achieved by `rls`, `rlsn`, `hcr`, and `hcrn` on the different JSSP instances.}{makespan_scaled_rlsn.svgz}{width=99.9%}
+
+\rel.figure{progress_rlsn_log_T}{The arithmetic mean of the best-so-far solution quality of `rls`, `rlsn`, `hcr`, and `hcrn` over time (with log-scaled time axis).}{progress_rlsn_log_T.svgz}{width=99.9%}
+
+Since we found that our RLS algorithms perform so much better than the hill climbers, it is also time to draw some Gantt charts.
+In [@fig:gantt_rls], we plot the Gantt charts corresponding to the median result of `rls` (RLS with `swap2`) for each instance.
+The operations are now packed much tighter.
+The makespan of the schedules is closer to quality $\lowerBound$ of the known optimal solution.
+Especially on the large (but nevertheless easy) instance `ta70`, the median schedule with 3020&nbsp;time units length only slightly exceeds the lower bound of 2995&nbsp;time units.
+Indeed, `rls` even discovered on solution that is optimal during one of its runs.
+For your enjoyment, we plot this chart in [@fig:best_gantt_rls].  
+
+\rel.figure{gantt_rls}{The Gantt charts corresponding to the median results of the randomized local search&nbsp;`rls`.}{gantt_rls.svgz}{width=99.9%}
+
+\rel.figure{best_gantt_rls}{The optimal Gantt chart found by&nbsp;`rls` for&nbsp;`ta70`.}{best_gantt_rls.svgz}{width=99.9%}
+
+The small change from accepting only better solutions to accepting all solutions that are no worse had a huge impact on performance.
+RLS can only have advantages over the hill climber if neutral moves that do not change the objective value exist.
+From our results, we can conclude that the networks of such "neutral" search moves allow our local search to escape from local optima on the JSSP.
+Next we could investigate whether restarting `rls` can further improve the performance.
+We tested restarts already twice in this chapter.
+Therefore, we leave this as an exercise for the interested reader. 
+
+
+### Summary
+
+In this section, we have learned about our first "reasonable" optimization methods.
+The stochastic hill climbing algorithm remembers the best-so-far point in the search space.
+In each step, it applies the unary operator to obtain a similar but slightly different point.
+If it is better, then it becomes the new best-so-far point.
+Otherwise, it is forgotten.
+
+The performance of hill climbing depends very much on the unary search operator.
+If the operator samples from a very small neighborhood only, like our `swap2` operator does, then the hill climber might quickly get trapped in a local optimum.
+A local optimum here is a point in the search space which is surrounded by a neighborhood that does not contain any better solution.
+If this is the case, the two conditions for doing efficient restarts may be fulfilled: quick convergence and variance of result quality.
+
+The question when to restart then arises, as we usually cannot find out if we are actually trapped in a local optimum or whether the improving move (application of the unary operator) just has not been discovered yet. 
+The most primitive solution is to simply set a limit&nbsp;$L$ for the maximum number of moves without improvement that are permitted.
+
+Our `hcr_L_swap2` was born.
+We configured&nbsp;$L$ in a small experiment and found that $L=32768$ seemed to be reasonable.
+The setup `hcr_32768_swap2` performed much better than `hc_swap2`.
+It should be noted that our experiment used for configuration was not very thorough, but it should suffice at this stage.
+We can also note that it showed that different settings of $L$ are better for different instances.
+This is probably related to the corresponding search space size &ndash; but we will not investigate this any further here.
+
+A second idea to improve the hill climber was to use a unary operator spanning a larger neighborhood, but which still most often sampled solutions similar to current one.
+The `swapn` operator gave better results than than the `swap2` operator in the basic hill climber.
+The take-away message is that different search operators may (well, obviously) deliver different performance and thus, testing some different operators can always be a good idea.
+
+We then tried to combine our two improvements, restarts and better operator, into the `hcr_L_swapn` algorithm.
+Here we learned the lesson that performance improvements do not necessarily add up.
+If we have a method that can deliver an improvement of 10% of solution quality and combine it with another one delivering 15%, we may not get an overall 25% improvement.
+Indeed, our `hcr_65536_swapn` algorithm did not really perform significantly better than `hcr_32768_swap2`.
+
+Finally, we tested accepting all solutions that are *not worse* instead of accepting only solutions that are *better* in our local searches.
+We obtained the random local search (RLS) algorithm, which differs only in this aspect from the hill climber.
+We found that it performed much better on the JSSP even compared to the hill climber with restarts.
+
+From this chapter, we also learned one more lesson:
+Many optimization algorithms have parameters.
+Our hill climber with restarts had two: the unary operator and the restart limit&nbsp;$L$.
+Configuring these parameters well can lead to significant improvements.

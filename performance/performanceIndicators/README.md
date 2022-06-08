@@ -49,6 +49,16 @@ We can then make statements such as "Algorithm&nbsp;$\algorithmStyle{B}$ is ten 
 An improvement in the objective value, as we could measure in the vertical cut approach, usually has no such interpretable meaning.
 We do not know whether it is hard or easy to improve the makespan of a JSSP instance by ten time units, for example.
 
+This way to measure performance also feel reminiscent of what research in computer science has done for many many decades.
+When we develop a traditional, deterministic algorithm for a specific type of problem, we want to get the algorithm that can solve the problem the fastest.
+We want the fastest sorting algorithm.
+We want the fastest way to find a path from *A* to *B* on a map.
+Every computer science curriculum probably has a module dedicated to just this topic:
+Students learn the average-case algorithmic complexity of sorting, path finding, planning, and minimum-spanning-tree computing algorithms.
+Thinking in terms of "How long do we need until we reach the goal in average?" is a natural way to look at algorithms.
+Of course, in our field, algorithms are randomized and we can only try to estimate expected runtimes from experiments covering a very small subset of the possible problem instances.
+The horizontal cut approach thus somewhat links experimentation with metaheuristics to traditional theoretical computer science.    
+
 The "horizontal cuts" idea is applied, for instance, in the [COCO Framework](http://coco.lri.fr/) for benchmarking numerical optimization algorithms&nbsp;[@HAFR2010RPBBOB2ES; @FHRA2015CDR1].
 
 One disadvantage of this method is that we cannot guarantee that a run will reach the specified goal quality.
