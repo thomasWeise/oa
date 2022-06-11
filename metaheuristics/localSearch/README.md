@@ -440,21 +440,38 @@ Here, a statistical test (see [@sec:testForSignificance] would probably not find
 \rel.figure{makespan_scaled_hcn}{Violin plots overlaid with box plots to illustrate the distributions of the (scaled) makespans achieved by `hcn`, `hcr`, and `hc` on the different JSSP instances.}{makespan_scaled_hcn.svgz}{width=99.9%}
 
 In [@fig:progress_hcn_log_T], we illustrate the best-so-far solution quality over the runtime in milliseconds (log-scaled).
-We find that `hcn` is initially slower than both `hc` and&nbsp;`hcr`.
-Its `swapn` operator samples from a larger neighborhood.
+We find that `hcn` is slower than both `hc` and&nbsp;`hcr` but keeps improving longer than&nbsp;`hc`.
+
+Why is it initially slower?
+There could be two possible explanations:
+First, maybe `swapn` yields, in average, worse solutions compared to `swap2` (but can escape local optima).
 In \def.ref{causality} and \def.ref{goodCausality}, we learned that similar solutions often have similar qualities.
 In \def.ref{mostSolutionsInNeighborhoodAreBad}, we learned that most solutions in the neighborhood of a good solution are worse than that solution.
 Of course, the bigger the neighborhood, the more worse solution it contains and the longer it will take to find the better ones.
-So initially `hcn` is slower.
+So this could be one reason for&nbsp;`hc2` being slower compared to&nbsp;`hc`.
 
-`hc` eventually stops improving because it arrived in a local optimum.
+Second, maybe `swapn` is just slower, i.e., applying `swapn` once takes longer than applying `swap2` once.
+We can test both hypothesis by also plotting the best-so-far solution quality over the runtime in terms of objective function evaluations (FEs) in [@fig:progress_hcn_log_FEs].
+If the first hypothesis is true, then these charts would look more or less like those plotted over clock time in [@fig:progress_hcn_log_T].
+But they look actually different:
+In [@fig:progress_hcn_log_FEs], `hcn` is even initially faster on some instances than `hc`.
+Most of the time, the performance curves of `hcn` and `hc` plotted over FEs look more or less the same.
+`hc2` keeps improving longer, though.
+Also its curves end *earlier*, meaning that it can finish fewer FEs within the same budget of two minutes compared to&nbsp;`hc`.  
+
+\rel.figure{progress_hcn_log_T}{The arithmetic mean of the best-so-far solution quality of `hcn`, `hc`, and `hcr` over time (with log-scaled time axis).}{progress_hcn_log_T.svgz}{width=99.9%}
+
+\rel.figure{progress_hcn_log_FEs}{The arithmetic mean of the best-so-far solution quality of `hcn`, `hc`, and `hcr` over the consumed FEs (with log-scaled time axis).}{progress_hcn_log_FEs.svgz}{width=99.9%}
+
+The hill climber `hc` with the `swap2` operator eventually stops improving because it arrived in a local optimum.
 The local optimum is surrounded by better or equally-good solutions.
 With the operator `swap2`, `hc` will not be able to escape.
 `hcn`, however, uses `swapn` which can potentially reach any other point in the search space, only the probability to do decreases with number of jobs that need to be swapped.
 It can therefore keep improving until the end of the budget.
-Its speed of improvement is lower and keeps getting lower towards the end, though.
 
-\rel.figure{progress_hcn_log_T}{The arithmetic mean of the best-so-far solution quality of `hcn`, `hc`, and `hcr` over time (with log-scaled time axis).}{progress_hcn_log_T.svgz}{width=99.9%}
+However, we found that the operator `swapn` takes more clock time to apply compared to `swap2`.
+Unfortunately, this shortens the period towards the end where its advantages, its ability to escape local optima, kick in.
+
 
 
 ### Combining Bigger Neighborhood with Restarts
@@ -588,7 +605,7 @@ In [@fig:gantt_rls], we plot the Gantt charts corresponding to the median result
 The operations are now packed much tighter.
 The makespan of the schedules is closer to quality $\lowerBound$ of the known optimal solution.
 Especially on the large (but nevertheless easy) instance `ta70`, the median schedule with 3020&nbsp;time units length only slightly exceeds the lower bound of 2995&nbsp;time units.
-Indeed, `rls` even discovered on solution that is optimal during one of its runs.
+Indeed, `rls` even discovered on solution that is optimal during four of its runs.
 For your enjoyment, we plot this chart in [@fig:best_gantt_rls].  
 
 \rel.figure{gantt_rls}{The Gantt charts corresponding to the median results of the randomized local search&nbsp;`rls`.}{gantt_rls.svgz}{width=99.9%}
