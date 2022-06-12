@@ -50,12 +50,14 @@ The sequence in which these job IDs occur then defines the order in which the jo
 One idea to create a slightly modified copy of such a point&nbsp;$\sespel$ in the search space would be to simply swap two of the jobs in it.
 Such a&nbsp;`swap2` operator can be implemented as follows:
 
+<div id="algo_swap2">
 1. Make a copy&nbsp;$\sespel'$ of the input point&nbsp;$\sespel$ from the search space.
 2. Pick a random index&nbsp;$i$ from $0\dots(\jsspMachines*\jsspJobs-1)$.
 3. Pick a random index&nbsp;$j$ from $0\dots(\jsspMachines*\jsspJobs-1)$.
 4. If the values at indexes&nbsp;$i$ and&nbsp;$j$ in&nbsp;$\sespel'$ are the same, then go back to step&nbsp;3.
 5. Swap the values at indexes&nbsp;$i$ and&nbsp;$j$ in&nbsp;$\sespel'$.
 6. Return the now modified copy&nbsp;$\sespel'$ of&nbsp;$\sespel$.
+</div>
 
 Step&nbsp;4 is important since swapping the same values makes no sense, as we would then get&nbsp;$\sespel'=\sespel$.
 We would actually not make a "move" and just waste time, because we already have seen and evaluated&nbsp;$\sespel$ before. 
@@ -377,6 +379,7 @@ We define the `swapn`&nbsp;operator for the JSSP as follows and implement it in 
 
 \git.code{mp}{Op1SwapN}{A unary search operator that swaps a random number of elements (often few, sometimes many) in a permutation that may contain repeated elements.}{moptipy/operators/permutations/op1_swapn.py}{}{book}{doc,comments}
 
+<div id="algo_swapn">
 1. Make a copy&nbsp;$\sespel'$ of the input point&nbsp;$\sespel$ from the search space.
 2. Pick a random index&nbsp;$i$ from $0\dots(\jsspMachines*\jsspJobs-1)$.
 3. Store the job-id at index&nbsp;$i$ in the variable&nbsp;$\mathit{first}$ for holding the very first job, i.e., set&nbsp;$f=\arrayIndex{\sespel'}{i}$.
@@ -392,6 +395,7 @@ We define the `swapn`&nbsp;operator for the JSSP as follows and implement it in 
     g. Set&nbsp;$i=j$.
 7. Store the first-swapped job-id&nbsp;$\mathit{first}$ in&nbsp;$\arrayIndex{\sespel'}{i}$.
 8. Return the now modified copy&nbsp;$\sespel'$ of&nbsp;$\sespel$.
+</div>
     
 Here, the idea is that we will perform at least one iteration of the loop (*point&nbsp;6*).
 If we would do exactly one iteration, then we would need to pick two indices&nbsp;$i1$ and&nbsp;$i2$ where different job-IDs are stored, as&nbsp;$last$ must be different from&nbsp;$first$ (*point&nbsp;c* and&nbsp;*d*).
@@ -444,24 +448,27 @@ We find that `hcn` is slower than both `hc` and&nbsp;`hcr` but keeps improving l
 
 Why is it initially slower?
 There could be two possible explanations:
-First, maybe `swapn` yields, in average, worse solutions compared to `swap2` (but can escape local optima).
+First, maybe `swapn` yields, *in average*, worse solutions compared to `swap2` (but can escape local optima).
 In \def.ref{causality} and \def.ref{goodCausality}, we learned that similar solutions often have similar qualities.
 In \def.ref{mostSolutionsInNeighborhoodAreBad}, we learned that most solutions in the neighborhood of a good solution are worse than that solution.
-Of course, the bigger the neighborhood, the more worse solution it contains and the longer it will take to find the better ones.
+The bigger the neighborhood, the more "different" and hence the more worse solution it contains and the longer it will take to find the better ones.
 So this could be one reason for&nbsp;`hc2` being slower compared to&nbsp;`hc`.
 
 Second, maybe `swapn` is just slower, i.e., applying `swapn` once takes longer than applying `swap2` once.
+Clearly, the [`swapn` algorithm](#algo_swapn) is more complicated than the [`swap2` algorithm](#algo_swap2), so it makes sense to assume that it is also slower.
+The question is whether this plays a role or whether the runtime of the unary algorithm is negligible.
+
+\rel.figure{progress_hcn_log_T}{The arithmetic mean of the best-so-far solution quality of `hcn`, `hc`, and `hcr` over time (with log-scaled time axis).}{progress_hcn_log_T.svgz}{width=99.9%}
+
+\rel.figure{progress_hcn_log_FEs}{The arithmetic mean of the best-so-far solution quality of `hcn`, `hc`, and `hcr` over the consumed FEs (with log-scaled time axis).}{progress_hcn_log_FEs.svgz}{width=99.9%}
+
 We can test both hypothesis by also plotting the best-so-far solution quality over the runtime in terms of objective function evaluations (FEs) in [@fig:progress_hcn_log_FEs].
 If the first hypothesis is true, then these charts would look more or less like those plotted over clock time in [@fig:progress_hcn_log_T].
 But they look actually different:
 In [@fig:progress_hcn_log_FEs], `hcn` is even initially faster on some instances than `hc`.
 Most of the time, the performance curves of `hcn` and `hc` plotted over FEs look more or less the same.
 `hc2` keeps improving longer, though.
-Also its curves end *earlier*, meaning that it can finish fewer FEs within the same budget of two minutes compared to&nbsp;`hc`.  
-
-\rel.figure{progress_hcn_log_T}{The arithmetic mean of the best-so-far solution quality of `hcn`, `hc`, and `hcr` over time (with log-scaled time axis).}{progress_hcn_log_T.svgz}{width=99.9%}
-
-\rel.figure{progress_hcn_log_FEs}{The arithmetic mean of the best-so-far solution quality of `hcn`, `hc`, and `hcr` over the consumed FEs (with log-scaled time axis).}{progress_hcn_log_FEs.svgz}{width=99.9%}
+Also its curves end *earlier*, meaning that it can finish fewer FEs within the same budget of two minutes compared to&nbsp;`hc`.
 
 The hill climber `hc` with the `swap2` operator eventually stops improving because it arrived in a local optimum.
 The local optimum is surrounded by better or equally-good solutions.
@@ -648,13 +655,22 @@ The `swapn` operator gave better results than than the `swap2` operator in the b
 The take-away message is that different search operators may (well, obviously) deliver different performance and thus, testing some different operators can always be a good idea.
 
 We then tried to combine our two improvements, restarts and better operator, into the `hcr_L_swapn` algorithm.
-Here we learned the lesson that performance improvements do not necessarily add up.
+Here we learned two lessons:
+
+1. Performance improvements do not necessarily add up.
 If we have a method that can deliver an improvement of 10% of solution quality and combine it with another one delivering 15%, we may not get an overall 25% improvement.
 Indeed, our `hcr_65536_swapn` algorithm did not really perform significantly better than `hcr_32768_swap2`.
 
-Finally, we tested accepting all solutions that are *not worse* instead of accepting only solutions that are *better* in our local searches.
+2. Runtime can be a crucial limitation in practice.
+`hcr_swapn` could probably outperform `hcr_swap2` if given enough runtime.
+But since we only have two minutes in our example scenario, it cannot.
+This is also why we try to apply some [performance tweaks](#sec:python).
+If we can double the number of objective function evaluations that we can do, this may change the result quality we can get quite significantly.
+
+As final idea in this chapter, we tested accepting all solutions that are *not worse* instead of accepting only solutions that are *better* in our local searches.
 We obtained the random local search (RLS) algorithm, which differs only in this aspect from the hill climber.
-We found that it performed much better on the JSSP even compared to the hill climber with restarts.
+We found that it performed much better on the JSSP even compared to the hill climber with restarts on the JSSP.
+As possible reason we identified the existence of so-called neutral networks (*not* neural networks), i.e., unary search moves that do not change the objective value, that allow the algorithm to escape from local optima towards new and better solutions.
 
 From this chapter, we also learned one more lesson:
 Many optimization algorithms have parameters.
