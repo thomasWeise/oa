@@ -1,0 +1,27 @@
+%%
+%% This is the main style file for the book.
+%% Here, all the other packages are imported.
+%%
+%
+\def\@my@tex@package@empty{}%
+%
+%% Our own packages.
+\RequirePackage{styles/i18n}%
+\RequirePackage{styles/hsection}%
+\RequirePackage{styles/hinput}%
+\RequirePackage{styles/colors}%
+\RequirePackage{styles/bibliography}%
+\RequirePackage{styles/href}%
+\RequirePackage{styles/definitions}%
+\RequirePackage{styles/latexgit}%
+\RequirePackage{styles/listing}%
+%
+%% Additional packages
+\RequirePackage{graphicx}%
+\RequirePackage{amsfonts}%
+\RequirePackage{afterpage}%
+%
+\renewcommand{\familydefault}{\sfdefault}%
+%
+\protected\gdef\indexi#1{#1\expandafter\index{#1}}%
+%

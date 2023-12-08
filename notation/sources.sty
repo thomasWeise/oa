@@ -1,0 +1,18 @@
+%%
+%% Access to Source Codes
+%%
+\xdef\moptipyRepo{https://github.com/thomasWeise/moptipy}%
+\xdef\moptipyUrl{https://thomasweise.github.io/moptipy}%
+%
+\xdef\oaRepo{https://github.com/thomasWeise/oa}%
+\xdef\oaUrl{https://thomasweise.github.io/oa}%
+%
+\xdef\oaDataRepo{https://github.com/thomasWeise/oa_data}%
+\xdef\oaDataUrl{https://thomasweise.github.io/oa_data}%
+%
+%% #1 the path
+%% #2 the arguments
+%% #3 the label
+%% #4 the caption
+\protected\gdef\moptipyCode#1#2#3#4{\expandafter\gitPython{\moptipyRepo}{#1}{#2}{#3}{#4}}
+%

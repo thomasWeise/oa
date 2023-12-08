@@ -1,0 +1,39 @@
+%%
+%% Hierarchical Automatic Sectioning
+%%
+\global\newcount\@sectiondepth%
+\global\@sectiondepth0\relax%
+%
+\protected\def\@defsectionA#1{\strut\par\noindent\textbf{#1.} }%
+\protected\def\@defsectionB#1{\strut\par\noindent\textit{#1.} }%
+\protected\def\@defsectionC#1{\strut\par\noindent\textrm{#1.} }%
+%
+\protected\gdef\hsection#1{%
+\relax%
+\ifcase\@sectiondepth%
+\let\@sec@tmp\part%              0
+\or\let\@sec@tmp\chapter%        1
+\or\let\@sec@tmp\section%        2
+\or\let\@sec@tmp\subsection%     3
+\or\let\@sec@tmp\subsubsection%  4
+\or\let\@sec@tmp\paragraph%      5
+\or\let\@sec@tmp\subparagraph%   6
+\or\let\@sec@tmp\@defsectionA%   7
+\or\let\@sec@tmp\@defsectionB%   8
+\else\let\@sec@tmp\@defsectionC% 9
+\fi%
+\relax%
+\ifx\@my@tex@package@empty#1\@my@tex@package@empty%
+\relax%
+\else%
+\@sec@tmp{#1}\relax%
+\fi%
+\relax%
+\global\advance\@sectiondepth by 1%
+}%
+%
+\protected\gdef\endhsection{%
+\global\advance\@sectiondepth by -1%
+}%
+%
+

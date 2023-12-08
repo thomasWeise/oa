@@ -1,0 +1,25 @@
+name: publish
+
+on:
+  push:    
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: xu-cheng/texlive-action@d9f893f837a29f066e3c70080540976b47263721
+        with:
+          scheme: full
+          run: |
+            apk add rust cargo py3-pip python3
+            ./make.sh
+# deploy to github pages
+      - name: deploy documentation
+        uses: JamesIves/github-pages-deploy-action@a1ea191d508feb8485aceba848389d49f80ca2dc
+        with:
+          branch: gh-pages
+          folder: /home/runner/work/oa/oa/website/
+          single-commit: true

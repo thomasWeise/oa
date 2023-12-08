@@ -1,0 +1,79 @@
+%%
+%% Citations and bibliography.
+%%
+%
+%% Load the biblatex package.
+\RequirePackage[%
+maxbibnames=99,%
+backend=biber,%
+style=numeric-comp,%
+backref=true,%
+urldate=iso,%
+]{biblatex}%
+%
+%% Set our bibliography.
+\bibliography{bibliography/bibliography} 
+%
+%% Define formats for ISBNs and ISSNs that link to search engines.
+\DeclareFieldFormat{isbn}{ISBN:~\href{https://www.directtextbook.com/isbn/#1}{#1}}%
+\DeclareFieldFormat{issn}{ISSN:~\href{https://portal.issn.org/api/search?search[]=MUST=allissnbis=#1}{#1}}%
+%
+%% Print the ISSNs and ISBNs for books.
+\usepackage{xpatch}%
+\@for\next:=book,inbook,collection,incollection,proceedings,inproceedings\do{%
+\xpatchbibdriver{\next}%
+{{\printfield{isbn}}}%
+{{\printfield{issn}\newunit\newblock\printfield{isbn}}}%
+{}{}%
+}%
+%
+%% Print the number field as volume for book series.
+\DeclareFieldFormat[book,inbook,collection,incollection,proceedings,inproceedings]%
+{number}{\bibstring{volume}~#1 \bibstring{ofseries}}%
+\renewbibmacro*{series+number}{%
+\printfield{number}%
+\setunit*{\addspace}%
+\printfield{series}%
+\newunit%
+}%
+%
+%% Allow linebreaks in URLs and dois.
+\setcounter{biburlnumpenalty}{8000}%
+\setcounter{biburlucpenalty}{8000}%
+\setcounter{biburllcpenalty}{8000}%
+%
+%% Make sure that the prefixes of dois and URLs have the right formats.
+\DeclareFieldFormat{doi}{%
+doi\addcolon%
+\ifhyperref%
+{\href{https://doi.org/#1}{\nolinkurl{#1}}}%
+{\nolinkurl{#1}}}%
+%
+\DeclareFieldFormat{url}{%
+URL\addcolon\space%
+\ifhyperref%
+{\href{#1}{\nolinkurl{#1}}}%
+{\nolinkurl{#1}}}%
+%
+%% Get the volume(number):pages format for articles.
+\renewbibmacro*{volume+number+eid}{%
+\printfield{volume}%
+\printfield[parens]{number}%
+\setunit{\addcolon}%
+\unspace\printfield{pages}}%
+\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
+\renewbibmacro*{issue+date}{}%
+\renewbibmacro*{note+pages}{%
+\setunit{\addcomma\addspace}%
+\usebibmacro{date}}%
+%
+\DeclareFieldFormat[article]{pages}{#1}
+%
+%% Remove "In:" from articles.
+\renewbibmacro{in:}{%
+\ifentrytype{article}{}{\bibstring{in}%
+\printunit{\intitlepunct}}}%
+%
+\newrobustcmd*{\citeauthorfull}{\AtNextCite{\DeclareNameAlias{labelname}{given-family}}\citeauthor}%
+%
+%
