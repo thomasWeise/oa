@@ -2,17 +2,17 @@
 \hsection{Example: Job Shop Scheduling Problem}%
 \label{sec:jsspExample}%
 %
-Another typical optimization task arises in \indexi{manufacturing}, namely the assignment (\inQuotes{\indexi{scheduling}}) of tasks (\inQuotes{jobs}) to machines in order to optimize a given performance criterion (\inQuotes{\indexi{objective}}).
+Another typical optimization task arises in manufacturing, namely the assignment (\inQuotes{scheduling}) of tasks (\inQuotes{jobs}) to machines in order to optimize a given performance criterion (\inQuotes{objective}).
 Scheduling~\cite{P2016STAAS,PS2009FYOSASOM} is one of the most active areas of operational research for more than  six decades.
 
-In the \emph{\indexi{Job Shop Scheduling Problem}}~(\indexi{JSSP})~\cite{CGLL1995STAIA,GLLRK1979OAAIDSASAS,LLRKS1993SASAAC,L1982RRITTOMS,T1993BFBSP,BDP1996TJSSPCANST}, we have a factory (\inQuotes{shop}) with several machines.
+In the \emph{Job Shop Scheduling Problem}~(JSSP)~\cite{CGLL1995STAIA,GLLRK1979OAAIDSASAS,LLRKS1993SASAAC,L1982RRITTOMS,T1993BFBSP,BDP1996TJSSPCANST}, we have a factory (\inQuotes{shop}) with several machines.
 We receive a set of customer orders for products which we have to produce.
 We know the exact sequence in which each product/order needs to pass through the machines and how long it will need at each machine.
 Each production job has one production step (\inQuotes{operation}) for each machine on which it needs to be processed.
 These operations must be performed in the right sequence.
 Of course, no machine can process more than one operation at a time.
 While we must obey these constraints, we can decide about the time at which each of the operations should begin.
-Often, we are looking for the starting times that lead to the earliest completion of all jobs, i.e., the shortest \indexi{makespan}.
+Often, we are looking for the starting times that lead to the earliest completion of all jobs, i.e., the shortest makespan.
 
 \begin{figure}%
 \centering%
@@ -34,4 +34,3 @@ Clearly, since the JSSP allows for an \emph{arbitrary} machine order per job, be
 We will introduce the JSSP in detail in TODO and use it as the main example in this book on which we will step-by-step exercise different optimization methods.%
 \endhsection%
 %
-

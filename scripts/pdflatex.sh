@@ -127,12 +127,16 @@ while [ "$watchFileContents" != "$oldWatchFileContents" ] ; do
   "${latexGitProgram[@]}" "$documentName"
   echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Finished applying latexgit as ${latexGitProgram[@]}."
 
-  echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Now applying latexgit as '$makeIndexProgram'."
-  "$makeIndexProgram" "$documentName"
-  echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Finished applying latexgit as '$makeIndexProgram'."
+  idxFile="$documentName.idx"
+  if [ -f "$idxFile" ]; then
+    echo "$(date +'%0Y-%0m-%0d %0R:%0S'): File '$idxFile' exists, so we now apply the make-index programm '$makeIndexProgram'."
+    "$makeIndexProgram" "$documentName"
+    echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Finished applying the make-index program '$makeIndexProgram'."
+  else
+    echo "$(date +'%0Y-%0m-%0d %0R:%0S'): File '$idxFile' does not exist, so we will not apply '$makeIndexProgram'."
+  fi
 
-
-  echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Now loading the idx contents."
+  echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Now loading the contents should no longer change when the built is complete."
   for suffix in "bbl" "bcf" "idx" "ind" "toc"; do
     echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Now looking for '$suffix' files."
     for theFile in *.$suffix; do
@@ -260,4 +264,3 @@ for auxFile in *.aux; do
   done
 
 echo "$(date +'%0Y-%0m-%0d %0R:%0S'): The pdflatex compiler script has finished. The compilation of document '$documentName' has been successfully completed."
-

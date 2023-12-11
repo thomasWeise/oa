@@ -1,7 +1,7 @@
 \hsection{Metaheuristics: Why do we need them?}%
 %
 The main topic of this book will be metaheuristic optimization (although I will eventually also discuss some other methods (remember: work in progress).
-So why do we need metaheuristic\indexi{metaheuristics} algorithms?
+So why do we need metaheuristic algorithms?
 Why should you read this book?%
 %
 \hsection{Good Solutions within Acceptable Runtime}%
@@ -14,8 +14,8 @@ Of course, the example problems discussed before cannot be attacked as easily as
 They require algorithms, they require computer science.
 
 Ever since primary school, we have learned many problems and types of equations that we can solve.
-Unfortunately, theoretical computer science shows that for many problems, the time we need to find the best-possible solution can grow \emph{exponentially}\index{exponential growth} with the number of involved variables in the worst case.
-The number of involved variables here could be the number of cities in a \indexi{TSP}, the number of jobs or machines in a \indexi{JSSP}, or the number of objects to pack in a, well, packing problem.
+Unfortunately, theoretical computer science shows that for many problems, the time we need to find the best-possible solution can grow \emph{exponentially} with the number of involved variables in the worst case.
+The number of involved variables here could be the number of cities in a TSP, the number of jobs or machines in a JSSP, or the number of objects to pack in a, well, packing problem.
 A big group of such complicated problems are called \NPhard~\cite{LLRKS1993SASAAC,CPW1998AROMSCAAA}.
 Unless some unlikely breakthrough happens in terms of which problems can be solved efficiently and which not~\cite{C1971TCOTPP,K1972RACP}, there will be many problems that we cannot always solve exactly within reasonable time.
 Each and every one of the example problems discussed belongs to this type!
@@ -27,7 +27,7 @@ Each and every one of the example problems discussed belongs to this type!
 \label{fig:function_growth}%
 \end{figure}
 
-As sketched in \autoref{fig:function_growth}, the exponential function\index{exponential growth} rises very quickly.
+As sketched in \autoref{fig:function_growth}, the exponential function rises very quickly.
 One idea would be to buy more computers for bigger problems and to simply parallelize the computation.
 Well, parallelization can provide a linear speed-up at best.
 If we have two CPU cores, we can solve the problem in half of the time and if we have three CPU cores, we can do it in one third of the time, and so on {\dots} if the problem lends itself to parallelization (and not all of them do).
@@ -49,7 +49,7 @@ And we will get this within acceptable time limits.
 \label{fig:runtime_quality_tradeoff}%
 \end{figure}
 
-In \autoref{fig:runtime_quality_tradeoff} we illustrate this idea on the example of the \indexi{Traveling Salesperson Problem}\index{TSP}~\cite{ABCC2006TTSPACS,LLRKS1985TTSPAGTOCO,GP2002TTSPAIV} briefly mentioned in \autoref{sec:intro:logistics}.
+In \autoref{fig:runtime_quality_tradeoff} we illustrate this idea on the example of the Traveling Salesperson Problem~\cite{ABCC2006TTSPACS,LLRKS1985TTSPAGTOCO,GP2002TTSPAIV} briefly mentioned in \autoref{sec:intro:logistics}.
 The goal of solving the TSP is to find the shortest round trip tour through $n$~cities.
 The TSP is \NPhard~\cite{GJ1979CAIAGTTTONC,GP2002TTSPAIV}. 
 Today, it is possible to solve many large instances of this problem to optimality by using sophisticated \emph{exact} algorithms~\cite{CEG2007CWDPIFTSPT,C2021WT}.
@@ -72,7 +72,7 @@ They may often still discover them (just not always, not guaranteed).%
 %
 Saying that we need a good algorithm to solve a given problem is very easy.
 Developing a good algorithm to solve a given problem is not, as any graduate student in the field can probably confirm.
-Before, I stated that great exact algorithms for the \indexi{TSP} exist~\cite{CEG2007CWDPIFTSPT,C2021WT}, that can solve many TSPs quickly (although not all).
+Before, I stated that great exact algorithms for the TSP exist~\cite{CEG2007CWDPIFTSPT,C2021WT}, that can solve many TSPs quickly (although not all).
 There are years and years of research in these algorithms.
 Even the top heuristic and metaheuristic algorithm for the TSP today result from many years of targeted research~\cite{H2009GKOSFTLKTH,NK2013APGAUEACFTTSP,W2016BNMDPCADIM} and their implementation from the algorithm specification alone can take months~\cite{WWLC2019IIIOADTM}.
 Unfortunately, if you do not have plain TSP, but one with some additional constraints --- say, time windows to visit certain cities --- the optimized, state-of-the-art TSP solvers are no longer applicable.
@@ -80,7 +80,7 @@ And in a real-world application scenario, you do not have years to develop an al
 What you need are simple, versatile, general algorithm concepts that you can easily adapt to your problem at hand.
 Something that can be turned into a working prototype within a few weeks.
 
-Metaheuristics\index{metaheuristics} are the answer~\cite{W2009GOATAA,MF2004HTSIMH}.
+Metaheuristics are the answer~\cite{W2009GOATAA,MF2004HTSIMH}.
 They are general algorithm concepts into which we can plug problem-specific modules.
 General metaheuristics are usually fairly easy to implement and deliver acceptable results.
 Once a sufficiently well-performing prototype has been obtained, we could go and integrate it into the software ecosystem of the customer.
@@ -88,4 +88,3 @@ We also can try to improve its performance using different ideas {\dots} and yea
 \endhsection%
 \endhsection%
 %
-
