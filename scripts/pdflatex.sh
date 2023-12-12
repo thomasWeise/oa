@@ -30,10 +30,28 @@ latexGitProgram=("python3" "-m" "latexgit.aux")
 echo "$(date +'%0Y-%0m-%0d %0R:%0S'): We will use latexgit like ${latexGitProgram[@]}."
 makeIndexProgram="makeindex"
 echo "$(date +'%0Y-%0m-%0d %0R:%0S'): We will use '$makeIndexProgram' to make the index."
+makeGlossariesProgram="makeglossaries"
+echo "$(date +'%0Y-%0m-%0d %0R:%0S'): We will use '$makeGlossariesProgram' to make the glossaries."
 
 cd "$currentDir"
 
 echo "$(date +'%0Y-%0m-%0d %0R:%0S'): First we will do some cleaning up temporary files from other LaTeX runs and also delete any pre-existing version of '$documentName.pdf'."
+
+acnFile="$documentName.acn"
+acrFile="$documentName.acr"
+algFile="$documentName.alg"
+glgFile="$documentName.glg"
+gloFile="$documentName.glo"
+glsFile="$documentName.gls"
+idxFile="$documentName.idx"
+istFile="$documentName.ist"
+slgFile="$documentName.slg"
+sloFile="$documentName.slo"
+slsFile="$documentName.sls"
+
+rm "$acnFile" || true
+rm "$acrFile" || true
+rm "$algFile" || true
 rm "$documentName.aux" || true
 rm "$documentName.bbl" || true
 rm "$documentName.bcf" || true
@@ -41,9 +59,14 @@ rm "$documentName.blg" || true
 rm "$documentName-blx.bib" || true
 rm "$documentName.dvi" || true
 rm "$documentName.ent" || true
-rm "$documentName.idx" || true
+rm "$glgFile" || true
+rm "$gloFile" || true
+rm "$glsFile" || true
+rm "$idxFile" || true
+rm "$istFile" || true
 rm "$documentName.ilg" || true
 rm "$documentName.ind" || true
+rm "$gloFile" || true
 rm "$documentName.latexgit.dummy" || true
 rm "$documentName.loa" || true
 rm "$documentName.lof" || true
@@ -55,6 +78,9 @@ rm "$documentName.out.ps" || true
 rm "$documentName.pdf" || true
 rm "$documentName.ps" || true
 rm "$documentName.run.xml " || true
+rm "$slgFile" || true
+rm "$sloFile" || true
+rm "$slsFile" || true
 rm "$documentName.snm" || true
 rm "$documentName.spl" || true
 rm "$documentName.synctex" || true
@@ -127,7 +153,6 @@ while [ "$watchFileContents" != "$oldWatchFileContents" ] ; do
   "${latexGitProgram[@]}" "$documentName"
   echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Finished applying latexgit as ${latexGitProgram[@]}."
 
-  idxFile="$documentName.idx"
   if [ -f "$idxFile" ]; then
     echo "$(date +'%0Y-%0m-%0d %0R:%0S'): File '$idxFile' exists, so we now apply the make-index programm '$makeIndexProgram'."
     "$makeIndexProgram" "$documentName"
@@ -136,8 +161,38 @@ while [ "$watchFileContents" != "$oldWatchFileContents" ] ; do
     echo "$(date +'%0Y-%0m-%0d %0R:%0S'): File '$idxFile' does not exist, so we will not apply '$makeIndexProgram'."
   fi
 
+acnFile="$documentName.acn"
+acrFile="$documentName.acr"
+algFile="$documentName.alg"
+glgFile="$documentName.glg"
+gloFile="$documentName.glo"
+glsFile="$documentName.gls"
+idxFile="$documentName.idx"
+istFile="$documentName.ist"
+slgFile="$documentName.slg"
+sloFile="$documentName.slo"
+slsFile="$documentName.sls"
+
+
+  if [ -f "$acnFile" ] ||\
+     [ -f "$acrFile" ] ||\
+     [ -f "$algFile" ] ||\
+     [ -f "$glgFile" ] ||\
+     [ -f "$gloFile" ] ||\
+     [ -f "$glsFile" ] ||\
+     [ -f "$istFile" ] ||\
+     [ -f "$slgFile" ] ||\
+     [ -f "$sloFile" ] ||\
+     [ -f "$slsFile" ] ; then
+    echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Found at least one of '$acnFile', '$acrFile', '$algFile', '$glgFile', '$gloFile', '$glsFile', '$istFile', '$slgFile', '$sloFile', or '$slsFile' exists, so we now apply the make-glossaries programm '$makeGlossariesProgram'."
+    "$makeGlossariesProgram" "$documentName"
+    echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Finished applying the make-glossaries program '$makeGlossariesProgram'."
+  else
+    echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Neither  '$acnFile', '$acrFile', '$algFile', '$glgFile', '$gloFile', '$glsFile', '$istFile', '$slgFile', '$sloFile', nor '$slsFile' does exist, so we will not apply '$makeGlossariesProgram'."
+  fi
+  
   echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Now loading the contents should no longer change when the built is complete."
-  for suffix in "bbl" "bcf" "idx" "ind" "toc"; do
+  for suffix in "acn" "acr" "alg" "bbl" "bcf" "glg" "glo" "gls" "idx" "ind" "ist""slg" "slo" "sls" "toc"; do
     echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Now looking for '$suffix' files."
     for theFile in *.$suffix; do
       if [ -f "$theFile" ]; then
@@ -211,6 +266,9 @@ if [ -f "$documentName.pdf" ]; then
 fi
 
 echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Now cleaning up temporary files."
+rm "$acnFile" || true
+rm "$acrFile" || true
+rm "$algFile" || true
 rm "$documentName.aux" || true
 rm "$documentName.bbl" || true
 rm "$documentName.bcf" || true
@@ -218,9 +276,14 @@ rm "$documentName.blg" || true
 rm "$documentName-blx.bib" || true
 rm "$documentName.dvi" || true
 rm "$documentName.ent" || true
-rm "$documentName.idx" || true
+rm "$glgFile" || true
+rm "$gloFile" || true
+rm "$glsFile" || true
+rm "$idxFile" || true
+rm "$istFile" || true
 rm "$documentName.ilg" || true
 rm "$documentName.ind" || true
+rm "$gloFile" || true
 rm "$documentName.latexgit.dummy" || true
 rm "$documentName.loa" || true
 rm "$documentName.lof" || true
@@ -231,6 +294,9 @@ rm "$documentName.out" || true
 rm "$documentName.out.ps" || true
 rm "$documentName.ps" || true
 rm "$documentName.run.xml" || true
+rm "$slgFile" || true
+rm "$sloFile" || true
+rm "$slsFile" || true
 rm "$documentName.snm" || true
 rm "$documentName.spl" || true
 rm "$documentName.synctex" || true
