@@ -22,15 +22,15 @@ echo "$(date +'%0Y-%0m-%0d %0R:%0S'): The relative document path is '$relativeDo
 documentName="${relativeDocumentPath%%.*}"
 echo "$(date +'%0Y-%0m-%0d %0R:%0S'): The base name of the document is '$documentName'."
 
-texProgram=("pdflatex" "-halt-on-error" "-interaction=nonstopmode" "$documentName")
+texProgram=("$(which pdflatex)" "-halt-on-error" "-interaction=nonstopmode" "$documentName")
 echo "$(date +'%0Y-%0m-%0d %0R:%0S'): We will use ${texProgram[@]} to compile the document."
-bibProgram="biber"
+bibProgram="$(readlink -f "$(which biber)")"
 echo "$(date +'%0Y-%0m-%0d %0R:%0S'): We will use '$bibProgram' to process bibliography files."
-latexGitProgram=("python3" "-m" "latexgit.aux")
+latexGitProgram=("$(readlink -f "$(which python3)")" "-m" "latexgit.aux")
 echo "$(date +'%0Y-%0m-%0d %0R:%0S'): We will use latexgit like ${latexGitProgram[@]}."
-makeIndexProgram="makeindex"
+makeIndexProgram="$(readlink -f "$(which makeindex)")"
 echo "$(date +'%0Y-%0m-%0d %0R:%0S'): We will use '$makeIndexProgram' to make the index."
-makeGlossariesProgram="makeglossaries"
+makeGlossariesProgram="$(readlink -f "$(which makeglossaries)")"
 echo "$(date +'%0Y-%0m-%0d %0R:%0S'): We will use '$makeGlossariesProgram' to make the glossaries."
 
 cd "$currentDir"
