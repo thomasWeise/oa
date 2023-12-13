@@ -4,12 +4,16 @@
 \protected\gdef\mathSpace#1{\ensuremath{\mathbb{#1}}}%
 %
 \newSymbol{realNumbers}{\mathSpace{R}}{R}{the set of the real numbers}%
-\newSymbol{naturalNumbersZ}{\ensuremath{\mathSpace{N}_0}}{N0}{the set of the natural numbers, including~0, i.e., 0, 1, 2, 3, and so on}
-\newSymbol{naturalNumbersO}{\ensuremath{\mathSpace{N}_1}}{N1}{the set of the natural numbers (excluding~0), i.e., 1, 2, 3, and so on}%
+\newSymbol{realNumbersP}{\ensuremath{\mathSpace{R}^+}}{R+}{the set of the positive real numbers, i.e., $\mathSpace{R}^+=\{x\in\realNumbers:x>0\}$.}%
+\newSymbol{naturalNumbersZ}{\ensuremath{\mathSpace{N}_0}}{N0}{the set of the natural numbers \emph{including}~0, i.e., 0, 1, 2, 3, and so on}%
+\newSymbol{naturalNumbersO}{\ensuremath{\mathSpace{N}_1}}{N1}{the set of the natural numbers \emph{excluding}~0, i.e., 1, 2, 3, 4, and so on}%
 %
 \protected\gdef\intRange#1#2{\ensuremath{#1..#2}}%
 %
-\protected\gdef\bigO#1{\ensuremath{\mathcal{O}(#1)}}%
+\newUnaryFunc{bigO}{\ensuremath{\mathcal{O}}}{O(g(x))}{g(x)}{%
+\mbox{If $f(x)={\mathcal{O}}(g(x))$,} then there exist positive numbers~$x_0\in\realNumbersP$ and~$c\in\realNumbersP$ such that~\mbox{$f(x)\leq c*g(x)\forall x\geq x_0$}~\cite{B1894DAZDVPB,L1909HDLVDVDP}. %
+In other words, ${\mathcal{O}}(g(x))$~describes an upper bound for function growth.}%
+%
 \protected\gdef\Pprefix{\ensuremath{\mathcal{P}}}%
 \protected\gdef\NPprefix{\ensuremath{\mathcal{NP}}}%
 \protected\gdef\NPhard{\NPprefix-hard}%

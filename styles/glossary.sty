@@ -2,7 +2,8 @@
 %% Commands related to glossaries.
 %%
 %
-\RequirePackage[acronyms,symbols,toc,section=chapter]{glossaries}%
+\RequirePackage[acronyms,symbols,toc]{glossaries}%
+\let\glspostdescription\dotfill%
 %
 %% Create a new symbol
 %% #1 the symbold ID
@@ -14,7 +15,23 @@
 type={symbols},
 name={#2},%
 sort={#3},%
-description={#4}%
+description={\sloppy#4}%
 }%
 \expandafter\protected\expandafter\gdef\csname#1\endcsname{\gls{#1}}}%
+%
+%% Create a new function with one argument
+%% #1 the function ID
+%% #2 the function text
+%% #3 the function sort key
+%% #4 the function default argument
+%% #5 the symbol description
+\protected\gdef\newUnaryFunc#1#2#3#4#5{%
+\newglossaryentry{#1}{%
+type={symbols},
+name={\ensuremath{#2(#4)}},%
+text={#2},%
+sort={#3},%
+description={\sloppy#5}%
+}%
+\expandafter\protected\expandafter\gdef\csname#1\endcsname##1{\ensuremath{\gls{#1}(##1)}}}%
 %

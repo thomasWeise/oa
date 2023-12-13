@@ -22,6 +22,7 @@
 @string { a_applegate_david_lee = "David Lee Applegate" }
 @string { a_arantes_leonardo = "Leonardo Arantes" }
 @string { a_bachem_achim = "Achim Bachem" }
+@string { a_bachmann_paul_gustav_heinrich = "Paul Gustav Heinrich Bachmann" }
 @string { a_balas_egon = "Egon Balas" }
 @string { a_brabazon_anthony = "Anthony Brabazon" }
 @string { a_banerji_ranan_b = "Ranan B.\ Banerji" }
@@ -85,6 +86,7 @@
 @string { a_kobayashi_shigenobu = "Shigenobu Kobayashi" }
 @string { a_koopmans_tjalling_charles = "Tjalling Charles Koopmans" }
 @string { a_korte_bernhard_h = "Bernhard H.\ Korte" }
+@string { a_landau_edmund = "Edmund Landau" }
 @string { a_lawler_eugene_leighhton = "Eugene Leighton Lawler" }
 @string { a_lawrence_stephen_r = "Stephen R.\ Lawrence" }
 @string { a_lenstra_jan_karel = "Jan Karel Lenstra" }
@@ -178,6 +180,7 @@
 @string { p_springer_science_business_media = "{Springer Science+Business Media, {LLC}}" }
 @string { p_springer_verlag_gmbh = "{Springer-Verlag {GmbH}}" }
 @string { p_taylor_and_francis = "{Taylor and Francis Ltd.}" }
+@string { p_teubner_b_g = "{B.\ G.\ Teubner}" }
 @string { p_university_of_applied_sciences_western_switzerland = "{University of Applied Sciences of Western Switzerland}" }
 @string { p_university_of_waterloo_dco = "{University of Waterloo, Department of Combinatorics and Optimization}" } 
 @string { p_vrije_universiteit_amsterdam = "{Vrije Universiteit Amsterdam}" }
@@ -193,6 +196,7 @@
 @string { l_germany_bonn = "{{Bonn}, {North Rhine-Westphalia}, {Germany}}" }
 @string { l_germany_heidelberg = "{{Heidelberg}, {Baden-W{\"u}rttemberg}, {Germany}}" }
 @string { l_germany_jena = "{{Jena}, {Th{\"u}ringen}, {Germany}}" }
+@string { l_germany_leipzig = "{{Leipzig}, {Sachsen}, {Germany}}" }
 @string { l_germany_tubingen = "{{T{\"u}bingen}, {Baden-W{\"u}rttemberg}, {Germany}}" }
 @string { l_netherlands_amsterdam = "{{Amsterdam}, {The Netherlands}}" }
 @string { l_switzerland_cham = "{{Cham}, {Switzerland}}" }
@@ -242,6 +246,7 @@
 @string { pa_springer_science_business_media = l_switzerland_cham }
 @string { pa_springer_verlag_gmbh = "{{Berlin/Heidelberg}, {Germany}}" }
 @string { pa_taylor_and_francis = l_uk_london }
+@string { pa_teubner_b_g = l_germany_leipzig }
 @string { pa_university_of_applied_sciences_western_switzerland = l_switzerland_yverdon }
 @string { pa_university_of_waterloo_dco = l_canada_waterloo }
 @string { pa_vrije_universiteit_amsterdam = l_netherlands_amsterdam }
@@ -431,6 +436,13 @@
  address = pa_wiley_and_sons_ltd
 }
 
+@xdata{ser_zvegdwiih,
+ author = a_bachmann_paul_gustav_heinrich,
+ publisher = p_teubner_b_g,
+ address = pa_teubner_b_g,
+ series = {Zahlentheorie: Versuch einer Gesamtdarstellung dieser Wissenschaft in ihren Haupttheilen}
+}
+
 
 %% contents
 @article{A2008TLOQC,
@@ -476,6 +488,16 @@
  date = {1991-05},
  doi = {10.1287/ijoc.3.2.149},
  addendum = {The JSSP instances used were generated in Bonn, Germany in 1986}
+}
+
+@book{B1894DAZDVPB,
+ title = {{Die Analytische Zahlentheorie} / {Dargestellt von Paul Bachmann}},
+ xdata = {ser_zvegdwiih},
+ number = {{Zweiter Theil}},
+ date = {1894},
+ isbn = {1418169633},
+ url = {http://gallica.bnf.fr/ark:/12148/bpt6k994750},
+ urldate = {2023-12-13}
 }
 
 @article{B1990OLDTPBEM,
@@ -758,6 +780,15 @@
  crossref = {MTB1972COCC},
  doi = {10.1007/978-1-4684-2001-2_9},
  pages = {85--103}
+}
+
+@book{L1909HDLVDVDP,
+ author = a_landau_edmund,
+ title = {{Handbuch der Lehre von der Verteilung der Primzahlen}},
+ publisher = p_teubner_b_g,
+ address = pa_teubner_b_g,
+ date = {1909},
+ isbn = {0821826506}
 }
 
 @incollection{L1982RRITTOMS,
