@@ -40,6 +40,7 @@ echo "$(date +'%0Y-%0m-%0d %0R:%0S'): First we will do some cleaning up temporar
 acnFile="$documentName.acn"
 acrFile="$documentName.acr"
 algFile="$documentName.alg"
+auxFile="$documentName.aux"
 glgFile="$documentName.glg"
 gloFile="$documentName.glo"
 glsFile="$documentName.gls"
@@ -52,7 +53,7 @@ slsFile="$documentName.sls"
 rm "$acnFile" || true
 rm "$acrFile" || true
 rm "$algFile" || true
-rm "$documentName.aux" || true
+rm "$auxFile" || true
 rm "$documentName.bbl" || true
 rm "$documentName.bcf" || true
 rm "$documentName.blg" || true
@@ -122,7 +123,7 @@ while [ "$watchFileContents" != "$oldWatchFileContents" ] ; do
 
   echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Finished running '$texProgram'. Now looking for aux files to process."
 
-  for auxFile in *.aux; do
+  for anyAuxFile in *.aux; do
     if [ -f "$auxFile" ]; then
       echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Discovered aux file '$auxFile'."
       fileContents="$(<$auxFile)"
@@ -130,7 +131,7 @@ while [ "$watchFileContents" != "$oldWatchFileContents" ] ; do
       if [[ "$fileContents" = *"\\citation{"* ]] || \
          [[ "$fileContents" = *"\\abx@aux@cite{"* ]]  || \
          [[ "$fileContents" = *"\\abx@aux@segm"* ]]; then
-        auxName="${auxFile%%.*}"
+        auxName="${anyAuxFile%%.*}"
         echo "$(date +'%0Y-%0m-%0d %0R:%0S'): File '$auxFile' contains citations, so we applying '$bibProgram' to '$auxName'."
         "$bibProgram" "$auxName"
         echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Finished applying '$bibProgram' to '$auxFile'."
@@ -161,36 +162,34 @@ while [ "$watchFileContents" != "$oldWatchFileContents" ] ; do
     echo "$(date +'%0Y-%0m-%0d %0R:%0S'): File '$idxFile' does not exist, so we will not apply '$makeIndexProgram'."
   fi
 
-acnFile="$documentName.acn"
-acrFile="$documentName.acr"
-algFile="$documentName.alg"
-glgFile="$documentName.glg"
-gloFile="$documentName.glo"
-glsFile="$documentName.gls"
-idxFile="$documentName.idx"
-istFile="$documentName.ist"
-slgFile="$documentName.slg"
-sloFile="$documentName.slo"
-slsFile="$documentName.sls"
-
-
-  if [ -f "$acnFile" ] ||\
-     [ -f "$acrFile" ] ||\
-     [ -f "$algFile" ] ||\
-     [ -f "$glgFile" ] ||\
-     [ -f "$gloFile" ] ||\
-     [ -f "$glsFile" ] ||\
-     [ -f "$istFile" ] ||\
-     [ -f "$slgFile" ] ||\
-     [ -f "$sloFile" ] ||\
-     [ -f "$slsFile" ] ; then
-    echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Found at least one of '$acnFile', '$acrFile', '$algFile', '$glgFile', '$gloFile', '$glsFile', '$istFile', '$slgFile', '$sloFile', or '$slsFile' exists, so we now apply the make-glossaries programm '$makeGlossariesProgram'."
-    "$makeGlossariesProgram" "$documentName"
-    echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Finished applying the make-glossaries program '$makeGlossariesProgram'."
+  if [ -f "$auxFile" ] ; then
+    echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Found '$auxFile'."
+    fileContents="$(<$auxFile)"
+    if [[ "$fileContents" = *"\\@istfilename"* ]] ; then
+      echo "$(date +'%0Y-%0m-%0d %0R:%0S'): '$auxFile' contains '\\@istfilename', so we may need to apply makeglossaries."
+      if [ -f "$acnFile" ] ||\
+         [ -f "$acrFile" ] ||\
+         [ -f "$algFile" ] ||\
+         [ -f "$glgFile" ] ||\
+         [ -f "$gloFile" ] ||\
+         [ -f "$glsFile" ] ||\
+         [ -f "$istFile" ] ||\
+         [ -f "$slgFile" ] ||\
+         [ -f "$sloFile" ] ||\
+         [ -f "$slsFile" ] ; then
+        echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Found at least one of '$acnFile', '$acrFile', '$algFile', '$glgFile', '$gloFile', '$glsFile', '$istFile', '$slgFile', '$sloFile', or '$slsFile' exists, so we now apply the make-glossaries programm '$makeGlossariesProgram'."
+        "$makeGlossariesProgram" "$documentName"
+        echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Finished applying the make-glossaries program '$makeGlossariesProgram'."
+      else
+        echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Neither '$acnFile', '$acrFile', '$algFile', '$glgFile', '$gloFile', '$glsFile', '$istFile', '$slgFile', '$sloFile', nor '$slsFile' does exist, so we will not apply '$makeGlossariesProgram'."
+      fi
+    else
+      echo "$(date +'%0Y-%0m-%0d %0R:%0S'): '$auxFile' does not contain '\\@istfilename' (contents are '$fileContents'), so we do not need to apply makeglossaries."
+    fi
   else
-    echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Neither  '$acnFile', '$acrFile', '$algFile', '$glgFile', '$gloFile', '$glsFile', '$istFile', '$slgFile', '$sloFile', nor '$slsFile' does exist, so we will not apply '$makeGlossariesProgram'."
+      echo "$(date +'%0Y-%0m-%0d %0R:%0S'): '$auxFile' does not exist, so we do not need to apply makeglossaries."
   fi
-  
+
   echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Now loading the contents should no longer change when the built is complete."
   for suffix in "acn" "acr" "alg" "bbl" "bcf" "glg" "glo" "gls" "idx" "ind" "ist""slg" "slo" "sls" "toc"; do
     echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Now looking for '$suffix' files."
@@ -269,7 +268,7 @@ echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Now cleaning up temporary files."
 rm "$acnFile" || true
 rm "$acrFile" || true
 rm "$algFile" || true
-rm "$documentName.aux" || true
+rm "$auxFile" || true
 rm "$documentName.bbl" || true
 rm "$documentName.bcf" || true
 rm "$documentName.blg" || true
@@ -308,24 +307,24 @@ rm "$documentName.vrb" || true
 rm "$documentName.xcp" || true
 rm "texput.log" || true
 
-for auxFile in *.aux; do
-    if [ -f "$auxFile" ]; then
-      echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Discovered aux file '$auxFile'."
-      fileContents="$(<$auxFile)"
+for anyAuxFile in *.aux; do
+    if [ -f "$anyAuxFile" ]; then
+      echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Discovered aux file '$anyAuxFile'."
+      fileContents="$(<$anyAuxFile)"
       if [[ "$fileContents" = *"\\citation{"* ]] || \
          [[ "$fileContents" = *"\\abx@aux@cite{"* ]]  || \
          [[ "$fileContents" = *"\\abx@aux@segm"* ]]; then
-        auxName="${auxFile%%.*}"
-        echo "$(date +'%0Y-%0m-%0d %0R:%0S'): File '$auxFile' contains citations, so we do bibtex cleanup for '$auxName'."
+        auxName="${anyAuxFile%%.*}"
+        echo "$(date +'%0Y-%0m-%0d %0R:%0S'): File '$anyAuxFile' contains citations, so we do bibtex cleanup for '$auxName'."
         rm "$auxName.bbl" || true
         rm "$auxName.bcf" || true
         rm "$auxName.blg" || true
         rm "$auxName-blx.bib" || true
       else
-        echo "$(date +'%0Y-%0m-%0d %0R:%0S'): File '$auxFile' does not contain citations."
+        echo "$(date +'%0Y-%0m-%0d %0R:%0S'): File '$anyAuxFile' does not contain citations."
       fi
-    echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Now deleting file '$auxFile'."
-    rm "$auxFile" || true
+    echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Now deleting file '$anyAuxFile'."
+    rm "$anyAuxFile" || true
     fi
   done
 
