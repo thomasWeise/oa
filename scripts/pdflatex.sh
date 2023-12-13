@@ -24,14 +24,18 @@ echo "$(date +'%0Y-%0m-%0d %0R:%0S'): The base name of the document is '$documen
 
 texProgram=("$(which pdflatex)" "-halt-on-error" "-interaction=nonstopmode" "$documentName")
 echo "$(date +'%0Y-%0m-%0d %0R:%0S'): We will use ${texProgram[@]} to compile the document."
+"${texProgram[0]}" --version
 bibProgram="$(readlink -f "$(which biber)")"
 echo "$(date +'%0Y-%0m-%0d %0R:%0S'): We will use '$bibProgram' to process bibliography files."
+"$bibProgram" --version
 latexGitProgram=("$(readlink -f "$(which python3)")" "-m" "latexgit.aux")
 echo "$(date +'%0Y-%0m-%0d %0R:%0S'): We will use latexgit like ${latexGitProgram[@]}."
+${latexGitProgram[@]} --version
 makeIndexProgram="$(readlink -f "$(which makeindex)")"
 echo "$(date +'%0Y-%0m-%0d %0R:%0S'): We will use '$makeIndexProgram' to make the index."
 makeGlossariesProgram="$(readlink -f "$(which makeglossaries)")"
 echo "$(date +'%0Y-%0m-%0d %0R:%0S'): We will use '$makeGlossariesProgram' to make the glossaries."
+"$makeGlossariesProgram" --version
 
 cd "$currentDir"
 
@@ -184,7 +188,7 @@ while [ "$watchFileContents" != "$oldWatchFileContents" ] ; do
         echo "$(date +'%0Y-%0m-%0d %0R:%0S'): Neither '$acnFile', '$acrFile', '$algFile', '$glgFile', '$gloFile', '$glsFile', '$istFile', '$slgFile', '$sloFile', nor '$slsFile' does exist, so we will not apply '$makeGlossariesProgram'."
       fi
     else
-      echo "$(date +'%0Y-%0m-%0d %0R:%0S'): '$auxFile' does not contain '\\@istfilename' (contents are '$fileContents'), so we do not need to apply makeglossaries."
+      echo "$(date +'%0Y-%0m-%0d %0R:%0S'): '$auxFile' does not contain '\\@istfilename', so we do not need to apply makeglossaries."
     fi
   else
       echo "$(date +'%0Y-%0m-%0d %0R:%0S'): '$auxFile' does not exist, so we do not need to apply makeglossaries."
