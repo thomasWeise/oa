@@ -1,27 +1,33 @@
 \chapter*{Preface}%
 \pdfbookmark{Preface}{preface}%
 %
-After writing ``\citetitle{W2009GOATAA}''~\cite{W2009GOATAA} during my time as PhD student a long time ago, I now want to write a more practical guide to optimization and metaheuristics.
+After writing \inQuotes{\citetitle{W2009GOATAA}}~\cite{W2009GOATAA} during my time as PhD student a long time ago, I now want to write a more \emph{practical} guide to optimization and metaheuristics.
 Currently, this \href{\oaUrl/index.html}{book} is in an early stage of development and work-in-progress, so expect many changes.
 
-The text tries to introduce optimization in an accessible way for an audience of undergraduate and graduate students without background in the field.
-It tries to provide an intuition about how optimization algorithms work in practice, what things to look for when solving a problem, and how to get from a simple, working, ``proof-of-concept'' approach to an efficient solution for a given problem.
-We follow a ``learning-by-doing'' approach by trying to solve one practical optimization problem as example theme throughout the book.
+This book tries to introduce optimization in an accessible way for an audience of undergraduate and graduate students without background in the field.
+It tries to provide an intuition about how optimization algorithms work in practice, how to recognize optimization problems and the basic structure behind them, what things to look for when solving an optimization problem, and how to get from a simple, working, \inQuotes{proof-of-concept} approach to an efficient algorithm for a given problem.
+
+We follow a \inQuotes{learning-by-doing} approach by trying to solve one practical optimization problem as example theme throughout the book.
 All algorithms are directly implemented and applied to that problem after we introduce them.
 This allows us to discuss their strengths and weaknesses based on actual results.
 We learn how to compare the performance of different algorithms.
 We try to improve the algorithms step-by-step, moving from very simple approaches, which do not work well, to efficient metaheuristics.
 
 We use concrete examples and algorithm implementations written in \href{https://python.org}{Python}.
-These are freely available at \url{\moptipyUrl} under the GNU GENERAL PUBLIC LICENSE Version~3, 29~June~2007.
-The listings in the book will usually be abridged excerpts.
-This means that we will omit a lot of details unnecessary for understanding the algorithms in play, such as type hints, sanity checks, or even complete methods.
-These are present in the full versions of the code just one click on \inQuotes{(src)}-links at the end of the listings captions away.
-This full code version therefore can look different from the illustrated abridged code in the book.
+The source code is freely available at \url{\moptipyUrl} under the GNU GENERAL PUBLIC LICENSE Version~3, 29~June~2007.
+The code listings in the book will usually be abridged excerpts.
+This means that we will omit a lot of details that are unnecessary for understanding the algorithms in play, such as type hints, sanity checks, or even complete methods.
+The full versions of the code can be reached by clicking on the \inQuotes{(src)}-links at the end of the listings captions away.
+The full versions therefore can look different from the illustrated abridged code in the book.
+
 In order to fully understand the code examples, we recommend the reader to familiarize themselves with \href{https://python.org}{Python}, \href{https://numpy.org/}{numpy}, and \href{https://matplotlib.org/}{matplotlib}.
-Of course, if you just read this book to learn about algorithms, you can ignore the source code examples. 
+Of course, if you just read this book to learn about algorithms, you can ignore the source code examples.
 
 The text of the book itself is actively written and available in the repository \url{\oaRepo}.
-There, you can also submit \href{\oaRepo/issues}{issues}, such as change requests, suggestions, errors, typos, or you can inform me that something is unclear, so that I can improve the book. 
+There, you can also submit \href{\oaRepo/issues}{issues}, such as change requests, suggestions, errors, typos, or you can inform me that something is unclear, so that I can improve the book.
+
 This book is released under the \emph{Attribution-NonCommercial-ShareAlike~4.0 International license} (\href{http://creativecommons.org/licenses/by-nc-sa/4.0/}{\mbox{CC~BY-NC-SA~4.0}}).
-The results of all experiments that we run in this book are available in the repository \url{\oaDataRepo}.
+You can freely share it.
+Please do not print it, though, to preserve the environment.
+
+The results of the experiments that we run in this book are available in the repository \url{\oaDataRepo}.

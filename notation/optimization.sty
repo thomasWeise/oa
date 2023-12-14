@@ -1,13 +1,31 @@
-\protected\gdef\instance{\ensuremath{\mathcal{I}}}%
-\protected\gdef\solutionSpace{\mathSpace{Y}}%
-\protected\gdef\solspel{\ensuremath{y}}%
-\protected\gdef\objf{\ensuremath{f}}%
+%
+\newSymbol{instance}{\ensuremath{\mathcal{I}}}{I}{%
+the problem instance data, see \autoref{def:instance} in \autoref{sec:problemInstance}}%
+\newSymbol{solutionSpace}{\mathSpace{Y}}{Y}{%
+the solution space, i.e., the set of possible solutions to an optimization problem}%
+\newSymbol{solspel}{\ensuremath{y}}{y}{%
+a candidate solution to an optimization problem, i.e., an element of the solution space~\solutionSpace}%
+%
+\newFunc{objf}{\ensuremath{f}}{f(y)}{y}{%
+an objective function~$f:\solutionSpace\mapsto\realNumbers$ computes the cost of a candidate solution~$\solspel\in\solutionSpace$}%
+%
 \protected\gdef\searchSpaceSubset{\ensuremath{X}}%
-\protected\gdef\searchSpace{\mathSpace{\searchSpaceSubset}}%
-\protected\gdef\sespel{\ensuremath{x}}%
-\protected\gdef\decode{\ensuremath{\gamma}}%
-\protected\gdef\searchOp{\ensuremath{\mathrm{searchOp}}}%
-\protected\gdef\obspel{\ensuremath{z}}%
+%
+\newSymbol{searchSpace}{\mathSpace{\searchSpaceSubset}}{X}{%
+the search space, i.e., the candidate solutions of an optimization problem, but in an encoded form that is easier to be processed with search operators}%
+\newSymbol{sespel}{\ensuremath{x}}{x}{%
+an element of the search space~\searchSpace}%
+%
+\newFunc{decode}{\ensuremath{\gamma}}{g(x)}{x}{%
+the decoding function~$gamma:\searchSpace\mapsto\solutionSpace$ maps the candidate solutions from their encoded form (a point in the search space~\searchSpace\ that is processed by search operators) to their decoded, human-understandable form (a point in the solution space~\solutionSpace\ that can be processed by the objective function~\objf)}%
+%
+\DeclareMathOperator{\@searchOp}{move}%
+\newFunc{searchOp}{\ensuremath{\@searchOp}}{move(x)}{x}{%
+A search operator $\@searchOp:\searchSpace^n\mapsto\searchSpace$ with $n\in\naturalNumbersZ$ takes zero or more points from the search space~\searchSpace\ as input and produces one new element of~\searchSpace\ as output}%
+%
+\newSymbol{obspel}{\ensuremath{z}}{z}{%
+an objective value returned by the objective function~\objf}%
+%
 \protected\gdef\fitness{\ensuremath{v}}%
 %
 \protected\gdef\localOptimum#1{\ensuremath{#1^{\times}}}%

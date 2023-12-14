@@ -15,7 +15,7 @@ They require algorithms, they require computer science.
 
 Ever since primary school, we have learned many problems and types of equations that we can solve.
 Unfortunately, theoretical computer science shows that for many problems, the time we need to find the best-possible solution can grow \emph{exponentially} with the number of involved variables in the worst case.
-The number of involved variables here could be the number of cities in a TSP, the number of jobs or machines in a JSSP, or the number of objects to pack in a, well, packing problem.
+The number of involved variables here could be the number of cities in a \gls{TSP}, the number of jobs or machines in a \gls{JSSP}, or the number of objects to pack in a, well, packing problem.
 A big group of such complicated problems are called \NPhard~\cite{LLRKS1993SASAAC,CPW1998AROMSCAAA}.
 Unless some unlikely breakthrough happens in terms of which problems can be solved efficiently and which not~\cite{C1971TCOTPP,K1972RACP}, there will be many problems that we cannot always solve exactly within reasonable time.
 Each and every one of the example problems discussed belongs to this type!
@@ -50,10 +50,10 @@ And we will get this within acceptable time limits.
 \end{figure}
 
 In \autoref{fig:runtime_quality_tradeoff} we illustrate this idea on the example of the Traveling Salesperson Problem~\cite{ABCC2006TTSPACS,LLRKS1985TTSPAGTOCO,GP2002TTSPAIV} briefly mentioned in \autoref{sec:intro:logistics}.
-The goal of solving the TSP is to find the shortest round trip tour through $n$~cities.
-The TSP is \NPhard~\cite{GJ1979CAIAGTTTONC,GP2002TTSPAIV}. 
+The goal of solving the \gls{TSP} is to find the shortest round trip tour through $n$~cities.
+The \gls{TSP} is \NPhard~\cite{GJ1979CAIAGTTTONC,GP2002TTSPAIV}.
 Today, it is possible to solve many large instances of this problem to optimality by using sophisticated \emph{exact} algorithms~\cite{CEG2007CWDPIFTSPT,C2021WT}.
-Yet, finding the \emph{shortest possible tour} for a particular TSP might still take many years if you are unlucky.
+Yet, finding the \emph{shortest possible tour} for a particular \gls{TSP} might still take many years if you are unlucky.
 Finding just \emph{one tour} is, however, very very easy:
 I can write down the cities in any particular order.
 Of course, I can visit the cities in an arbitrary order.
@@ -72,10 +72,10 @@ They may often still discover them (just not always, not guaranteed).%
 %
 Saying that we need a good algorithm to solve a given problem is very easy.
 Developing a good algorithm to solve a given problem is not, as any graduate student in the field can probably confirm.
-Before, I stated that great exact algorithms for the TSP exist~\cite{CEG2007CWDPIFTSPT,C2021WT}, that can solve many TSPs quickly (although not all).
+Before, I stated that great exact algorithms for the \gls{TSP} exist~\cite{CEG2007CWDPIFTSPT,C2021WT}, that can solve many TSPs quickly (although not all).
 There are years and years of research in these algorithms.
-Even the top heuristic and metaheuristic algorithm for the TSP today result from many years of targeted research~\cite{H2009GKOSFTLKTH,NK2013APGAUEACFTTSP,W2016BNMDPCADIM} and their implementation from the algorithm specification alone can take months~\cite{WWLC2019IIIOADTM}.
-Unfortunately, if you do not have plain TSP, but one with some additional constraints --- say, time windows to visit certain cities --- the optimized, state-of-the-art TSP solvers are no longer applicable.
+Even the top heuristic and metaheuristic algorithm for the \gls{TSP} today result from many years of targeted research~\cite{H2009GKOSFTLKTH,NK2013APGAUEACFTTSP,W2016BNMDPCADIM} and their implementation from the algorithm specification alone can take months~\cite{WWLC2019IIIOADTM}.
+Unfortunately, if you do not have plain \gls{TSP}, but one with some additional constraints --- say, time windows to visit certain cities --- the optimized, state-of-the-art \gls{TSP} solvers are no longer applicable.
 And in a real-world application scenario, you do not have years to develop an algorithm.
 What you need are simple, versatile, general algorithm concepts that you can easily adapt to your problem at hand.
 Something that can be turned into a working prototype within a few weeks.

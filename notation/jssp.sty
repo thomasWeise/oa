@@ -1,10 +1,28 @@
 \global\let\jsspInstance\instance%
-\protected\gdef\jsspMachines{\ensuremath{m}}%
-\protected\gdef\jsspJobs{\ensuremath{n}}%
+%
+\definecolor{jssp-machines}{HTML}{0000c0}%
+\newSymbol{jsspMachines}{{\color{jssp-machines}\ensuremath{m}}}{m}{%
+the number of machines in a \gls{JSSP} instance, see \autoref{sec:jsspInstanceStructure}%
+}%
+\definecolor{jssp-jobs}{HTML}{c00000}%
+\newSymbol{jsspJobs}{{\color{jssp-jobs}\ensuremath{n}}}{n}{%
+the number of jobs in a \gls{JSSP} instance, see \autoref{sec:jsspInstanceStructure}%
+}%
+%
 \protected\gdef\jsspJobIndex{\ensuremath{i}}%
 \protected\gdef\jsspMachineIndex{\ensuremath{j}}%
-\protected\gdef\jsspOperationMachine#1#2{\arrayIndexx{M}{#1}{#2}}%
-\protected\gdef\jsspOperationTime#1#2{\arrayIndexx{T}{#1}{#2}}%
+%
+\definecolor{jssp-machine}{HTML}{9b00ff}%
+\newSymbol{jsspOperationMachineMat}{{\color{jssp-machine}\ensuremath{M}}}{M}{%
+in a \gls{JSSP} instance, the machine on which the operation~\jsspMachineIndex\ of job~\jsspJobIndex\ must be executed is~$\arrayIndexx{M}{\jsspJobIndex}{\jsspMachineIndex}$}%
+\protected\gdef\jsspOperationMachine#1#2{\arrayIndexx{\jsspOperationMachineMat}{#1}{#2}}%
+%
+%
+\definecolor{jssp-time}{HTML}{d78800}%
+\newSymbol{jsspOperationTimeMat}{{\color{jssp-time}\ensuremath{T}}}{T}{%
+in a \gls{JSSP} instance, the time which the operation~\jsspMachineIndex\ of job~\jsspJobIndex\ needs is~$\arrayIndexx{T}{\jsspJobIndex}{\jsspMachineIndex}$}%
+\protected\gdef\jsspOperationTime#1#2{\arrayIndexx{\jsspOperationTimeMat}{#1}{#2}}%
+%
 \protected\gdef\jsspMachineStartIdle#1{\arrayIndex{a}{#1}}%
 \protected\gdef\jsspMachineRuntime#1{\arrayIndex{b}{#1}}%
 \protected\gdef\jsspMachineEndIdle#1{\arrayIndex{c}{#1}}%

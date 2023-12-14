@@ -3,6 +3,15 @@
 %%
 %
 \RequirePackage[acronyms,symbols,toc]{glossaries}%
+%
+\setacronymstyle{long-short}%
+%
+%% make sure that \acrfull counts as first use.
+\let\@oldacrfull\acrfull%
+\let\@oldcrfullpl\acrfullpl%
+\protected\gdef\acrfull#1{\@oldacrfull{#1}\glsunset{#1}}%
+\protected\gdef\acrfullpl#1{\@oldcrfullpl{#1}\glsunset{#1}}%
+%
 \let\glspostdescription\dotfill%
 %
 %% Create a new symbol
@@ -15,7 +24,7 @@
 type={symbols},
 name={#2},%
 sort={#3},%
-description={\sloppy#4}%
+description={\sloppy#4.}%
 }%
 \expandafter\protected\expandafter\gdef\csname#1\endcsname{\gls{#1}}}%
 %
@@ -25,13 +34,15 @@ description={\sloppy#4}%
 %% #3 the function sort key
 %% #4 the function default argument
 %% #5 the symbol description
-\protected\gdef\newUnaryFunc#1#2#3#4#5{%
+\protected\gdef\newFunc#1#2#3#4#5{%
 \newglossaryentry{#1}{%
 type={symbols},
 name={\ensuremath{#2(#4)}},%
 text={#2},%
 sort={#3},%
-description={\sloppy#5}%
+description={\sloppy#5.}%
 }%
-\expandafter\protected\expandafter\gdef\csname#1\endcsname##1{\ensuremath{\gls{#1}(##1)}}}%
+\expandafter\protected\expandafter\gdef\csname#1\endcsname{\ensuremath{\gls{#1}}}%
+\expandafter\protected\expandafter\gdef\csname#1Of\endcsname##1{\ensuremath{\gls{#1}(##1)}}
+}%
 %

@@ -3,6 +3,7 @@
 %%
 \xdef\moptipyRepo{https://github.com/thomasWeise/moptipy}%
 \xdef\moptipyUrl{https://thomasweise.github.io/moptipy}%
+\gdef\moptipy{\href{\moptipyUrl}{moptipy}}%
 %
 \xdef\oaRepo{https://github.com/thomasWeise/oa}%
 \xdef\oaUrl{https://thomasweise.github.io/oa}%
@@ -15,4 +16,6 @@
 %% #3 the label
 %% #4 the caption
 \protected\gdef\moptipyCode#1#2#3#4{\expandafter\gitPython{\moptipyRepo}{#1}{#2}{#3}{#4}}
+%
+\gdef\numpyndarray{\href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html}{\codeil{np.ndarray}}}%
 %
