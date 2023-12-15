@@ -17,5 +17,9 @@
 %% #4 the caption
 \protected\gdef\moptipyCode#1#2#3#4{\expandafter\gitPython{\moptipyRepo}{#1}{#2}{#3}{#4}}
 %
-\gdef\numpyndarray{\href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html}{\codeil{np.ndarray}}}%
+%% Some references to numpy
+\xdef\numpybaseurl{https://numpy.org/doc/stable/reference/generated}%
+\xdef\numpyndarrayurl{\numpybaseurl/numpy.ndarray.html}%
+\gdef\numpyndarray{\href{\numpyndarrayurl}{\codeil{np.ndarray}}}%
+\gdef\numpyndarrays{\href{\numpyndarrayurl}{\codeils{np.ndarray}}}%
 %

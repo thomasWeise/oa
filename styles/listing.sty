@@ -4,6 +4,8 @@
 %
 \RequirePackage{listings}%
 %
+\def\@lstbasicstyle{\small\color{listing-text-color}\linespread{1.0}\lst@ifdisplaystyle\small\fi\ttfamily{}}%
+%
 \lstdefinestyle{python_style}{%
 %
 backgroundcolor=\color{listing-background},%
@@ -18,7 +20,7 @@ tabsize=4,%
 language=Python,%
 sensitive=true,%
 %
-basicstyle=\small\color{listing-text-color}\linespread{1.0}\lst@ifdisplaystyle\small\fi\ttfamily{},%
+basicstyle=\@lstbasicstyle,%
 identifierstyle=\color{listing-identifier},%
 numberstyle=\color{listing-line-numbers},%
 %
@@ -31,7 +33,7 @@ emphstyle=\color{listing-emph-1}\bfseries,
 emph={[2]True,False,None},%
 emphstyle=[2]\color{listing-emph-2},%
 %
-emph={[3]object,type,isinstance,copy,deepcopy,zip,enumerate,reversed,list,set,len,dict,tuple,xrange,append,execfile,real,imag,reduce,str,repr},%
+emph={[3]object,type,isinstance,deepcopy,zip,enumerate,reversed,list,set,len,dict,tuple,xrange,append,execfile,real,imag,reduce,str,repr},%
 emphstyle=[3]\color{listing-emph-3},%
 %
 emph={[4]Exception,NameError,IndexError,SyntaxError,TypeError,ValueError,OverflowError,ZeroDivisionError},%
@@ -76,14 +78,27 @@ literate=%
 }%
 \lstset{style=python_style}%
 %
+%% the box around the inline listings
+\def\@inlinelistingbox#1{\bgroup%
+\fboxsep=0.5pt%
+\fboxrule=0.5pt%
+\mbox{\fcolorbox{listing-rule}{listing-background}{\mbox{#1}}}%
+\egroup}%
 %
-% print some code inline
-% #1 the optional args
-% #2 the code to be printed inline
+%% print some code inline
+%% #1 the optional args
+%% #2 the code to be printed inline
 \gdef\codeil#1{%
-\mbox{\fcolorbox{listing-rule}{listing-background}{\mbox{%
-\lstinline[style=python_style]$#1$%
-}}}}%
+\@inlinelistingbox{\lstinline[style=python_style]$#1$}}%
+%
+\newlength\@lstbasicstylesheight%
+\settoheight{\@lstbasicstylesheight}{\mbox{\bgroup\@lstbasicstyle{s}\egroup}}%
+%
+%% print some code inline with an 's' added for plural
+%% #1 the optional args
+%% #2 the code to be printed inline
+\gdef\codeils#1{%
+\@inlinelistingbox{\lstinline[style=python_style]$#1$\resizebox{!}{\@lstbasicstylesheight}{\color{darkgray}s}}}%
 %
 %%
 %% Use latexgit to place a listing.
@@ -108,4 +123,12 @@ literate=%
 \gitCode{#1}{#2}{python3 -m latexgit.formatters.python #3}{#4}{#5}%
 }%
 %
+%
+%%
+%% Load a local listing.
+%% #1 the local path
+%% #2 the label (lst: will be pre-pended)
+%% #3 the caption
+\protected\gdef\relCode#1#2#3{%
+\lstinputlisting[float,label={lst:#2},caption={#3}]{\currentDir/#1}}%
 %

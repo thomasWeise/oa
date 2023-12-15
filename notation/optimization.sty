@@ -2,9 +2,9 @@
 \newSymbol{instance}{\ensuremath{\mathcal{I}}}{I}{%
 the problem instance data, see \autoref{def:instance} in \autoref{sec:problemInstance}}%
 \newSymbol{solutionSpace}{\mathSpace{Y}}{Y}{%
-the solution space, i.e., the set of possible solutions to an optimization problem}%
+the solution space, i.e., the set of possible solutions to an optimization problem, see \autoref{def:solutionSpace}}%
 \newSymbol{solspel}{\ensuremath{y}}{y}{%
-a candidate solution to an optimization problem, i.e., an element of the solution space~\solutionSpace}%
+a candidate solution to an optimization problem, i.e., an element of the solution space~\solutionSpace, see \autoref{def:candidateSolution}}%
 %
 \newFunc{objf}{\ensuremath{f}}{f(y)}{y}{%
 an objective function~$f:\solutionSpace\mapsto\realNumbers$ computes the cost of a candidate solution~$\solspel\in\solutionSpace$}%
@@ -25,6 +25,9 @@ A search operator $\@searchOp:\searchSpace^n\mapsto\searchSpace$ with $n\in\natu
 %
 \newSymbol{obspel}{\ensuremath{z}}{z}{%
 an objective value returned by the objective function~\objf}%
+%
+\newSymbol{nFeasible}{\ensuremath{\#\mathrm{feasible}}}{feasible}{%
+the number of feasible solutions in the solution space~\solutionSpace, see \autoref{def:feasibility}}%
 %
 \protected\gdef\fitness{\ensuremath{v}}%
 %

@@ -125,7 +125,7 @@ Its processing times are from the interval~$\intRange{10}{50}$.%
 %
 \end{enumerate}%
 %
-The raw data of these instances is part of the \href{\moptipyUrl}{moptipy} Python package with the sources for our experiments as resource.
+The raw data of these instances is part of the \moptipy\ Python package with the sources for our experiments as resource.
 
 Of course, if we really want to solve a new type of problem, we will normally use as many benchmark problem instances as possible to get a good understand about the performance of our algorithm(s).
 Only for the sake of clarity of presentation, we will here limit ourselves to the above eight problems.
@@ -186,7 +186,7 @@ By using the third dimension, I can immediately see this.
 Of course, I could also have two separate matrices or use the same format as the text files.
 This would mean that the code accessing the data would look a bit differently, but that would also be OK.
 
-Now, if we want to represent matrices of integer values in Python, it is best to use {\numpyndarray}s.
+Now, if we want to represent matrices of integer values in Python, it is best to use \numpyndarrays.
 These are memory efficient and accessing their elements is faster than using two-dimensional lists.
 So we will make our class inherit from \numpyndarray.
 We will also add an attribute \codeil{name} with the instance name stored as string.

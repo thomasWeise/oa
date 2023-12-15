@@ -52,8 +52,8 @@
 @string { a_du_ding_zhu = "Ding{-}Zhu Du" }
 @string { a_dyckhoff_harald = "Harald Dyckhoff" }
 @string { a_edgar_thomas_f = "Thomas F.\ Edgar" }
-@string { a_ekart_aniko = "Anik{\'{o}} Ek{\'{a}}rt" }
-@string { a_esparcia_alcazar_anna_isabel = "Anna Isabel {Esparcia-Alc{\'{a}}zar}" }
+@string { a_ekart_aniko = "Anik{\'o} Ek{\'a}rt" }
+@string { a_esparcia_alcazar_anna_isabel = "Anna Isabel {Esparcia-Alc{\'a}zar}" }
 @string { a_espinoza_daniel_g = "Daniel G.\ Espinoza" }
 @string { a_farooq_muddassar = "Muddassar Farooq" }
 @string { a_fink_andreas = "Andreas Fink" }
@@ -69,7 +69,7 @@
 @string { a_goycoolea_marcos = "Marcos Goycoolea" }
 @string { a_graham_ronald_lewis = "Ronald Lewis Graham" }
 @string { a_graves_stephen_c = "Stephen C.\ Graves" }
-@string { a_groetschel_martin = "Martin Gr{\"{o}}tschel" }
+@string { a_groetschel_martin = "Martin Gr{\"o}tschel" }
 @string { a_gutin_gregory_z = "Gregory Z.\ Gutin" }
 @string { a_hammer_peter_l = "Peter L.\ Hammer" }
 @string { a_harrison_michael_a = "Michael A. Harrison" }
@@ -81,8 +81,9 @@
 @string { a_johnson_david_stiffler = "David Stifler Johnson" }
 @string { a_johnson_e_l = "E.\ L.\ Johnson" }
 @string { a_johnson_selmer_martin = "Selmer Martin Johnson" }
-@string { a_juenger_michael = "Michael J{\"{u}}nger" }
+@string { a_juenger_michael = "Michael J{\"u}nger" }
 @string { a_karp_richard_m = "Richard M.\ Karp" }
+@string { a_klein_robert = "Robert Klein" }
 @string { a_kobayashi_shigenobu = "Shigenobu Kobayashi" }
 @string { a_koopmans_tjalling_charles = "Tjalling Charles Koopmans" }
 @string { a_korte_bernhard_h = "Bernhard H.\ Korte" }
@@ -95,7 +96,7 @@
 @string { a_lodi_anrea = "Andrea Lodi" }
 @string { a_machado_penousal = "Penousal Machado" }
 @string { a_manderick_bernard = "Bernard Manderick" }
-@string { a_manner_reinhard = "Reinhard M{\"{a}}nner" }
+@string { a_manner_reinhard = "Reinhard M{\"a}nner" }
 @string { a_martello_silvano = "Silvano Martello" }
 @string { a_mccormack_jon = "Jon {McCormack}" }
 @string { a_meeran_sheik = "Sheik Meeran" }
@@ -145,6 +146,7 @@
 @string { a_van_hoorn_jelke_jeron = "Jelke Jeroen {van Hoorn}" }
 @string { a_weise_thomas = "Thomas Weise" }
 @string { a_whitley_l_darrell = "L.\ Darrell Whitley" }
+@string { a_wilson_james_m = "James M.\ Wilson" }
 @string { a_woeginger_gerhard_j = "Gerhard J.\ Woeginger" }
 @string { a_wu_david_s = "S.\ David Wu" }
 @string { a_wu_yuezhong = "Yuezhong Wu" }
@@ -409,6 +411,13 @@
  publisher = p_springer_verlag_gmbh,
  address = pa_springer_verlag_gmbh,
  issn = {0302-9743},
+}
+
+@xdata{ser_orcsis,
+ series = {Operations Research/Computer Science Interfaces Series},
+ publisher = p_springer_new_york,
+ address = pa_springer_new_york,
+ issn = {1387-666X}
 }
 
 @xdata{ser_psam,
@@ -782,6 +791,16 @@
  pages = {85--103}
 }
 
+@book{K2000SORCP,
+ author = a_klein_robert,
+ title = {Scheduling of Resource-Constrained Projects},
+ xdata = {ser_orcsis},
+ number = {10},
+ year = {2000},
+ doi = {10.1007/978-1-4615-4629-0},
+ isbn = {978-0-7923-8637-7}
+}
+
 @book{L1909HDLVDVDP,
  author = a_landau_edmund,
  title = {{Handbuch der Lehre von der Verteilung der Primzahlen}},
@@ -1066,7 +1085,7 @@
 
 @phdthesis{vH2016DPFRASOSOD,
  author = a_van_hoorn_jelke_jeron,
- title = {Dynamic Programming for Routing and Scheduling: Optimizing Sequences of Decisions},
+ title = {Dynamic Programming for Routing and Scheduling: {O}ptimizing Sequences of Decisions},
  date = {2016-06},
  school = p_vrije_universiteit_amsterdam,
  publisher = p_vrije_universiteit_amsterdam,
@@ -1087,26 +1106,17 @@
  doi = {10.1007/s10951-017-0547-8}
 }
 
-@incollection{WPG2009SRWVRPWEA,
- author = a_weise_thomas # { and } # a_podlich_alexander # { and } # a_gorldt_christian,
- title = {Solving Real-World Vehicle Routing Problems with Evolutionary Algorithms},
- crossref = {CD2009NIFSPAPP},
- chapter = {2},
- pages = {29--53},
- doi = {10.1007/978-3-642-04039-9_2},
- url = {http://iao.hfuu.edu.cn/images/publications/WPG2009SRWVRPWEA.pdf},
- urldate = {2023-12-05}
-}
-
-@inproceedings{WPRGG2009EFTP,
- author = a_weise_thomas # { and } # a_podlich_alexander # { and } # a_reinhard_kai # { and } # a_gorldt_christian # { and } # a_geihs_kurt,
- title = {Evolutionary Freight Transportation Planning},
- booktitle = {Applications of Evolutionary Computing {--} Proceedings of {EvoWorkshops 2009}: {EvoCOMNET, EvoENVIRONMENT, EvoFIN, EvoGAMES, EvoHOT, EvoIASP, EvoINTERACTION, EvoMUSART, EvoNUM, EvoSTOC, EvoTRANSLOG}, } # apr # {~15--17, 2009, } # l_germany_tubingen,
- crossref = {PROC2009EVOWORKSHOPS},
- pages = {768--777},
- doi = {10.1007/978-3-642-01129-0_87},
- url = {http://iao.hfuu.edu.cn/images/publications/WPRGG2009EFTP.pdf},
- urldate = {2023-12-07}
+@article{W2003GCACA,
+ author = a_wilson_james_m,
+ title = {Gantt Charts: {A} Centenary Appreciation},
+ xdata = {j_ejor},
+ volume = {149},
+ number = {2},
+ date = {2003-09},
+ pages = {430--437},
+ doi = {10.1016/S0377-2217(02)00769-5},
+ url = {http://www-public.imtbs-tsp.eu/~gibson/Teaching/Teaching-ReadingMaterial/Wilson03.pdf},
+ urldate = {2023-12-15}
 }
 
 @book{W2009GOATAA,
@@ -1136,6 +1146,28 @@
  url = {http://github.com/thomasWeise/jsspInstancesAndResults},
  urldate = {2023-12-07},
  addendum = {A {GitHub} repository with the common benchmark instances for the {Job} {Shop} {Scheduling} {Problem} as well as results from the literature, both in form of {CSV} files and R program code to access them.}
+}
+
+@incollection{WPG2009SRWVRPWEA,
+ author = a_weise_thomas # { and } # a_podlich_alexander # { and } # a_gorldt_christian,
+ title = {Solving Real-World Vehicle Routing Problems with Evolutionary Algorithms},
+ crossref = {CD2009NIFSPAPP},
+ chapter = {2},
+ pages = {29--53},
+ doi = {10.1007/978-3-642-04039-9_2},
+ url = {http://iao.hfuu.edu.cn/images/publications/WPG2009SRWVRPWEA.pdf},
+ urldate = {2023-12-05}
+}
+
+@inproceedings{WPRGG2009EFTP,
+ author = a_weise_thomas # { and } # a_podlich_alexander # { and } # a_reinhard_kai # { and } # a_gorldt_christian # { and } # a_geihs_kurt,
+ title = {Evolutionary Freight Transportation Planning},
+ booktitle = {Applications of Evolutionary Computing {--} Proceedings of {EvoWorkshops 2009}: {EvoCOMNET, EvoENVIRONMENT, EvoFIN, EvoGAMES, EvoHOT, EvoIASP, EvoINTERACTION, EvoMUSART, EvoNUM, EvoSTOC, EvoTRANSLOG}, } # apr # {~15--17, 2009, } # l_germany_tubingen,
+ crossref = {PROC2009EVOWORKSHOPS},
+ pages = {768--777},
+ doi = {10.1007/978-3-642-01129-0_87},
+ url = {http://iao.hfuu.edu.cn/images/publications/WPRGG2009EFTP.pdf},
+ urldate = {2023-12-07}
 }
 
 @article{WWLC2019IIIOADTM,
