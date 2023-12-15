@@ -13,12 +13,30 @@ A problem instance of the \gls{JSSP} is a concrete scenario, e.g., a concrete li
 A concrete instantiation of all information that are relevant from the perspective of solving an optimization problems is called a \emph{problem instance}~\instance.%
 \end{definition}%
 %
-The problem instance is the \emph{input} of the optimization algorithms.
+%
+\endhsection%
+%
+\hsection{A Programmer's Perspective}%
+From the perspective of a programmer, the problem instance is the \emph{input} of the optimization algorithms.
 A problem instance is related to an optimization problem in the same way an object/instance is related to its \codeil{class} in an object-oriented programming language like Python or Java, or a \codeil{struct} in~C.
 The \codeil{class} defines which member variables exist and what their valid ranges are.
 An instance of the \codeil{class} is a piece of memory which holds concrete values for each member variable.%
+
+For the \gls{TSP}, for example, a problem instance could be a matrix with the distances between the cities.
+For the \gls{QAP}, we could have two matrices:
+One with the distances between the locations and one with the flows between the facilities.
+For the \gls{BPP}, we would need to know the size of the containers into which we want to pack the objects and as well as the sizes of the objects that we want to pack.
+A programmer would then create a \codeil{class} with attributes to store this information.
+
+Side note:
+A programmer would probably also define some sort of text file format to read and write such instance data.
+Because then, she would have already taken care of how to handle the input of her program:
+It will be files of this text format.%
+%
+\ruleOfThumb{input1}{One part of the \emph{input} of optimization algorithm is the instance data~\instance.}%
 %
 \endhsection%
+%
 %
 \hsection{Example: Job Shop Scheduling}%
 \label{sec:jsspInstance}%
@@ -138,7 +156,8 @@ They stem from instance sets contributed by different researchers and have diffe
 \hsection{File Format and \instStyle{demo} Instance}%
 \label{sec:jsspDemoInstance}%
 Our benchmark instances for the \gls{JSSP} are taken from the OR\nobreakdash-Library.
-In the simple text format used in the OR\nobreakdash-Library, several problem instances can be contained in one file.
+We mentioned before that it often makes sense to have a simple text format to represent the input of optimization algorithms, the instance data~\instance.
+The OR\nobreakdash-Library defines such a format for the \gls{JSSP}.
 For the sake of simplicity, we created one additional, smaller \gls{JSSP} instance to describe the format of these files, as illustrated in \autoref{fig:jssp_demo_instance}.
 
 \begin{figure}%
@@ -148,7 +167,7 @@ For the sake of simplicity, we created one additional, smaller \gls{JSSP} instan
 \label{fig:jssp_demo_instance}%
 \end{figure}
 
-Each problem instance~\instance\ starts and ends with a line of several \texttt{+} characters.
+Each problem instance~\instance\ in the OR\nobreakdash-Library starts and ends with a line of several \texttt{+} characters.
 The next line is a short description or title of the instance.
 In the third line, the number~\jsspJobs\ of jobs is specified, followed by the number~\jsspMachines\ of machines.
 The actual IDs or indexes of machines and jobs are 0\nobreakdash-based, similar to array indices in Python.
@@ -199,6 +218,7 @@ In \autoref{lst:jssp_instance}, we give an excerpt of this class, i.e., a snippe
 We add a static method \codeil{from_resource(name)} to this class that can load any of the aforementioned benchmark \gls{JSSP} instances from a resource inside our \moptipy\ package directly based on its name (and return it as instance of \codeil{Instance}).
 This way, we can conveniently access all the necessary data of a job shop scheduling task.
 The actual code of the above, other utility methods, as well as sanity checks in the \codeil{__new__} constructor have here been omitted as they are unimportant for the understanding of the scenario.%
+\endhsection%
 \endhsection%
 \endhsection%
 %
