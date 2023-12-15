@@ -174,9 +174,59 @@ In the general case, we obtain \autoref{eq:jssp_solution_space_size_upper} for t
 \label{eq:jssp_solution_space_size_upper}%
 \end{align}%
 %
-However, the fact that we can generate $(\jsspJobs!)^{\jsspMachines}$ possible Gantt charts without useless delay for a \gls{JSSP} with \jsspJobs~jobs and \jsspMachines~machines does not mean that all of them are actual \emph{feasible} solutions.%
+\begin{table}%
+\centering%
+\caption{The size~$\left|\solutionSpace\right|$ of the solution space~\solutionSpace\ (without schedules that stall uselessly) for selected values of the number~\jsspJobs\ of jobs and the number~\jsspMachines\ of machines of an \gls{JSSP} instance~\instance\ (later compare also with \autoref{fig:function_growth}).}%
+\label{tbl:jsspSolutionSpaceSizeTable}%
+%\small%
+\begin{tabular}{lrrrr}%
+\hline%
+example&\jsspJobs&\jsspMachines&$\left|\solutionSpace\right|$\\%
+\hline%
+&2&2&4\\%
+&2&3&8\\%
+&2&4&16\\%
+&2&5&32\\%
+&3&2&36\\%
+&3&3&216\\%
+&3&4&1\dgsep296\\%
+&3&5&7\dgsep776\\%
+&4&2&576\\%
+&4&3&13\dgsep824\\%
+&4&4&331\dgsep776\\%
+\instStyle{demo}&4&5&7\dgsep962\dgsep624\\%
+&5&2&14\dgsep400\\%
+&5&3&1\dgsep728\dgsep000\\%
+&5&4&207\dgsep360\dgsep000\\%
+&5&5&24\dgsep883\dgsep200\dgsep000\\%
+\instStyle{orb06}&10&10&$\approx3.959*10^{65}$\\%
+\instStyle{la38}&15&15&$\approx5.591*10^{181}$\\%
+\instStyle{abz8}&20&15&$\approx6.193*10^{275}$\\%
+\instStyle{yn4}&20&20&$\approx5.278*10^{367}$\\%
+\instStyle{swv14}&50&10&$\approx6.772*10^{644}$\\%
+\instStyle{dmu67}&40&20&$\approx1.710*10^{958}$\\%
+\instStyle{dmu72}&50&15&$\approx1.762*10^{967}$\\%
+\instStyle{ta70}&50&20&$\approx4.587*10^{1\dgsep289}$\\%
+\hline%
+\end{tabular}%
+\end{table}%
 %
+We list some examples for the number~$\left|\solutionSpace\right|$ of possible schedules which do not waste time uselessly for different values of~$\jsspJobs$ and~$\jsspMachines$ in \autoref{tbl:jsspSolutionSpaceSizeTable}.
+We find that even small problems with just $\jsspMachines=5$~machines and $\jsspJobs=5$~jobs have billions of possible solutions.
+The eight more realistic problem instances which we will use as benchmarks in our book already have more solutions than what we could ever enumerate, list, or store with any conceivable hardware or computer.
+For the smallest of them, \instStyle{orb06}, which has ten jobs and ten machines, we already could theoretically construct $3.959*10^{65}$ possible Gantt charts.
+The biggest of them, \instStyle{ta70}, has 50~jobs and 20~machines, which means that the number of theoretically possible solutions is about $4.587*10^{1\dgsep289}$, a number that would easily fill a whole single sheet of paper if written down\dots%
+%
+\ruleOfThumb{spaceSize}{Solution spaces tend to be huge, even for seemingly small problem instances.}%
+%
+From this, it becomes immediately clear:
+We cannot simply test all possible solutions and pick the best one.
+We will need some more sophisticated algorithms to solve these problems.
+This is the topic of this book.
+
+However, the fact that we can generate many possible Gantt charts for a \gls{JSSP} instance with \jsspJobs~jobs and \jsspMachines~machines does not mean that all of them are actual \emph{feasible} solutions.%
 \endhsection%
+%
 %
 \hsection{The Feasibility of the Solutions}%
 \label{sec:solutionSpace:feasibility}%
@@ -252,18 +302,11 @@ Hence, there are only three out of four possible Gantt charts that work for this
 For a problem instance where the jobs need to pass through all machines in the same sequence, however, all possible Gantt charts will work, as also illustrated in the left column of \autoref{fig:jssp_feasible_gantt}.
 The number of actually feasible Gantt charts in~\solutionSpace\ thus can be different for different problem instances.
 
-This is very annoying.
-The potential existence of infeasible solutions means that we cannot just pick a good element from~\solutionSpace\ (according to whatever \emph{good} means), we also must be sure that it is actually \emph{feasible}.
-An optimization algorithm that may sometimes return infeasible solutions will not be acceptable.%
-\endhsection%
-%
-\hsection{Summary}%
-%
 \begin{table}%
 \centering%
-\caption{The size~$\left|\solutionSpace\right|$ of the solution space~\solutionSpace\ (without schedules that stall uselessly) for selected values of the number~\jsspJobs\ of jobs and the number~\jsspMachines\ of machines of an gls{JSSP} instance~\instance\ (later compare also with \autoref{fig:function_growth}), as well as the minimal number $\min\nFeasible$ of feasible solutions.}%
-\label{tbl:jsspSolutionSpaceTable}%
-%\small%
+\caption{%
+The minimal number $\min\nFeasible$ of feasible solutions over all instances with specific size \jsspJobs\ and \jsspMachines\ (compare with \autoref{tbl:jsspSolutionSpaceSizeTable}).}%
+\label{tbl:jsspSolutionSpaceFeasibleTable}%
 \begin{tabular}{lrrrr}%
 \hline%
 example&\jsspJobs&\jsspMachines&$\min\nFeasible$&$\left|\solutionSpace\right|$\\%
@@ -279,42 +322,59 @@ example&\jsspJobs&\jsspMachines&$\min\nFeasible$&$\left|\solutionSpace\right|$\\
 &4&2&244&576\\%
 &4&3&1\dgsep630&13\dgsep824\\%
 &4&4&7\dgsep451&331\dgsep776\\%
-\instStyle{demo}&4&5&&7\dgsep962\dgsep624\\%
 &5&2&4\dgsep548&14\dgsep400\\%
 &5&3&91\dgsep461&1\dgsep728\dgsep000\\%
-&5&4&&207\dgsep360\dgsep000\\%
-&5&5&&24\dgsep883\dgsep200\dgsep000\\%
-\instStyle{orb06}&10&10&&$\approx3.959*10^{65}$\\%
-\instStyle{la38}&15&15&&$\approx5.591*10^{181}$\\%
-\instStyle{abz8}&20&15&&$\approx6.193*10^{275}$\\%
-\instStyle{yn4}&20&20&&$\approx5.278*10^{367}$\\%
-\instStyle{swv14}&50&10&&$\approx6.772*10^{644}$\\%
-\instStyle{dmu67}&40&20&&$\approx1.710*10^{958}$\\%
-\instStyle{dmu72}&50&15&&$\approx1.762*10^{967}$\\%
-\instStyle{ta70}&50&20&&$\approx4.587*10^{1\dgsep289}$\\%
 \hline%
 \end{tabular}%
 \end{table}%
-%
-We will use \gls{JSSP} instances to explore the performance of different optimization algorithms.
-Of course, there are infinitely many such instances for a given setting of~$\jsspJobs$ and~$\jsspMachines$ and those that we can actually use in our experiments always only can give us a small glimpse on the situation.
-
-We therefore illustrate some examples for the number~$\left|\solutionSpace\right|$ of possible schedules which do not waste time uselessly for different values of~$\jsspJobs$ and~$\jsspMachines$ in \autoref{tbl:jsspSolutionSpaceTable}.
-We find that even small problems with just $\jsspMachines=5$~machines and $\jsspJobs=5$~jobs have billions of possible solutions.
-The eight more realistic problem instances which we will try to solve here already have more solutions that what we could ever enumerate, list, or store with any conceivable hardware or computer.
-For the smallest of them, \instStyle{orb06}, which has ten jobs and ten machines, we already could theoretically construct $3.959*10^{65}$ possible Gantt charts (some of which may not be feasible).
-The biggest of them, \instStyle{ta70}, has 50~jobs and 20~machines, which means that the number of theoretically possible solutions is about $4.587*10^{1\dgsep289}$, a number that would easily fill a whole single sheet of paper if written down\dots\relax
-
-From this, it becomes immediately clear:
-We cannot simply test all possible solutions and pick the best one.
-We will need some more sophisticated algorithms to solve these problems.
-This is what we will discuss in the following, the topic of this book.
 
 Different \gls{JSSP} instances can have different numbers~\nFeasible\ of possible \emph{feasible} Gantt charts, even if they have the same numbers of machines and jobs.
-For a given setting of~$\jsspMachines$ and~$\jsspJobs$, we are interested in the minimum~$\min\nFeasible$ of this number, i.e., the \emph{smallest value} that~\nFeasible\ can take on over all possible instances with \jsspJobs~jobs and \jsspMachines~machines.
-I don't know how to compute this number and we only want to see out of academic curiosity.
-So, I just enumerated the instances and Gantt charts for small settings of \jsspMachines\ and~\jsspJobs.
-In \autoref{tbl:jsspSolutionSpaceTable}, I then provide the smallest results I got.
-Interestingly, we find that most of the possible Gantt charts for a problem instance might be infeasible, as~$\min\nFeasible$ can be much smaller than~$\left|\solutionSpace\right|$.
+We just saw this in \autoref{fig:jssp_feasible_gantt}.
+Naturally, for a given setting of~$\jsspMachines$ and~$\jsspJobs$, we are interested in the minimum~$\min\nFeasible$ of this number, i.e., the \emph{smallest value} that~\nFeasible\ can take on over all possible instances with \jsspJobs~jobs and \jsspMachines~machines.
+
+Now, I don't know how to compute this number in any efficient and we only want to see out of academic curiosity.
+So I just enumerated all the instances for a given combination of \jsspJobs\ and ~jsspMachines.
+For each instance, I enumerated all the possible Gantt charts and counted how many were feasible, i.e., computed \nFeasible\ for that instance.
+After I was done with enumerating all the instances, I know the smallest value of \nFeasible, i.e., $\min\nFeasible$, for that combination of \jsspJobs\ and~\jsspMachines.
+I know that there must be a better way to get this number, probably with dynamic programming, but for now, the crude method will be sufficient.
+Of course, it only works for very small values of \jsspJobs\ and~\jsspMachines.
+
+The results in \autoref{tbl:jsspSolutionSpaceFeasibleTable} show that, at least for some instances, most of the possible Gantt charts might be infeasible, as~$\min\nFeasible$ can be much smaller than~$\left|\solutionSpace\right|$.
+%
+\ruleOfThumb{infeasibleSolutions}{If a problem has feasibility constraints, then we often find that most of the candidate solutions are infeasible.}%
+%
+This is very annoying.
+The potential existence of infeasible solutions means that we cannot just pick a good element from~\solutionSpace\ (according to whatever \emph{good} means), we also must be sure that it is actually \emph{feasible}.
+An optimization algorithm that may sometimes return infeasible solutions will not be acceptable.%
+%
+\endhsection%
+%
+\hsection{Summary}%
+%
+In this section we introduced a vital component of optimization problems: The solution space~\solutionSpace.
+This space contains all the possible candidate solutions~\solspel\ for the problem.
+Now, we do not yet know whether a candidate solution~\solspel\ is a good or a bad solution.
+In the next sections, we will learn how to decide about that.
+
+To ground the basic concepts of~\solutionSpace\ and~\solspel\ to some practical experience, we looked again at the \gls{JSSP} as example.
+We found that Gantt charts are a proper way to express solutions to this scheduling problem.
+A Gantt chart basically tells which operation should be carried out by which machine at which time.
+We then briefly sketched that a Gantt chart can be represented as an instance of a \codeil{class} in Python and that we can implement basic functionality for handling such classes as an instance of \codeil{Space} interface.
+We can use this later on, for now it shall not be important.
+
+What is important is that we decided to only consider Gantt charts that do not include useless waiting time.
+If an operation can be executed on a machine, we will not wait uselessly but execute it right away.
+While there is an infinite number of Gantt charts with arbitrary useless waiting time, the number of Gantt charts without such time is limited (\autoref{eq:jssp_solution_space_size_upper}).
+However, while it is limited, it grows very quickly and, thus, $|\solutionSpace|$ is very huge, even for seemingly small instances~\instance\ (with small \jsspMachines\ and~\jsspJobs).
+
+Moreover, we discovered that not every Gantt chart that we can draw for a given \gls{JSSP} instance is also \emph{feasible}.
+Some of them have deadlocks (\ref{fig:jssp_feasible_gantt}).
+Obviously, whatever we will later do to find \emph{good} Gantt charts, we must never return an infeasible one, i.e., one that cannot actually be executed.
+To make matters worse, we discovered that it is entirely possible that the vast majority of Gantt charts that we could come up with for a given instance could be infeasible.
+
+So the \gls{JSSP} is not just a problem where the number of possible solutions is far too huge to test them all, most of these solutions may also be wrong.
+And the \gls{JSSP} is an \inQuotes{average citizen} in optimization.
+We may often encounter similar situations, at least in terms of the size of the solution space (not all problems have feasiblity constraints).
+So optimization is indeed interesting.%
 \endhsection%
 \endhsection%

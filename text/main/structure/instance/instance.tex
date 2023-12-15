@@ -38,6 +38,7 @@ These operations correspond to the single production steps, such as \inQuotes{cu
 Each job may need to pass through the machines in a different order.
 The operation~\jsspMachineIndex\ of job~\jsspJobIndex\ must be executed on machine~$\jsspOperationMachine{\jsspJobIndex}{\jsspMachineIndex}\in \intRange{0}{(\jsspMachines-1)}$.
 Doing so needs~$\jsspOperationTime{\jsspJobIndex}{\jsspMachineIndex}\in\naturalNumbersZ$ time units for completion.
+Here, \inQuotes{time unit} is just a placeholder for a real measure of time and in a practical application, the time unit could be milliseconds, seconds, hours, days, or something else.
 Once a machine~\jsspMachineIndex\ begins to process an operation, it cannot stop until the operation is completed, i.e., will remain busy for~$\jsspOperationTime{\jsspJobIndex}{\jsspMachineIndex}\in\naturalNumbersZ$ time units.
 
 This definition of a \gls{JSSP} instance~\instance\ is quite versatile.
@@ -201,4 +202,3 @@ The actual code of the above, other utility methods, as well as sanity checks in
 \endhsection%
 \endhsection%
 %
-

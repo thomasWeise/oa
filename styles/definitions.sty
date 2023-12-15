@@ -1,6 +1,45 @@
 %%
-\RequirePackage{amsthm}%
-\newtheorem{definition}{Definition}%
+\RequirePackage{ntheorem}%
+\RequirePackage[framemethod=TikZ]{mdframed}%
 %
-\newcommand{\definitionautorefname}{Definition}%
+\theorembodyfont{\normalfont}%
+\newcommand{\definitionautorefname}{Definition}%%
+%
+\newmdtheoremenv[%
+linewidth=2pt,%
+linecolor=definition-frame,%
+roundcorner=4pt,%
+backgroundcolor=definition-background,%
+leftmargin=5pt,%
+rightmargin=5pt,%
+font={}%
+]{definition}{\definitionautorefname}[chapter]%
+%
+\newcommand{\@ruleOfThumbautorefname}{Rule of Thumb}%
+%
+\newmdtheoremenv[%
+linewidth=2pt,%
+linecolor=ruleofthumb-frame,%
+roundcorner=4pt,%
+backgroundcolor=ruleofthumb-background,%
+leftmargin=5pt,%
+rightmargin=5pt,%
+font={}%
+]{@ruleOfThumb}{\@ruleOfThumbautorefname}%
+%%
+\xdef\@rulesOfThumb{}%
+%
+\gdef\ruleOfThumb#1#2{%
+\begin{@ruleOfThumb}\label{rule:#1}#2\end{@ruleOfThumb}%
+%
+\ifx\@rulesOfThumbs\empty\expandafter\@firstoftwo\else\expandafter\@secondoftwo\fi%
+{\gdef\@rulesOfThumb{\noindent\autoref{rule:#1}:~#2}}%
+{\g@addto@macro\@rulesOfThumb{\smallskip\par\noindent\autoref{rule:#1}: #2}}%
+}%
+%
+\gdef\printRulesOfThumb{%
+\chapter*{Rules of Thumb}%
+\pdfbookmark{Rules of Thumb}{Rules of Thumb}%
+\@rulesOfThumb%
+}%
 %
