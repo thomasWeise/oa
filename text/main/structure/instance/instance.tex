@@ -8,7 +8,7 @@ An optimization problem is the general blueprint of the tasks.
 The \gls{JSSP}, for instance, has the goal of scheduling production jobs to machines under a set of constraints that we will discuss later.
 A problem instance of the \gls{JSSP} is a concrete scenario, e.g., a concrete lists of tasks, requirements, and machines.%
 %
-\begin{definition}%
+\begin{definition}[Problem Instance~\instance]%
 \label{def:instance}%
 A concrete instantiation of all information that are relevant from the perspective of solving an optimization problems is called a \emph{problem instance}~\instance.%
 \end{definition}%
@@ -219,6 +219,15 @@ We add a static method \codeil{from_resource(name)} to this class that can load 
 This way, we can conveniently access all the necessary data of a job shop scheduling task.
 The actual code of the above, other utility methods, as well as sanity checks in the \codeil{__new__} constructor have here been omitted as they are unimportant for the understanding of the scenario.%
 \endhsection%
+\endhsection%
+%
+\hsection{Summary}%
+We now have learned the first component of optimization problems.
+When we say \inQuotes{optimization problem} we do not actually mean a single problem that we can solve.
+We refer to a whole family of scenarios that have the same structure and can be solved by the same algorithms.
+There is not just \emph{one} \gls{TSP} or \emph{one} \gls{JSSP}.
+There are infinitely many of them.
+They are called problem \emph{instances}~\instance.%
 \endhsection%
 \endhsection%
 %

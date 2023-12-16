@@ -19,7 +19,7 @@ gs -dAntiAliasColorImages=true \
    -dAntiAliasMonoImages=true \
    -dAutoFilterColorImages=false \
    -dAutoFilterGrayImages=false \
-   -dAutoRotatePages=/PageByPage \
+   -dAutoRotatePages=/None \
    -dBATCH \
    -dCannotEmbedFontPolicy=/Error \
    -dColorConversionStrategy=/LeaveColorUnchanged \
