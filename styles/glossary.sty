@@ -3,7 +3,7 @@
 %%
 %
 %% Use smaller margins for backmatter.
-\RequirePackage[acronyms,symbols,toc]{glossaries}%
+\RequirePackage[acronyms,symbols,toc,sort=standard]{glossaries}%
 %
 \setacronymstyle{long-short}%
 %
@@ -44,6 +44,39 @@ sort={#3},%
 description={\sloppy#5.}%
 }%
 \expandafter\protected\expandafter\gdef\csname#1\endcsname{\ensuremath{\gls{#1}}}%
-\expandafter\protected\expandafter\gdef\csname#1Of\endcsname##1{\ensuremath{\gls{#1}(##1)}}
+\expandafter\protected\expandafter\gdef\csname#1Of\endcsname##1{\ensuremath{\gls{#1}(##1)}}%
 }%
 %
+%% Create a new superscript
+%% #1 the symbold ID
+%% #2 the symbol text
+%% #3 the symbol sort key
+%% #4 the symbol description
+\protected\gdef\newSuperscript#1#2#3#4{%
+\newglossaryentry{#1}{%
+type={symbols},
+name={$\circ^{#2}$},%
+sort={#3},%
+text={#2},%
+description={\sloppy#4.}%
+}%
+\expandafter\protected\expandafter\gdef\csname#1\endcsname{\ensuremath{\gls{#1}}}%
+\expandafter\protected\expandafter\gdef\csname#1Of\endcsname##1{\ensuremath{##1^{\gls{#1}}}}%
+}%
+%
+%% Create a new subscript
+%% #1 the symbold ID
+%% #2 the symbol text
+%% #3 the symbol sort key
+%% #4 the symbol description
+\protected\gdef\newSubscript#1#2#3#4{%
+\newglossaryentry{#1}{%
+type={symbols},
+name={$\circ_{#2}$},%
+sort={#3},%
+text={#2},%
+description={\sloppy#4.}%
+}%
+\expandafter\protected\expandafter\gdef\csname#1\endcsname{\ensuremath{\gls{#1}}}%
+\expandafter\protected\expandafter\gdef\csname#1Of\endcsname##1{\ensuremath{##1_{\gls{#1}}}}%
+}%

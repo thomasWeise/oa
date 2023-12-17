@@ -90,6 +90,7 @@ rm "$documentName.snm" || true
 rm "$documentName.spl" || true
 rm "$documentName.synctex" || true
 rm "$documentName.synctex.gz" || true
+rm "$documentName.thm" || true
 rm "$documentName.toc" || true
 rm "$documentName.upa" || true
 rm "$documentName.upb" || true
@@ -304,6 +305,7 @@ rm "$documentName.snm" || true
 rm "$documentName.spl" || true
 rm "$documentName.synctex" || true
 rm "$documentName.synctex.gz" || true
+rm "$documentName.thm" || true
 rm "$documentName.toc" || true
 rm "$documentName.upa" || true
 rm "$documentName.upb" || true

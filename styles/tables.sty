@@ -1,0 +1,15 @@
+%%
+%% Tools for tables.
+%%
+%
+\RequirePackage{booktabs}%
+%
+\gdef\tableHeader{\rowcolor{table-header}}%
+%
+\newenvironment{booktabular}[2][2]{%
+\renewcommand{\arraystretch}{1.2}%
+\rowcolors{#1}{table-row}{}%
+\begin{tabular}{#2}\arrayrulecolor{table-rule}\toprule\tableHeader%
+}{%
+\bottomrule\end{tabular}%
+}

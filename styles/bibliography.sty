@@ -15,8 +15,10 @@ urldate=iso,%
 \bibliography{bibliography/bibliography}
 %
 %% Define formats for ISBNs and ISSNs that link to search engines.
-\DeclareFieldFormat{isbn}{ISBN:~\href{https://www.directtextbook.com/isbn/#1}{#1}}%
-\DeclareFieldFormat{issn}{ISSN:~\href{https://portal.issn.org/api/search?search[]=MUST=allissnbis=#1}{#1}}%
+\protected\gdef\isbn#1{ISBN:~\href{https://www.directtextbook.com/isbn/#1}{#1}}%
+\DeclareFieldFormat{isbn}{\isbn{#1}}%
+\protected\gdef\issn#1{ISSN:~\href{https://portal.issn.org/api/search?search[]=MUST=allissnbis=#1}{#1}}%
+\DeclareFieldFormat{issn}{\issn{#1}}%
 %
 %% Print the ISSNs and ISBNs for books.
 \usepackage{xpatch}%

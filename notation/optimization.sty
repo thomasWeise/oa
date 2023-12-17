@@ -26,14 +26,14 @@ A search operator $\@searchOp:\searchSpace^n\mapsto\searchSpace$ with $n\in\natu
 \newSymbol{obspel}{\ensuremath{z}}{z}{%
 an objective value returned by the objective function~\objf, see \autoref{def:objectiveValue}}%
 %
-\newSymbol{nFeasible}{\ensuremath{\#\mathrm{feasible}}}{feasible}{%
+\newSymbol{nFeasible}{\ensuremath{\#\mathrm{feasible}}}{\#feasible}{%
 the number of feasible solutions in the solution space~\solutionSpace, see \autoref{def:feasibility}}%
 %
 \protected\gdef\fitness{\ensuremath{v}}%
 %
-\protected\gdef\localOptimum#1{\ensuremath{#1^{\times}}}%
-\protected\gdef\globalOptimum#1{\ensuremath{#1^{\star}}}%
-\protected\gdef\bestSoFar#1{\ensuremath{#1_{b}}}%
+\newSuperscript{localOptimum}{\ensuremath{\times}}{.*}{the superscript $\times$~symbol denotes that $\circ$ is a local optimum}%
+\newSuperscript{globalOptimum}{\ensuremath{\star}}{.*}{the superscript $\star$~symbol denotes that $\circ$ is a global optimum}%
+\newSubscript{bestSoFar}{\ensuremath{b}}{.b}{the subscript~$b$ denotes that $\circ$ is the best-so-far element of an optimization process}%
 %
 \protected\gdef\iteration{\ensuremath{\tau}}%
 %

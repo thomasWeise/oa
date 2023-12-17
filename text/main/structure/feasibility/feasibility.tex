@@ -95,12 +95,11 @@ The number of actually feasible Gantt charts in~\solutionSpace\ thus can be diff
 \begin{table}%
 \centering%
 \caption{%
-The minimal number $\min\nFeasible$ of feasible solutions over all instances with specific size \jsspJobs\ and \jsspMachines\ (compare with \autoref{tbl:jsspSolutionSpaceSizeTable}).}%
+The minimal number $\min\nFeasible$ of feasible solutions over all instances with specific sizes \jsspJobs\ and \jsspMachines\ (compare with \autoref{tbl:jsspSolutionSpaceSizeTable}).}%
 \label{tbl:jsspSolutionSpaceFeasibleTable}%
-\begin{tabular}{lrrrr}%
-\hline%
+\begin{booktabular}{lrrrr}%
 example&\jsspJobs&\jsspMachines&$\min\nFeasible$&$\left|\solutionSpace\right|$\\%
-\hline%
+\midrule%
 \autoref{fig:jssp_feasible_gantt}&2&2&3&4\\%
 &2&3&4&8\\%
 &2&4&5&16\\%
@@ -114,8 +113,7 @@ example&\jsspJobs&\jsspMachines&$\min\nFeasible$&$\left|\solutionSpace\right|$\\
 &4&4&7\dgsep451&331\dgsep776\\%
 &5&2&4\dgsep548&14\dgsep400\\%
 &5&3&91\dgsep461&1\dgsep728\dgsep000\\%
-\hline%
-\end{tabular}%
+\end{booktabular}%
 \end{table}%
 
 Different \gls{JSSP} instances can have different numbers~\nFeasible\ of possible \emph{feasible} Gantt charts, even if they have the same numbers of machines and jobs.

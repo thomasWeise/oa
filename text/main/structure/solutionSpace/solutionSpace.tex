@@ -78,7 +78,7 @@ You can find an example illustrated in \autoref{fig:gantt_demo_without_makespan}
 \begin{figure}%
 \centering%
 \includegraphics[width=0.55\linewidth]{\currentDir/gantt_demo_without_makespan.pdf}%
-\caption{One example candidate solution for the demo instance given in \autoref{fig:jssp_demo_instance}: A Gantt chart assigning a time window to each job on each machine.}%
+\caption{One example candidate solution for the \instStyle{demo} instance given in \autoref{fig:jssp_demo_instance}: A Gantt chart assigning a time window to each job on each machine.}%
 \label{fig:gantt_demo_without_makespan}%
 \end{figure}
 
@@ -180,11 +180,9 @@ In the general case, we obtain \autoref{eq:jssp_solution_space_size_upper} for t
 \centering%
 \caption{The size~$\left|\solutionSpace\right|$ of the solution space~\solutionSpace\ (without schedules that stall uselessly) for selected values of the number~\jsspJobs\ of jobs and the number~\jsspMachines\ of machines of an \gls{JSSP} instance~\instance\ (later compare also with \autoref{fig:function_growth}).}%
 \label{tbl:jsspSolutionSpaceSizeTable}%
-%\small%
-\begin{tabular}{lrrrr}%
-\hline%
+\begin{booktabular}{lrrrr}%
 example&\jsspJobs&\jsspMachines&$\left|\solutionSpace\right|$\\%
-\hline%
+\midrule%
 &2&2&4\\%
 &2&3&8\\%
 &2&4&16\\%
@@ -209,8 +207,7 @@ example&\jsspJobs&\jsspMachines&$\left|\solutionSpace\right|$\\%
 \instStyle{dmu67}&40&20&$\approx1.710*10^{958}$\\%
 \instStyle{dmu72}&50&15&$\approx1.762*10^{967}$\\%
 \instStyle{ta70}&50&20&$\approx4.587*10^{1\dgsep289}$\\%
-\hline%
-\end{tabular}%
+\end{booktabular}%
 \end{table}%
 %
 We list some examples for the number~$\left|\solutionSpace\right|$ of possible schedules which do not waste time uselessly for different values of~$\jsspJobs$ and~$\jsspMachines$ in \autoref{tbl:jsspSolutionSpaceSizeTable}.
