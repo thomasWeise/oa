@@ -52,7 +52,7 @@ Lower bounds are a \emph{\inQuotes{nice to have}} feature allowing us to better 
 In \autoref{lst:Objective}, we presented the API for implementing objective functions.
 We extend this API by a function \codeil{lower_bound()} that can return a lower bound or~$-\infty$ if no bound is known.
 (Indeed, $-\infty$ is also a valid lower bound that fulfills \autoref{def:lowerBound}.)
-Furthermore, our experiment \href{\moptipyUrl/moptipy.api.html#module-moptipy.api.execution}{execution API} will automatically stop the optimization processes if a solution~$\globalOptimumOf{\solspel}$ with~$\objfOf{\globalOptimumOf{\solspel}}=\lowerBoundOf{\objf}$ is reached.%
+Furthermore, our experiment \href{\moptipyExecution}{execution API} will automatically stop the optimization processes if a solution~$\globalOptimumOf{\solspel}$ with~$\objfOf{\globalOptimumOf{\solspel}}=\lowerBoundOf{\objf}$ is reached.%
 \endhsection%
 %
 \hsection{Example: Job Shop Scheduling}%

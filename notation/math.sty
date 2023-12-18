@@ -45,10 +45,3 @@ In other words, ${\mathcal{O}}(g(x))$~describes an upper bound for function grow
 %
 \protected\gdef\instStyle#1{\ensuremath{\mathtt{#1}}}%
 %
-%%
-%% The digit group separator.
-%% This is needed to produce numbers like 12'344 that look nice in math mode.
-\protected\gdef\dgsep{%
-\ifmmode\expandafter\@firstoftwo\else\expandafter\@secondoftwo\fi%
-{\mathstrut\hspace{-0.02em}\textnormal{'}\hspace{-0.02em}\mathstrut}{'}}%
-%

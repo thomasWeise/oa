@@ -12,12 +12,12 @@ an objective function~$f:\solutionSpace\mapsto\realNumbers$ computes the cost of
 \protected\gdef\searchSpaceSubset{\ensuremath{X}}%
 %
 \newSymbol{searchSpace}{\mathSpace{\searchSpaceSubset}}{X}{%
-the search space, i.e., the candidate solutions of an optimization problem, but in an encoded form that is easier to be processed with search operators}%
+the search space, i.e., the candidate solutions of an optimization problem, but in an encoded form that is easier to be processed with search operators, see \autoref{def:searchSpace}}%
 \newSymbol{sespel}{\ensuremath{x}}{x}{%
-an element of the search space~\searchSpace}%
+an element of the search space~\searchSpace, see \autoref{def:searchSpacePoint}}%
 %
 \newFunc{decode}{\ensuremath{\gamma}}{g(x)}{x}{%
-the decoding function~$\gamma:\searchSpace\mapsto\solutionSpace$ maps the candidate solutions from their encoded form (a point in the search space~\searchSpace\ that is processed by search operators) to their decoded, human-understandable form (a point in the solution space~\solutionSpace\ that can be processed by the objective function~\objf)}%
+the decoding function~$\gamma:\searchSpace\mapsto\solutionSpace$ maps the candidate solutions from their encoded form (a point in the search space~\searchSpace\ that is processed by search operators) to their decoded, human-understandable form (a point in the solution space~\solutionSpace\ that can be processed by the objective function~\objf), see \autoref{def:decoding}}%
 %
 \DeclareMathOperator{\@searchOp}{move}%
 \newFunc{searchOp}{\ensuremath{\@searchOp}}{move(x)}{x}{%
