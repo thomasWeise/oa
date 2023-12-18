@@ -357,7 +357,7 @@ Some elements of the search space~\searchSpace\ will map to the same element in 
 For example, we could arbitrarily swap the first three numbers in the example string in \autoref{fig:jssp_encoding} and would obtain the same Gantt chart, because jobs~0, 2, and~3 start at different machines.
 
 As said before, we should avoid redundancy in the search space.
-However, here we will stick with our proposed mapping because it is very simple, it solves the problem of feasibility of candidate solutions, and it allows us to relatively easily introduce and discuss many different approaches, algorithms, and sub-algorithm%
+However, here we will stick with our proposed mapping because it is very simple, it solves the problem of feasibility of candidate solutions, and it allows us to relatively easily introduce and discuss many different approaches, algorithms, and sub-algorithms.%
 \endhsection%
 \endhsection%
 %
@@ -369,7 +369,7 @@ We have learned that we need an objective function~$\objf:\solutionSpace\mapsto\
 
 In this section, however, we have learned \emph{optional} components of the structure of optimization: the search space~\searchSpace\ and the decoding function~$\decode:\searchSpace\mapsto\solutionSpace$ that translates points~$\sespel\in\searchSpace$ to candidate solutions~$\solspel\in\solutionSpace$.
 In many cases, neither~\searchSpace\ nor \decode\ are needed and we can search in~\solutionSpace\ as-is.
-However, in many \emph{other} cases, the data structure~\solutionSpace\ that we can present to the user and rate with the objective function~\objf\ is not suitable to be explored directly during the optmization process.
+However, in many \emph{other} cases, the data structure~\solutionSpace\ that we can present to the user and rate with the objective function~\objf\ is not suitable to be explored directly during the optimization process.
 It may either be too constraint or too complicated.
 
 Then, we may come up with a way~\decode\ to translate some very simple space~\searchSpace, let's say bit strings, real vectors, or permutations to~\solutionSpace.
