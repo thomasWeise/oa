@@ -19,11 +19,13 @@
 %
 %% Some references to numpy
 \xdef\numpybaseurl{https://numpy.org}%
-\xdef\numpydocurl{\numpybaseurl/doc/stable/reference/generated}%
+\xdef\numpydocurl{\numpybaseurl/doc/stable/reference}%
 \protected\gdef\numpy{\href{\numpybaseurl}{numpy}}%
-\xdef\numpyndarrayurl{\numpydocurl/numpy.ndarray.html}%
+\xdef\numpyndarrayurl{\numpydocurl/generated/numpy.ndarray.html}%
 \protected\gdef\numpyndarray{\href{\numpyndarrayurl}{\codeil{np.ndarray}}}%
 \protected\gdef\numpyndarrays{\href{\numpyndarrayurl}{\codeils{np.ndarray}}}%
+\xdef\numpyGeneratorurl{\numpydocurl/random/generator.html}%
+\protected\gdef\numpyGenerator{\href{\numpyGeneratorurl}{\codeil{np.random.Generator}}}%
 %
 \xdef\moptipyExecution{\moptipyUrl/moptipy.api.html\#module-moptipy.api.execution}%
 %

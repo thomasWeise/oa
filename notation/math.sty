@@ -28,7 +28,8 @@ In other words, ${\mathcal{O}}(g(x))$~describes an upper bound for function grow
 \newFunc{lowerBound}{\ensuremath{\@lowerBound}}{lb(f(x))}{f(x)}{the lower bound of a function~$f$, i.e., \ensuremath{\@lowerBound(f)\leq f(x)\forall x}, see \autoref{def:lowerBound}}%
 \DeclareMathOperator{\@upperBound}{ub}%
 \newFunc{upperBound}{\ensuremath{\@upperBound}}{ub(f(x))}{f(x)}{the upper bound of a function, i.e., \ensuremath{\@upperBound(f)\geq f(x)\forall x}}%
-\newSymbol{random}{\ensuremath{\mathfrak{R}}}{R}{a random number}%
+%
+\newSymbol{random}{\ensuremath{\mathfrak{R}}}{R}{a source of random number numbers; in a real algorithm implementation, this is a pseudo-random number generator, e.g., a \numpyGenerator}%
 %
 \protected\gdef\probability{\ensuremath{P}}%
 \protected\gdef\mean{\ensuremath{\mathrm{mean}}}%

@@ -106,7 +106,7 @@ In \autoref{lst:Space}, we already have defined a simple API to provide common o
 We can reuse this very same API for search spaces too.
 Additionally, we need a function that can convert from points in the search space to candidate solutions.%
 %
-\moptipyCode{moptipy/api/encoding.py}{--labels book --args doc}{Encoding}{An base class for encodings.}%
+\moptipyCode{moptipy/api/encoding.py}{--labels book --args doc}{Encoding}{A base class for encodings.}%
 
 The class given in \autoref{lst:Encoding} provides the blueprint for a function \codeil{decode} which translates one point~\codeil{x} in the search space to a candidate solution instance~\codeil{y} of the solution space.
 This \codeil{decode} function corresponds to the general definition~$\decode:\searchSpace\mapsto\solutionSpace$ of the encoding.

@@ -21,7 +21,7 @@ the decoding function~$\gamma:\searchSpace\mapsto\solutionSpace$ maps the candid
 %
 \DeclareMathOperator{\@searchOp}{move}%
 \newFunc{searchOp}{\ensuremath{\@searchOp}}{move(x)}{x}{%
-A search operator $\@searchOp:\searchSpace^n\mapsto\searchSpace$ with $n\in\naturalNumbersZ$ takes zero or more points from the search space~\searchSpace\ as input and produces one new element of~\searchSpace\ as output}%
+A search operator $\@searchOp:\random\times\searchSpace^k\mapsto\searchSpace$ with $k\in\naturalNumbersZ$ takes zero or more points from the search space~\searchSpace\ together with a source~\random\ of randomness as input and produces one new element of~\searchSpace\ as output, see \autoref{def:searchOp}}%
 %
 \newSymbol{obspel}{\ensuremath{z}}{z}{%
 an objective value returned by the objective function~\objf, see \autoref{def:objectiveValue}}%
