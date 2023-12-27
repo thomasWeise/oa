@@ -45,7 +45,7 @@ In other words, if \objf~is the objective function of a maximization problem, we
 %
 \hsection{A Programmer's Perspective}%
 %
-From the perspective of a programmer, the general concept of objective functions can be represented by the \codeil{class} given in \autoref{lst:Objective}.
+From the perspective of a programmer, the general concept of objective functions can be represented by the \codeil{class} given in \cref{lst:Objective}.
 The \codeil{evaluate} function of this class accepts one element~\codeil{x} from the solution space and returns a numerical value.
 We can implement this function in any way we want, meaning that we can accommodate all types of solution spaces and optimization goals.%
 %
@@ -57,7 +57,7 @@ We can implement this function in any way we want, meaning that we can accommoda
 \label{sec:jsspObjectiveFunction}%
 %
 What could be a suitable objective function for the \gls{JSSP}?
-As stated in \autoref{sec:jsspExample}, our goal is to complete the production jobs as soon as possible.%
+As stated in \cref{sec:jsspExample}, our goal is to complete the production jobs as soon as possible.%
 %
 \begin{definition}[Makespan]%
 \label{def:makespan}%
@@ -67,18 +67,18 @@ In manufacturing, the \emph{makespan} is the time difference between the start a
 Since we assume that all jobs begin at time index~0 in our Gantt charts, the makespan is the time when the last operation of the last job is finished.
 Obviously, the smaller this value, the earlier we are done with all jobs, the better is the plan.
 The makespan is therefore subject to minimization.
-As illustrated in \autoref{fig:gantt_demo_with_makespan}, the makespan is the time index of the right-most edge of any of the machine rows/schedules in the Gantt chart.
+As illustrated in \cref{fig:gantt_demo_with_makespan}, the makespan is the time index of the right-most edge of any of the machine rows/schedules in the Gantt chart.
 In the figure, this happens to be the end time~230 of the last operation of job~0, executed on machine~4.
 
 \begin{figure}%
 \centering%
 \includegraphics[width=0.55\linewidth]{\currentDir/gantt_demo_with_makespan.pdf}%
-\caption{The makespan, i.e., the time when the last job is completed, for the example candidate solution illustrated in \autoref{fig:gantt_demo_without_makespan} for the \instStyle{demo} instance from \autoref{fig:jssp_demo_instance}.}%
+\caption{The makespan, i.e., the time when the last job is completed, for the example candidate solution illustrated in \cref{fig:gantt_demo_without_makespan} for the \instStyle{demo} instance from \cref{fig:jssp_demo_instance}.}%
 \label{fig:gantt_demo_with_makespan}%
 \end{figure}
 
 Our objective function~\objf\ is thus equivalent to the makespan and subject to minimization.
-Based on our candidate solution data structure \codeil{Gantt} developed \autoref{lst:jssp_gantt}, we can easily compute~\objf.
+Based on our candidate solution data structure \codeil{Gantt} developed \cref{lst:jssp_gantt}, we can easily compute~\objf.
 Remember that each instance of \codeil{Gantt} is basically a \numpyndarray\ with three dimensions.
 The first dimension (accessed via the first index~\jsspMachineIndex) is the machine index.
 The second dimension (accessed via the second index~$k$) lets us access the operations in the order in which they are carried out on that machine.
@@ -87,10 +87,10 @@ For this, we can set second index to~$k=-1$, which, in Python, gives us the last
 Finally, in the third dimension (accessed via the third index~$l$), we store the job~ID (at~$l=0$), the start time (at~$l=1$), and the end time of the operation (at~$l=2$).
 Obviously, we only need that last value, so we can set the third index to~$l=2$.
 So the second and third index into a \codeil{Gantt} chart matrix are defined and we only need to compute the maximum value that we get for any of the possible values of first index.
-In \autoref{lst:jssp_makespan}, we implement exactly this concept in the easiest possible way.
+In \cref{lst:jssp_makespan}, we implement exactly this concept in the easiest possible way.
 (For the Python aficionado: we apply the performance tricks from TODO.)
 
-\moptipyCode{moptipy/examples/jssp/makespan.py}{--labels book --args doc,comments}{jssp_makespan}{An implementation of the \codeil{class Objective} \autoref{lst:Objective} to represent the makepan objective function for \glspl{JSSP}.}
+\moptipyCode{moptipy/examples/jssp/makespan.py}{--labels book --args doc,comments}{jssp_makespan}{An implementation of the \codeil{class Objective} \cref{lst:Objective} to represent the makepan objective function for \glspl{JSSP}.}
 
 With this objective function~\objf, subject to minimization, we have defined that a Gantt chart~$\solspel_1$ is better than another Gantt chart~$\solspel_2$ if and only if $\objfOf{\solspel_1}<\objfOf{\solspel_2}$.\footnote{under the assumption that both are feasible, of course}
 \endhsection%

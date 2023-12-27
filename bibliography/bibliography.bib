@@ -89,15 +89,19 @@
 @string { a_grendrau_michel = "Michel Gendreau" }
 @string { a_groetschel_martin = "Martin Gr{\"o}tschel" }
 @string { a_gutin_gregory_z = "Gregory Z.\ Gutin" }
+@string { a_hall_leslie_a = "Leslie A.\ Hall" }
 @string { a_hammer_peter_l = "Peter L.\ Hammer" }
 @string { a_harrison_michael_a = "Michael A. Harrison" }
 @string { a_helsgaun_keld = "Keld Helsgaun" }
 @string { a_henning_andre = "Andr{\'e} Henning" }
 @string { a_hermann_mario = "Mario Hermann" }
+@string { a_hoogeveen_j_a_han = "J.\ A.\ (Han) Hoogeveen" }
+@string { a_hurkens_c_a_j = "Cor A.\ J.\ Hurkens" }
 @string { a_iida_masanobu = "Masanobu Iida" }
 @string { a_iima_hitoshi = "Hitoshi Iima" }
 @string { a_iori_manuel = "Manuel Iori" }
 @string { a_jain_anant_singh = "Anant Singh Jain" }
+@string { a_jansen_klaus = "Klaus Jansen" }
 @string { a_john_robert_i = "Robert I.\ John" }
 @string { a_johnson_david_stiffler = "David Stifler Johnson" }
 @string { a_johnson_e_l = "E.\ L.\ Johnson" }
@@ -130,6 +134,7 @@
 @string { a_manderick_bernard = "Bernard Manderick" }
 @string { a_manner_reinhard = "Reinhard M{\"a}nner" }
 @string { a_martello_silvano = "Silvano Martello" }
+@string { a_mastrolilli_monaldo = "Monaldo Mastrolilli" }
 @string { a_matsumura_tsuyoshi = "Tsuyoshi Matsumura" }
 @string { a_mattfeld_dirk_c = "Dirk C.\ Mattfeld " }
 @string { a_mccollum_barry = "Barry {McCollum}" }
@@ -174,15 +179,18 @@
 @string { a_scheithauer_guntram = "Guntram Scheithauer" }
 @string { a_schwefel_hans_paul = "Hans{-}Paul Schwefel" }
 @string { a_sethi_ravi = "Ravi Sethi" }
+@string { a_sevastjanov_sergey_vasilevich = "Sergey Vasil'evich Sevast'janov" }
 @string { a_shaw_paul = "Paul Shaw" }
 @string { a_shi_guoyong = "Guoyong Shi" }
 @string { a_shmoys_david_b = "David B.\ Shmoys" }
 @string { a_shylo_oleg_v = "Oleg V.\ Shylo" }
 @string { a_siarry_patrick = "Patrick Siarry" }
+@string { a_solis_oba_roberto = "Roberto Solis{-}Oba" }
 @string { a_sprague_jr_ralph_h = "Ralph H.\ {Sprague Jr.}" }
 @string { a_storer_robert_h = "Robert H.\ Storer" }
 @string { a_strusevich_vitaly_a = "Vitaly A.\ Strusevich" }
 @string { a_sutton_andrew_m = "Andrew M. Sutton" }
+@string { a_svensson_ola = "Ola Svensson" }
 @string { a_taillard_eric_d = "{\'E}ric D.\ Taillard" }
 @string { a_tarantino_ernesto = "Ernesto Tarantino" }
 @string { a_thatcher_james_w = "James W.\ Thatcher" }
@@ -201,6 +209,7 @@
 @string { a_weise_thomas = "Thomas Weise" }
 @string { a_werner_frank = "Frank Werner" }
 @string { a_whitley_l_darrell = "L.\ Darrell Whitley" }
+@string { a_williamson_david_paul = "David Paul Williamson" }
 @string { a_wilson_james_m = "James M.\ Wilson" }
 @string { a_woeginger_gerhard_j = "Gerhard J.\ Woeginger" }
 @string { a_wu_david_s = "S.\ David Wu" }
@@ -343,6 +352,13 @@
 @string { pa_wiley_interscience_uk = l_uk_chichester }
 
 
+%% conferences
+@xdata{c_gecco,
+ publisher = p_acm,
+ address = pa_acm,
+}
+
+
 %% journals
 @xdata{j_cace,
  journal = {Computers {\&} Chemical Engineering},
@@ -460,6 +476,13 @@
  journal = {{ORSA} Journal on Computing},
  issn = {0899-1499},
  publisher = p_orsa
+}
+
+@xdata{j_or,
+ journal = {Operations Research},
+ issn = {1526-5463},
+ publisher = p_informs,
+ address = pa_informs
 }
 
 @xdata{j_ors,
@@ -1050,6 +1073,19 @@
  doi = {10.1016/S0377-2217(98)00113-1},
 }
 
+@article{JMSO2005ASFJSSPWCPT,
+ author = a_jansen_klaus # { and } # a_mastrolilli_monaldo # { and } # a_solis_oba_roberto,
+ title = {Approximation Schemes for Job Shop Scheduling Problems with Controllable Processing Times},
+ xdata = {j_ejor},
+ volume = {167},
+ number = {2},
+ pages = {297--319},
+ date = {2005-12},
+ doi = {10.1016/j.ejor.2004.03.025},
+ url = {http://people.idsia.ch/~monaldo/papers/EJOR-varJsp-05.pdf},
+ urldate = {2023-12-20}
+}
+
 @incollection{K1972RACP,
  author = a_karp_richard_m,
  title = {Reducibility Among Combinatorial Problems},
@@ -1180,6 +1216,19 @@
  doi = {10.1007/978-3-662-07807-5}
 }
 
+@article{MS2011HOAFAJSSP,
+ author = a_mastrolilli_monaldo # { and } # a_svensson_ola,
+ title = {Hardness of Approximating Flow and Job Shop Scheduling Problems},
+ xdata = {j_jacm},
+ volume = {58},
+ number = {5},
+ pages = {20:1--20:32},
+ date = {2011-10},
+ doi = {10.1145/2027216.2027218},
+ url = {http://theory.epfl.ch/osven/Ola%20Svensson_publications/JACM11.pdf},
+ urldate = {2023-12-20}
+}
+
 @collection{MT1963IS,
  booktitle = {Industrial Scheduling},
  editor = a_muth_john_f # { and } # a_thompson_gerald_l,
@@ -1301,8 +1350,6 @@
  xdata = {ser_lncs},
  number = {2439},
  isbn = {978-3-540-44139-7},
- publisher = {Springer-Verlag GmbH},
- address = {Berlin/Heidelberg, Germany},
  doi = {10.1007/3-540-45712-7}
 }
 
@@ -1328,8 +1375,7 @@
 @proceedings{PROC2016GECCOCompanion,
  editor = a_friedrich_tobias # { and } # a_neumann_frank # { and } # a_sutton_andrew_m,
  title = {Companion Material Proceedings of the Genetic and Evolutionary Computation Conference {(GECCO'16)}, } # jul # {~20-24, 2016, } # l_usa_denver,
- publisher = p_acm,
- address = pa_acm,
+ xdata = {c_gecco},
  date = {2016},
  doi = {10.1145/2908961},
  isbn = {978-1-4503-4323-7},
@@ -1556,6 +1602,19 @@
  url = {http://github.com/thomasWeise/jsspInstancesAndResults},
  urldate = {2023-12-07},
  addendum = {A {GitHub} repository with the common benchmark instances for the {Job} {Shop} {Scheduling} {Problem} as well as results from the literature, both in form of {CSV} files and R program code to access them.}
+}
+
+@article{WHHHLSS1997SSS,
+ author = a_williamson_david_paul # { and } # a_hall_leslie_a # { and } # a_hoogeveen_j_a_han # { and } # a_hurkens_c_a_j # { and } # a_lenstra_jan_karel # { and } # a_sevastjanov_sergey_vasilevich # { and } # a_shmoys_david_b,
+ title = {Short Shop Schedules},
+ xdata = {j_or},
+ volume = {45},
+ number = {2},
+ pages = {288--294},
+ date = {1997-03/1997-04},
+ doi = {10.1287/opre.45.2.288},
+ url = {https://www.researchgate.net/publication/2254626},
+ urldate = {2023-12-20}
 }
 
 @incollection{WPG2009SRWVRPWEA,

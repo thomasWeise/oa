@@ -13,9 +13,9 @@ An $k$-ary \emph{search operator}~$\searchOp:\searchSpace^k\times\random\mapsto\
 Special cases of search operators are%
 %
 \begin{itemize}%
-\item nullary operators ($k=0$, see \autoref{lst:op0}) sample a new point from the search space without using any information from an existing points,%
-\item unary operators ($k=1$, see \autoref{lst:op1}) sample a new point from the search space based on the information of one existing point, and%
-\item binary operators ($k=2$, see \autoref{lst:op2}) sample a new point from the search space by combining information from two existing points.%
+\item nullary operators ($k=0$, see \cref{lst:op0}) sample a new point from the search space without using any information from an existing points,%
+\item unary operators ($k=1$, see \cref{lst:op1}) sample a new point from the search space based on the information of one existing point, and%
+\item binary operators ($k=2$, see \cref{lst:op2}) sample a new point from the search space by combining information from two existing points.%
 \end{itemize}%
 %
 Operators that take existing points in the search space as input tend to sample new points which, in some sort, are similar to their inputs.
@@ -43,7 +43,7 @@ Whether, which, and how such such operators are used depends on the nature of th
 
 Search operators are often \emph{randomized}, which means invoking the same operator with the same input multiple times may yield different results.
 In the definitions, this is signified by the component~$\random$ in their input.
-Therefore \autoref{lst:op0}, \ref{lst:op1}, and \ref{lst:op2} all expect an instance of \numpyGenerator, a pseudorandom number generator of the \numpy\ library, as parameter.
+Therefore \cref{lst:op0,lst:op1,lst:op2} all expect an instance of \numpyGenerator, a pseudorandom number generator of the \numpy\ library, as parameter.
 \endhsection%
 %
 \hsection{Example: Job Shop Scheduling}%

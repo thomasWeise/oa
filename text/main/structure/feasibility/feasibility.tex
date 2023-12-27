@@ -28,7 +28,7 @@ A candidate solution~$\solspel\in\solutionSpace$ is \emph{infeasible} if it is \
 \hsection{A Programmer's Perspective}%
 %
 There is not much to discuss here from a programmer's perspective because there are many different ways to deal with constraints.
-In our \moptipy\ \codeil{Space} API illustrated in \autoref{lst:Space}, we provide the method \codeil{validate}.
+In our \moptipy\ \codeil{Space} API illustrated in \cref{lst:Space}, we provide the method \codeil{validate}.
 The programmer can implement this method to check whether a solution is feasible or not.
 If not, the method is supposed to throw a \codeil{ValueError} if it is not.%
 %
@@ -74,7 +74,7 @@ The right one has only three feasible solutions and one infeasible one.}%
 \label{fig:jssp_feasible_gantt}%
 \end{figure}%
 
-The third schedule in the right column of \autoref{fig:jssp_feasible_gantt} illustrates exactly this case.
+The third schedule in the right column of \cref{fig:jssp_feasible_gantt} illustrates exactly this case.
 Machine~0 should begin by doing job~1.
 Job~1 can only start on machine~0 after it has been finished on machine~1.
 At machine~1, we should begin with job~0.
@@ -89,18 +89,18 @@ All operations are assigned to proper machines and receive the right processing 
 Still, the schedule is infeasible, because it cannot be executed or written down without breaking the precedence constraint.
 
 Hence, there are only three out of four possible Gantt charts that work for this problem instance.
-For a problem instance where the jobs need to pass through all machines in the same sequence, however, all possible Gantt charts will work, as also illustrated in the left column of \autoref{fig:jssp_feasible_gantt}.
+For a problem instance where the jobs need to pass through all machines in the same sequence, however, all possible Gantt charts will work, as also illustrated in the left column of \cref{fig:jssp_feasible_gantt}.
 The number of actually feasible Gantt charts in~\solutionSpace\ thus can be different for different problem instances.
 
 \begin{table}%
 \centering%
 \caption{%
-The minimal number $\min\nFeasible$ of feasible solutions over all instances with specific sizes \jsspJobs\ and \jsspMachines\ (compare with \autoref{tbl:jsspSolutionSpaceSizeTable}).}%
+The minimal number $\min\nFeasible$ of feasible solutions over all instances with specific sizes \jsspJobs\ and \jsspMachines\ (compare with \cref{tbl:jsspSolutionSpaceSizeTable}).}%
 \label{tbl:jsspSolutionSpaceFeasibleTable}%
 \begin{booktabular}{lrrrr}%
 example&\jsspJobs&\jsspMachines&$\min\nFeasible$&$\left|\solutionSpace\right|$\\%
 \midrule%
-\autoref{fig:jssp_feasible_gantt}&2&2&3&4\\%
+\cref{fig:jssp_feasible_gantt}&2&2&3&4\\%
 &2&3&4&8\\%
 &2&4&5&16\\%
 &2&5&6&32\\%
@@ -117,7 +117,7 @@ example&\jsspJobs&\jsspMachines&$\min\nFeasible$&$\left|\solutionSpace\right|$\\
 \end{table}%
 
 Different \gls{JSSP} instances can have different numbers~\nFeasible\ of possible \emph{feasible} Gantt charts, even if they have the same numbers of machines and jobs.
-We just saw this in \autoref{fig:jssp_feasible_gantt}.
+We just saw this in \cref{fig:jssp_feasible_gantt}.
 Naturally, for a given setting of~$\jsspMachines$ and~$\jsspJobs$, we are interested in the minimum~$\min\nFeasible$ of this number, i.e., the \emph{smallest value} that~\nFeasible\ can take on over all possible instances with \jsspJobs~jobs and \jsspMachines~machines.
 
 Now, I don't know how to compute this number in any efficient and we only want to see out of academic curiosity.
@@ -127,7 +127,7 @@ After I was done with enumerating all the instances, I know the smallest value o
 I know that there must be a better way to get this number, probably with dynamic programming, but for now, the crude method will be sufficient.
 Of course, it only works for very small values of \jsspJobs\ and~\jsspMachines.
 
-The results in \autoref{tbl:jsspSolutionSpaceFeasibleTable} show that, at least for some instances, most of the possible Gantt charts might be infeasible, as~$\min\nFeasible$ can be much smaller than~$\left|\solutionSpace\right|$.
+The results in \cref{tbl:jsspSolutionSpaceFeasibleTable} show that, at least for some instances, most of the possible Gantt charts might be infeasible, as~$\min\nFeasible$ can be much smaller than~$\left|\solutionSpace\right|$.
 %
 \ruleOfThumb{infeasibleSolutions}{If a problem has feasibility constraints, then we often find that most of the candidate solutions are infeasible.}%
 %
@@ -140,7 +140,7 @@ An optimization algorithm that may sometimes return infeasible solutions will no
 \hsection{Summary}%
 %
 In this section, we discovered that not every Gantt chart that we can draw for a given \gls{JSSP} instance is also \emph{feasible}.
-Some of them have deadlocks (\ref{fig:jssp_feasible_gantt}).
+Some of them have deadlocks (\cref{fig:jssp_feasible_gantt}).
 Obviously, whatever we will later do to find \emph{good} Gantt charts, we must never return an infeasible one, i.e., one that cannot actually be executed.
 To make matters worse, we discovered that it is entirely possible that the vast majority of Gantt charts that we could come up with for a given instance could be infeasible.
 
@@ -159,7 +159,7 @@ Other constraints may not be structural but instead of a metric nature, e.g., \i
 Such constraints may not even be hard, e.g., permit some violation as long as it is small.
 
 Either way:
-If there are constraints, then it is likely that most possible solutions are infeasible, as noted in \autoref{rule:infeasibleSolutions}.
+If there are constraints, then it is likely that most possible solutions are infeasible, as noted in \cref{rule:infeasibleSolutions}.
 And for our example problem, the \gls{JSSP}, this is the case.
 So optimization is indeed interesting.%
 \endhsection%

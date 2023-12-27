@@ -24,13 +24,13 @@ First, let us clarify what \emph{optimization problems} actually are.%
 An \emph{optimization problem} is a situation~\instance\ which requires deciding for one choice from a set of possible alternatives in order to reach a predefined/required goal at minimal costs.%
 \end{definition}%
 %
-\autoref{def:optimizationProblemEconomical} presents an economical point of view on optimization in a rather informal manner.
+\cref{def:optimizationProblemEconomical} presents an economical point of view on optimization in a rather informal manner.
 But the points come across:
 We want to reach a certain goal, e.g., visit all cities in a \gls{TSP}, process all jobs in a \gls{JSSP}, pack all the items into bins in a \gls{BPP}, or assign all factories to locations in the \gls{QAP}.
 We have several possible ways to reach that goal and we need to choose one among them.
 Each of these possible choices has an associated cost.
 Since all of them lead to reaching the goal, we want to pick the one choice with the minimal costs.
-We can refine this situation into the more mathematical formulation given in \autoref{def:optimizationProblemMathematical}.%
+We can refine this situation into the more mathematical formulation given in \cref{def:optimizationProblemMathematical}.%
 %
 \begin{definition}[Optimization Problem~\textrm{II}]%
 \label{def:optimizationProblemMathematical}%
@@ -54,7 +54,7 @@ This input data of the optimization algorithm is discussed in TODO.%
 %
 \end{enumerate}%
 %
-If we want to solve a \gls{TSP} as sketched in \autoref{sec:intro:logistics}), for instance, then the instance data~\instance\ could include the locations of the cities that we want to visit from which we then can compute the travel distances.
+If we want to solve a \gls{TSP} as sketched in \cref{sec:intro:logistics}), for instance, then the instance data~\instance\ could include the locations of the cities that we want to visit from which we then can compute the travel distances.
 The candidate solution data structure~\solutionSpace\ could simply be a \inQuotes{city list} containing each city exactly once and prescribing the visiting order.
 The objective function~\objf\ would take such a city list~$\solspel\in\solutionSpace$ as input and compute the overall tour length.
 It would be subject to minimization.
@@ -75,7 +75,7 @@ Often, in order to actually practically implement an optimization approach, ther
 \end{enumerate}%
 %
 At first glance, all of this looks a bit complicated --- but rest assured, it won't be.
-We will explore all of these structural elements that make up an optimization problem in this chapter, based on a concrete example of the \acrfull{JSSP} from \autoref{sec:jsspExample}~\cite{GLLRK1979OAAIDSASAS,LLRKS1993SASAAC,L1982RRITTOMS,T1993BFBSP,BDP1996TJSSPCANST}.
+We will explore all of these structural elements that make up an optimization problem in this chapter, based on a concrete example of the \acrfull{JSSP} from \cref{sec:jsspExample}~\cite{GLLRK1979OAAIDSASAS,LLRKS1993SASAAC,L1982RRITTOMS,T1993BFBSP,BDP1996TJSSPCANST}.
 This example should give a reasonable idea about how the structural elements and formal definitions involved in optimization can be realized in practice.
 While any actual optimization problem can require very different data structures and operations from what we will discuss here, the general approach and ideas that we will discuss on specific examples should carry over to many scenarios.
 

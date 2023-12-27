@@ -21,7 +21,7 @@ If the objective function is subject to minimization, then each global optimum i
 For every \emph{global minimum}~$\globalOptimumOf{\solspel}\in\solutionSpace$ of single-objective optimization problem with solution space~\solutionSpace\ and objective function~$\objf:\solutionSpace\mapsto\realNumbers$ subject to minimization, it holds that $\objfOf{\solspel} \geq \objfOf{\globalOptimumOf{\solspel}} \forall \solspel \in \solutionSpace$.%
 \end{definition}%
 %
-Notice that \autoref{def:globalMinimum} does not state that the objective value of~\globalOptimumOf{\solspel} needs to be better than the objective value of all other possible solutions.
+Notice that \cref{def:globalMinimum} does not state that the objective value of~\globalOptimumOf{\solspel} needs to be better than the objective value of all other possible solutions.
 The reason is that there may be more than one global optimum, in which case all of them have the same objective value.
 Thus, a global optimum is not defined as a candidate solutions better than all other solutions, but as a solution for which no better alternative exists.
 
@@ -29,7 +29,7 @@ The real-world meaning of \inQuotes{globally optimal} is nothing else than \inQu
 If we solve a \gls{JSSP} for a factory, our goal is to find the \emph{shortest} makespan.
 If we try to pack the factory's products into containers, i.e., solve a \gls{BPP},, we look for the packing that needs the \emph{least} amount of containers.
 If we solve a vehicle routing problem to serve several customers, then we may either want to serve the \emph{most} customers, use the \emph{least} amount of vehicles, or travel the \emph{shortest} overall distance.
-Thus, optimization means searching for such superlatives, as illustrated in \autoref{fig:optimization_superlatives}.
+Thus, optimization means searching for such superlatives, as illustrated in \cref{fig:optimization_superlatives}.
 Vice versa, whenever we are looking for the cheapest, fastest, strongest, best, biggest or smallest \inQuotes{thing}, then we have an optimization problem at our hands~\cite{KBBDCGJLMPQSVBY2016GLPFOR}.%
 %
 \begin{figure}%
@@ -45,7 +45,7 @@ An \emph{exact} algorithm guarantees to always find a globally optimal solution 
 \end{definition}%
 %
 At the present state of research, any algorithm guaranteeing to always find the optimal solution of any \NPhard\ optimization problem may require a runtime that is exponential in the \emph{problem scale}.
-Very early in this book, in \autoref{fig:function_growth}, we saw that exponential growth is very problematic.
+Very early in this book, in \cref{fig:function_growth}, we saw that exponential growth is very problematic.
 
 This does not mean that exact algorithms \emph{always} need a very long time.
 One the one hand, if the problem scale is small, then even an exponential runtime is not very long.
@@ -67,18 +67,18 @@ If our application always falls into such a special case of the problem we are d
 
 The general version of the \gls{JSSP}, however, is indeed \NPhard~\cite{LLRKS1993SASAAC,CPW1998AROMSCAAA}, meaning that we cannot expect to solve it to global optimality in reasonable time.
 For the \gls{JSSP}, the problem scale is defined by the numbers of machines~\jsspMachines\ and jobs~\jsspJobs\ involved.
-In \autoref{tbl:jsspSolutionSpaceSizeTable} we saw that the size of the solution space~\solutionSpace\ grows very quickly with~\jsspMachines\ and~\jsspJobs.
+In \cref{tbl:jsspSolutionSpaceSizeTable} we saw that the size of the solution space~\solutionSpace\ grows very quickly with~\jsspMachines\ and~\jsspJobs.
 And so will the runtime of exact methods.
 
 \begin{figure}%
 \centering%
 \includegraphics[width=0.55\linewidth]{\currentDir/gantt_demo_opt_with_makespan.pdf}%
-\caption{The optimal solution of the \instStyle{demo} instance given in \autoref{fig:jssp_demo_instance}.}%
+\caption{The optimal solution of the \instStyle{demo} instance given in \cref{fig:jssp_demo_instance}.}%
 \label{fig:gantt_demo_opt_with_makespan}%
 \end{figure}
 
 For small instances of the \gls{JSSP}, however, we can still find the optimal solution by simply enumerating all possible Gantt charts and picking the one with shortest makespan, i.e., the best objective value.
-In \autoref{fig:gantt_demo_opt_with_makespan}, we illustrate the optimal solution for our small \instStyle{demo} instance that was discovered this way.
+In \cref{fig:gantt_demo_opt_with_makespan}, we illustrate the optimal solution for our small \instStyle{demo} instance that was discovered this way.
 This method will obviously not work on bigger problems.%
 %
 \ruleOfThumb{scale1}{Algorithms working well on small-scale toy problem instances do not necessarily work well on reasonably-sized or large-scale instances.}%

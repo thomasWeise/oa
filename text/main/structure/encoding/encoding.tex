@@ -102,13 +102,13 @@ But let's not take things too far here.%
 %
 \hsection{A Programmer's Perspective}%
 %
-In \autoref{lst:Space}, we already have defined a simple API to provide common operations for (solution) spaces.
+In \cref{lst:Space}, we already have defined a simple API to provide common operations for (solution) spaces.
 We can reuse this very same API for search spaces too.
 Additionally, we need a function that can convert from points in the search space to candidate solutions.%
 %
 \moptipyCode{moptipy/api/encoding.py}{--labels book --args doc}{Encoding}{A base class for encodings.}%
 
-The class given in \autoref{lst:Encoding} provides the blueprint for a function \codeil{decode} which translates one point~\codeil{x} in the search space to a candidate solution instance~\codeil{y} of the solution space.
+The class given in \cref{lst:Encoding} provides the blueprint for a function \codeil{decode} which translates one point~\codeil{x} in the search space to a candidate solution instance~\codeil{y} of the solution space.
 This \codeil{decode} function corresponds to the general definition~$\decode:\searchSpace\mapsto\solutionSpace$ of the encoding.
 An implementation of \codeil{decode} will overwrite whatever contents were stored in the object~\codeil{y}, i.e., we assume the objects~\codeil{y} can be modified.
 
@@ -122,7 +122,7 @@ This is possible because between these two components, the decoding function~\de
 \label{sec:jsspSearchSpace}%
 %
 In our \gls{JSSP} example problem, the candidate solutions are Gantt charts.
-We developed the class \codeil{Gantt} given in \autoref{lst:jssp_gantt} to represent their data.
+We developed the class \codeil{Gantt} given in \cref{lst:jssp_gantt} to represent their data.
 This data can easily be interpreted and visualized by the user.
 Yet, it is not that clear how we can efficiently create such solutions, especially feasible ones, let alone how to \emph{search} in the space of Gantt charts.\footnote{%
 Of course, there are many algorithms that can do that and we could design one such algorithm if we would seriously think about it, but here we take the educational route where we investigate the full scenario with~$\searchSpace\neq\solutionSpace$.} %
@@ -149,7 +149,7 @@ Each job~ID would appear \jsspMachines~times, because that is how many operation
 We would process such a string from the beginning to the end.
 Whenever encountering a job~ID, we assign the first not-yet assigned operation of the job to its correspoinding machine.
 We will always get a feasible Gantt chart as result.
-It is not possible to produce a deadlock (see \autoref{sec:solutionSpace:feasibility}), because we will only allocate an operation to a machine after having placed all operations that come before it in the same job.
+It is not possible to produce a deadlock (see \cref{sec:solutionSpace:feasibility}), because we will only allocate an operation to a machine after having placed all operations that come before it in the same job.
 
 \begin{figure}%
 \centering%
@@ -173,7 +173,7 @@ A point~$\sespel\in\searchSpace$ in the search space~$\searchSpace$ for the \ins
 As example, we choose $\sespel=(0, 2, 3, 2, 2, 3, 1, 1, 0, 3, 1, 3, 2, 1, 3, 2, 0, 1, 0, 0)$.
 
 Let us now exercise the decoding procedure~\decodeOf{\sespel}.
-In \autoref{fig:jssp_encoding}, we sketch several of its steps.
+In \cref{fig:jssp_encoding}, we sketch several of its steps.
 For each step, we show the instance data~\instance\ on the left, the point~\sespel\ in the search space in the middle, and the current state of the Gantt chart~\solspel\ on the right hand side.
 
 The decoding of the string~\sespel\ starts with an empty Gantt chart.
@@ -205,7 +205,7 @@ While machine~1 has no job assigned to it yet, we cannot place the operation at 
 We first need to wait for the first operation of job~2 to complete, which happens at time index~30.
 Hence, we can start the operation at that time.
 
-In the fifth row of \autoref{fig:jssp_encoding}, we again find job~2.
+In the fifth row of \cref{fig:jssp_encoding}, we again find job~2.
 We need to assign its third operation, which goes to machine~4 and will need 12~time units there.
 It can only start after the second operation of the job is completed, which happens after $30+20=50$~time units.
 Also, machine~4 is used by job~3, whose first operation will be completed there also after 50~time units.
@@ -222,7 +222,7 @@ Directly afterwards, job~1 needs to be assigned again and its second operation w
 It can start at time index~$50+20=70$, namely after its first operation is completed.
 
 We continue this iterative process.
-The last row of \autoref{fig:jssp_encoding} illustrates the second-to-last decoding step.
+The last row of \cref{fig:jssp_encoding} illustrates the second-to-last decoding step.
 It places the second-to-last operation of job~0 onto machine~3.
 The previous (i.e., third) operation of the job was on machine~2 and completed there after 180~time units.
 Machine~3 is idle at that time, so operation~4 of job~1 will occupy it from time index~180 to~220.
@@ -235,15 +235,15 @@ No deadlock can occur and~\solspel\ must therefore be feasible.
 
 \moptipyCode{moptipy/examples/jssp/ob_encoding.py}{--labels book --args comments,doc}{jssp_encoding}{An excerpt of the implementation of the operation-based encoding for the \gls{JSSP}.}
 
-In \autoref{lst:jssp_encoding}, we illustrate how such an encoding can be implemented.
+In \cref{lst:jssp_encoding}, we illustrate how such an encoding can be implemented.
 It basically is a function translating an \numpyndarray\ of integers to a \codeil{Gantt} chart.
 We put the algorithm into a function \codeil{decode}, so that we can mark it for compilation with \numba\ to improve the performance, utilizing the performance tips discussed in TODO.
 
-\moptipyCode{moptipy/spaces/permutations.py}{--labels book --args doc,comments}{PermutationsWithRepetitions}{Excerpt of the implementation of the \codeil{Space} API from \autoref{lst:Space} for permutations with (or without) repetitions.}
+\moptipyCode{moptipy/spaces/permutations.py}{--labels book --args doc,comments}{PermutationsWithRepetitions}{Excerpt of the implementation of the \codeil{Space} API from \cref{lst:Space} for permutations with (or without) repetitions.}
 
 Besides implementing the decoding function~\decode, we also need to provide the functionality of our \codeil{Space} API for (search) spaces that are permutations with repetitions.
 This functionality will be needed to create, copy, store, load, and check the points in the search space.
-In \autoref{lst:PermutationsWithRepetitions}, we provide a very small excerpt of the implementation of the \codeil{Space} API for permutations of numbers stored in \numpyndarrays.
+In \cref{lst:PermutationsWithRepetitions}, we provide a very small excerpt of the implementation of the \codeil{Space} API for permutations of numbers stored in \numpyndarrays.
 This class is quite general:
 We provide a \codeil{blueprint} string of the numbers that we want to arrange in the permutations.
 This could be a true permutation, e.g., $[1, 2, 3]$, or a permutation with repetitions, such as $[1, 1, 2, 2, 3, 3]$.
@@ -270,8 +270,8 @@ If it contains the numbers~$\intRange{0}{(\jsspJobs-1)}$ each exactly~$\jsspMach
 
 The candidate solution corresponding to a valid point from the search space will always be \emph{feasible}~\cite{B1995AGPATJSSWGA}.
 The mapping~\decode\ will ensure that the order of the operations per job is always observed.
-Thus, we have solved the issue of deadlocks mentioned in \autoref{sec:solutionSpace:feasibility}.
-We know from \autoref{tbl:jsspSolutionSpaceFeasibleTable}, that the vast majority of the possible Gantt charts for a given problem might actually be infeasible.
+Thus, we have solved the issue of deadlocks mentioned in \cref{sec:solutionSpace:feasibility}.
+We know from \cref{tbl:jsspSolutionSpaceFeasibleTable}, that the vast majority of the possible Gantt charts for a given problem might actually be infeasible.
 Now we do no longer need to worry about that.
 Our mapping~\decode\ also obeys the more trivial constraints, such as that each machine will process at most one job at a time and that all operations are eventually processed.
 
@@ -291,9 +291,9 @@ Additionally, it becomes  easy to indirectly create and modify candidate solutio
 \label{sec:size_of_jssp_search_space}%
 %
 It is relatively easy to compute the size~$\left|\searchSpace\right|$ of our proposed search space~\searchSpace~\cite{SIS1997NESFSJSPBGA}.
-We do not need to make any assumptions regarding \inQuotes{no useless waiting time}, as in \autoref{sec:solutionSpace:size}, since useless delays cannot occur by default.
+We do not need to make any assumptions regarding \inQuotes{no useless waiting time}, as in \cref{sec:solutionSpace:size}, since useless delays cannot occur by default.
 Each element~$\sespel\in\searchSpace$ is a permutation of a multiset where each of the \jsspJobs~elements occurs exactly \jsspMachines~ times.
-This means that the size of the search space can be computed as given in \autoref{eq:jssp_search_space_size}.%
+This means that the size of the search space can be computed as given in \cref{eq:jssp_search_space_size}.%
 %
 \begin{align}%
 \left|\searchSpace\right| = \frac{\left(\jsspMachines*\jsspJobs\right)!}{ \left(\jsspMachines!\right)^{\jsspJobs} }%
@@ -308,7 +308,7 @@ However, the number~$3$ appears twice and it does not matter which of the~$3$s a
 If we add another~$3$, i.e., $3$~would appear three times and we have~$(1, 2, 3, 3, 3, 4)$, then there would be $6!/3!=720/6=120$ possible arrangements.
 If we now add another two~$4$s, we get $(1, 2, 3, 3, 3, 4, 4, 4)$.
 This sequence can be arranged in $8!/(3!*3!)=40320/36=120$ possible ways.
-If each one of \jsspJobs~different numbers appears \jsspMachines~times, we hence have $(\jsspJobs*\jsspMachines)/(\jsspMachines)^{\jsspJobs}$ different possible permutations, i.e., obtain \autoref{eq:jssp_search_space_size}.
+If each one of \jsspJobs~different numbers appears \jsspMachines~times, we hence have $(\jsspJobs*\jsspMachines)/(\jsspMachines)^{\jsspJobs}$ different possible permutations, i.e., obtain \cref{eq:jssp_search_space_size}.
 
 \begin{table}%
 \centering%
@@ -341,7 +341,7 @@ example&\jsspJobs&\jsspMachines&$\left|\solutionSpace\right|$&$\left|\searchSpac
 \end{booktabular}%
 \end{table}
 
-We give some example values for this search space size~$\left|\searchSpace\right|$ in \autoref{tbl:jsspSearchSpaceTable}.
+We give some example values for this search space size~$\left|\searchSpace\right|$ in \cref{tbl:jsspSearchSpaceTable}.
 From the table, we can immediately see that the number of points in the search space, too, grows very quickly with both the number of jobs~\jsspJobs\ and the number of machines~\jsspMachines\ of a \gls{JSSP} instance~\instance.
 If we compare the ordering of our example \gls{JSSP} instances by search space size with the ordering by solution space, we find that there only is one disagreement:
 \instStyle{dmu67} has the larger search space~\searchSpace\ but a smaller solution space~\solutionSpace\ compared to \instStyle{dmu72}.
@@ -354,7 +354,7 @@ There is much redundancy in our mapping.
 The mapping~\decode\ is not injective.
 Some elements of the search space~\searchSpace\ will map to the same element in the solution space~\solutionSpace.
 
-For example, we could arbitrarily swap the first three numbers in the example string in \autoref{fig:jssp_encoding} and would obtain the same Gantt chart, because jobs~0, 2, and~3 start at different machines.
+For example, we could arbitrarily swap the first three numbers in the example string in \cref{fig:jssp_encoding} and would obtain the same Gantt chart, because jobs~0, 2, and~3 start at different machines.
 
 As said before, we should avoid redundancy in the search space.
 However, here we will stick with our proposed mapping because it is very simple, it solves the problem of feasibility of candidate solutions, and it allows us to relatively easily introduce and discuss many different approaches, algorithms, and sub-algorithms.%

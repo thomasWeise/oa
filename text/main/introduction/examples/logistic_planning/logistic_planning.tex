@@ -8,7 +8,7 @@ A client can order one or multiple containers to be delivered to her location wi
 She will fill the containers with goods, which are then to be transported to a destination location, again within a certain time window.
 The logistics company may receive many such customer orders per day, maybe several hundreds or even thousands.
 The company may have multiple depots, where containers and trucks are stored.
-For each order, it needs to decide which container(s) to use and how to get them to the customer, as sketched in \autoref{fig:logistic_planning}.
+For each order, it needs to decide which container(s) to use and how to get them to the customer, as sketched in \cref{fig:logistic_planning}.
 The trucks it owns may have different capacities and could, e.g., carry either one or two containers.
 Besides using trucks, which can travel freely on the map, it may also be possible to utilize trains.
 Trains have higher capacities and can carry many containers.
@@ -37,7 +37,7 @@ And it should do so within a limited, feasible time.
 \end{figure}%
 %
 Of course, there is a wide variety of possible logistics planning tasks.
-Besides our real-world example above, a classical task is the \acrfull{TSP}~\cite{ABCC2006TTSPACS,LLRKS1985TTSPAGTOCO,GP2002TTSPAIV}, where the goal is to find the shortest round-trip tour through $n$~cities, as sketched in \autoref{fig:tsp_china}.
+Besides our real-world example above, a classical task is the \acrfull{TSP}~\cite{ABCC2006TTSPACS,LLRKS1985TTSPAGTOCO,GP2002TTSPAIV}, where the goal is to find the shortest round-trip tour through $n$~cities, as sketched in \cref{fig:tsp_china}.
 Many other scenarios can be modeled as such logistics questions, too:
 If a robot arm needs to several drill holes into a circuit board, finding the shortest tour means solving a \gls{TSP} and will speed up the production process, for instance~\cite{GJR1991OCOPADMACS}.%
 \endhsection%

@@ -4,7 +4,7 @@
 \hsection{Definitions}%
 \label{sec:solutionSpaceDefinitions}%
 %
-As stated in \autoref{def:optimizationProblemEconomical}, an optimization problem asks us to make a choice between different possible solutions.
+As stated in \cref{def:optimizationProblemEconomical}, an optimization problem asks us to make a choice between different possible solutions.
 We call them \emph{candidate solutions}.
 %
 \begin{definition}[Candidate Solution~\solspel]%
@@ -36,7 +36,7 @@ It could be a \codeil{list}, a \numpyndarray, a tree data structure, a \codeil{d
 Earlier, I said that we will do a lot of hands-on learning in this optimization book.
 We will look at things not \emph{only} from the perspective of an algorithm scientist, but also from the perspective of a \emph{programmer}.
 If a programmer is supposed to build algorithms that can deal with arbitrary data structures, she will first think about what kind of operations she will need to perform with them.
-In \autoref{lst:Space}, we give an excerpt example of such a \inQuotes{space API.}
+In \cref{lst:Space}, we give an excerpt example of such a \inQuotes{space API.}
 
 \moptipyCode{moptipy/api/space.py}{--labels book --args format}{Space}{An excerpt of as base class for implementing space handlers.}
 
@@ -63,8 +63,8 @@ We can create a variable to hold a~\solspel, we can copy it, and we can read and
 %
 \hsection{Example: Job Shop Scheduling}%
 %
-What would be a candidate solution to a \gls{JSSP} instance as defined in \autoref{sec:jsspInstance}?
-Recall from \autoref{sec:jsspExample} that our goal is to complete the jobs, i.e., the production tasks, as soon as possible.
+What would be a candidate solution to a \gls{JSSP} instance as defined in \cref{sec:jsspInstance}?
+Recall from \cref{sec:jsspExample} that our goal is to complete the jobs, i.e., the production tasks, as soon as possible.
 Hence, a candidate solution should tell us what to do, i.e., how to process the jobs on the machines.%
 %
 \hsection{Idea: Gantt Chart}%
@@ -73,12 +73,12 @@ Hence, a candidate solution should tell us what to do, i.e., how to process the 
 This is basically what Gantt charts~\cite{W2003GCACA,K2000SORCP} are for.
 A Gantt chart defines what each of our~\jsspMachines\ machines has to do at each point in time.
 The operations of each job are assigned to time windows on their corresponding machines.
-You can find an example illustrated in \autoref{fig:gantt_demo_without_makespan}.
+You can find an example illustrated in \cref{fig:gantt_demo_without_makespan}.
 
 \begin{figure}%
 \centering%
 \includegraphics[width=0.55\linewidth]{\currentDir/gantt_demo_without_makespan.pdf}%
-\caption{One example candidate solution for the \instStyle{demo} instance given in \autoref{fig:jssp_demo_instance}: A Gantt chart assigning a time window to each job on each machine.}%
+\caption{One example candidate solution for the \instStyle{demo} instance given in \cref{fig:jssp_demo_instance}: A Gantt chart assigning a time window to each job on each machine.}%
 \label{fig:gantt_demo_without_makespan}%
 \end{figure}
 
@@ -87,7 +87,7 @@ It is to be read from left to right, where the horizontal axis represents the ti
 Each colored bar in the row of a given machine stands for a job and denotes the time window during which the job is processed.
 The bar representing operation~\jsspMachineIndex\ of job~\jsspJobIndex\ is painted in the row of machine~\jsspOperationMachine{\jsspJobIndex}{\jsspMachineIndex} and its length equals the time requirement~\jsspOperationTime{\jsspJobIndex}{\jsspMachineIndex}.
 
-\autoref{fig:gantt_demo_without_makespan} illustrates one example solution of our \instStyle{demo} instance as such a Gantt chart.
+\cref{fig:gantt_demo_without_makespan} illustrates one example solution of our \instStyle{demo} instance as such a Gantt chart.
 We use a distinct color for each job.
 This chart defines that job~0 starts at time unit~0 on machine~0 and is processed there for ten time units.
 Then the machine idles until the 70\textsuperscript{th} time unit, at which point it begins to process job~1 for another ten time units.
@@ -98,29 +98,29 @@ Machine~1 starts its day with an idle period until job~2 arrives from machine~2 
 It then processes jobs~1 and~0 consecutively and finishes with job~3 after another idle period.
 And so on.
 
-If we wanted to create a Python \codeil{class} to represent the complete information from a Gantt diagram, it could look like \autoref{lst:jssp_gantt}.
+If we wanted to create a Python \codeil{class} to represent the complete information from a Gantt diagram, it could look like \cref{lst:jssp_gantt}.
 Here, we again just subclass \numpyndarray\ to store all data as three-dimensional array.
 The array has one row for each of the \jsspMachines~machines.
 Each machine will process one operation of each job.
 Therefore, there will be with one column for each of the \jsspJobs~operations to be executed on the machine.
 Each cell then holds the job~ID, the start time, and the end time of the operation.
-Additionally, an instance of our \codeil{Gantt} class holds a reference to the \gls{JSSP} instance (see \autoref{lst:jssp_instance}).
+Additionally, an instance of our \codeil{Gantt} class holds a reference to the \gls{JSSP} instance (see \cref{lst:jssp_instance}).
 This allows us to look up the instance information such as \jsspJobs, \jsspMachines, \jsspOperationMachineMat, and \jsspOperationTimeMat, e.g., for checking if everything in the Gantt chart is correct, as well as the instance name, e.g., for displaying it to the user.
 
 \moptipyCode{moptipy/examples/jssp/gantt.py}{--labels book --args doc,comments}{jssp_gantt}{Excerpt from a Python class for representing a Gantt chart, i.e., the data of a candidate solution to a \gls{JSSP}: a subclass of \numpyndarray\ to hold the data and a pointer to the \gls{JSSP} instance.}%
 %
-\relCode{jssp_example_solution_times.py}{jssp_example_solution_times}{The contents of the array data of an instance of \codeil{Gantt} (see \autoref{lst:jssp_gantt}) representing the solution illustrated in \autoref{fig:gantt_demo_without_makespan}.}
+\relCode{jssp_example_solution_times.py}{jssp_example_solution_times}{The contents of the array data of an instance of \codeil{Gantt} (see \cref{lst:jssp_gantt}) representing the solution illustrated in \cref{fig:gantt_demo_without_makespan}.}
 
-The first row of the \codeil{Gantt} array corresponding to \autoref{fig:gantt_demo_without_makespan} would look as follows:
+The first row of the \codeil{Gantt} array corresponding to \cref{fig:gantt_demo_without_makespan} would look as follows:
 Its first element are the values \codeil{[0, 0, 10]}, since the operation of jobs~0 takes place during the first 10~ time units of the schedule on this machine.
 Then the entry \codeil{[1, 70, 80]} follows, indicating that job~1 is processed for the 10~time units starting at time index~70 at machine~0.
 The third entry, \codeil{[3, 95, 115]} states that job~3 arrives at the machine~0 at time unit~95 and is processed for 20~time units until time index~115.
 The fourth and last entry, \codeil{[2, 150, 160]} denotes that job~2 is processed by the machine in the time window~$\intRange{150}{160}$.
 
 The second row is for machine~1.
-Its entries \codeil{[2,  30, 50]}, \codeil{[1, 50,  70]}, \codeil{[0,  70,  90]}, and \codeil{[3, 115, 130]} represent the sequence of operations we observed in \autoref{fig:gantt_demo_without_makespan}:
+Its entries \codeil{[2,  30, 50]}, \codeil{[1, 50,  70]}, \codeil{[0,  70,  90]}, and \codeil{[3, 115, 130]} represent the sequence of operations we observed in \cref{fig:gantt_demo_without_makespan}:
 job~2 is first, followed by job~1, job~0, and, finally, by job~3, which starts after 115~time units.
-The complete array contents are illustrated in \autoref{lst:jssp_example_solution_times}.
+The complete array contents are illustrated in \cref{lst:jssp_example_solution_times}.
 
 This way to represent Gantt charts as data structures is easy to read, understand, and visualize.
 Actually, we could also chose a more compact representation:
@@ -134,9 +134,9 @@ However, also storing the job IDs end times of the operations will make our life
 It allows the human operator to directly see what is going on.
 She can directly tell each machine or worker what to do and when to do it, without needing to look up any additional information from the problem instance data.
 
-\moptipyCode{moptipy/examples/jssp/gantt_space.py}{--labels book --args doc,comments}{jssp_gantt_space}{Excerpt of the implementation of the \codeil{Space} API \autoref{lst:Space} for Gantt charts.}
+\moptipyCode{moptipy/examples/jssp/gantt_space.py}{--labels book --args doc,comments}{jssp_gantt_space}{Excerpt of the implementation of the \codeil{Space} API \cref{lst:Space} for Gantt charts.}
 
-In \autoref{lst:jssp_gantt_space} we implement the \codeil{Space} interface from \autoref{lst:Space} for Gantt charts.
+In \cref{lst:jssp_gantt_space} we implement the \codeil{Space} interface from \cref{lst:Space} for Gantt charts.
 This code snippet is only here to show that we can indeed offer all the necessary functionality for creating and copying Gantt charts~\solspel\ and for converting them to and from strings.
 How these methods work exactly is not important here -- the only thing that is important is that they are there.
 All in all, we now know how we can represent possible solutions~\solspel\ for the \gls{JSSP} inside of our computer.
@@ -169,7 +169,7 @@ Then, the possible arrangements simply \inQuotes{multiply.}
 If we have $\jsspMachines=2$~machines and $\jsspJobs=3$~jobs, then there are 6~possible arrangements on the first machine and, for \emph{each} such arrangement, there are 6~possible arrangements on the second machine.
 Thus, if we have~$\jsspJobs=3$ jobs and~$\jsspMachines=2$ machines, we then would have $(3!)*(3!)=(3!)^2=36$ possible Gantt charts.
 For $\jsspMachines=3$~machines, it is then $(\jsspJobs!)^3$, and so on.
-In the general case, we obtain \autoref{eq:jssp_solution_space_size_upper} for the size~$\left|\solutionSpace\right|$ of the solution space~$\solutionSpace$.%
+In the general case, we obtain \cref{eq:jssp_solution_space_size_upper} for the size~$\left|\solutionSpace\right|$ of the solution space~$\solutionSpace$.%
 %
 \begin{align}%
 \left|\solutionSpace\right| = (\jsspJobs!)^{\jsspMachines}%
@@ -178,7 +178,7 @@ In the general case, we obtain \autoref{eq:jssp_solution_space_size_upper} for t
 %
 \begin{table}%
 \centering%
-\caption{The size~$\left|\solutionSpace\right|$ of the solution space~\solutionSpace\ (without schedules that stall uselessly) for selected values of the number~\jsspJobs\ of jobs and the number~\jsspMachines\ of machines of an \gls{JSSP} instance~\instance\ (later compare also with \autoref{fig:function_growth}).}%
+\caption{The size~$\left|\solutionSpace\right|$ of the solution space~\solutionSpace\ (without schedules that stall uselessly) for selected values of the number~\jsspJobs\ of jobs and the number~\jsspMachines\ of machines of an \gls{JSSP} instance~\instance\ (later compare also with \cref{fig:function_growth}).}%
 \label{tbl:jsspSolutionSpaceSizeTable}%
 \begin{booktabular}{lrrrr}%
 example&\jsspJobs&\jsspMachines&$\left|\solutionSpace\right|$\\%
@@ -210,7 +210,7 @@ example&\jsspJobs&\jsspMachines&$\left|\solutionSpace\right|$\\%
 \end{booktabular}%
 \end{table}%
 %
-We list some examples for the number~$\left|\solutionSpace\right|$ of possible schedules which do not waste time uselessly for different values of~$\jsspJobs$ and~$\jsspMachines$ in \autoref{tbl:jsspSolutionSpaceSizeTable}.
+We list some examples for the number~$\left|\solutionSpace\right|$ of possible schedules which do not waste time uselessly for different values of~$\jsspJobs$ and~$\jsspMachines$ in \cref{tbl:jsspSolutionSpaceSizeTable}.
 We find that even small problems with just $\jsspMachines=5$~machines and $\jsspJobs=5$~jobs have billions of possible solutions.
 The eight more realistic problem instances which we will use as benchmarks in our book already have more solutions than what we could ever enumerate, list, or store with any conceivable hardware or computer.
 For the smallest of them, \instStyle{orb06}, which has ten jobs and ten machines, we already could theoretically construct $3.959*10^{65}$ possible Gantt charts.
@@ -240,7 +240,7 @@ We can use this later on, for now it shall not be important.
 
 What is important is that we decided to only consider Gantt charts that do not include useless waiting time.
 If an operation can be executed on a machine, we will not wait uselessly but execute it right away.
-While there is an infinite number of Gantt charts with arbitrary useless waiting time, the number of Gantt charts without such time is limited (\autoref{eq:jssp_solution_space_size_upper}).
+While there is an infinite number of Gantt charts with arbitrary useless waiting time, the number of Gantt charts without such time is limited (\cref{eq:jssp_solution_space_size_upper}).
 However, while the search space size is finite, it grows very quickly and, thus, $|\solutionSpace|$ is very huge, even for seemingly small instances~\instance\ (with small \jsspMachines\ and~\jsspJobs).
 This is a very common situation in optimization and one of the fundamental forces that requires us to develop clever algorithms.%
 %

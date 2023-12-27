@@ -26,7 +26,7 @@ The \emph{lower bound}~\lowerBoundOf{f} of a function~$f$ is a value such that $
 We know that it is not possible that any solution can have a quality better than~$\lowerBoundOf{\objf}$.
 If a solution~$\solspel\in\solutionSpace$ exists with $\objfOf{\solspel}=\lowerBoundOf{\objf}$, then this solution must be a global optimum, i.e., it is actually~\globalOptimumOf{\solspel}.
 
-However, notice the \inQuotes{$\geq$} in \autoref{def:lowerBound}.
+However, notice the \inQuotes{$\geq$} in \cref{def:lowerBound}.
 It means that maybe no solution exists that has this objective value.
 In this case, the objective value~\objfOf{\globalOptimumOf{\solspel}} of the global optimum~\globalOptimumOf{\solspel} would actually be larger, i.e., $\objfOf{\globalOptimumOf{\solspel}}>\lowerBoundOf{\objf}$.
 
@@ -49,15 +49,15 @@ Lower bounds are a \emph{\inQuotes{nice to have}} feature allowing us to better 
 %
 \hsection{A Programmer's Perspective}%
 %
-In \autoref{lst:Objective}, we presented the API for implementing objective functions.
+In \cref{lst:Objective}, we presented the API for implementing objective functions.
 We extend this API by a function \codeil{lower_bound()} that can return a lower bound or~$-\infty$ if no bound is known.
-(Indeed, $-\infty$ is also a valid lower bound that fulfills \autoref{def:lowerBound}.)
+(Indeed, $-\infty$ is also a valid lower bound that fulfills \cref{def:lowerBound}.)
 Furthermore, our experiment \href{\moptipyExecution}{execution API} will automatically stop the optimization processes if a solution~$\globalOptimumOf{\solspel}$ with~$\objfOf{\globalOptimumOf{\solspel}}=\lowerBoundOf{\objf}$ is reached.%
 \endhsection%
 %
 \hsection{Example: Job Shop Scheduling}%
 \label{sec:jssp:lowerBounds}%
-We have already defined our solution space~$\solutionSpace$ for the \gls{JSSP} in \autoref{lst:jssp_gantt} and the objective function~$\objf$ in \autoref{lst:jssp_makespan}.
+We have already defined our solution space~$\solutionSpace$ for the \gls{JSSP} in \cref{lst:jssp_gantt} and the objective function~$\objf$ in \cref{lst:jssp_makespan}.
 A Gantt chart with the shortest possible makespan is then a global optimum.
 There may be multiple globally optimal solutions, which then would all have the same makespan.
 
@@ -72,7 +72,7 @@ Of course, this would also be a useless lower bound, because it does not tell us
 %
 \ruleOfThumb{lowerBoundObjective}{A lower bound~\lowerBoundOf{\objf} of the objective function~\objf\ is the better and the more useful, the higher it is.}%
 %
-The highest possible lower bound for the quality of an optimal solution would be exactly that quality itself (because otherwise it would violate \autoref{def:lowerBound}).
+The highest possible lower bound for the quality of an optimal solution would be exactly that quality itself (because otherwise it would violate \cref{def:lowerBound}).
 As said, we are not able to build such a bound for the \gls{JSSP}.
 But we can do other things.
 
@@ -103,23 +103,23 @@ As lower bound for the fastest schedule that could theoretically exist, we there
 \label{eq:jsspLowerBound}%
 \end{align}%
 %
-\autoref{eq:jsspLowerBound} is implemented in \autoref{lst:jssp_makespan_lb}, following the ideas from~\cite{T1993BFBSP}.%
+\cref{eq:jsspLowerBound} is implemented in \cref{lst:jssp_makespan_lb}, following the ideas from~\cite{T1993BFBSP}.%
 %
-\moptipyCode{moptipy/examples/jssp/instance.py}{--labels lb --args comments}{jssp_makespan_lb}{An implementation of \citeauthor{T1993BFBSP}'s algorithm~\cite{T1993BFBSP} represented in \autoref{eq:jsspLowerBound} to compute the lower bound of the makespan of a \gls{JSSP} instance.}%
+\moptipyCode{moptipy/examples/jssp/instance.py}{--labels lb --args comments}{jssp_makespan_lb}{An implementation of \citeauthor{T1993BFBSP}'s algorithm~\cite{T1993BFBSP} represented in \cref{eq:jsspLowerBound} to compute the lower bound of the makespan of a \gls{JSSP} instance.}%
 %
 \begin{figure}%
 \centering%
 \includegraphics[width=0.55\linewidth]{\currentDir/gantt_demo_opt_with_makespan_and_lb.pdf}%
-\caption{A globally optimal solution of the \instStyle{demo} instance \autoref{fig:jssp_demo_instance}, whose makespan happens to be the same as the lower bound from \autoref{eq:jsspLowerBound}.}%
+\caption{A globally optimal solution of the \instStyle{demo} instance \cref{fig:jssp_demo_instance}, whose makespan happens to be the same as the lower bound from \cref{eq:jsspLowerBound}.}%
 \label{fig:gantt_demo_opt_with_makespan_and_lb}%
 \end{figure}%
 
-\autoref{fig:gantt_demo_opt_with_makespan_and_lb} again illustrates the globally optimal solution for our small \instStyle{demo} \gls{JSSP} instance already shown in \autoref{fig:gantt_demo_opt_with_makespan}.
+\cref{fig:gantt_demo_opt_with_makespan_and_lb} again illustrates the globally optimal solution for our small \instStyle{demo} \gls{JSSP} instance already shown in \cref{fig:gantt_demo_opt_with_makespan}.
 Here we were lucky:
 The objective value of this solution happens to be the same as the lower bound for the makespan.
 Upon closer inspection, the limiting machine is the one at index~3.
 
-We will find this by again looking at \autoref{fig:jssp_demo_instance}.
+We will find this by again looking at \cref{fig:jssp_demo_instance}.
 Regardless with which job we would start here, it would need to initially wait at least~$\jsspMachineStartIdle{3}=30$ time units.
 The reason is that not a single first operation of any job starts at machine~3.
 Every job starts at another machine.
@@ -137,12 +137,12 @@ In other words, machine~3 needs to wait at least 30~time units before it can com
 
 In between, it will need to work for exactly $\jsspMachineRuntime{3}=140$~time units, the total sum of the running time of all operations assigned to it.
 This means that no schedule can complete faster than $\jsspMachineFinish{3}=\jsspMachineStartIdle{3}+\jsspMachineRuntime{3}+\jsspMachineEndIdle{3}=30+140+10=180$~time units.
-Thus, \autoref{fig:gantt_demo_opt_with_makespan_and_lb} illustrates the optimal solution for the \instStyle{demo} instance (and the lower bound).
+Thus, \cref{fig:gantt_demo_opt_with_makespan_and_lb} illustrates the optimal solution for the \instStyle{demo} instance (and the lower bound).
 
-Interestingly, while the last job in \autoref{fig:gantt_demo_opt_with_makespan_and_lb} is on machine~4, machine~4 does not limit us.
+Interestingly, while the last job in \cref{fig:gantt_demo_opt_with_makespan_and_lb} is on machine~4, machine~4 does not limit us.
 We could start by putting job~3 first on machine~4, so this machine could theoretically begin its work immediately at time unit~0.
 Also, we could finish both job~0 and job~1 at machine~4, so there also would not necessarily be an idle time at the end of the schedule on machine~4.
-Both of these facts can be seen in \autoref{fig:gantt_demo_opt_with_makespan_and_lb}.
+Both of these facts can be seen in \cref{fig:gantt_demo_opt_with_makespan_and_lb}.
 If we could schedule all jobs on machine~4 without delay, then we would need $50+12+30+10=102$~time units.
 Without starting delay and and ending idle time, this machine would limit schedules to not be shorter than 102~time units.
 Since we know that machine~3 imposes a makespan no less than 180~time units, machine~4 has no impact on the lower bound of the makespan.%
@@ -150,26 +150,26 @@ Since we know that machine~3 imposes a makespan no less than 180~time units, mac
 \begin{table}%
 \centering%
 \caption{The lower bounds~\lowerBoundOf{\objf} for the makespan of the optimal solutions for our example problems. %
-For some instances, research literature~\cite{W2019JRDAIOTJSSP} (last column) provides better (i.e., higher) lower bounds~$\lowerBoundOf{\objf}^{\star}$ than our algorithm in \autoref{lst:jssp_makespan_lb}.}%
+For some instances, research literature~\cite{W2019JRDAIOTJSSP} (last column) provides better (i.e., higher) lower bounds~$\lowerBoundOf{\objf}^{\star}$ than our algorithm in \cref{lst:jssp_makespan_lb}.}%
 \label{tbl:jsspLowerBoundsTable}%
 %
 \begin{booktabular}{lrrrll}%
 name&\jsspJobs&\jsspMachines&\lowerBoundOf{\objf}&$\lowerBoundOf{\objf}^{\star}$&source for~$\lowerBoundOf{\objf}^{\star}$\\%
 \midrule%
-\instStyle{demo}&5&4&180&180&\autoref{eq:jsspLowerBound}\\%
+\instStyle{demo}&5&4&180&180&\cref{eq:jsspLowerBound}\\%
 \textbf{\instStyle{abz8}}&20&15&566&648&\cite{VLS2015FDSFCBS}\\%
 \textbf{\instStyle{dmu67}}&40&20&5454&5589&\cite{GL2010ETSMBRSFTJSSP}\\%
 \textbf{\instStyle{dmu72}}&50&15&6216&6395&\cite{GL2010ETSMBRSFTJSSP}\\%
 \instStyle{la38}&15&15&943&1196&\cite{VAL1996JSSBLS}\\%
 \instStyle{orb06}&10&10&930&1010&\cite{JM1999DJSSPPAF}\\%
-\instStyle{swv14}&50&10&2968&2968&\autoref{eq:jsspLowerBound}\\%
-\instStyle{ta65}&50&20&2725&2725&\autoref{eq:jsspLowerBound}\\%
-\instStyle{ta79}&100&20&5358&5358&\autoref{eq:jsspLowerBound}\\%
+\instStyle{swv14}&50&10&2968&2968&\cref{eq:jsspLowerBound}\\%
+\instStyle{ta65}&50&20&2725&2725&\cref{eq:jsspLowerBound}\\%
+\instStyle{ta79}&100&20&5358&5358&\cref{eq:jsspLowerBound}\\%
 \textbf{\instStyle{yn4}}&20&20&818&929&\cite{VLS2015FDSFCBS}\\%
 \end{booktabular}%
 \end{table}
 
-The lower bounds for the makespans of our example problems are listed in \autoref{tbl:jsspLowerBoundsTable}.
+The lower bounds for the makespans of our example problems are listed in \cref{tbl:jsspLowerBoundsTable}.
 At the time of this writing, there are four instances (\instStyle{abz8}, \instStyle{dmu67}, \instStyle{dmu72}, and \instStyle{yn4}) in our benchmark set for which no solutions have been found yet whose makespan equals the best available lower bound.
 This either means that these four problems have not yet been solved to optimality or that their optimal solution has already been found but has a makespan worse than the lower bound.
 In the table, we also provide better, i.e., higher lower bounds~$\lowerBoundOf{\objf}^{\star}$ that are available for some instances.

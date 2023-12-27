@@ -3,7 +3,7 @@
 %%
 %
 %% Use smaller margins for backmatter.
-\RequirePackage[acronyms,symbols,toc,sort=standard]{glossaries}%
+\RequirePackage[acronyms,symbols,toc,sort=standard,nonumberlist]{glossaries}%
 %
 \setacronymstyle{long-short}%
 %
@@ -12,8 +12,7 @@
 \let\@oldcrfullpl\acrfullpl%
 \protected\gdef\acrfull#1{\@oldacrfull{#1}\glsunset{#1}}%
 \protected\gdef\acrfullpl#1{\@oldcrfullpl{#1}\glsunset{#1}}%
-%
-\let\glspostdescription\dotfill%
+\let\glspostdescription\relax%
 %
 %% Create a new symbol
 %% #1 the symbold ID
