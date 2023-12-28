@@ -1,27 +1,28 @@
-\hsection{The Termination Criterion and the Problem of Measuring Time}%
+\hsection{The Termination Criterion}%
 \label{sec:terminationCriterion}%
 %
 We have seen that the search spaces for even small instances of the \gls{JSSP} can already be quite large.
 We simply cannot enumerate all points in them, as it would take too long.
-This raises the question:
+While optimization algorithms usually do something much cleverer than simply checking all possible solutions, we already discovered the profoundly simply question:
 \inQuotes{If we cannot look at all possible solutions, how can we find the global optimum?}
-We may also ask:
+We then went a step further and asked:
 \inQuotes{If we cannot look at all possible solutions, how can we know whether a given candidate solution is the global optimum or not?}
 In some optimization scenarios, we can have good lower bounds~\lowerBoundOf{\objf} of the objective function~\objf\ and if we find a solution~$\globalOptimumOf{\solspel}\in\solutionSpace$ with $\objfOf{\globalOptimumOf{\solspel}}\leq\lowerBoundOf{\objf}$, then we know that we have solved the problem.
 However, usually the answer to both question is simply:
 \emph{We cannot.}
 
-Usually, we don't know if the best solution~\bestSoFarOf{\solspel} we know so far is the global optimum or not.
+Usually, we simply don't know if the best solution~\bestSoFarOf{\solspel} we know so far is the global optimum or not.
 This leads us to another problem:
-If we do not know whether we found the best-possible solution or not, how do we know if we can stop the optimization process or should continue trying to solve the problem?
+If we do not know whether we found the best-possible solution or not, how do we know if we can stop the optimization process (whatever that might be) or should continue trying to solve the problem?
 
-There are two very simple answers to this question:
-Either when the time is up or when we found a reasonably-good solution.
-And there are some less simple answers, such as \inQuotes{when we were not able to improve upon~\bestSoFarOf{\solspel} for a while.}
+At first glance, there are two very simple answers to this question:
+We stop either \inQuotes{when the time is up} or \inQuotes{when we found a reasonably-good solution.}
+Additionally, there are many more complicated answers~\cite{GCJ2017TCIEAAS}, such as \inQuotes{when we were not able to improve upon~\bestSoFarOf{\solspel} for a while.}%
 %
 \hsection{Definitions}%
+\label{sec:termination:defs}%
 %
-\begin{definition}[Termintion Criterion]%
+\begin{definition}[Termination Criterion]%
 \label{def:terminationCriterion}%
 The \emph{termination criterion}~$\shouldTerminate:\mathSpace{S}\mapsto\{\codeil{False}, \codeil{True}\}$ is a function of the state~\mathSpace{S} of the optimization process which becomes \codeil{True} if the optimization process should stop and remains \codeil{False} as long as it can continue.%
 \end{definition}%
@@ -29,9 +30,16 @@ The \emph{termination criterion}~$\shouldTerminate:\mathSpace{S}\mapsto\{\codeil
 Into such a termination criterion we can embed any combination of time or solution quality limits.
 We could, for instance, define a goal objective value~\goalF\ good enough so that we can stop the optimization procedure as soon as a candidate solution~$\solspel\in\solutionSpace$ has been discovered with $\objfOf{\solspel}\leq\goalF$, i.e., which is at least as good as the goal.
 We could set $\goalF=\lowerBoundOf{\objf}$ if we have a reasonably good lower bound.
-We could also set to some acceptable quality limit resulting from our practical application scenario, 
+We could also set to some acceptable quality limit resulting from our practical application scenario.
 
-Alternatively -- or in addition -- we may define a maximum amount of time the user is willing to wait for an answer, i.e., a computational budget after which we simply need to stop.%
+Alternatively -- or in addition -- we may define a maximum amount of time the user is willing to wait for an answer, i.e., a computational budget after which we simply need to stop.
+
+Most optimization processes iteratively try to find better solutions.
+We could stop when, for a certain amount of time, no better solution was discovered.
+While the current-best solution may not be \inQuotes{reasonably good,} continuing to try finding better solutions may be pointless anyway when the last improvement was made one minute after we started the optimization process {\dots} and, by now, that is ten hours ago{\dots}
+
+Some algorithms maintain sets of solutions and iteratively work on all the solutions in the sets.
+A maximum number of such iterations was used as stopping criterion in some older works, but this is known to be a bad practice and, thus, strongly discouraged~\cite{RLMC2022MNOGAASCCH}.%
 %
 \endhsection%
 %
@@ -74,7 +82,15 @@ Please keep in mind that the fact that some will work out worse than others in o
 \endhsection%
 %
 \hsection{Summary}%
-TODO
+In this section, we raised the question when an optimization should stop.
+This is an important question, since we already know that we usually do not know whether we found the optimal solution or not.
+Sometimes, termination criteria arise from our practical scenario, e.g., our application defines a time limit and then, that is when we will stop.
+Sometimes, we have a lot of time available and could let the optimization process go on for quite a bit.
+However, even then, we do not want to waste computational time when it is already clear that our algorithm cannot make any improvement anymore.
+Finally, we may have a goal quality threshold~\goalF\ and after reaching it, we can stop.
+Sometimes we have a combination of the above.
+Either way, we have to stop eventually.%
 \endhsection%
 \endhsection%
 %
+
