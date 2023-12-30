@@ -1,0 +1,18 @@
+#
+# Dependencies Required to Build the Optimization Algorithms Book
+#
+
+# Basically, we only need the `latexgit` Python companion package.
+# You can find it at https://thomasweise.github.io/latexgit_py,
+# https://github.com/thomasWeise/latexgit_py, or at
+# https://pypi.org/project/latexgit.
+latexgit == 0.8.2
+
+# minify_html is needed to minify html output.
+minify_html == 0.11.1
+
+# for converting the additional markdown files to HTML
+markdown == 3.5
+
+# for converting files to HTML
+Pygments==2.16.1
