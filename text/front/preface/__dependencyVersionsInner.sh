@@ -15,6 +15,7 @@ hasOutput=false  # Do we have some output and need a separator?
 packages=("moptipy")
 # python3 -m pip install --require-virtualenv "${packages[@]}" 1>/dev/null 2>&1
 python3 -m pip install --require-virtualenv "${packages[@]}" 2>&1 || true
+exit 0
 # Check the versions of the tools and packages.
 for pack in "${packages[@]}"; do
   # For each tool or plugin, we get the version separately.
