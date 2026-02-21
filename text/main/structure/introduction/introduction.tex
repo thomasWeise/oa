@@ -26,7 +26,7 @@ An \emph{optimization problem} is a situation~\instance\ which requires deciding
 %
 \cref{def:optimizationProblemEconomical} presents an economical point of view on optimization in a rather informal manner.
 But the points come across:
-We want to reach a certain goal, e.g., visit all cities in a \gls{TSP}, process all jobs in a \gls{JSSP}, pack all the items into bins in a \gls{BPP}, or assign all factories to locations in the \gls{QAP}.
+We want to reach a certain goal, e.g., visit all cities in a \pgls{optTSP}, process all jobs in a \pgls{optJSSP}, pack all the items into bins in a \pgls{optBPP}, or assign all factories to locations in the \pgls{optQAP}.
 We have several possible ways to reach that goal and we need to choose one among them.
 Each of these possible choices has an associated cost.
 Since all of them lead to reaching the goal, we want to pick the one choice with the minimal costs.
@@ -34,55 +34,23 @@ We can refine this situation into the more mathematical formulation given in \cr
 %
 \begin{definition}[Optimization Problem~\textrm{II}]%
 \label{def:optimizationProblemMathematical}%
-The goal of solving an \emph{optimization problem} is finding an input value~$\globalOptimum{\solspel}\in\solutionSpace$ from a set~\solutionSpace\ of allowed values for which a function~$\objf:\solutionSpace\mapsto\realNumbers$ takes on the smallest value.%
+The goal of solving an \emph{optimization problem} is finding an input~$\solution\in\solutionSpace$ for which a function~$\objFun:\solutionSpace\mapsto\realNumbers$ takes on a value as small as possible.%
 \end{definition}%
 %
-From these definitions, we can already deduce a set of necessary components that make up such an optimization problem.
+From these definitions, we can already deduce a three necessary components that make up such an optimization problem.
 We will look at them from the perspective of a programmer:%
 %
 \begin{enumerate}%
 %
 \item The first obvious component is a data structure~\solutionSpace\ representing possible solutions to the problem.
-This one half of the output of the optimization software and is discussed in TODO.%
+This one half of the output of the optimization software.%
 %
-\item Then, there is the so-called objective function~$\objf:\solutionSpace\mapsto\realNumbers$, which rates the quality of the candidate solutions~$\solspel\in\solutionSpace$.
+\item Then, there is the so-called objective function~$\objFun:\solutionSpace\mapsto\realNumbers$, which rates the quality of the candidate solutions~$\solution\in\solutionSpace$.
 It basically returns the cost of a solution and we usually want to minimize it.%
 %
-\item The third component follows from the definitions rather implicitly:
-The problem instance data~\instance, i.e., the concrete situation which defines the framework conditions for the solutions to be found.
-This input data of the optimization algorithm is discussed in TODO.%
+\item Finally, there must be some way to instantiate the data structure~\solutionSpace, i.e., to sample one~\solution\ from~\solutionSpace.%
 %
 \end{enumerate}%
 %
-If we want to solve a \gls{TSP} as sketched in \cref{sec:intro:logistics}), for instance, then the instance data~\instance\ could include the locations of the cities that we want to visit from which we then can compute the travel distances.
-The candidate solution data structure~\solutionSpace\ could simply be a \inQuotes{city list} containing each city exactly once and prescribing the visiting order.
-The objective function~\objf\ would take such a city list~$\solspel\in\solutionSpace$ as input and compute the overall tour length.
-It would be subject to minimization.
-
-Often, in order to actually practically implement an optimization approach, there will also be%
-%
-\begin{enumerate}%
-\setcounter{enumi}{4}%
-%
-\item a search space~\searchSpace, i.e., a simpler data structure for internal use, which can more be efficiently processed by an optimization algorithm than~\solutionSpace\ (see TODO),%
-%
-\item a mapping~$\decode:\searchSpace\mapsto\solutionSpace$, which decodes the \inQuotes{points}~$\sespel\in\searchSpace$ from the search space~\searchSpace\ to candidate solutions~$\solspel\in\solutionSpace$ in the solution space~\solutionSpace\ (see TODO),%
-%
-\item search operators~$\searchOp:\searchSpace^n\mapsto\searchSpace$, which allow for the iterative exploration of the search space~\searchSpace\ (see TODO), and%
-%
-\item a termination criterion, which tells the optimization process when to stop (see TODO).%
-%
-\end{enumerate}%
-%
-At first glance, all of this looks a bit complicated --- but rest assured, it won't be.
-We will explore all of these structural elements that make up an optimization problem in this chapter, based on a concrete example of the \acrfull{JSSP} from \cref{sec:jsspExample}~\cite{GLLRK1979OAAIDSASAS,LLRKS1993SASAAC,L1982RRITTOMS,T1993BFBSP,BDP1996TJSSPCANST}.
-This example should give a reasonable idea about how the structural elements and formal definitions involved in optimization can be realized in practice.
-While any actual optimization problem can require very different data structures and operations from what we will discuss here, the general approach and ideas that we will discuss on specific examples should carry over to many scenarios.
-
-\textbf{At this point, I would like to make explicitly clear that the goal of this book is NOT to solve the \gls{JSSP} particularly well. Our goal is to have an easy-to-understand yet practical introduction to optimization.}
-This means that sometimes we will choose an easy-to-understand approach, algorithm, or data structure over a better but more complicated one.
-Also, our aim is to nurture the general ability to come up with a solution approach to a new optimization problem within a reasonably short time, i.e., without being able to conduct research over several years.
-That being said, the algorithms and approaches discussed in this book are not necessarily inefficient.
-While having much room for improvement, we eventually reach approaches that will find decent solutions.%
 \endhsection%
 %

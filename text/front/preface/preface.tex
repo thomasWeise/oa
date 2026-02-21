@@ -1,8 +1,8 @@
 \chapter*{Preface}%
 \pdfbookmark{Preface}{preface}%
 %
-After writing \inQuotes{\citetitle{W2009GOATAA}}~\cite{W2009GOATAA} during my time as PhD student a long time ago, I now want to write a more \emph{practical} guide to optimization and metaheuristics.
-Currently, this \href{\oaUrl/index.html}{book} is in an early stage of development and work-in-progress, so expect many changes.
+After writing \inQuotes{\citetitle{W2009GOATAA}}~\cite{W2009GOATAA} as PhD student a long time ago, I now want to write a more \emph{practical} guide to optimization and metaheuristics.
+Currently, this book is in an early stage of development and work-in-progress, so expect many changes.
 
 This book tries to introduce optimization in an accessible way for an audience of undergraduate and graduate students without background in the field.
 It tries to provide an intuition about how optimization algorithms work in practice, how to recognize optimization problems and the basic structure behind them, what things to look for when solving an optimization problem, and how to get from a simple, working, \inQuotes{proof-of-concept} approach to an efficient algorithm for a given problem.
@@ -13,21 +13,36 @@ This allows us to discuss their strengths and weaknesses based on actual results
 We learn how to compare the performance of different algorithms.
 We try to improve the algorithms step-by-step, moving from very simple approaches, which do not work well, to efficient metaheuristics.
 
-We use concrete examples and algorithm implementations written in \href{https://python.org}{Python}.
-The source code is freely available at \url{\moptipyUrl} under the GNU GENERAL PUBLIC LICENSE Version~3, 29~June~2007.
+We use concrete examples and algorithm implementations written in \python~\cite{programmingWithPython}.
+The source code is freely as part of the \moptipy\ package under the GNU GENERAL PUBLIC LICENSE Version~3, 29~June~2007.
 The code listings in the book will usually be abridged excerpts.
-This means that we will omit a lot of details that are unnecessary for understanding the algorithms in play, such as type hints, sanity checks, or even complete methods.
-The full versions of the code can be reached by clicking on the \inQuotes{(src)}-links at the end of the listings captions away.
-The full versions therefore can look different from the illustrated abridged code in the book.
 
-In order to fully understand the code examples, we recommend the reader to familiarize themselves with \href{https://python.org}{Python}, \numpy, and \href{https://matplotlib.org/}{matplotlib}.
+In order to fully understand the code examples, we recommend the reader to familiarize themselves with  \python, \numpy, and \matplotlib.
 Of course, if you just read this book to learn about algorithms, you can ignore the source code examples.
-
-The text of the book itself is actively written and available in the repository \url{\oaRepo}.
-There, you can also submit \href{\oaRepo/issues}{issues}, such as change requests, suggestions, errors, typos, or you can inform me that something is unclear, so that I can improve the book.
 
 This book is released under the \emph{Attribution-NonCommercial-ShareAlike~4.0 International license} (\href{http://creativecommons.org/licenses/by-nc-sa/4.0/}{\mbox{CC~BY-NC-SA~4.0}}).
 You can freely share it.
 Please do not print it, though, to preserve the environment.
-
-The results of the experiments that we run in this book are available in the repository \url{\oaDataRepo}.
+%
+\strut\vfill\strut%
+%
+\copyrightBlock{2024--2026}%
+%
+\clearpage%
+%
+\strut\vfill\strut%
+%
+\begin{center}%
+\noindent\resizebox{\linewidth}{!}{%
+\begin{tabular}{c@{~~~~~~~~}c}%
+\includegraphics[width=7cm]{\currentDir/bookUrl}&\includegraphics[width=7cm]{\currentDir/courseUrl}\\\relax%
+{\huge{[\expandafter\href{\oaUrl/oa.pdf}{book pdf}]}}&{\huge{[\expandafter\href{\oaUrl}{course website}]}}\\%
+\end{tabular}}%
+\\[12pt]\noindent%
+\resizebox{0.85\linewidth}{!}{\expandafter\url{\oaUrl}}%
+\end{center}%
+%
+\strut\vfill\strut%
+This book was built using the following software:%
+\gitExec{exec:versions}{}{}{text/front/preface/dependencyVersions.sh}%
+\lstinputlisting[style=text_style]{\gitFile{exec:versions}}%

@@ -1,21 +1,10 @@
 \documentclass[a4paper,oneside,10pt]{memoir}%
 %
-\setsecnumdepth{subsubsection}%  number down to sub-sub-sections
-%
-% prepare and set the book margins
-\setlrmarginsandblock{3cm}{3cm}{*}%
-\setulmarginsandblock{2.5cm}{2.5cm}{*}%
-\setlength{\parskip}{3pt}%
-\checkandfixthelayout%
-%
-\usepackage{styles/styles}%  import our own basic styles
-\usepackage{notation/notation}%  import the book-specific notation
-%
-\makeglossaries%  make the glossary
+\xdef\bookbaseDir{./bookbase}%
+\usepackage{bookbase/styles/book}%  import our own basic styles
+\xdef\courseUrlQR{text/front/preface/courseUrl}%
 %
 \title{Optimization Algorithms}%
-\author{Thomas Weise}%
-\date{\today}%
 %%
 \begin{document}%
 %

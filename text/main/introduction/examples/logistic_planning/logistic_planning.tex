@@ -20,8 +20,9 @@ Containers can be exchanged between different vehicles at locations such as park
 \begin{figure}%
 \centering%
 \includegraphics[width=0.99\linewidth]{\currentDir/logistic_planning}%
-\caption{Illustrative sketch of logistics problems: Orders require us to pick up some items at source locations within certain time windows and deliver them to their destination locations, again within certain time windows. We need to decide which containers and vehicles to use and over which routes we should channel the vehicles.}
-\label{fig:logistic_planning}
+\caption{Illustrative sketch of logistics problems:~Orders require us to pick up some items at source locations within certain time windows and deliver them to their destination locations, again within certain time windows. %
+We need to decide which containers and vehicles to use and over which routes we should channel the vehicles.}%
+\label{fig:logistic_planning}%
 \end{figure}
 
 The company could have the goals to fulfill all transportation requests \emph{at the lowest cost}.
@@ -32,13 +33,13 @@ And it should do so within a limited, feasible time.
 \begin{figure}%
 \centering%
 \includegraphics[width=0.6\linewidth]{\currentDir/tsp_china}%
-\caption{A \acrfull{TSP} through eleven cities in China.}%
+\caption{A \pgls{optTSP} through eleven cities in China, including the beautiful city of Hefei~(合肥).}%
 \label{fig:tsp_china}%
 \end{figure}%
 %
 Of course, there is a wide variety of possible logistics planning tasks.
-Besides our real-world example above, a classical task is the \acrfull{TSP}~\cite{ABCC2006TTSPACS,LLRKS1985TTSPAGTOCO,GP2002TTSPAIV}, where the goal is to find the shortest round-trip tour through $n$~cities, as sketched in \cref{fig:tsp_china}.
+Besides our real-world example above, a classical task is the \pgls{optTSP}~\cite{ABCC2006TTSPACS,LLRKS1985TTSPAGTOCO,GP2002TTSPAIV}, where the goal is to find the shortest round-trip tour through $n$~cities, as sketched in \cref{fig:tsp_china}.
 Many other scenarios can be modeled as such logistics questions, too:
-If a robot arm needs to several drill holes into a circuit board, finding the shortest tour means solving a \gls{TSP} and will speed up the production process, for instance~\cite{GJR1991OCOPADMACS}.%
+If a robot arm needs to several drill holes into a circuit board, finding the shortest tour means solving a \pgls{optTSP} and will speed up the production process, for instance~\cite{GJR1991OCOPADMACS}.%
 \endhsection%
 %
