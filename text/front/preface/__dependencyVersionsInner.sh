@@ -14,7 +14,9 @@ hasOutput=false  # Do we have some output and need a separator?
 # Make sure that all packages are installed.
 packages=("moptipy")
 # python3 -m pip install --require-virtualenv "${packages[@]}" 1>/dev/null 2>&1
-python3 -m pip install --require-virtualenv "${packages[@]}" 2>&1 || true
+python3 -m pip install --require-virtualenv "${packages[@]}" 1>_tmp.txt 2>&1 || true
+sed 's/[^\x00-\x7F]//g' _tmp.txt > _tmp.txt
+cat _tmp.txt
 exit 0
 # Check the versions of the tools and packages.
 for pack in "${packages[@]}"; do
