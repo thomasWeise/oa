@@ -15,7 +15,8 @@ hasOutput=false  # Do we have some output and need a separator?
 packages=("moptipy")
 
 # python3 -m pip install --require-virtualenv "${packages[@]}" 1>/dev/null 2>&1
-python3 -m pip install --require-virtualenv "${packages[@]}" 1>out_1.txt 2>&1 || true
+python3 -m pip install -v --require-virtualenv "${packages[@]}" --log out_1.txt 1>out_2.txt 2>out_3.txt || true
+for f in "out_1.txt" "out_2.txt" "out_3.txt"; do
 sed -r \
 -e 's/\x00/[NUL]/g' \
 -e 's/\x01/[SOH]/g' \
@@ -49,9 +50,11 @@ sed -r \
 -e 's/\x1D/[GS]/g' \
 -e 's/\x1E/[RS]/g' \
 -e 's/\x1F/[US]/g' \
--e 's/\x7F/[DEL]/g' out_1.txt > out_2.txt
-sed 's/[^\x00-\x7F]//g' out_2.txt > out_3.txt
-cat out_3.txt
+-e 's/\x7F/[DEL]/g' "$f" > x.txt
+sed 's/[^\x00-\x7F]//g' x.txt > y.txt
+echo "================= [sep] ========"
+cat y.txt
+done;
 exit 0
 # Check the versions of the tools and packages.
 for pack in "${packages[@]}"; do
