@@ -14,8 +14,16 @@ hasOutput=false  # Do we have some output and need a separator?
 # Make sure that all packages are installed.
 packages=("moptipy")
 
+# Find the Python interpreter.
+if [[ $(declare -p PYTHON_INTERPRETER 2>/dev/null) != declare\ ?x* ]]; then
+  export PYTHON_INTERPRETER="$(readlink -f "$(which python3)")"
+  echo "Using system python"
+else
+  echo "Using PYTHON_INTERPRETER"
+fi
+
 # python3 -m pip install --require-virtualenv "${packages[@]}" 1>/dev/null 2>&1
-python3 -m pip install --require-virtualenv "${packages[@]}" --log out_1.txt 1>out_2.txt 2>out_3.txt || true
+"$PYTHON_INTERPRETER" -m pip install --require-virtualenv "${packages[@]}" --log out_1.txt 1>out_2.txt 2>out_3.txt || true
 for f in "out_1.txt"; do
 sed -r \
 -e 's/\x00/[NUL]/g' \
