@@ -51,9 +51,8 @@ sed -r \
 -e 's/\x1E/[RS]/g' \
 -e 's/\x1F/[US]/g' \
 -e 's/\x7F/[DEL]/g' "$f" > x.txt
-sed 's/[^\x00-\x7F]//g' x.txt > y.txt
 echo "================= [sep] ========"
-cat y.txt
+cat x.txt
 done;
 exit 0
 # Check the versions of the tools and packages.
