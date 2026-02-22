@@ -17,6 +17,8 @@ jobs:
           scheme: full
           run: |
             apk add cargo gcc linux-headers musl-dev py3-pip python3 python3-dev rust
+            apk add --no-cache gnu-libiconv  # temp
+            export LD_PRELOAD=/usr/lib/preloadable_libiconv.so  # temp
             ./make.sh
 # deploy to github pages
       - name: deploy documentation

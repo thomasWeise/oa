@@ -13,8 +13,11 @@ hasOutput=false  # Do we have some output and need a separator?
 
 # Make sure that all packages are installed.
 packages=("moptipy")
-python3 -m pip install --require-virtualenv "${packages[@]}" 1>/dev/null 2>&1
-
+# python3 -m pip install --require-virtualenv "${packages[@]}" 1>/dev/null 2>&1
+python3 -m pip install --require-virtualenv "${packages[@]}" 1>out_1.txt 2>&1 || true
+iconv -f UTF-8 -t ASCII//TRANSLIT out_1.txt -o out_2.txt || true
+cat out_2.txt || true
+exit 0
 # Check the versions of the tools and packages.
 for pack in "${packages[@]}"; do
   # For each tool or plugin, we get the version separately.
