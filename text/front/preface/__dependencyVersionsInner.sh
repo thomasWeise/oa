@@ -15,7 +15,7 @@ hasOutput=false  # Do we have some output and need a separator?
 packages=("moptipy")
 # python3 -m pip install --require-virtualenv "${packages[@]}" 1>/dev/null 2>&1
 python3 -m pip install --require-virtualenv "${packages[@]}" 1>_tmp.txt 2>&1 || true
-LC_ALL=C sed 's/[^\x00-\x7F]/?/g' _tmp.txt > _tmp2.txt
+iconv -f UTF-8 -t "ASCII//TRANSLIT" _tmp.txt -o _tmp2.txt
 cat _tmp2.txt
 exit 0
 # Check the versions of the tools and packages.
